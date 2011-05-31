@@ -1,0 +1,172 @@
+\documentclass[11pt]{skrapport}
+\usepackage[utf8]{inputenc}
+\usepackage{harvard}
+\usepackage{moreverb}
+
+\newcommand\PDF{\textsc{pdf}}
+\newcommand\DVI{\textsc{dvi}}
+\newcommand\EPS{\textsc{eps}}
+\newcommand\UTF{\textsc{utf8}}
+\newcommand\cli[1]{\texttt{#1}}
+\newcommand\pack[1]{\textsf{#1}}
+\newcommand\pdfLaTeX{pdf\LaTeX}
+\newcommand\BibTeX{\textsc{Bib}\TeX}
+
+\begin{document}
+	\begin{titlepage} % (fold)
+		\title{Att \TeX{}a: en praktisk guide}
+		\author{Simon Sigurdhsson\thanks{\url{ssimon@student.chalmers.se}}}
+		\regarding{Nybörjarguide i \LaTeX}
+		\date{v0.1 (2011--05--22)}
+		\maketitle
+		\begin{abstract}
+			En inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
+			till studenter på Chalmers Tekniska Högskola, specifikt programmen
+			Teknisk Matematik och till en viss utsträckning Teknisk Matematik.
+			Inspiration har tagits från bl.a. \citeasnoun{Schultz05},
+			\citeasnoun{Voss10} och \citeasnoun{Oetiker11}.
+		\end{abstract}
+	\end{titlepage} % (end)
+	
+	\section{\LaTeX --- en typsättare}
+	\subsection{Vad är \LaTeX?}
+	
+	\subsection{Varför \LaTeX?}
+	Traditionellt så har \LaTeX{} använts för att det gör typsättning av just
+	matematik och fysik både enkel och attraktiv. Detta betyder dock inte att
+	\LaTeX{} är meningslöst för de som inte behöver denna funktionalitet; långt
+	ifrån, till och med. Tillhörande program och paket som till exempel
+	\BibTeX{} ger dig som författare frihet att kunna koncentrera dig på att
+	skriva, och lämnar över typsättningen och referenshanteringen till
+	programmet.
+	
+	Detta gör att du utan ansträngning kan skapa attraktiva och läsbara
+	rapporter, artiklar och böcker.
+	
+	\section{Ett första \LaTeX-dokument}
+	
+	\subsection{Konstruktioner}
+	
+	\subsubsection{Dokumentklasser}
+	
+	\subsubsection{Paket}
+	
+	\subsubsection{Miljöer}
+	
+	\subsubsection{Kommandon}
+	
+	\subsection{Dokumentstruktur}
+	
+	\subsubsection{Stycken, avsnitt, m.m.}
+	
+	\subsection{Ett exempeldokument}
+	
+	\subsection{En \PDF{} med \pdfLaTeX}
+	
+% 	\section{Rekommenderade paket}
+% 	\subsection{\pack{inputenc} och \pack{fontenc}}
+% 	Dessa paket är i princip ett måste när du skriver i \LaTeX. De berättar för
+% 	\LaTeX{} vilket format din indata är i, och vilket format dina typsnitt ska
+% 	vara i. Generellt sett så kan man förutsätta att indatan kommer att vara
+% 	i \UTF-format, och att du vill använda T1-typsnitt; detta görs enkelt:
+% 
+% \begin{listing}[999]{-2}
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+% \end{listing}
+% 
+% 	\subsection{\pack{babel}}
+% 	Detta paket ger dig avstavning och standardrubriker på rätt språk, och är
+% 	ännu ett måste när du skriver rapporter med \LaTeX. Paketet har stöd för en
+% 	stor mängd språk, men oftast är det svenska man vill ha:
+% 
+% \begin{listing}[999]{-1}
+% \usepackage[swedish]{babel}
+% \end{listing}
+% 
+% 	\subsection{\AmS\LaTeX --- \pack{amsmath} och \pack{amssymb}}
+% 	\AmS, \emph{the American Mathematical Society}, har skapat ett paket som ger
+% 	tillgång till en stor mängd \LaTeX-kommandon som underlättar typsättning av
+% 	matematik. Det relevanta paketet är egentligen \pack{amsmath}, men ibland
+% 	vill man även använda \pack{amssymb} som ger tillgång till en del
+% 	matematiska symboler. Paketen inkluderas enkelt:
+% 
+% \begin{listing}[999]{-2}
+% \usepackage{amsmath}
+% \usepackage{amssymb}
+% \end{listing}
+% 	
+% 	En stor genomgång av vad som erbjuds av \pack{amsmath} och varför man bör
+% 	använda detta paket istället för det som redan finns i \LaTeX{} ges av
+% 	\citeasnoun{Voss10}.
+% 	
+% 	\subsection{Grafik: \pack{graphicx}}
+% 	
+% 	\subsection{Tabeller: \pack{booktabs}}
+% 	
+% 	\subsection{Figurtexter: \pack{caption}}
+% 	
+% 	\section{Skapa \PDF-filer med \pdfLaTeX}
+% 	När ditt \LaTeX-dokument förr eller senare ska publiceras på internet,
+% 	skrivas ut eller lämnas in till en examinator är det lämpligt att använda
+% 	ett utbrett format. \PDF-formatet är ett av de mest utbredda
+% 	dokumentformaten och kan öppnas av i princip alla, samtidigt som det enkelt
+% 	kan skrivas ut på de flesta datorer. Förr exporterades \LaTeX-dokument till
+% 	\PDF-filer genom att konvertera de \DVI-filer \LaTeX{} normalt genererar
+% 	till \PDF-filer med hjälp av kommandot \cli{dvipdf} \cite{Schultz05}.
+% 	
+% 	Numera är detta dock meningslöst; den moderna \LaTeX-varianten \pdfLaTeX{}
+% 	kan kompilerar dina \LaTeX-dokument direkt till \PDF-filer, och med paket
+% 	som t.ex. \pack{hyperref} kan mycket av funktionaliteten som finns i \PDF{}
+% 	användas från \LaTeX.
+% 	
+% 	Ett problem är dock att typsnitten som normalt används i \LaTeX{} inte är
+% 	gjorda för visning på en skärm; de är bitmappstypsnitt och är gjorda för att
+% 	se bra ut på papper. Man måste därför använda de T1-typsnitt; dessa är
+% 	i vektorformat och fungerar både i utskrifter och på skärmen. Detta gör man
+% 	genom att ladda \pack{fontenc}-paketet:
+% 	
+% \begin{listing}[999]{-1}
+% \usepackage[T1]{fontenc}
+% \end{listing}
+% 
+% 	Tyvärr är det gamla standardtypsnittet som används i \LaTeX mycket utdaterat
+% 	och saknar många tecken, däribland svenska. Detta innebär att \PDF-filerna
+% 	\pdfLaTeX{} genererar inte innehåller ''riktiga'' svenska tecken, och att
+% 	man därför inte kan kopiera texten i dem på ett enkelt sätt. Det lättaste
+% 	sättet att åtgärda detta är att använda ett annat typsnitt, till exempel
+% 	Latin Modern, en modern klon av standardtypsnittet:
+% 	
+% \begin{listing}[999]{-1}
+% \usepackage{lmodern}
+% \end{listing}
+% 
+% 	Det finns även andra typsnitt så som \pack{times} (Times New Roman),
+% 	\pack{mathpazo} (Palatino) och en hel del \TeX{} Gyre-typsnitt\footnote{\url{http://www.gust.org.pl/projects/e-foundry/tex-gyre/nfp11.pdf}}.
+% 	
+% 	En annan aspekt av att använda \pdfLaTeX{} är att det inte stöder import av
+% 	\EPS-filer när man använder \pack{graphicx}. De format som istället är
+% 	tillgängliga är JPEG, PNG och \PDF{} --- existerande \EPS-filer kan man
+% 	konvertera till \PDF{} med hjälp av kommandot \cli{epstopdf}.
+% 	
+% 	\section{Typografitips}
+% 	\subsection{Generella tips för ekvationer}
+% 	Funktioner, integraler, \verb|\limits|, vektorer
+% 	
+% 	\subsection{Siffror och tal}
+% 	Decimalavskiljare, tusentalsavskiljare, minustecken
+% 	
+% 	\subsection{Svensk och utländsk typografi}
+% 	tankstreck osv., datum
+% 	
+% 	\subsection{Fler typografigrejer?}
+% 	
+% 	\section{Figurer och tabeller}
+% 	Floats, varför \LaTeX{} flyttar runt figurer, varför man inte ska
+% 	ändra på det, etc.
+% 	
+% 	\section{Referenssystemet \BibTeX}
+	
+	\bibliographystyle{dcumod}
+	\bibliography{referenser}
+\end{document}
