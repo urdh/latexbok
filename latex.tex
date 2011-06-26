@@ -1,34 +1,74 @@
-\documentclass[11pt]{skrapport}
-\usepackage[utf8]{inputenc}
-\usepackage{harvard}
-\usepackage{moreverb}
+\documentclass[swe,12pt]{skrapport}
+\usepackage[utf8]{inputenc}				% input encoding
+\usepackage{fixltx2e}					% fixing LaTeX2e bugs
+\usepackage[usenames,dvipsnames]{color} % colors
+\usepackage{chscite}					% references
+\usepackage{minted}						% code highlighting
+\usepackage{graphicx}					% include graphics
+\usepackage{float}						% custom floats
+\usepackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
+										% ^^^^ custom captions
+\usepackage[hyperfootnotes=false,colorlinks=true,linkcolor=Red,urlcolor=Magenta]{hyperref}
+										% ^^^^ hyperlinks (with colors)
+\usepackage[para,perpage]{footmisc}		% footer fixes
+\usepackage{hologo}						% logotypes
 
-\newcommand\PDF{\textsc{pdf}}
-\newcommand\DVI{\textsc{dvi}}
-\newcommand\EPS{\textsc{eps}}
-\newcommand\UTF{\textsc{utf8}}
-\newcommand\cli[1]{\texttt{#1}}
-\newcommand\pack[1]{\textsf{#1}}
-\newcommand\pdfLaTeX{pdf\LaTeX}
-\newcommand\BibTeX{\textsc{Bib}\TeX}
+\newcommand\PDF{\textsc{pdf}}							% PDF format
+\newcommand\DVI{\textsc{dvi}}							% DVI format
+\newcommand\EPS{\textsc{eps}}							% EPS format
+\newcommand\UTF{\textsc{utf-8}}							% UTF-8 standard
+\newcommand\cli[1]{\texttt{#1}}							% Command-line input
+\newcommand\opt[1]{\textlangle\emph{#1}\textrangle}		% CLI option
+\newcommand\pack[1]{\textsf{#1}}						% LaTeX package
+\newcommand\pdfLaTeX{\hologo{pdfLaTeX}}					% pdfLaTeX logotype
+\newcommand\BibTeX{\textsc{Bib}\TeX}					% BibTeX logotype
+\newcommand\PGFTikZ{PGF/Ti\emph{k}Z}					% PGF/TikZ logotype
+\newcommand\XeTeX{\hologo{XeTeX}}						% XeTeX logotype
+\newcommand\eng[1]{(eng.~\emph{#1})}					% english translation
+\newcommand\cmd[1]{\texttt{\textbackslash{}#1}}			% LaTeX command
+\newcommand\env[1]{\texttt{#1}}							% LaTeX environment
+\setcounter{secnumdepth}{1}								% Section depth
+
+\makeatletter % (fold)
+% Listings title (urklipp)
+\renewcommand{\listingscaption}{Urklipp}
+% Environments for examples and code
+\newcommand\expl@kod[3][]{\inputminted[frame=single,#1]{latex}{#3.tex}}
+\newcommand\expl@fig[3][]{\fbox{\includegraphics[width=0.984\textwidth,clip=true,#2]{#3.pdf}}}
+\newcommand\expl@input[3][]{\expl@kod[#1]{}{#3}\vspace{1ex}\expl@fig{#2}{#3}}
+\newenvironment{exempel}{\begin{expl@eenv}[tbp]\let\exempel=\expl@input}{\end{expl@eenv}}
+\newenvironment{kod}{\begin{expl@kenv}[tbp]\let\exempel=\expl@kod}{\end{expl@kenv}}
+\newenvironment{fig}{\begin{figure}[tbp]\let\exempel=\expl@fig}{\end{figure}}
+% Floats for examples and code
+\newfloat{expl@eenv}{tbp}{lop}\floatname{expl@eenv}{Exempel}
+\newfloat{expl@kenv}{tbp}{lop}\floatname{expl@kenv}{Kodbit}
+% Displaying one line of code
+\newcommand\kodrad[2]{\hspace{1ex}\inputminted[firstline=#1,lastline=#1]{latex}{#2.tex}}
+% Redefining sections to break page
+\let\section@old=\section
+\renewcommand\section{\@ifstar\my@section@star\my@section}
+\newcommand\my@section[2][\@empty]{\newpage\ifx\@empty#1\section@old{#2}\else\section@old[#1]{#2}\fi}
+\newcommand\my@section@star[2][\@empty]{\newpage\ifx\@empty#1\section@old*{#2}\else\section@old*[#1]{#2}\fi}
+\makeatother % (end)
 
 \begin{document}
 	\begin{titlepage} % (fold)
 		\title{Att \TeX{}a: en praktisk guide}
 		\author{Simon Sigurdhsson\thanks{\url{ssimon@student.chalmers.se}}}
 		\regarding{Nybörjarguide i \LaTeX}
-		\date{v0.1 (2011--05--22)}
+		\date{v0.1 (2011-??-??)}
 		\maketitle
 		\begin{abstract}
 			En inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
 			till studenter på Chalmers Tekniska Högskola, specifikt programmen
-			Teknisk Matematik och till en viss utsträckning Teknisk Matematik.
-			Inspiration har tagits från bl.a. \citeasnoun{Schultz05},
-			\citeasnoun{Voss10} och \citeasnoun{Oetiker11}.
+			Teknisk Matematik och Teknisk Fysik.
+			Inspiration har tagits från bland annat \citeasnoun{Schultz05} och
+			\citeasnoun{Voss10}, men främst från \citeasnoun{Oetiker11}.
 		\end{abstract}
 	\end{titlepage} % (end)
 	
-	\section{\LaTeX --- en typsättare}
+	%% INLEDNING (fold)
+	\section*{Inledning}
 	\subsection{Vad är \LaTeX?}
 	
 	\subsection{Varför \LaTeX?}
@@ -43,130 +83,217 @@
 	Detta gör att du utan ansträngning kan skapa attraktiva och läsbara
 	rapporter, artiklar och böcker.
 	
-	\section{Ett första \LaTeX-dokument}
+	\subsection{I denna introduktion}
+	Den här korta introduktionen kommer att visa dig hur man på ett enkelt
+	sätt typsätter dokument med \LaTeX{} i vanliga tillämpningar.
+	Dessutom kommer den framåt slutet peka på specifika paket eller
+	resurser som kan vara användbara för mer avancerade fall.
 	
-	\subsection{Konstruktioner}
+	Efter att ha läst den här introduktionen bör läsaren kunna skriva
+	dokument och rapporter utan problem. Det är dock inte tänkt att denna
+	introduktion ska vara en fullgod referens till \LaTeX; för detta
+	rekommenderas istället \citeasnoun{Lamport94} och
+	\citeasnoun{Mittelbach04}.
 	
-	\subsubsection{Dokumentklasser}
+	Introduktionen innehåller följande delar:
+	\begin{description}
+		\item[{Del 1, \hyperref[sec:1]{Grundläggande begrepp}}]
+		beskriver den grundläggande strukturen hos \LaTeX-dokument och hur det
+		språk dokumenten skrivs i fungerar i korta drag. Efter denna del bör
+		du veta på ett ungefär hur \LaTeX{} fungerar.
+		
+		\item[{Del 2, \hyperref[sec:2]{Typsättning med \pdfLaTeX}}]
+		beskriver i detalj hur man skriver ett \LaTeX-dokument och typsätter
+		detta med \pdfLaTeX, och förklarar några av de viktigaste miljöerna
+		och kommandona som används. Efter denna del bör du kunna skriva enkla
+		dokument med \LaTeX.
+		
+		\item[{Del 3, \hyperref[sec:3]{Matematik med \LaTeX{} och \AmS}}]
+		beskriver hur man på bästa sätt använder \LaTeX{} tillsammans med
+		\AmS-paketen för att typsätta det \LaTeX{} typsätter bäst; matematik,
+		och går även kort in på hur man typsätter en del fysik med paketet
+		\pack{siunitx}.
+		
+		\item[{Del 4, \hyperref[sec:4]{Grafik med \LaTeX}}]
+		beskriver hur man inkluderar grafik i \LaTeX{} med paketet
+		\pack{graphicx}, och visar några korta exempel på hur man kan rita
+		direkt i \LaTeX{} med \PGFTikZ{}. Efter den här och föregående del bör
+		du kunna skriva fullständiga rapporter med \LaTeX.
+		
+		\item[{Del 5, \hyperref[sec:5]{Referenser med \BibTeX}}]
+		beskriver hur du använder \BibTeX{} för att hålla koll på och använda
+		referenser i \LaTeX. Beskriver i korthet paketet \pack{chscite} som
+		hjälper dig att typsätta referenser på det sätt Chalmers bibliotek
+		rekommenderar. Efter denna delen bör du kunna skriva långa arbeten
+		(till exempel kandidatrapporter) i \LaTeX.
+		
+		\item[{Del 6, \hyperref[sec:6]{Vidare läsning}}]
+		tipsar om andra resurser, paket, dokumentklasser och rekommendationer
+		som kan vara av nytta när du skriver långa (eller korta) rapporter.
+		Kan vara en språngbräda om du vill göra något som inte förklaras i
+		resten av introduktionen.
+	\end{description}
 	
-	\subsubsection{Paket}
+	Det är viktigt att läsa delarna i rätt ordning; varje del bygger på de
+	föregående, och de är ju trots allt inte särskilt långa. Se till att
+	studera och förstå de exempel som presenteras, och lek gärna lite själv
+	om du inte riktigt förstår. Det finns inget bättre sätt att lära sig än
+	att vara nyfiken!
 	
-	\subsubsection{Miljöer}
+	\LaTeX{} finns till många plattformar, och finns installerat på Chalmers
+	Linuxdatorer. Vill du installera \LaTeX{} på din egen dator finns det
+	sannolikt i din pakethanterare (om du använder Linux), alternativt i form
+	av \TeX{} Live\footnote{\url{http://www.tug.org/texlive/}}. Använder du
+	Mac OS X finns det istället
+	Mac\TeX\footnote{\url{http://www.tug.org/mactex/}}, och till Windows finns
+	MiK\TeX\footnote{\url{http://miktex.org/}}. Den här introduktionen kan
+	tyvärr inte ge fullständiga instruktioner för att installera dessa paket
+	(det är inte introduktionens syfte);
+	konsultera istället respektive pakets dokumentation.
 	
-	\subsubsection{Kommandon}
+	Under introduktionens gång kommer det refereras till så kallade
+	\emph{paket}, som används för att utöka \LaTeX{} med intressanta (och
+	ibland nödvändiga) funktioner. Dessa paket kommer oftast att beskrivas
+	lite kort, men vill man se fullständig dokumentation för varje paket
+	kan man leta på \emph{the Comprehensive \TeX{} Archive Network}
+	(CTAN)\footnote{\url{http://www.ctan.org/}}. Det lättaste sättet att hitta
+	paket på CTAN är att använda dess
+	sökfunktion\footnote{\url{http://www.ctan.org/search/}}.
+	%% (end)
 	
-	\subsection{Dokumentstruktur}
+	%\begin{kod}
+	%	\centering 
+	%	\exempel[lastline=5]{}{examples/ex-1}
+	%	\caption{Ingressen till vårt enkla \LaTeX-dokument}
+	%	\label{kod:ingress}
+	%\end{kod}
 	
-	\subsubsection{Stycken, avsnitt, m.m.}
+	%\kodrad{1}{examples/ex-1}
 	
-	\subsection{Ett exempeldokument}
+	%\begin{exempel}
+	%	\centering
+	%	\exempel[]{trim=4cm 17cm 4cm 5.9cm}{examples/ex-1}
+	%	\caption{Ett mycket enkelt \LaTeX-dokument}
+	%	\label{ex:first}
+	%\end{exempel}
 	
-	\subsection{En \PDF{} med \pdfLaTeX}
+	%% GRUNDLÄGGANDE BEGREPP (fold)
+	\section{Grundläggande begrepp}\label{sec:1}
 	
-% 	\section{Rekommenderade paket}
-% 	\subsection{\pack{inputenc} och \pack{fontenc}}
-% 	Dessa paket är i princip ett måste när du skriver i \LaTeX. De berättar för
-% 	\LaTeX{} vilket format din indata är i, och vilket format dina typsnitt ska
-% 	vara i. Generellt sett så kan man förutsätta att indatan kommer att vara
-% 	i \UTF-format, och att du vill använda T1-typsnitt; detta görs enkelt:
-% 
-% \begin{listing}[999]{-2}
-% \usepackage[utf8]{inputenc}
-% \usepackage[T1]{fontenc}
-% \end{listing}
-% 
-% 	\subsection{\pack{babel}}
-% 	Detta paket ger dig avstavning och standardrubriker på rätt språk, och är
-% 	ännu ett måste när du skriver rapporter med \LaTeX. Paketet har stöd för en
-% 	stor mängd språk, men oftast är det svenska man vill ha:
-% 
-% \begin{listing}[999]{-1}
-% \usepackage[swedish]{babel}
-% \end{listing}
-% 
-% 	\subsection{\AmS\LaTeX --- \pack{amsmath} och \pack{amssymb}}
-% 	\AmS, \emph{the American Mathematical Society}, har skapat ett paket som ger
-% 	tillgång till en stor mängd \LaTeX-kommandon som underlättar typsättning av
-% 	matematik. Det relevanta paketet är egentligen \pack{amsmath}, men ibland
-% 	vill man även använda \pack{amssymb} som ger tillgång till en del
-% 	matematiska symboler. Paketen inkluderas enkelt:
-% 
-% \begin{listing}[999]{-2}
-% \usepackage{amsmath}
-% \usepackage{amssymb}
-% \end{listing}
-% 	
-% 	En stor genomgång av vad som erbjuds av \pack{amsmath} och varför man bör
-% 	använda detta paket istället för det som redan finns i \LaTeX{} ges av
-% 	\citeasnoun{Voss10}.
-% 	
-% 	\subsection{Grafik: \pack{graphicx}}
-% 	
-% 	\subsection{Tabeller: \pack{booktabs}}
-% 	
-% 	\subsection{Figurtexter: \pack{caption}}
-% 	
-% 	\section{Skapa \PDF-filer med \pdfLaTeX}
-% 	När ditt \LaTeX-dokument förr eller senare ska publiceras på internet,
-% 	skrivas ut eller lämnas in till en examinator är det lämpligt att använda
-% 	ett utbrett format. \PDF-formatet är ett av de mest utbredda
-% 	dokumentformaten och kan öppnas av i princip alla, samtidigt som det enkelt
-% 	kan skrivas ut på de flesta datorer. Förr exporterades \LaTeX-dokument till
-% 	\PDF-filer genom att konvertera de \DVI-filer \LaTeX{} normalt genererar
-% 	till \PDF-filer med hjälp av kommandot \cli{dvipdf} \cite{Schultz05}.
-% 	
-% 	Numera är detta dock meningslöst; den moderna \LaTeX-varianten \pdfLaTeX{}
-% 	kan kompilerar dina \LaTeX-dokument direkt till \PDF-filer, och med paket
-% 	som t.ex. \pack{hyperref} kan mycket av funktionaliteten som finns i \PDF{}
-% 	användas från \LaTeX.
-% 	
-% 	Ett problem är dock att typsnitten som normalt används i \LaTeX{} inte är
-% 	gjorda för visning på en skärm; de är bitmappstypsnitt och är gjorda för att
-% 	se bra ut på papper. Man måste därför använda de T1-typsnitt; dessa är
-% 	i vektorformat och fungerar både i utskrifter och på skärmen. Detta gör man
-% 	genom att ladda \pack{fontenc}-paketet:
-% 	
-% \begin{listing}[999]{-1}
-% \usepackage[T1]{fontenc}
-% \end{listing}
-% 
-% 	Tyvärr är det gamla standardtypsnittet som används i \LaTeX mycket utdaterat
-% 	och saknar många tecken, däribland svenska. Detta innebär att \PDF-filerna
-% 	\pdfLaTeX{} genererar inte innehåller ''riktiga'' svenska tecken, och att
-% 	man därför inte kan kopiera texten i dem på ett enkelt sätt. Det lättaste
-% 	sättet att åtgärda detta är att använda ett annat typsnitt, till exempel
-% 	Latin Modern, en modern klon av standardtypsnittet:
-% 	
-% \begin{listing}[999]{-1}
-% \usepackage{lmodern}
-% \end{listing}
-% 
-% 	Det finns även andra typsnitt så som \pack{times} (Times New Roman),
-% 	\pack{mathpazo} (Palatino) och en hel del \TeX{} Gyre-typsnitt\footnote{\url{http://www.gust.org.pl/projects/e-foundry/tex-gyre/nfp11.pdf}}.
-% 	
-% 	En annan aspekt av att använda \pdfLaTeX{} är att det inte stöder import av
-% 	\EPS-filer när man använder \pack{graphicx}. De format som istället är
-% 	tillgängliga är JPEG, PNG och \PDF{} --- existerande \EPS-filer kan man
-% 	konvertera till \PDF{} med hjälp av kommandot \cli{epstopdf}.
-% 	
-% 	\section{Typografitips}
-% 	\subsection{Generella tips för ekvationer}
-% 	Funktioner, integraler, \verb|\limits|, vektorer
-% 	
-% 	\subsection{Siffror och tal}
-% 	Decimalavskiljare, tusentalsavskiljare, minustecken
-% 	
-% 	\subsection{Svensk och utländsk typografi}
-% 	tankstreck osv., datum
-% 	
-% 	\subsection{Fler typografigrejer?}
-% 	
-% 	\section{Figurer och tabeller}
-% 	Floats, varför \LaTeX{} flyttar runt figurer, varför man inte ska
-% 	ändra på det, etc.
-% 	
-% 	\section{Referenssystemet \BibTeX}
+	\subsection{\TeX/\LaTeX}
 	
-	\bibliographystyle{dcumod}
+	\subsection{\LaTeX-dokument}
+	\subsubsection{Grundläggande struktur}
+	\subsubsection{Tomrum}
+	\subsubsection{Specialtecken}
+	\subsubsection{\LaTeX-kommandon}
+	
+	\subsection{Från \TeX{} till \PDF}
+	\subsubsection{Kompilatorn: \pdfLaTeX}
+	\subsubsection{Automatisera med \cli{latexmk}}
+	
+	\subsection{Filer du kanske stöter på}
+	%% (end)
+	
+	%% TYPSÄTTNING MED PDFLATEX (fold)
+	\section{Typsättning med \pdfLaTeX}\label{sec:2}
+	
+	\subsection{Text- och språkstruktur}
+	\subsubsection{Textstycket}
+	\subsubsection{Avstavning}
+	
+	\subsection{Rad- och sidbrytningar}
+	
+	\subsection{Specialtecken och symboler}
+	\subsubsection{Citattecken}
+	\subsubsection{Streck av olika längd}
+	
+	\subsection{Svenska och andra ''internationella'' språk}
+	\subsubsection{Unicode}
+	\subsubsection{Språkpaketet \pack{babel}}
+	
+	\subsection{Avstånd}
+	\subsubsection{Mellan ord}
+	\subsubsection{Mellan stycken}
+	
+	\subsection{Rubriker}
+	\subsubsection{Metadata}
+	\subsubsection{Dokumentets små delar}
+	
+	\subsection{Andra viktiga kommandon}
+	\subsubsection{Fotnoter}
+	\subsubsection{Kursivt och fetstilt}
+	\subsubsection{Etiketter}
+	
+	\subsection{Miljöer \eng{environments}}
+	\subsubsection{Listor av alla slag}
+	\subsubsection{Citat}
+	\subsubsection{Sammanfattningar}
+	
+	\subsection{Flytande objekt}
+	\subsubsection{Figurer}
+	\subsubsection{Tabeller}
+	\subsubsection{Varför ska \LaTeX{} bestämma var min figur ligger?}
+	%% (end)
+	
+	%% MATEMATIK MED LATEX OCH AMS (fold)
+	\section{Matematik med \LaTeX{} och \AmS}\label{sec:3}
+	
+	\subsection{\AmS-\LaTeX}
+	
+	\subsection{Att visa ekvationer}
+	\subsubsection{Ekvationer i löpande text}
+	\subsubsection{Ekvationer som ekvationer}
+	
+	\subsection{En snabbkurs i \LaTeX-matematik}
+	
+	\subsection{Ekvationsmiljöer}
+	\subsubsection{Långa ekvationer med \env{multline}}
+	\subsubsection{Ekvationsutvecklingar: \env{aligned}}
+	\subsubsection{Matriser (\env{\{p,b\}matrix})}
+	\subsubsection{Olika fall med \env{cases}}
+	% fler??
+	
+	\subsection{Avstånd}
+	\subsubsection{Fantomer}
+	
+	\subsection{Symboler och funktioner}
+	% detexify!
+	
+	\subsection{Enheter med \pack{siunitx}}
+	%% (end)
+	
+	%% GRAFIK MED LATEX (fold)
+	\section{Grafik med \LaTeX}\label{sec:4}
+	
+	\subsection{Inkludera grafik med \pack{graphicx}}
+	\subsubsection{Rätt format?}
+	
+	\subsection{Rita med \PGFTikZ}
+	\cite{Mertz07}
+	%% (end)
+	
+	%% REFERENSER MED BIBTEX (fold)
+	\section{Referenser med \BibTeX}\label{sec:5}
+	%% (end)
+	
+	%% VIDARE LÄSNING (fold)
+	\section{Vidare läsning}\label{sec:6}
+	
+	\subsection{Andra resurser}
+	\subsubsection{Böcker och artiklar}
+	\subsubsection{Hjälp med specifika problem}
+	% TeX.SE!
+	
+	\subsection{Rekommenderade paket}
+	
+	\subsection{Tips för stora projekt}
+	
+	\subsection{Andra \TeX-baserade projekt}
+	\subsubsection{Unicode-baserade \XeTeX}
+	\subsubsection{Skripta med \hologo{LuaTeX}}
+	%% (end)
+	
+	\let\oldurl=\url\renewcommand\url[1]{\newline{\small\oldurl{#1}}}
 	\bibliography{referenser}
 \end{document}
