@@ -1,7 +1,7 @@
 \documentclass[swe,12pt]{skrapport}
 \usepackage[utf8]{inputenc}				% input encoding
 \usepackage{fixltx2e}					% fixing LaTeX2e bugs
-\usepackage[usenames,dvipsnames]{color} % colors
+\usepackage[usenames,dvipsnames]{xcolor}% colors
 \usepackage{chscite}					% references
 \usepackage{minted}						% code highlighting
 \usepackage{graphicx}					% include graphics
@@ -10,8 +10,12 @@
 										% ^^^^ custom captions
 \usepackage[hyperfootnotes=false,colorlinks=true,linkcolor=Red,urlcolor=Magenta]{hyperref}
 										% ^^^^ hyperlinks (with colors)
-\usepackage[para,perpage]{footmisc}		% footer fixes
+\usepackage[para,perpage,ragged,bottom,stable]{footmisc}
+										% ^^^^ footer fixes
 \usepackage{hologo}						% logotypes
+\usepackage{microtype}
+\usepackage{tikz}
+\usepackage[swedish]{varioref}
 
 \newcommand\PDF{\textsc{pdf}}							% PDF format
 \newcommand\DVI{\textsc{dvi}}							% DVI format
@@ -28,6 +32,7 @@
 \newcommand\cmd[1]{\texttt{\textbackslash{}#1}}			% LaTeX command
 \newcommand\env[1]{\texttt{#1}}							% LaTeX environment
 \setcounter{secnumdepth}{1}								% Section depth
+\newminted{latex}{frame=single}
 
 \makeatletter % (fold)
 % Listings title (urklipp)
@@ -56,7 +61,7 @@
 		\title{Att \TeX{}a: en praktisk guide}
 		\author{Simon Sigurdhsson\thanks{\url{ssimon@student.chalmers.se}}}
 		\regarding{Nybörjarguide i \LaTeX}
-		\date{v0.1 (2011-??-??)}
+		\date{första upplagan (2011-??-??)}
 		\maketitle
 		\begin{abstract}
 			En inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
@@ -132,6 +137,11 @@
 		som kan vara av nytta när du skriver långa (eller korta) rapporter.
 		Kan vara en språngbräda om du vill göra något som inte förklaras i
 		resten av introduktionen.
+		
+		\item[Appendix A, {\hyperref[app:1]{En enkel mall}}]
+		innehåller mall du kan basera dina framtida \LaTeX{}-dokument
+		på. Den är fullt kommenterad och motiverar de paket som inkluderas och
+		kommandon som definieras.
 	\end{description}
 	
 	Det är viktigt att läsa delarna i rätt ordning; varje del bygger på de
@@ -197,6 +207,7 @@
 	
 	%% TYPSÄTTNING MED PDFLATEX (fold)
 	\section{Typsättning med \pdfLaTeX}\label{sec:2}
+	Hàn Th\'{ê} Thành
 	
 	\subsection{Text- och språkstruktur}
 	\subsubsection{Textstycket}
@@ -211,6 +222,7 @@
 	\subsection{Svenska och andra ''internationella'' språk}
 	\subsubsection{Unicode}
 	\subsubsection{Språkpaketet \pack{babel}}
+	\subsubsection{Skarpare tecken: \pack{fontenc} och \pack{lmodern}}
 	
 	\subsection{Avstånd}
 	\subsubsection{Mellan ord}
@@ -265,12 +277,156 @@
 	
 	%% GRAFIK MED LATEX (fold)
 	\section{Grafik med \LaTeX}\label{sec:4}
+	Många dokument kräver att man inkluderar figurer för att presentera
+	resultat eller förtydliga resonemang. Dessa typsätts i \LaTeX{} med hjälp
+	av flytande objekt, vilket diskuteras i del~\ref{sec:2}, men i dessa
+	flytande objekt måste man även importera eller generera sin grafik.
+	
+	\LaTeX{} ger genom diverse paket många möjligheter att göra detta. Med den
+	klassiska \LaTeX{}-motorn, som genererar \DVI-filer, kunde man importera
+	\EPS-filer eller rita direkt med \textsc{PostScript}-kommandon, men
+	eftersom man i dagsläget oftast använder (och bör använda) \pdfLaTeX{}
+	måste man använda något annorlunda metoder. Denna del förklarar två av
+	dessa: \pack{graphicx} och \PGFTikZ.
 	
 	\subsection{Inkludera grafik med \pack{graphicx}}
+	Det enklaste sättet att inkludera grafik är att skapa sina figurer i ett
+	externt program (det kan till exempel vara fördelaktigt att exportera sina
+	figurer direkt från den programvara man använder) och sedan importera
+	dessa till \LaTeX{}-dokumentet. Detta gör man med paketet \pack{graphicx}.
+	
+	Proceduren är enkel:
+	\begin{enumerate}
+		\item Skapa figuren i ett externt program och spara i rätt format
+		
+		\item Inkludera \pack{graphicx}-paketet genom att skriva
+		\mint{latex}|\usepackage{graphicx}|
+		i inledningen till dokumentet.
+		
+		\item Inkludera grafiken i en \env{figure}-miljö med hjälp av
+		\cmd{includegraphics}:
+		\mint{latex}|\includegraphics[<alternativ>]{<filnamn>}|
+		
+		Alternativen här kan vara många. Oftast vill man ställa in bredden på
+		sin bild så att den passar sidan, och detta kan man göra genom att
+		specificera alternativet \cli{width} och sätta det till
+		\cmd{textwidth}:
+		\mint{latex}|\includegraphics[width=\textwidth]{<filnamn>}|
+		
+		Andra alternativ som kan användas är \cli{height}, \cli{angle}
+		och \cli{trim}\footnote{Man bör då inte heller glömma att sätta
+		\cli{clip=true}.\hfil}. En komplett beskrivning av paketet och de 
+		alternativ som finns att tillgå finns i dokumentationen på
+		CTAN\footnote{\url{http://www.ctan.org/archive/macros/latex/required/graphics/grfguide.pdf}}.
+	\end{enumerate}
+	
+	Säg att man till exempel vill inkludera filen \cli{interpolation.png}
+	i sitt dokument för att illustrera konceptet interpolation. Man bestämmer
+	sig dock för att figuren bara ska ta upp 25\,\% av textbredden, eftersom
+	figuren bli för stor annars. Man använder då alternativet \cli{width}
+	enligt figur~\vref{fig:graphicx} för att specificera detta.
+	
+	\begin{figure}[p]
+		\begin{minipage}{0.475\textwidth} % kod
+				\vfil\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{ex/4/graphicx.tex}\vfil
+		\end{minipage}
+		\hfil
+		\begin{minipage}{0.475\textwidth} % figur
+			\fbox{\includegraphics[width=\textwidth,clip=true,trim=80 0 80 0]{ex/4/graphicx.pdf}}
+		\end{minipage}
+		\caption{Koden till vänster inkluderar filen \cli{interpolation.png} i
+		\LaTeX-dokumentet och ger det resultat som ses till höger.}
+		\label{fig:graphicx}
+	\end{figure}
+	
 	\subsubsection{Rätt format?}
+	En nackdel med \pdfLaTeX{} när det gäller \pack{graphicx} är att det inte
+	finns särskilt många bildformat som fungerar (dock fler än för gamla
+	\LaTeX{}, som bara accepterade \EPS). De enda format som kan inkluderas
+	med \pack{graphicx} när man använder \pdfLaTeX{} är \textsc{PNG},
+	\textsc{JPEG} och \PDF. Oftast vill man använda \PDF{} för figurer,
+	eftersom
+	det är det enda vektorbaserade formatet som fungerar, medan man för
+	fotografier och dylikt använder \textsc{JPEG}. \textsc{PNG} kan man
+	använda då man egentligen bör använda \PDF{} men detta inte är möjligt.
+	
+	Eftersom många verktyg och programvaror fortfarande sparar filer i
+	\EPS-format kan det vara praktiskt att kunna konvertera dessa till ett
+	format som fungerar. Detta kan göras med verktyget \cli{epstopdf}, som
+	finns tillgängligt på CTAN.
 	
 	\subsection{Rita med \PGFTikZ}
-	\cite{Mertz07}
+	Ett lite mer komplicerat sätt att inkludera grafik (men ofta 
+	föredelaktigt, eftersom allt innehåll stannar i \TeX-filen) är att använda
+	\PGFTikZ, ett paket skrivet för att användas med \pdfLaTeX{} för att rita
+	figurer i \LaTeX{}. Med det kan man direkt i sitt \LaTeX-dokument skapa
+	enklare figurer som flödesscheman, träd, grafer eller liknande; se exempel
+	i figur~\vref{fig:tikz}. Även mer avancerade figurer är möjliga, men att
+	förklara hela \PGFTikZ{} tar allt för lång tid för denna introduktion. Den
+	intresserade läsaren hänvisas istället till \citeasnoun{Mertz07} som har
+	en bra introduktion till ämnet, och \PGFTikZ-manualen \cite{Tantau10} som
+	utförligt beskriver hur paketet fungerar.
+	
+	\begin{figure}[p]
+		\centering
+		\begin{minipage}{0.95\textwidth} % kod
+			\vfil
+			\begin{minted}[frame=single]{latex}
+\newcounter{d}\setcounter{d}{0}\def\mcolor{SpringGreen}
+\begin{tikzpicture}
+    \path[coordinate] (0,0) coordinate(A) ++( 60:6cm)
+                      coordinate(B) ++(-60:6cm) coordinate(C);
+    \draw[fill=Black!\thed!\mcolor] (A) -- (B) -- (C) -- cycle;
+    \foreach \x in {1,...,15}{%
+        \pgfmathsetcounter{d}{\thed+10}
+        \setcounter{d}{\thed}
+        \path[coordinate] coordinate(X) at (A){};
+        \path[coordinate] (A) -- (B) coordinate[pos=.15](A)
+                            -- (C) coordinate[pos=.15](B)
+                            -- (X) coordinate[pos=.15](C);
+        \draw[fill=Black!\thed!\mcolor]
+				(A)--(B)--(C)--cycle;
+    }
+\end{tikzpicture}
+			\end{minted}
+			\vfil
+		\end{minipage}
+		\\[1ex]
+		\begin{minipage}{0.95\textwidth} % figur
+			\centering
+			\newcounter{density}\setcounter{density}{0}
+			\begin{minipage}{0.475\textwidth}
+			\fbox{\begin{tikzpicture}
+			    \path[coordinate] (0,0)  coordinate(A)
+			                ++( 60:6cm) coordinate(B)
+			                ++(-60:6cm) coordinate(C);
+			    \draw[fill=Black!\thedensity!SpringGreen]
+							(A) -- (B) -- (C) -- cycle;
+			    \foreach \x in {1,...,15}{%
+			        \pgfmathsetcounter{density}{\thedensity+10}
+			        \setcounter{density}{\thedensity}
+			        \path[coordinate] coordinate(X) at (A){};
+			        \path[coordinate] (A) -- (B) coordinate[pos=.15](A)
+			                            -- (C) coordinate[pos=.15](B)
+			                            -- (X) coordinate[pos=.15](C);
+			        \draw[fill=Black!\thedensity!SpringGreen]
+							(A)--(B)--(C)--cycle;
+			    }
+			\end{tikzpicture}}
+			\end{minipage}\hfil
+			\begin{minipage}{0.475\textwidth}
+			\caption[Koden ovan tolkas av \PGFTikZ{} och resulterar i den
+			itererade triangeln till vänster]{
+			Koden ovan tolkas av \PGFTikZ{} och resulterar i den
+			itererade triangeln till vänster.
+			Fler exempel finns i
+			\citeasnoun{Mertz07} och \citeasnoun{Tantau10}. Tack till Alain 
+			Matthes för originalkoden\footnote{\url{http://www.texample.net/tikz/examples/rotated-triangle/}}.}
+			\label{fig:tikz}
+			\end{minipage}
+		\end{minipage}
+	\end{figure}
+	
 	%% (end)
 	
 	%% REFERENSER MED BIBTEX (fold)
@@ -296,4 +452,10 @@
 	
 	\let\oldurl=\url\renewcommand\url[1]{\newline{\small\oldurl{#1}}}
 	\bibliography{referenser}
+	
+	\appendix
+	%% EN ENKEL MALL (fold)
+	\section{En enkel mall}
+	
+	%% (end)
 \end{document}
