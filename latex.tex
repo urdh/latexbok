@@ -1,12 +1,8 @@
-\documentclass[swe,12pt]{skrapport}
+\documentclass[swe,12pt,nofont]{skrapport}
 %% Packages (fold)
-% input encoding
-\usepackage[utf8]{inputenc}
-% fixing bugs
-\usepackage{fixltx2e}
-\usepackage{microtype}
-% references
-\usepackage{chscite}
+% Packages included by <skrapport>:
+% polyglossia, microtype, icomma, amsmath,
+% unicode-math, xunicode, fontspec
 % graphics
 \usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{graphicx}
@@ -14,43 +10,61 @@
 \usetikzlibrary{shadows}
 % code
 \usepackage{minted}
-% mathematics
-\usepackage{amsmath}
-\usepackage{amssymb}
 % improvement packages
 \usepackage{float}
-\usepackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
 \usepackage[hyperfootnotes=false,colorlinks=true,linkcolor=Red,urlcolor=Magenta]{hyperref}
 \usepackage[swedish]{varioref}
 \usepackage[para,perpage,ragged,bottom,stable]{footmisc}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage{booktabs}
+% references
+\usepackage[swedish]{chscite}
 % other stuff
 \usepackage{siunitx}
 \usepackage{hologo}
-\usepackage[T1,safe]{tipa}
-% the tocloft package requires lof and lot to exist
-\makeatletter\let\l@figure\@empty\let\l@table\@empty\makeatother
+\usepackage[safe,noenc]{tipa}
 \usepackage[titles]{tocloft}
+%% (end)
+
+%% FONT SELECTION (fold)
+\defaultfontfeatures{%
+	Numbers={Proportional,OldStyle},%
+	Ligatures={Historic,Common,Required,Contextual},%
+	Contextuals=Swash,%
+}
+\setmainfont[Scale=1.1]{Baskerville}%{Adobe Caslon Pro}%
+\setsansfont[Scale=0.935]{Frutiger LT Std}
+\setmonofont[Scale=0.935]{Prestige Elite Std}
+\newfontfamily\titlefont[%
+	Alternate=0,%
+	Ligatures={Rare,Historic,Common,Required,Contextual}%
+]{Hoefler Text}
+\newfontfamily\tipafont{DejaVu Serif}
+\setmathrm{Asana Math}
+%\setmathsf{}
+%\setmathtt{}
+%\setboldmathrm{}
+\makeatletter\newcommand\@titstyle{\titlefont}\makeatother
 %% (end)
 
 %% Hacks (fold)
 \makeatletter
+% Varioref seems broken with XeLaTeX
+\def\reftextfaceafter {på \reftextvario{motstående}{nästa} sida}%
+\def\reftextfacebefore{på \reftextvario{motstående}{föregående} sida}%
+\def\reftextafter     {på \reftextvario{följande}{nästa} sida}%
+\def\reftextbefore    {på föregående sida}%
+\def\reftextcurrent   {på denna sida}%
+\def\reftextfaraway#1{på sidan~\pageref{#1}}%
+\def\reftextpagerange#1#2{på sidorna~\pageref{#1}--\pageref{#2}}%
+\def\reftextlabelrange#1#2{\ref{#1} till~\ref{#2}}%
+\DeclareRobustCommand\Vref{\@ifstar{\let\vref@space\relax\Vr@f}{\let\vref@space~\Vr@f}}
+\DeclareRobustCommand\vref{\@ifstar{\let\vref@space\relax\vr@f}{\let\vref@space~\vr@f}}
 % Twoside
 \@twosidetrue
 % Listings title (urklipp)
 \renewcommand{\listingscaption}{Urklipp}
-% Environments for examples and code
-\newcommand\expl@kod[3][]{\inputminted[frame=single,#1]{latex}{#3.tex}}
-\newcommand\expl@fig[3][]{\fbox{\includegraphics[width=0.984\textwidth,clip=true,#2]{#3.pdf}}}
-\newcommand\expl@input[3][]{\expl@kod[#1]{}{#3}\vspace{1ex}\expl@fig{#2}{#3}}
-\newenvironment{exempel}{\begin{expl@eenv}[tbp]\let\exempel=\expl@input}{\end{expl@eenv}}
-\newenvironment{kod}{\begin{expl@kenv}[tbp]\let\exempel=\expl@kod}{\end{expl@kenv}}
-\newenvironment{fig}{\begin{figure}[tbp]\let\exempel=\expl@fig}{\end{figure}}
-% Floats for examples and code
-\newfloat{expl@eenv}{tbp}{lop}\floatname{expl@eenv}{Exempel}
-\newfloat{expl@kenv}{tbp}{lop}\floatname{expl@kenv}{Kodbit}
 % Displaying one line of code
 \newcommand\kodrad[2]{\hspace{1ex}\inputminted[firstline=#1,lastline=#1]{latex}{#2.tex}}
 % Redefining sections to break page
@@ -116,7 +130,7 @@
 \newcommand\EPS{\textsc{eps}}							% EPS format
 \newcommand\UTF{\textsc{utf-8}}							% UTF-8 standard
 \newcommand\cli[1]{\texttt{#1}}							% Command-line input
-\newcommand\opt[1]{\texttt{emph{#1}}}					% CLI option
+\newcommand\opt[1]{\texttt{\emph{#1}}}					% CLI option
 \newcommand\pack[1]{\textsf{#1}}						% LaTeX package
 \newcommand\pdfLaTeX{\hologo{pdfLaTeX}}					% pdfLaTeX logotype
 \newcommand\BibTeX{\textsc{Bib}\TeX}					% BibTeX logotype
@@ -211,20 +225,20 @@
 	Moderna programvaror (ordbehandlare, främst) fungerar på ett helt annat
 	sätt. De ger all makt till författaren, som givetvis inte alltid är
 	särskilt bra på det där med typsättning eller design. Som en konsekvens
-	blir typsättningen av dokument inte alltid bra --- användarna är under
+	blir typsättningen av dokument inte alltid bra — användarna är under
 	illusionen att ett estetiskt tilltalande dokument även är ett bra dokument
 	rent typografiskt. Så är givetvis inte fallet.
 	
 	För att få snygga dokument måste man återskapa den gamla ordningen då
 	varje uppgift löstes av någon som var bra på det. En författare ska inte
-	behöva berätta \emph{hur} saker ska se ut --- det ska designern göra ---
+	behöva berätta \emph{hur} saker ska se ut — det ska designern göra —
 	författaren ska bara berätta \emph{vad} saker är\footnote{Detta är inte
 	helt olikt den uppdelning som görs mellan HTML och CSS.}. \LaTeX{} låter
 	dig som författare göra just detta.
 	
 	\subsection*{Vad är \LaTeX{}?}
 	\addcontentsline{toc}{subsection}{Vad är \LaTeX{}?}
-	\LaTeX{} (uttalas \textipa{[\textprimstress lA:tEx]}) är i princip en
+	\LaTeX{} (uttalas \textipa{\tipafont[\textprimstress lA:tEx]}) är i princip en
 	påbyggnad till \TeX{}, ett typsättningssystem. Man kan även se det som att
 	\LaTeX{} är designern, och \TeX{} är typsättaren. \LaTeX{} berättar i
 	någon mening för \TeX{} hur den tror att du vill ha ditt dokument (utifrån
@@ -244,8 +258,8 @@
 	\subsection*{Varför \LaTeX?}
 	\addcontentsline{toc}{subsection}{Varför \LaTeX{}?}
 	Fördelen med \LaTeX{} är då att författaren endast behöver lära sig några
-	enkla kommandon --- sådana som gör texten kursiv eller infogar en figur
-	--- men att dokumentet ändå håller mycket hög standard, precis som om
+	enkla kommandon — sådana som gör texten kursiv eller infogar en figur
+	— men att dokumentet ändå håller mycket hög standard, precis som om
 	det typsatts av en riktig typsättare.
 	
 	Eftersom språket man skriver dokument i uppmanar till struktur och ordning
@@ -345,7 +359,7 @@
 	paket på CTAN är att använda dess
 	sökfunktion\footnote{\url{http://www.ctan.org/search/}}.
 	%% (end)
-	
+	 
 	%% GRUNDLÄGGANDE BEGREPP (fold)
 	\section{Grundläggande begrepp}\label{sec:1}
 	Introduktionen har förklarat lite kort vad \TeX/\LaTeX{} är och varför du
@@ -391,7 +405,7 @@
 	\cmd{}, innan tecknet man vill använda (dock ej innan
 	\cmd{} självt, eftersom \LaTeX{} tolkar
 	\cmd{\textbackslash} som att man vill tvinga fram en
-	radbrytning --- vill man ha ett \cmd{} använder man istället
+	radbrytning — vill man ha ett \cmd{} använder man istället
 	\cmd{textbackslash}).
 	När det gäller \texttt{\^{}} och \texttt{\~{}} måste man
 	dessutom lägga till måsvingar efteråt, eftersom dessa kan användas för att
@@ -457,7 +471,7 @@
 	
 	Båda dessa kommandon tar en obligatorisk parameter (namnet på 
 	stilen/paketet) och en frivillig parameter som används för att skicka
-	inställningar till stilen eller paketet som laddas in --- en närmare
+	inställningar till stilen eller paketet som laddas in — en närmare
 	förklaring av båda dessa kommandon finns \vpageref{sec:1:layout}.
 	
 	När allt förarbete är gjort kan man inleda dokumentet. Först berättar man
@@ -479,7 +493,7 @@
 	Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
 	är vilken typ av dokument författaren vill skapa. Detta specificeras med
 	hjälp av kommandot \cmd{documentclass}:
-	\mint{latex}|\documentclass[parametrar]{klass}|
+	\mint{latex}|\documentclass[inställningar]{klass}|
 	
 	Här berättar \opt{klass} vilken sort dokument som ska skapas, eller vilken
 	stil som ska användas. Med de flesta \LaTeX{}-distributioner följer ett 
@@ -512,7 +526,7 @@
 		
 		\item[a4paper,\ldots{}] definierar pappersstorleken. Det finns ett
 		antal olika, bland annat \texttt{a5paper} och \texttt{b5paper}, men
-		standard är \texttt{letterpaper} --- se därför till att ändra,
+		standard är \texttt{letterpaper} — se därför till att ändra,
 		eftersom denna pappersstorlek inte används i Sverige.
 		
 		\item[onecolumn,twocolumn] sätter antalet kolumner i dokumentet.
@@ -542,7 +556,7 @@
 	Lyckligvis finns det då nästan alltid ett paket på CTAN som förenklar
 	det du vill göra. Installerade paket kan inkluderas med kommandot
 	\cmd{usepackage}:
-	\mint{latex}|\usepackage[parametrar]{paketnamn}|
+	\mint{latex}|\usepackage[inställningar]{paketnamn}|
 	
 	Notera dock att du måste installera dessa paket innan du kan inkludera dem
 	i ditt \LaTeX-dokument. Din \LaTeX-distribution kommer förmodligen med de
@@ -559,7 +573,7 @@
 	\begin{description}[font=\sffamily]
 		\item[fontenc] berättar för \LaTeX{} vilken sorts typsnitt det
 		typsatta dokumentet ska använda; de vanligaste är \texttt{T3} och
-		\texttt{T1} --- oftast vill man ha \texttt{T1}, som är vektorbaserad:
+		\texttt{T1} — oftast vill man ha \texttt{T1}, som är vektorbaserad:
 		\mint{latex}|\usepackage[T1]{fontenc}|
 		
 		\item[inputenc] berättar för \LaTeX{} vilken teckenkodning indatan har
@@ -580,7 +594,7 @@
 	Normalt måste man köra kompilatorn åtminstone två gånger, så att \LaTeX{}
 	får en chans att förbättra och korrigera småsaker som referenser,
 	innehållsförteckningar med mera\footnote{Detta är en konsekvens av hur
-	\TeX{} fungerar; den läser filen bit för bit och expanderar kommandon ---
+	\TeX{} fungerar; den läser filen bit för bit och expanderar kommandon —
 	det går inte att röra sig ''bakåt'' i filen, så vill man ändra på något
 	man redan gått förbi måste man spara information om detta i en extern fil
 	som man läser in under nästa körning.}.
