@@ -1,4 +1,4 @@
-\documentclass[swe,12pt,nofont]{skrapport}
+\documentclass[draft,swe,12pt,nofont]{skrapport}
 %% Packages (fold)
 % Packages included by <skrapport>:
 % polyglossia, microtype, icomma, amsmath,
@@ -11,6 +11,7 @@
 % code
 \usepackage{minted}
 % improvement packages
+\usepackage{multirow}
 \usepackage[hyperfootnotes=false,colorlinks=true,linkcolor=Red,urlcolor=Magenta]{hyperref}
 \usepackage[swedish]{varioref}
 \usepackage[para,perpage,ragged,bottom,stable]{footmisc}
@@ -20,6 +21,7 @@
 % references
 \usepackage[swedish]{chscite}
 % other stuff
+\usepackage{ifdraft}
 \usepackage{siunitx}
 \usepackage{hologo}
 \usepackage[safe,noenc]{tipa}
@@ -28,6 +30,31 @@
 \usepackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
 \usepackage{subfig}
 \usepackage{cprotect}
+\usepackage{bookmark}
+% more math
+\let\Finv\relax\let\Game\relax\let\beth\relax\let\gimel\relax\let\daleth\relax
+\usepackage{amssymb}
+%\usepackage{mathtools}
+%% (end)
+
+%% Draft fixes to minted, tikz (fold)
+\ifdraft{%
+\makeatletter%
+% minted fixes <FIXME> (how do we account for options e.g. border?)
+\renewcommand\mint[3][]{\DefineShortVerb{#3}\fvset{#1}\SaveVerb[aftersave={\UndefineShortVerb{#3}\begin{flushleft}\UseVerb{minted@verb}\end{flushleft}}]{minted@verb}#3}%
+\renewenvironment{minted}[2][]{\VerbatimEnvironment\fvset{#1}\begin{Verbatim}}{\end{Verbatim}}
+\renewcommand\inputminted[3][]{\fvset{#1}\VerbatimInput{#3}}
+% tikz fixes
+% not nessecary at the moment <FIXME>
+% LaTeX source code
+\newminted{latex}{frame=single}
+\newmint{latex}{frame=single}
+\makeatother%
+}{%
+% LaTeX source code
+\newminted{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}
+\newmint{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}
+}
 %% (end)
 
 %% FONT SELECTION (fold)
@@ -55,15 +82,31 @@
 
 %% Hacks (fold)
 \makeatletter
+% Fix \hologo{XeTeX}
+\def\HoLogo@Xe#1{% 
+   X% 
+   \kern-.1em\relax 
+   \ltx@IfUndefined{HOLOGO@ReflectBox\hologodriver} 
+     {\ltx@IfUndefined{HOLOGO@ReflectBox}\ltx@firstoftwo\ltx@secondoftwo} 
+     \ltx@secondoftwo 
+   {e}{% 
+     \lower.5ex\hbox{% 
+       \HOLOGO@ReflectBox{E}% 
+     }% 
+   }% 
+}
+% Force cramped style on inline math (actually smashes instead)
+%\def\(#1\){\relax\ifmmode\@badmath\else$\fi\cramped{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
+\def\(#1\){\relax\ifmmode\@badmath\else$\fi\smash{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
 % Varioref seems broken with XeLaTeX
-\def\reftextfaceafter {på \reftextvario{motstående}{nästa} sida}%
+\def\reftextfaceafter{på \reftextvario{motstående}{nästa} sida}%
 \def\reftextfacebefore{på \reftextvario{motstående}{föregående} sida}%
-\def\reftextafter     {på \reftextvario{följande}{nästa} sida}%
-\def\reftextbefore    {på föregående sida}%
-\def\reftextcurrent   {på denna sida}%
-\def\reftextfaraway#1{på sidan~\pageref{#1}}%
-\def\reftextpagerange#1#2{på sidorna~\pageref{#1}–\pageref{#2}}%
-\def\reftextlabelrange#1#2{\ref{#1} till~\ref{#2}}%
+\def\reftextafter{på \reftextvario{följande}{nästa} sida}%
+\def\reftextbefore{på föregående sida}%
+\def\reftextcurrent{på denna sida}%
+\def\reftextfaraway#1{{på sidan~\pageref{#1}}}%
+\def\reftextpagerange#1#2{{på sidorna~\pageref{#1}–\pageref{#2}}}%
+\def\reftextlabelrange#1#2{{\ref{#1} till~\ref{#2}}}%
 \DeclareRobustCommand\Vref{\@ifstar{\let\vref@space\relax\Vr@f}{\let\vref@space~\Vr@f}}
 \DeclareRobustCommand\vref{\@ifstar{\let\vref@space\relax\vr@f}{\let\vref@space~\vr@f}}
 % Twoside
@@ -134,14 +177,26 @@
 % File last modified
 \def\parsedate #1:2#2#3#4#5#6#7#8#9\empty{\ifx{#2}{9}19\else20\fi#3#4/#5#6/#7#8}
 \newcommand\moddate[1][\jobname.tex]{\expandafter\parsedate\pdffilemoddate{#1}\empty}
+% Minted background fix
+\renewenvironment{minted@colorbg}[1]{%
+	\par%
+	\def\minted@bgcol{#1}%
+	\noindent\begin{lrbox}{\minted@bgbox}%
+	\begin{minipage}{\linewidth-2\fboxsep}%
+}{%
+	\end{minipage}%
+	\end{lrbox}%
+	\colorbox{\minted@bgcol}{\usebox{\minted@bgbox}}%
+	\par%
+}
 \makeatother
 % (end)
 
 %% Convenient definitions (fold)
-\newcommand\PDF{\textsc{pdf}}							% PDF format
-\newcommand\DVI{\textsc{dvi}}							% DVI format
-\newcommand\EPS{\textsc{eps}}							% EPS format
-\newcommand\UTF{\textsc{utf-8}}							% UTF-8 standard
+\newcommand\PDF{\textsc{PDF}}							% PDF format
+\newcommand\DVI{\textsc{DVI}}							% DVI format
+\newcommand\EPS{\textsc{EPS}}							% EPS format
+\newcommand\UTF{\textsc{UTF-8}}							% UTF-8 standard
 \newcommand\cli[1]{\texttt{#1}}							% Command-line input
 \newcommand\opt[1]{\texttt{\emph{#1}}}					% CLI option
 \newcommand\pack[1]{\textsf{#1}}						% LaTeX package
@@ -153,7 +208,6 @@
 \newcommand\eng[1]{(eng.~\emph{#1})}					% english translation
 \newcommand\cmd[1]{\texttt{\textbackslash{}#1}}			% LaTeX command
 \newcommand\env[1]{\texttt{#1}}							% LaTeX environment
-\newminted{latex}{frame=single}							% LaTeX source code
 % Front/back page color and graphics
 \def\frontpagecolor{LimeGreen}
 \newcommand\frontpagegraphic{\begin{tikzpicture}[remember picture,overlay]
@@ -163,8 +217,20 @@
 	minimum width=\paperwidth,
 	minimum height=6cm] at (midpoint) {};
 \end{tikzpicture}}
+% minted style
+\usemintedstyle{solarized}
+\definecolor{mintedbg}{rgb}{0.9665,0.9550,0.9175}
 % Unit definitions
 \DeclareSIUnit\point{pt}
+\DeclareSIUnit\em{em}
+\DeclareSIUnit\mu{mu}
+\sisetup{locale=DE}
+% Math redefinitions
+\DeclareMathOperator{\erfc}{erfc}
+\renewcommand{\frac}[2]{\genfrac{}{}{}{}{\displaystyle #1}{\displaystyle #2}}
+\makeatletter
+\renewcommand\d[1]{\ensuremath{\,\mathrm{d}#1\@ifnextchar\d{\!}{}}}
+\makeatother
 %% (end)
 
 %% Redefinitions of style (fold)
@@ -218,6 +284,10 @@
 \regarding{Nybörjarguide i \LaTeX}
 \date{första upplagan.}
 %% (end)
+
+% <FIXME>
+% * \subsubsubsection needs starred variant to work properly
+% * \cramped typesets a strange bar above (inline?) math
 
 \begin{document}
 	\pagestyle{empty}
@@ -445,7 +515,7 @@
 	hända. Vanligtvis slutar det bara med att tecknet inte syns, men det kan
 	potentiellt göra att ditt dokument inte ens kompilerar. Specialtecknen
 	är inte särskilt många:
-	\mint{latex}|# ^ & _ { } ~ \ % $|
+	\latex|# ^ & _ { } ~ \ % $|
 	
 	För att använda dem måste man lägga till ett (bakvänt) snedstreck,
 	\cmd{}, innan tecknet man vill använda (dock ej innan
@@ -456,7 +526,7 @@
 	När det gäller \verb|^| och \verb|~| måste man
 	dessutom lägga till måsvingar efteråt, eftersom dessa kan användas för att
 	modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
-	\mint{latex}|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
+	\latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
 	
 	\subsubsection{\LaTeX-kommandon}
 	För att säga åt \LaTeX{} vad som ska göras används kommandon. De flesta
@@ -486,7 +556,7 @@
 	Vissa kommandon kräver en obligatorisk och/eller frivillig parameter som
 	på ett eller annat sätt bestämmer hur kommandot beter sig. Den generella
 	strukturen hos ett kommando, med dessa parametrar, är relativt enkel:
-	\mint{latex}|\kommando[frivillig parameter]{obligatorisk parameter}|
+	\latex|\kommando[frivillig parameter]{obligatorisk parameter}|
 	
 	Finns det ingen obligatorisk parameter, eller om den frivilliga parametern
 	inte används, kan hela biten inklusive hakparantes/måsvinge helt
@@ -499,21 +569,21 @@
 	inte är helt säker på. Detta görs med procenttecknet; när \LaTeX{} stöter
 	på ett sådant (såvida det inte sitter ett \cmd{} före) så ignorerar den
 	hela resten av den raden i \TeX{}-filen:
-	\mint{latex}|Lite text\ldots{} % ...och en kommentar|
+	\latex|Lite text\ldots{} % ...och en kommentar|
 	
 	\subsubsection{Grundläggande struktur}
 	När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
 	kommenterar delar av dina filer är det dags att förklara lite närmre hur
 	en typisk \LaTeX{}-fil ser ut. Kompilatorn förväntar sig en viss struktur,
 	till exempel så måste varje dokument inledas med kommandot
-	\mint{latex}|\documentclass{...}|
+	\latex|\documentclass{...}|
 	som berättar för \LaTeX{} vilken dokumentstil du vill använda (det finns
 	ett antal olika, för till exempel rapporter, böcker eller brev).
 	
 	Därefter bör man köra de kommandon som påverkar hela dokumentet, till
 	exempel så kan man ladda in extra paket eller definiera nya kommandon.
 	Paket laddar man in med kommandot \cmd{usepackage}:
-	\mint{latex}|\usepackage{...}|
+	\latex|\usepackage{...}|
 	
 	Båda dessa kommandon tar en obligatorisk parameter (namnet på 
 	stilen/paketet) och en frivillig parameter som används för att skicka
@@ -522,10 +592,10 @@
 	
 	När allt förarbete är gjort kan man inleda dokumentet. Först berättar man
 	för \LaTeX{} att innehållet börjar med hjälp av kommandot
-	\mint{latex}|\begin{document}|
+	\latex|\begin{document}|
 	och därefter följer dokumentets innehåll. När allt innehåll är slut
 	avslutar man dokumentet med det snarlika kommandot
-	\mint{latex}|\end{document}|
+	\latex|\end{document}|
 	som säger åt \LaTeX{} att det inte finns något mer som ska typsättas.
 	
 	\subsection{Dokumentets layout}\label{sec:1:layout}
@@ -539,7 +609,7 @@
 	Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
 	är vilken typ av dokument författaren vill skapa. Detta specificeras med
 	hjälp av kommandot \cmd{documentclass}:
-	\mint{latex}|\documentclass[inställningar]{klass}|
+	\latex|\documentclass[inställningar]{klass}|
 	
 	Här berättar \opt{klass} vilken sort dokument som ska skapas, eller vilken
 	stil som ska användas. Med de flesta \LaTeX{}-distributioner följer ett 
@@ -592,7 +662,7 @@
 	allmänt accepterade textstorleken \SI{12}{\point} på ett A4-papper. Det är
 	ingen lång rapport, kanske till och med en inlämningsuppgift, och du
 	bestämmer dig därför för att använda \pack{article}-klassen:
-	\mint{latex}|\documentclass[12pt,a4paper]{article}|
+	\latex|\documentclass[12pt,a4paper]{article}|
 	
 	\subsubsection{Paket}
 	När du skriver ett dokument kommer du troligtvis att märka att vissa saker
@@ -602,7 +672,7 @@
 	Lyckligvis finns det då nästan alltid ett paket på CTAN som förenklar
 	det du vill göra. Installerade paket kan inkluderas med kommandot
 	\cmd{usepackage}:
-	\mint{latex}|\usepackage[inställningar]{paketnamn}|
+	\latex|\usepackage[inställningar]{paketnamn}|
 	
 	Notera dock att du måste installera dessa paket innan du kan inkludera dem
 	i ditt \LaTeX-dokument. Din \LaTeX-distribution kommer förmodligen med de
@@ -620,14 +690,14 @@
 		\item[fontenc] berättar för \LaTeX{} vilken sorts typsnitt det
 		typsatta dokumentet ska använda; de vanligaste är \texttt{T3} och
 		\texttt{T1} — oftast vill man ha \texttt{T1}, som är vektorbaserad:
-		\mint{latex}|\usepackage[T1]{fontenc}|
+		\latex|\usepackage[T1]{fontenc}|
 		
 		\item[inputenc] berättar för \LaTeX{} vilken teckenkodning indatan har
 		skrivits i. \LaTeX{} (som
 		stammar från 80-talet) antar att teckenkodningen är
 		\textsc{iso-8859-1} om inget annat anges, men många moderna system
 		använder \UTF vilket man då måste berätta:
-		\mint{latex}|\usepackage[utf8]{inputenc}|
+		\latex|\usepackage[utf8]{inputenc}|
 		\label{sec:1:inputenc}
 	\end{description}
 	
@@ -752,7 +822,7 @@
 		över tabeller.
 		
 		\item[.aux] En fil som innehåller information om korsreferenser,
-		ettiketter och annat. Läses in vid nästa körning av \cli{pdflatex}.
+		etiketter och annat. Läses in vid nästa körning av \cli{pdflatex}.
 	\end{description}
 	%% (end)
 	
@@ -811,7 +881,7 @@
 	= \frac{\pi}{2}
 \end{equation}
 kan man alltså med Monte Carlo-integration ta fram
-ett approximativt värde på $\pi$.
+ett approximativt värde på \(\pi\).
 
 % Exempel två
 \ldots{}Weibullfördelningen, döpt efter den svenska
@@ -858,18 +928,18 @@ Mandelbrot-mängden, som\ldots{}
 	använda dessa för att strukturera sin text.
 	
 	Standardklasserna i \LaTeX{} har sex rubriknivåer:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \part{...}          % Ingen nivå
 \section{...}       % Nivå 1
 \subsection{...}    % Nivå 2
 \subsubsection{...} % Nivå 3
 \paragraph{...}     % Nivå 4
 \subparagraph{...}  % Nivå 5
-	\end{latexcode*}
+	\end{latexcode}
 	
 	Dessutom finns det i \pack{report}- och \pack{book}-klasserna en
 	rubriknivå till, nivå noll, som ges av \cmd{chapter}:
-	\mint{latex}|\chapter{...}       % Nivå 0|
+	\latex|\chapter{...}       % Nivå 0|
 	Eftersom \pack{article}-klassen inte känner igen \cmd{chapter} kan man
 	enkelt inkludera artiklar som kapitel i till exempel en bok.
 	
@@ -879,10 +949,10 @@ Mandelbrot-mängden, som\ldots{}
 	\LaTeX{} dessutom per automatik numrerar ner till en viss nivå. Denna
 	definieras av dokumentklassen men kan ändras genom att ställa in
 	den inbyggda räknaren \texttt{secnumdepth}:
-	\mint{latex}|\setcounter{secnumdepth}{2} % Numrera ner till subsection|
+	\latex|\setcounter{secnumdepth}{2} % Numrera ner till subsection|
 	Dessutom kan man införa onumrerade rubriker genom att lägga till en
 	stjärna efter rubrikkommandot:
-	\mint{latex}|\section*{Inledning} % Onumrerad rubrik|
+	\latex|\section*{Inledning} % Onumrerad rubrik|
 	
 	Dessa rubriker kan sedan om så önskas listas i en innehållsförteckning med
 	hjälp av kommandot \cmd{tableofcontents}, där endast de numrerade
@@ -890,7 +960,7 @@ Mandelbrot-mängden, som\ldots{}
 	i sin innehållsförteckning måste man uttryckligen lägga till dessa med
 	kommandot \cmd{addcontentsline}.}.
 	Djupet på innehållsförteckningen styrs med räknaren \texttt{tocdepth}:
-	\mint{latex}|\setcounter{tocdepth}{2}|
+	\latex|\setcounter{tocdepth}{2}|
 	
 	\subsubsection{Rad- och sidbrytningar}
 	Med \LaTeX{} behöver man i princip aldrig bry sig om att rad- eller
@@ -944,16 +1014,16 @@ Mandelbrot-mängden, som\ldots{}
 	\pack{babel} (paketet förklaras närmre i del~\ref{sec:6}), till och med
 	för dokument med mer än ett språk, men oftast räcker det med att helt
 	enkelt inkludera paketet med rätt inställning:
-	\mint{latex}|\usepackage[swedish]{babel} % Dokumentet är på svenska|
+	\latex|\usepackage[swedish]{babel} % Dokumentet är på svenska|
 	
 	Det andra paketet, \pack{polyglossia}, är en ny och förbättrad variant av
 	\pack{babel}. Det innehåller bland annat kraftigt förbättrade
 	avstavningsregler. Att använda \pack{polyglossia} är nästan lika enkelt
 	som att använda \pack{babel}:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \usepackage{polyglossia}
 \setmainlanguage{swedish} % Dokumentet är på svenska
-	\end{latexcode*}
+	\end{latexcode}
 	
 	Inga avstavningspaket är dock kompletta, och skriver man tekniska 
 	rapporter är risken stor att något ord inte finns med eller avstavas på
@@ -961,7 +1031,7 @@ Mandelbrot-mängden, som\ldots{}
 	avstavas med hjälp av kommandot \cmd{hyphenate}. Kommandots argument ska
 	vara en lista av ord (separerade med mellanslag) som har bindestreck
 	placerade där \LaTeX{} får bryta ordet. Sålunda kan raden
-	\mint{latex}|\hyphenate{FORTRAN span-ku-le-ra}|
+	\latex|\hyphenate{FORTRAN span-ku-le-ra}|
 	användas för att berätta för \LaTeX{} att ordet ”\textsc{FORTRAN}” inte 
 	får brytas, medan ordet ”spankulera” får brytas på de angivna 
 	positionerna.
@@ -1028,7 +1098,7 @@ Mandelbrot-mängden, som\ldots{}
 	typsätts, inte \emph{hur} det ska typsättas. Säg till exempel att du vill
 	typsätta namn på \LaTeX-paket med sans-serif-typsnitt. Vi kan då definiera
 	ett kommando \cmd{package} som i sin tur tillämpar \cmd{textsf}:
-	\mint{latex}|\newcommand\package[1]{\textsf{#1}}|
+	\latex|\newcommand\package[1]{\textsf{#1}}|
 	När detta sedan används i dokumentet ser man direkt att det är ett paket
 	som beskrivs; att det sedan typsätts med sans-serif-typsnitt är inte så
 	intressant just när man skriver dokumentet.
@@ -1048,11 +1118,11 @@ Mandelbrot-mängden, som\ldots{}
 	en annan, men kan inte överlappa (varje omgivning måste avslutas innan
 	dess ”förälder” avslutas), vilket gör att de ger en tydlig trädliknande
 	struktur. En omgivning (här \texttt{verbatim}) kan alltså skrivas
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \begin{verbatim}
     Det här är omgivningens innehåll
 \end{verbatim}
-	\end{latexcode*}
+	\end{latexcode}
 	där omgivningens innehåll med fördel kan indenteras för att göra
 	strukturen tydlig.
 	
@@ -1165,11 +1235,11 @@ Mandelbrot-mängden, som\ldots{}
 	tillåts placera objektet. Om inget av dessa fungerar kommer \LaTeX{} att
 	placera objektet på en egen sida. Sålunda kan man skapa en \emph{float}
 	med följande kod:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \begin{<floattyp>}[tb] % Får placeras som top eller bottom
 	% Innehåll i det flytande objektet
 \end{<floattyp>}
-	\end{latexcode*}
+	\end{latexcode}
 	
 	Flytande objekt kan även ha figurtexter, som definieras med kommandot
 	\cmd{caption}. En figurtext ska komplettera figuren och förklara vad som
@@ -1214,13 +1284,13 @@ Mandelbrot-mängden, som\ldots{}
 	mätserier eller liknande. \LaTeX{} definierar två tabellrelaterade
 	omgivningar; \texttt{table} och \texttt{tabular}. Det förstnämnda är ett
 	flytande objekt och används precis som \texttt{figure}:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \begin{table}[tpb]
 	\centering 
 	\caption{En beskrivning av tabellen}
 	% Här ska själva tabellen in
 \end{table}
-	\end{latexcode*}
+	\end{latexcode}
 	
 	Den andra omgivningen, \texttt{tabular}, är den som faktiskt används för
 	att definiera tabellen. \LaTeX{} kan i denna omgivning hjälpa till med att
@@ -1240,12 +1310,12 @@ Mandelbrot-mängden, som\ldots{}
 	\toprule 
 	Konstant & Värde & Kort beskrivning \\
 	\midrule 
-	$\gamma$ & $0,577$ & Skillnaden mellan den
-	 harmoniska summan från $1$ till $n$ och den
-	 naturliga logaritmen av $n$ då $n\to\infty$.\\
-	$e$ & $2,718$ & Den konstant med egenskapen
-	att $(e^x)' = e^x$. \\
-	$\pi$ & $3,1415$ & Kvoten mellan en cirkels
+	\(\gamma\) & \(0,577\) & Skillnaden mellan den
+	 harmoniska summan från \(1\) till \(n\) och den
+	 naturliga logaritmen av \(n\) då \(n\to\infty\).\\
+	\(e\) & \(2,718\) & Den konstant med egenskapen
+	att \((e^x)' = e^x\). \\
+	\(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
 	 omkrets och dess diameter. Mycket viktig
 	 konstant i många sammanhang; dyker upp
 	 lite varstans. \\
@@ -1260,12 +1330,12 @@ Mandelbrot-mängden, som\ldots{}
 				\toprule 
 				Konstant & Värde & Kort beskrivning \\
 				\midrule 
-				$\gamma$ & $0,577$ & Skillnaden mellan den
-				 harmoniska summan från $1$ till $n$ och den
-				 naturliga logaritmen av $n$ då $n\to\infty$.\\
-				$e$ & $2,718$ & Den konstant med egenskapen
-				att $(e^x)' = e^x$. \\
-				$\pi$ & $3,1415$ & Kvoten mellan en cirkels
+				\(\gamma\) & \(0,577\) & Skillnaden mellan den
+				 harmoniska summan från \(1\) till \(n\) och den
+				 naturliga logaritmen av \(n\) då \(n\to\infty\).\\
+				\(e\) & \(2,718\) & Den konstant med egenskapen
+				att \((e^x)' = e^x\). \\
+				\(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
 				 omkrets och dess diameter. Mycket viktig
 				 konstant i många sammanhang; dyker upp
 				 lite varstans. \\
@@ -1300,8 +1370,8 @@ Mandelbrot-mängden, som\ldots{}
 			\item Använd aldrig någonsin lodräta linjer.
 			\item Använd aldrig dubbla linjer.
 			\item Lägg enheter i tabellhuvudet.
-			\item Decimalkomma ska alltid föregås av en siffra; alltså $0,1$ 
-			\emph{inte} bara $,1$.
+			\item Decimalkomma ska alltid föregås av en siffra; alltså \(0,1\) 
+			\emph{inte} bara \(,1\).
 			\item Använd inte upprepningstecken eller sådana konventioner för
 			att repetera föregående värde. I många fall räcker det med en tom
 			cell. Gör det inte det, repetera värdet.
@@ -1352,15 +1422,15 @@ Mandelbrot-mängden, som\ldots{}
 	För att kunna hålla koll på sina etiketter bör man även namnge dem på ett
 	logiskt sätt (varje etikett bör beskriva det den refererar till) och gärna
 	inleda varje etikett med en liten beskrivande förkortning. Man kan till
-	exempel märka en figur som visar $\beta$-sönderfall med följande etikett:
-	\mint{latex}|\label{fig:betasonderfall}|
+	exempel märka en figur som visar \(\beta\)-sönderfall med följande etikett:
+	\latex|\label{fig:betasonderfall}|
 
 	Etiketterna kan man sedan referera till med \cmd{ref}, som skriver ut det
 	nummer figuren (eller motsvarande) har. Dessutom finns \cmd{pageref}, som
 	skriver ut vilken sida figuren ligger på. Dessa kommandon är dock inte
 	medvetna om vilken typ av objekt man refererar till, så detta måste man
 	berätta:
-	\mint{latex}|...som man ser i figur~\ref{fig:betasonderfall}...|
+	\latex|...som man ser i figur~\ref{fig:betasonderfall}...|
 	
 	Paketet \pack{varioref} inför det något mer intelligenta kommandot
 	\cmd{vref} (och även \cmd{vpageref}) som formulerar referensen på ett
@@ -1393,7 +1463,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	\begin{table}[tb]
 		\centering 
-		\caption{Citattecken i \LaTeX}
+		\caption{Citattecken i \LaTeX.}
 		\label{tab:citat}
 		\begin{tabular}{l l p{0.5\textwidth}}
 			\toprule 
@@ -1416,11 +1486,11 @@ Mandelbrot-mängden, som\ldots{}
 	att det finns olika skiljetecken). Det är relativt viktigt att skilja på
 	dessa och se till att använda rätt streck vid rätt tillfälle.
 	
-	Det första strecket, minustecknet, är relativt långt ($-$) och går i
+	Det första strecket, minustecknet, är relativt långt (\(-\)) och går i
 	princip inte att missa eller missbruka. Det infogas av \LaTeX då man
 	använder ett vanligt bindestreck (\verb|-|) i matematikläge\footnote{
 	Mer om detta i del~\ref{sec:3}.}:
-	\mint{latex}|...och ett flyttal kan därför ha värdet $-0$.|
+	\latex|...och ett flyttal kan därför ha värdet \(-0\).|
 	
 	Nästa tecken, det vanliga bindestrecket (-), behöver man i princip aldrig
 	använda själv. Det infogas av \LaTeX{} då ord avstavas, men kan även
@@ -1430,7 +1500,7 @@ Mandelbrot-mängden, som\ldots{}
 	Det tredje strecket kallas intervallstreck (–) och är något längre än
 	bindestrecket. Detta används som namnet antyder för att typsätta
 	intervall, och skrivs med hjälp av två bindestreck (\verb|--|):
-	\mint{latex}|...det kan ta upp emot 3--4 timmar att...|
+	\latex|...det kan ta upp emot 3--4 timmar att...|
 	
 	Det fjärde och sista strecket kallas tankstreck (—) och är det längsta av
 	strecken. Tankstrecket är relativt ovanligt inom svensk typografi, men det
@@ -1440,7 +1510,7 @@ Mandelbrot-mängden, som\ldots{}
 	\citename{LIU98} föreslår ska använda tankstrecket i intervall eller
 	punktlistor.}. Ett tankstreck skriver man med tre bindestreck i följd
 	(\verb|---|), och man bör omge det med mellanslag:
-	\mint{latex}|...det är --- för tillfället åtminstone --- omöjligt att...|
+	\latex|...det är --- för tillfället åtminstone --- omöjligt att...|
 	
 	\subsubsection{Avstånd mellan stycken}
 	Det finns två vedertagna sätt att separera stycken; indrag och
@@ -1453,7 +1523,7 @@ Mandelbrot-mängden, som\ldots{}
 	egentligen skriva helt nya dokumentklasser, men eftersom detta är ett
 	stort jobb kan man istället ”laga” \LaTeX{}. Detta görs av
 	paketet \pack{parskip}:
-	\mint{latex}|\usepackage{parskip}|
+	\latex|\usepackage{parskip}|
 	
 	\subsubsection{Andra saker att hålla reda på}
 	Datum skrivs på bästa sätt i ISO-format (YYYY–MM–DD), där man
@@ -1480,7 +1550,7 @@ Mandelbrot-mängden, som\ldots{}
 	på bitmappar, som inte skalar särskilt väl. Därför måste man använda
 	paketet \pack{fontenc} för att säga åt \LaTeX{} att använda vektorbaserade
 	typsnitt istället:
-	\mint{latex}|\usepackage[T1]{fontenc}|
+	\latex|\usepackage[T1]{fontenc}|
 	
 	Det är då man brukar stöta på nästa problem, som yttrar sig i att text
 	(främst skandinaviska tecken och andra tecken som inte finns 
@@ -1495,7 +1565,7 @@ Mandelbrot-mängden, som\ldots{}
 	i princip ut som Computer Modern, men innehåller alla de glyfer som behövs
 	för att typsätta svensk (och annan icke-anglikansk) text. För att använda
 	Latin Modern inkluderar man paketet \pack{lmodern}:
-	\mint{latex}|\usepackage{lmodern}|
+	\latex|\usepackage{lmodern}|
 	
 	\subsection{Andra viktiga delar}
 	% <FIXME> Skriva något här?
@@ -1506,13 +1576,13 @@ Mandelbrot-mängden, som\ldots{}
 	enkelt att göra, och fungerar i princip så att man definierar sin
 	metadata (titel, datum, författare) med hjälp av ett par kommandon, varpå
 	man kör kommandot \cmd{maketitle} för att skriva ut en titelsida:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \title{En fantastisk rapport\thanks{Tack till DD-gudarna
        för visad barmhärtighet och stabila filservrar.}}
 \date{2011--12--13}
 \author{E.~Johansson\thanks{erik.johansson@example.org}}
 \maketitle
-	\end{latexcode*}
+	\end{latexcode}
 	
 	Kommandot \cmd{thanks} kan användas för att infoga korta tack eller extra
 	information om titel eller författare, så som mailadresser eller
@@ -1530,19 +1600,19 @@ Mandelbrot-mängden, som\ldots{}
 	språk mitt i dokumentet. Man måste då först ladda in \pack{babel} med stöd 
 	för båda språken (notera att det sista språket i listan är aktivt från
 	dokumentets start):
-	\mint{latex}|\usepackage[english,swedish]{babel}|
+	\latex|\usepackage[english,swedish]{babel}|
 	Använder man \pack{polyglossia} är förfarandet snarlikt:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \usepackage{polyglossia}
 \setmainlanguage{swedish}
 \setotherlanguage{english}
-	\end{latexcode*}
+	\end{latexcode}
 	
  	Därefter byter man helt enkelt språk när man vill ha sitt \emph{abstract}%
 	\footnote{Lyckligtvis är \pack{polyglossia} delvis bakåtkompatibelt med
 	\pack{babel}, så kodstycket för att byta språk fungerar med båda dessa
 	paket.}:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \begin{otherlanguage}{english}
     \begin{abstract}
         % Abstract
@@ -1551,7 +1621,7 @@ Mandelbrot-mängden, som\ldots{}
 \begin{abstract}
     % Sammanfattning
 \end{abstract}
-	\end{latexcode*}
+	\end{latexcode}
 	
 	\subsubsection{Citat}
 	Det finns två omgivningar i \LaTeX{} som kan användas för att märka upp
@@ -1569,7 +1639,7 @@ Mandelbrot-mängden, som\ldots{}
 	man inte det förutsätter \LaTeX{} att dokumentet är skrivet i
 	\textsc{iso-8859-1}, och är det då inte det så kommer hemska saker hända.
 	Teckenkodningen specificeras med paketet \pack{inputenc}:
-	\mint{latex}|\usepackage[<teckenkodning>]{inputenc}|
+	\latex|\usepackage[<teckenkodning>]{inputenc}|
 	Här refererar man till \UTF{} som \texttt{utf8}, \textsc{iso-8859-1} som
 	\texttt{latin1} och \textsc{CP-1252} som \texttt{ansinew}. Det finns även
 	en del mer obskyra teckenkodningar\footnote{De som stöds av 
@@ -1583,7 +1653,7 @@ Mandelbrot-mängden, som\ldots{}
 	sidan som får fyllas med text. Genom att lägga till ett flyttal innan
 	längden kan man dessutom berätta för \LaTeX{} att man till exempel vill
 	ha en figur som endast täcker \num{3/4} av bredden:
-	\mint{latex}|0.75\textwidth|
+	\latex|0.75\textwidth|
 	
 	Det finns en stor mängd längder i \LaTeX, och många av dem relaterar till
 	olika mått på sidan \cite[s.~132]{Oetiker11}, medan andra (till exempel
@@ -1597,7 +1667,7 @@ Mandelbrot-mängden, som\ldots{}
 	till exempel) som är ”ömtåliga” \eng{fragile}, och som därför inte kan
 	användas i rörliga argument utan vidare. Vill man göra det måste man
 	skydda dem, något som görs med kommandot \cmd{protect}:
-	\mint{latex}|\section{En rubrik\protect\footnote{Med en fotnot.}}|
+	\latex|\section{En rubrik\protect\footnote{Med en fotnot.}}|
 	
 	%% (end)
 	
@@ -1621,60 +1691,1013 @@ Mandelbrot-mängden, som\ldots{}
 	För att typsätta matematik så som det beskrivs i den här delen måste du
 	använda paketen \pack{amsmath} och \pack{amssymb}, som bör följa med din
 	\LaTeX-distribution:
-	\begin{latexcode*}{frame=none}
+	\begin{latexcode}
 \usepackage{amsmath}
 \usepackage{amssymb}
-	\end{latexcode*}
+	\end{latexcode}
 	
 	\subsection{Att visa ekvationer}
-	a
+	Ekvationer är mångfacetterade och man kan vilja inkludera ekvationer av
+	olika anledningar och på olika sätt. I \LaTeX{} kan figurer infogas
+	\emph{inline} (det vill säga i löpande text) eller i omgivningar (vilket
+	frilägger ekvationen, något som är lämpligt för längre ekvationer eller
+	ekvationer av större vikt). %% <FIXME> utveckla...
 	
 	\subsubsection{Ekvationer i löpande text}
-	a
+	Ekvationer i löpande text kan infogas på två olika sätt; dels genom att
+	placera matematiken mellan dollartecken (\verb|$\sin(x)$|) och dels genom
+	att använda de \LaTeX-specifika alternativen till dollartecken, \cmd{(}
+	och \cmd{)}. Det rekommenderas att använda det senare, eftersom detta inte
+	ger fullt så obskyra felmeddelanden när saker är fel, men även
+	dollatecknen fungerar bra och det är ingen typografisk skillnad.
 	
-	\subsubsection{Ekvationer som ekvationer}
-	a
+	Matematik som typsätts i löpande text kommer att anpassas i höjd för att
+	inte störa texten omkring. Det innebär att till exempel kvoter kommer att
+	se tilltryckta ut. Oftast bör man dock inte använda matematik i löpande
+	text vid de tillfällen då det kommer se ”fel” ut, eftersom ett block då
+	är mer logiskt, textmässigt. Matematik i löpande text är istället oftast
+	konstanter, enstaka värden och kanske någon olikhet:
+	\latex|Ett helt varv runt cirkeln är \(2\pi\)...|
+	
+	\subsubsection{Ekvationer som ekvationer}\label{sec:3:ekvsomekv}
+	Längre och/eller viktigare ekvationer bör inte typsättas i löpande text.
+	Man bör istället använda en av de många omgivningar (\AmS)\LaTeX{} ger
+	tillgång till. Den allra enklaste omgivningen (som fungerar i de flesta
+	fall) är \texttt{equation}. Den finns i en vanlig variant, och ger då en
+	numrerad ekvation, samt en variant (\texttt{equation*}) som ger en
+	onumrerad ekvation. Som en tumregel bör man endast använda den numrerade
+	varianten om man behöver referera till ekvationen, eller om det är en
+	viktig definition som andra kan tänkas vilja referera till.
+	
+	Fristående ekvationer kan typsättas mycket bättre eftersom de inte är 
+	begränsade av omgivande text. Integraler och summor kan göras så höga som
+	det krävs, och paranteser kan växa nästan obegränsat. Det är dock viktigt
+	att komma ihåg att en fristående ekvation \emph{inte} ska vara ett eget
+	stycke. Exempel~\vref{ex:stycken} visade hur ett antal ekvationer och
+	mellanrumet mellan dessa och den omgivande texten varierade beroende på
+	ekvationens plats i stycket. Slutsatsen som ska dras är alltså att man
+	trots att ekvationen är ”fristående” bör behandla den ungefär som en
+	ekvation i löpande text. Skillnaden är främst typografisk.
 	
 	\subsubsection{Referera till ekvationer}
-	a
-	
+	Likt figurer och tabeller finns det även ett behov av att kunna referera
+	till sina ekvationer. På samma sätt som för figurer markerar man den
+	ekvation man vill referera till med hjälp av \cmd{label}, men istället
+	för att referera med hjälp av \cmd{ref} eller \cmd{vref} bör man använda
+	\cmd{eqref} för att referera till ekvationer. Sådana referenser typsätts
+	lite annorlunda, och bör inte heller föregås av någon text som indikerar
+	att det är en referens:
+	\latex|Det är uppenbart från \eqref{eq:cauchy-schwartz} att...|
 	
 	
 	\subsection{En snabbkurs i \LaTeX-matematik}
-	a
+	Nu när du vet hur man skapar förutsättningarna för att typsätta matematik
+	är det dags att gå in på detaljerna. Det finns oerhört många konventioner
+	och betänkligheter när det gäller typsättning av matematik, så det är
+	svårt att göra något annat än att skrapa på ytan, men sidorna framöver
+	ämnar presentera tillräckligt mycket för att du ska klara att typsätta
+	det mesta du stöter på under en typisk kandidatutbildning i Teknisk Fysik
+	eller Teknisk Matematik.
 	
-	\subsection{Ekvationsmiljöer}
-	a
+	\label{sec:3:subscript}
+	Till att börja med måste två oerhört elementära operationer förklaras;
+	\emph{superskript} (för potenser och dylikt) och \emph{subskript} (för 
+	index och liknande). Ett superskript inför man i \LaTeX{} med hjälp av
+	en cirkumflex (\verb|^|); koden \verb|\(e^x\)| producerar alltså \(e^x\).
+	Ett subskript å andra sidan införs med hjälp av ett understreck (\verb|_|)
+	på liknande sätt; \verb|\(x_i\)| blir \(x_i\). Notera att dessa tecken
+	endast påverkar nästa \emph{kommandoföljd}, vilket innebär att man om man
+	vill upphöja/nedsänka mer än ett tecken (eller kommando), så måste man
+	omsluta dessa med måsvingar:
+	\latex|\(x_{i,j}\)|
+	Detta innebär även att om man vill ha både superskript och subskript efter
+	en variabel så är det inget problem; man inkluderar bara dessa i följd
+	direkt efter variabeln (eller operatorn):
+	\latex|\(x_i^2\)|
+	Dessa två exempel producerar alltså \(x_{i,j}\) och \(x_i^2\), 
+	respektive.
+	
+	Det finns även några viktiga skillnader mellan matematiktypsättning och
+	vanlig texttypsättning, som främst har att göra med mellanrum:
+	\begin{itemize}
+		\item Mellanslag i koden ignoreras nästan alltid. De mellanrum som ska
+		visas i det typsatta dokumentet placeras istället ut av \LaTeX. Det
+		finns även explicita kommandon som gör detta. Detta gör att du kan
+		vara liberal med mellanrum i din kod, vilket ökar läsbarheten.
+		
+		\item Tomma rader tillåts inte i matematiktypsättning. Endast ett
+		”stycke” per ekvationsomgivning får förekomma.
+		
+		\item Alla bokstäver anses vara variabler och typsätts därför med
+		kursiv text. De bokstäver som inte är variabler (till exempel
+		differentieringsoperatorn \(\text{d}\)) måste skrivas in med kommandot
+		\cmd{mathrm\{...\}}, och längre bitar text (hela ord och så vidare)
+		bör skrivas in med kommandot \cmd{text}.
+	\end{itemize}
+	
+	% <FIXME> mer, övergång?
+	
+	\subsubsection{Enkla konstruktioner} % \frac, \choose, etc.
+	Det finns ett antal enkla konstruktioner inom matematiken som var man
+	(och kvinna) bör känna till och kunna typsätta. Dessa är konstruktioner
+	som kvoter, binomialkoefficienter, rötter och så vidare. Dessa visas
+	kollektivt i tabell~\vref{tab:math:enkla}.
+	
+	\begin{table}[t]
+		\centering
+		\caption{Enkla matematiska konstruktioner i \LaTeX{}.}
+		\label{tab:math:enkla}
+		\begin{tabular}{llc}
+			\toprule 
+			Konstruktion & \LaTeX-kod & Resultat  \\
+			\midrule 
+			Kvadratrot & \verb|\sqrt{x}| & \(\sqrt{x}\) \\
+			\(n\)-rot & \verb|\sqrt[n]{x}| & \(\sqrt[n]{x}\) \\
+			Binomialkoefficient & \verb|\binom{n}{k}| & \(\binom{n}{k}\) \\
+			Kvot & \verb|\frac{a}{b}| & \(\frac{a}{b}\) \\
+			%% <FIXME> fler?
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	%% <FIXME> förklara tab:math:enkla närmre?
+	
+	Ibland kan det även vara önskvärt att markera bitar av ekvationer med små
+	kommentarer ovan och under matematiken. Detta kan göras med kommandona
+	\cmd{overbrace} och \cmd{underbrace}, vilket visas i
+	exempel~\vref{ex:overbrace}.
+	
+	\begin{kod}[b]
+		\centering
+		\begin{minipage}{0.8\textwidth} % kod
+			\begin{latexcode}
+\begin{equation*}
+  \underbrace{y'' + 2y' + y}_{\mathrm{D}(y)}
+  = \overbrace{ax^2+bx+c}^{f(x)}
+\end{equation*}
+			\end{latexcode}
+		\end{minipage}
+		\medskip\\
+		\begin{minipage}{0.8\textwidth} % figur
+			\begin{equation*}
+				\underbrace{y'' + 2y' + y}_{\mathrm{D}(y)}
+				= \overbrace{ax^2+bx+c}^{f(x)}
+			\end{equation*}
+		\end{minipage}		
+		\caption{Annotering med \cmd{overbrace} och \cmd{underbrace}.}
+		\label{ex:overbrace}
+	\end{kod}
+	
+	%% <FIXME> mer?
+	
+	\subsubsection{Funktioner etc.} % sin, lim, sup, etc.
+	Många välanvända eller kända funktioner och operatorer (alltså inte 
+	\(f(x)\) och \(g(x)\) utan trigonometriska funktioner och liknande) har
+	långa namn som för skrivas i upprätt text, det vill säga med \cmd{mathrm}.
+	Då detta är både tidskrävande och inelegant definierar (\AmS)\LaTeX{}
+	några
+	av dessa som kommandon istället — sinus blir \cmd{sin}, cosinus \cmd{cos}
+	och så vidare.
+	
+	De vanligaste trigonometriska funktionerna, logaritmer samt vanliga
+	operationer så som \(\max\), \(\min\), \(\sup\), \(\inf\) och \(\lim\)
+	finns som kommandon, och om man behöver typsätta en sådan funktion kan man
+	oftast satsa på att den finns. Finns den inte så kan man skapa den med
+	hjälp av kommandot \cmd{DeclareMathOperator}:
+	\latex|\DeclareMathOperator{gcd} % Största gemensamma nämnare|
+	
+	%% <FIXME> behöver detta utvecklas?
+	
+	\subsubsection{Symboler}\label{sec:3:symbs}
+	Matematiken innehåller ett stort antal symboler, däribland det grekiska
+	alfabetet, talmängder, oändligheter, tomma mängden och så vidare (och då
+	inkluderar vi inte de pilar, operatorer, hattar och olikhetstecken som
+	diskuteras \vpageref{sec:3:operatorer}). Några av dessa symboler listas i
+	tabell~\vrefrange{tab:symbs}{tab:grekiska} — notera att några av de 
+	grekiska bokstäverna inte har några kommandon för versaler, eftersom dessa
+	är identiska med latinska bokstäver, samt att några har ”varianter” som
+	ser något annorlunda ut (till exempel \cmd{varepsilon}, som är mer lik
+	det lilla epsilon man brukar rita för hand än \cmd{epsilon}).
+	
+	Det är givetvis svårt (en del
+	skulle säga omöjligt) att hålla reda på motsvarande \LaTeX-kommandon för
+	alla dessa olika symboler själv, och det kan därför vara bra att ha en
+	bra referens \citeaffixed{Pakin09}{till exempel}. Man kan även använda det
+	utmärkta verktyget Detexify%
+	\footnote{\url{http://detexify.kirelabs.org/classify.html}}, i vilket man
+	kan rita sin symbol och få en lista över liknande \LaTeX-symboler och
+	deras motsvarande kommandon.
+	
+	\begin{table}[tb]
+		\centering 
+		\caption{Diverse användbara symboler i \LaTeX.}
+		\label{tab:symbs}
+		\begin{tabular}{lcp{0.5\textwidth}}
+			\toprule 
+			Kommando & & Kommentar \\
+			\midrule 
+			\cmd{hbar} & \(\hbar\) & Konstant inom kvantfysiken \\
+			\cmd{Re} & \(\Re\) & Realdel av komplext tal \\
+			\cmd{Im} & \(\Im\) & Imaginärdel av komplext tal \\
+			\cmd{aleph} & \(\aleph\) & Beskriver kardinalitet av mängder \\
+			\cmd{forall} & \(\forall\) & \\
+			\cmd{exists} & \(\exists\) & \\
+			\cmd{nexists} & \(\nexists\) & \\
+			\cmd{complement} & \(\complement\) & \\
+			\cmd{emptyset} & \(\emptyset\) & Tomma mängden; även \cmd{varnothing} (\(\varnothing\)) eller \cmd{mathcal\{O\}} (\(\mathcal{O}\))\\
+			\cmd{infty} & \(\infty\) & Oändlighet \\
+			
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[p]
+		\centering 
+		\caption{Kommandon motsvarande symbolerna i grekiska alfabetet.}
+		\label{tab:grekiska}
+		\begin{tabular}{lclclc}
+			\toprule 
+			%\multicolumn{2}{c}{\LaTeX-kommando} \\
+			%\cmidrule{1-2}
+			Gemen & & Versal & & Variant & \\
+			\midrule 
+			\cmd{alpha} & \(\alpha\) & \cmd{mathrm\{A\}} & \(\mathrm{A}\) & & \\
+			\cmd{beta} & \(\beta\) & \cmd{mathrm\{B\}} & \(\mathrm{B}\) & & \\
+			\cmd{gamma} & \(\gamma\) & \cmd{Gamma} & \(\Gamma\) & & \\
+			\cmd{delta} & \(\delta\) & \cmd{Delta} & \(\Delta\) & &  \\
+			\cmd{epsilon} & \(\epsilon\) & \cmd{mathrm\{E\}} & \(\mathrm{E}\) & \cmd{varepsilon} & \(\varepsilon\) \\
+			\cmd{zeta} & \(\zeta\) & \cmd{mathrm\{Z\}} & \(\mathrm{Z}\) & & \\
+			\cmd{eta} & \(\eta\) & \cmd{mathrm\{H\}} & \(\mathrm{H}\) & & \\
+			\cmd{theta} & \(\theta\) & \cmd{Theta} & \(\Theta\) & \cmd{vartheta} & \(\vartheta\) \\
+			\cmd{iota} & \(\iota\) & \cmd{mathrm\{I\}} & \(\mathrm{I}\) & & \\
+			\cmd{kappa} & \(\kappa\) & \cmd{mathrm\{K\}} & \(\mathrm{K}\) & & \\
+			\cmd{lambda} & \(\lambda\) & \cmd{Lambda} & \(\Lambda\) & & \\
+			\cmd{mu} & \(\mu\) & \cmd{mathrm\{M\}} & \(\mathrm{M}\) & & \\
+			\cmd{nu} & \(\nu\) & \cmd{mathrm\{N\}} & \(\mathrm{N}\) & & \\
+			\cmd{xi} & \(\xi\) & \cmd{Xi} & \(\Xi\) & & \\
+			\texttt{o} & \(o\) & \cmd{mathrm\{O\}} & \(\mathrm{O}\) & & \\
+			\cmd{pi} & \(\pi\) & \cmd{Pi} & \(\Pi\) & \cmd{varpi} & \(\varpi\) \\
+			\cmd{rho} & \(\rho\) & \cmd{mathrm\{P\}} & \(\mathrm{P}\) & \cmd{varrho} & \(\varrho\) \\
+			\cmd{sigma} & \(\sigma\) & \cmd{Sigma} & \(\Sigma\) & \cmd{varsigma} & \(\varsigma\) \\
+			\cmd{tau} & \(\tau\) & \cmd{mathrm\{T\}} & \(\mathrm{T}\) & & \\
+			\cmd{upsilon} & \(\upsilon\) & \cmd{Upsilon} & \(\Upsilon\) & & \\
+			\cmd{phi} & \(\phi\) & \cmd{Phi} & \(\Phi\) & \cmd{varphi} & \(\varphi\) \\
+			\cmd{chi} & \(\chi\) & \cmd{mathrm\{X\}} & \(\mathrm{X}\) & & \\
+			\cmd{psi} & \(\psi\) & \cmd{Psi} & \(\Psi\) & & \\
+			\cmd{omega} & \(\omega\) & \cmd{Omega} & \(\Omega\) & & \\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	\subsubsubsection*{Operatorer}\label{sec:3:operatorer}%
+	Förutom symbolerna som diskuterades \vpageref{sec:3:symbs} finns även en
+	mycket stor mängd operatorer inom matematiken. Även dessa kan man leta
+	fram med hjälp av Detexify, men de flesta (åtminstone de som används
+	oftast) har logiska namn; nabla-operatorn (\(\nabla\)) heter till exempel
+	\cmd{nabla}, och tillhörandeoperatorn (\(\in\)) heter \cmd{in}. Tabell~%
+	\ref{tab:pilar} till \ref{tab:operatorer} \vpageref{tab:pilar} 
+	listar de vanligaste pilarna,
+	relationssymbolerna och operatorerna i \LaTeX.
+	
+	\subsubsubsection*{Hattar, prickar, primtecken och liknande}
+	Ibland vill man även modifiera variablers betydelse, kanske för att
+	beteckna en transformerad variabel, en vektor 
+	eller en derivata med avseende på tid.
+	Detta kan göras med de \LaTeX-kommandon som listas i tabell~%
+	\vref{tab:hattar}, tillsammans med en kort förklaring av notationens
+	innebörd.
+	
+	Just för vektorer existerar det dock flera olika notationer för. En 
+	populär
+	variant (som \LaTeX{} främjar) är att sätta dit en liten pil ovanför
+	variabeln (\(\vec{a}\)), vilket görs med \cmd{vec}. Andra föredrar att
+	skriva variabeln fetstilt eller med krittavletypsnitt,
+	vilket görs med \cmd{boldmath} och \cmd{mathbb}, respektive.
+	
+	Min rekommendation är att använda \cmd{vec} (eftersom det i
+	koden indikerar att vi pratar om en vektor), och omdefiniera den om man
+	föredrar en annan notation. Man kan till exempel använda följande kommando
+	för att göra så att \cmd{vec} istället visar variabeln fetstilt:
+	\latex|\renewcommand\vec[1]{\boldmath{#1}}|
+	
+	\begin{table}[tb]
+		\centering 
+		\caption{Hattar och dylikt med \LaTeX-kommandon.}
+		\label{tab:hattar}
+		\begin{tabular}{lcp{0.5\textwidth}}
+			\toprule 
+			Notation & & Kommentar \\
+			\midrule 
+			\cmd{hat\{a\}} & \(\hat{a}\) & Transformerade variabler \\
+			\cmd{vec\{a\}} & \(\vec{a}\) & Vektorer (alternativ notation existerar) \\
+			\cmd{dot\{a\}} & \(\dot{a}\)& Förstaderviata med avseende på tid\\
+			\cmd{ddot\{a\}} &\(\ddot{a}\)& Andraderivata med avseende på tid\\
+			\cmd{bar\{a\}} & \(\bar{a}\) & Statistiskt medelvärde \\
+			\cmd{tilde\{a\}} & \(\tilde{a}\) & Statistisk median \\
+			\cmd{widehat\{abc\}} & \(\widehat{abc}\) & Variant av \cmd{hat} för flera tecken \\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	%% Pilar, operatorer och relationer (fold)
+	\begin{table}[p]
+		\centering 
+		\caption{Viktiga pilar i matematisk notation och deras \LaTeX-kommandon.}
+		\label{tab:pilar}
+		\begin{tabular}{lclc}
+			\toprule 
+			Kort & & Lång & \\
+			\midrule 
+			\cmd{gets} & \(\gets\) & \cmd{longleftarrow}&\(\longleftarrow\) \\
+			\cmd{to} & \(\to\) & \cmd{longrightarrow}&\(\longrightarrow\) \\ 
+			\cmd{leftrightarrow} & \(\leftrightarrow\) & \cmd{longleftrightarrow} & \(\longleftrightarrow\) \\
+			\cmd{Leftarrow} & \(\Leftarrow\) & \cmd{Longleftarrow} & \(\Longleftarrow\) \\
+			\cmd{Rightarrow} & \(\Rightarrow\) & \cmd{Longrightarrow} & \(\Longrightarrow\) \\
+			\cmd{Leftrightarrow} & \(\Leftrightarrow\) & \cmd{iff} & \(\iff\) \\
+			\cmd{mapsto} & \(\mapsto\) & \cmd{longmapsto} & \(\longmapsto\) \\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[p]
+		\centering 
+		\caption{Viktiga relationssymboler och deras \LaTeX-kommandon.}
+		\label{tab:relationer}
+		\begin{tabular}{lclclc}
+			\toprule 
+			Mindre & & Större & & Lika & \\
+			\midrule 
+			\texttt{<} & \(<\) & \texttt{>} & \(>\) & \texttt{=} & \(=\) \\
+			\cmd{nless} & \(\nless\) & \cmd{ngtr} & \(\ngtr\) & \cmd{neq} & \(\neq\) \\
+			\cmd{leq} & \(\leq\) & \cmd{geq} & \(\geq\) & \cmd{equiv} & \(\equiv\) \\
+			\cmd{nleq} & \(\nleq\) & \cmd{ngeq} & \(\ngeq\) & & \\
+			\cmd{lesssim} & \(\lesssim\) & \cmd{gtrsim} & \(\gtrsim\) & \cmd{approx} & \(\approx\) \\
+			\cmd{ll} & \(\ll\) & \cmd{gg} & \(\gg\) & & \\
+			\cmd{subset} & \(\subset\) & \cmd{supset} & \(\supset\) & & \\
+			\cmd{subseteq} & \(\subseteq\) & \cmd{supseteq} & \(\supseteq\) & & \\
+			\bottomrule
+		\end{tabular}
+	\end{table}
+	
+	\begin{table}[p]
+		\centering 
+		\caption{Viktiga operatorer och deras \LaTeX-kommandon.}
+		\label{tab:operatorer}
+		\begin{tabular}{llp{0.5\textwidth}}
+			\toprule 
+			Operator & & Kommentar \\ 
+			\midrule 
+			\texttt{+}, \texttt{-} & \(+\), \(-\) & \\
+			\cmd{times}, \cmd{div} & \(\times\), \(\div\) & Multiplikation kan även skrivas ut tydligt med \cmd{cdot} (\(\cdot\)); \cmd{times} och \cmd{cdot} har speciella betydelser inom linjär algebra\\
+			\cmd{pm}, \cmd{mp} & \(\pm\), \(\mp\) & \\
+			\cmd{cup}, \cmd{cap} & \(\cup\), \(\cap\) & Union/snitt i mängdlära \\
+			\cmd{lor}, \cmd{land} & \(\lor\), \(\land\) & Och/eller i Boolesk algebra \\
+			\cmd{partial} & \(\partial\) & Partiell deriveringsoperator \\
+			\cmd{nabla} & \(\nabla\) & Flerdimensionell deriveringsoperator \\
+			\cmd{Delta} & \(\Delta\) & Laplaceoperator \\
+%			\cmd{mathscr\{F\}} & \(\mathscr{F}\) & Fouriertransform \\
+			\bottomrule 
+		\end{tabular}
+		% \wedge, \cup, \in, \to, \nabla
+	\end{table}
+	%% (end)
+	
+	\subsubsection{Paranteser och dylikt}
+	Paranteser är mycket viktiga inom matematiken för att visa olika typer av
+	grupper, och besitter dessutom egenskapen att de måste skalas med sin
+	omgivning för att de ska se bra ut. I \LaTeX{} skapar man så kallade
+	grupper av paranteser med kommandona \cmd{left} och \cmd{right}, vilket
+	gör att dessa paranteser automatiskt sträcks ut för att bli lika höga som
+	innehållet i gruppen (vilket visas i exempel~\vref{ex:paranteser}). Man 
+	använder \cmd{left} och \cmd{right} genom att
+	sätta dit parantesen direkt efter kommandot:
+	\latex|\left(\frac{1}{2}\right)|
+	
+	De paranteser som oftast används listas i tabell~\vref{tab:paranteser}.
+	Värt att notera är att \cmd{left} och \cmd{right} måste användas i par,
+	just eftersom de skapar en grupp. Vill man bara använda en av dem måste
+	man ändå sätta dit den andra på en lämplig plats, men med en punkt efter
+	istället för en parantes. Punkten motsvarar tomrum:
+	\latex|\left.\frac{1}{2}\right]|
+	
+	Paranteserna måste alltså inte heller matcha typmässigt, även om detta
+	ofta är önskvärt:
+	\latex|\left(\frac{1}{2}\right]|
+	
+	Att ha omatchade paranteser kan vara önskvärt inom till exempel
+	kvantfysik, där man har bra-ket-notation (se dock notisen om \cmd{mid}
+	\vpageref{sec:3:mid}):
+	\latex|\left\langle\psi\right\vert|
+	
+	\begin{table}[t]
+		\centering 
+		\caption{Fyra vanliga parantestyper i \LaTeX.}
+		\label{tab:paranteser}
+		\begin{tabular}{lcp{0.5\textwidth}}
+			\toprule 
+			Paranteser & & Kommentar \\
+			\midrule 
+			\verb|\{ \}| & \(\{\quad\}\) & Används för bland annat 
+			mängddefinitioner \\
+			\texttt{( )} & \( (\quad) \) & \\
+			\texttt{[ ]} & \( [\quad] \) & Används av vissa istället för 
+			\(()\), av andra för att visa insättning av en variabel\\
+			\verb|\langle| & \(\langle\quad\rangle\) &
+			\multirow{2}{0.5\textwidth}{Används för att visa skalärprodukten i
+			till exempel funktionsrum}\\
+			\verb|\rangle| & & \\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	\begin{kod}[tb]
+		\centering 
+		\begin{minipage}{0.85\textwidth}
+			\begin{latexcode}
+\begin{equation*}
+  \int\limits_0^1\!\left(\dfrac{x^3}{3} +
+  x^2\right)\d{x} = \left[\dfrac{x^4}{12} +
+  \dfrac{x^3}{3}\right]_{x=0}^1 = \dfrac{5}{12}
+\end{equation*}
+			\end{latexcode}
+		\end{minipage}
+		\\
+		\begin{equation*}
+			\displaystyle\int\limits_0^1\!\left(\dfrac{x^3}{3} +
+			x^2\right)\d{x} = \left[\dfrac{x^4}{12} + 
+			\dfrac{x^3}{3}\right]_{x=0}^1 = \dfrac{5}{12}
+		\end{equation*}
+		\caption{Skalbara paranteser med \cmd{left} och \cmd{right}.}
+		\label{ex:paranteser}
+	\end{kod}
+
+	\subsubsubsection*{Vertikala streck}
+	Vertikala streck är mycket lika paranteser; man kan även använda dessa
+	genom att skriva exempelvis \cmd{left|} och \cmd{right|} (eller
+	\cmd{left\textbackslash vert} och \cmd{right\textbackslash vert}), om man
+	vill. Det
+	finns dock även kommandon \cmd{lvert} och \cmd{rvert} som motsvarar dessa
+	(och som beter sig något bättre typsättningsmässigt),
+	samt \cmd{lVert} och \cmd{rVert} som motsvarar dubbla vertikala streck.
+	Man kan således definiera absolutbelopps- och normkommandon i \LaTeX%
+	\footnote{Tack till Lev Bishop för grunden till dessa definitioner 
+	(\url{http://bit.ly/lev-bishop-abs-norm}).}:
+	\begin{latexcode}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+	\end{latexcode}
+	Dessa kan sedan enkelt användas i matematikläge:
+	\latex|\norm{x}_1 = \sum_{i=1}^n\abs{x_i}|
+	
+	Dessutom används det vertikala strecket ibland mitt i block (exempelvis
+	vid definition av mängder, \(\varnothing = \{A \mid A \in A\}\)) och
+	betecknas då \cmd{mid}. Ett exempel med tidigare nämnda bra-ket-notation
+	kan se ut så här: \label{sec:3:mid}
+	\latex|\left\langle\psi\mid\Psi\right\rangle|
+	
+	Dessutom kan den användas som en operator,
+	exempelvis för att visa insättning av en variabel som ett led i
+	integrering (\(\int_1^e\! x^{-1}\d{x}=\ln x\vert_{x=1}^e=1 \)) i vilket
+	fall man istället skriver \cmd{vert}:
+	\latex|\ldots=\ln x\vert_{x=1}^e=\ldots|
+	
+	\subsubsection{Summor och integration}
+	Integraler och summor (och upprepade produkter och så vidare) är mycket
+	enkla att uttrycka med \LaTeX{}. Med hjälp av kommandot \cmd{sum} (eller
+	\cmd{int}, se även tabell~\vref{tab:sums}) kan man infoga en summa (eller
+	integral) utan gränser. Vill man ha en definit integral, eller en summa
+	med gränser, så använder man sub- och superskriptskommandona \verb|_| och
+	\verb|^| som tidigare diskuterats \vpageref{sec:3:subscript}:
+	\latex|\sum_{x\in A}\left(\ldots\right)|
+	
+	\begin{table}[tb]
+		\centering 
+		\caption{Sum-, produkt- och integraltecken i \LaTeX.}
+		\label{tab:sums}
+		\begin{tabular}{lclclc}
+			\toprule 
+			
+			\midrule 
+			% Användning av $..$ i denna tabell motiveras av att \(..\)
+			% omdefinierats med \smash{} och därför dödar tabellen.
+			% \strut-hacken är bara fula.
+			\cmd{sum} & $\displaystyle\sum$ & \cmd{prod} & $\displaystyle\prod$ & \cmd{coprod} & $\displaystyle\coprod$ \\
+			\cmd{int} & $\displaystyle\int$ & \cmd{iint} & $\displaystyle\iint$ & \cmd{iiint} & $\displaystyle\iiint$ {\huge\strut}\\
+			\cmd{iiiint} & $\displaystyle\iiiint$ & \cmd{idotsint} & $\displaystyle\idotsint$ & \cmd{oint} & $\displaystyle\oint$ {\huge\strut}\\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	Detta resulterar oftast i ett korrekt resultat, med gränser över och under
+	tecknet då detta får plats, och med gränser likt vanliga upphöjningar och
+	nedsänkningar annars (till exempel i ekvationer i text, där det är ont om
+	plats i höjdled). Ibland gör \LaTeX dock fel. När detta händer får man
+	hinta \LaTeX{} om att gränserna inte typsätts korrekt med hjälp av
+	kommandot \cmd{limits}, som placeras mellan tecknet och gränserna:
+	\latex|\sum\limits_{x=1}^\infty \frac{1}{x^2}|
+	
+	Kommandot \cmd{limits} kan även användas med andra operatorer, till
+	exempel \(\max\), \(\inf\) och \(\lim\):
+	\latex|\lim\limits_{x\to\infty} \frac{1}{x}| 
+	
+	\subsubsubsection*{Snyggare (och mer korrekta) integraler}
+	Integraler, så som \LaTeX typsätter dem från början, blir ofta felaktiga
+	i det avseendet att avståndet mellan integraltecken och innehåll
+	blir stort, samtidigt som avståndet till differentieringsoperatorn
+	(som dessutom
+	inte typsätts korrekt utan visst krångel) blir för litet. Det första
+	problemet (som i viss mån även finns för summor) kan åtgärdas genom att
+	lägga in ett negativt mellanrum (\cmd{!}) mellan integraltecken och
+	innehåll:
+	\latex|\int_0^1\! x^2 \d{x}|
+	
+	Det andra problemet kan också lösas genom att lägga till mellanrum (i
+	kombination med att typsätta \(dx\) med \cmd{mathrm}), men eftersom
+	det är så ofta man behöver differentieringsoperatorn är det bättre att
+	definiera ett nytt kommando för detta\footnote{Tack till Niel de Beaudrap 
+	för grunden till detta kommando (\url{http://bit.ly/beaudrap-dx}).}:
+	\begin{latexcode}
+\makeatletter
+\renewcommand\d[1]{\ensuremath{%
+  \,\mathrm{d}#1\@ifnextchar\d{\!}{}}}
+\makeatother
+	\end{latexcode}
+	\label{sec:3:integ:kod}
+	
+	Med denna definition kan man mycket enklare typsätta snygga integraler med
+	korrekta differentieringsoperatorer, vilket exempel~\vref{ex:integral}
+	visar. Notera även att exemplet inte använder \cmd{iint} trots att det
+	handlar om en dubbelintegral; detta eftersom varje ”underintegral” har
+	egna gränser. Integraltecknet \cmd{iint} används istället med fördel när
+	man ska visa integrering över exempelvis ett område \(A\), då detta bara
+	är ”en” gräns:
+	\latex|\iint_A f(x) \d{A}|
+	
+	\begin{kod}[tb]
+		\centering
+				\begin{minipage}[b]{0.225\textwidth}
+					\[ \int\limits_0^\infty\int\limits_0^1 f(x,y) dydx \]
+				\end{minipage}
+				\begin{minipage}{0.625\textwidth}
+					\begin{latexcode}
+\begin{equation*}
+  \int\limits_0^\infty
+  \int\limits_0^1 f(x,y) dydx
+\end{equation*}
+					\end{latexcode}
+				\end{minipage}
+		\\
+				\begin{minipage}[b]{0.225\textwidth}
+					\[ \int\limits_0^\infty\!\int\limits_0^1\! f(x,y) \d{y}\d{x} \]
+				\end{minipage}
+				\begin{minipage}{0.625\textwidth}
+					\begin{latexcode}
+\begin{equation*}
+  \int\limits_0^\infty\!
+  \int\limits_0^1\! f(x,y) \d{y}\d{x}
+\end{equation*}
+					\end{latexcode}
+				\end{minipage}
+		\caption[Integral med korrekt och inkorrekt typsättning]{Integral med
+		korrekt (underst) och inkorrekt (överst) typsättning. Notera att 
+		\cmd{d} inte finns i \LaTeX{} från början utan måste definieras med 
+		den kod som presenteras \vpageref{sec:3:integ:kod}.}
+		\label{ex:integral}
+	\end{kod}
+	
+	\subsection{Ekvationsomgivningar}\label{sec:3:environments}
+	Redan \vpageref{sec:3:ekvsomekv} diskuterades två av de 
+	ekvationsomgivningar
+	\AmS\LaTeX{} erbjuder (\env{equation} och \env{equation*}), och dessa två
+	är fullt tillräckliga för väldigt många tillämpningar. Det finns dock
+	tillfällen då dessa inte räcker till, och därför definierar \AmS\LaTeX{}
+	även en stor mängd andra omgivningar för att lösa de problem som kan 
+	uppstå. Det kan handla om att man har en väldigt lång ekvation som måste
+	brytas över flera rader, att man har flera små ekvationer som hör ihop men
+	som bör vara radbrutna, att man vill ha en matris eller något helt annat.
+	
+	Den här introduktionen kommer bara att presentera några av de viktigaste
+	omgivningarna; en fullständig lista finns i användarguiden till
+	\pack{amsmath} \cite{AMS99} och en ordentlig genomgång ges av
+	\citeasnoun{Voss10}.
 	
 	\subsubsection{Långa ekvationer med \env{multline}}
-	a
+	Ibland (oroväckande ofta, till och med) stöter man på ekvationer som är
+	alldeles för långa för att få plats på en rad. Hamnar man i en sådan
+	situation är det \env{multline} (notera avsaknandet av ett \texttt{i})
+	man bör använda. Omgivningen typsätter matematik på flera rader, där den
+	första raden vänsterjusteras, sista raden högerjusteras och rader 
+	däremellan centreras — ett exempel kan ses i \eqref{eq:multline}.
 	
-	\subsubsection{Ekvationsutvecklingar: \env{aligned}}
-	a
+	\begin{multline}\label{eq:multline}
+		\int_0^\infty\!R(t)\d{t} = -3\sqrt{2\pi 
+		e}\erfc\left(\frac{1}{\sqrt{2}}\right) \\
+		-3e^2\sqrt{2\pi}\left(e^{5/2}\erfc\left(
+		\frac{3}{\sqrt{2}}\right) - 2\erfc\left(
+		\sqrt{2}\right)\right) + 2
+	\end{multline}
 	
-	\subsubsection{Matriser (\env{\{p,b\}matrix})}
-	a
+	Rader separeras helt enkelt med radbrytningskommandot \verb|\\|:
+	\begin{latexcode}
+\begin{multline}
+  \lim_{x\to a} \frac{f(x) - f(a)}{x - a} = \\
+  \ldots \\
+  = f'(a)
+\end{multline}
+	\end{latexcode}
+	
+	Precis som \env{equation} finns \env{multline} både med och utan stjärna,
+	och på exakt samma sätt har varianten utan stjärna ett ekvationsnummer,
+	vilket den med stjärna inte har. I övrig finns det inga skillnader mellan
+	de båda. Notera att varje \env{multline}-omgivning endast får \emph{ett}
+	ekvationsnummer; vill man ha ett per rad ska man istället använda
+	\env{align}.
+	
+	Förutom långa ekvationer kan \env{multline} även med fördel användas i
+	till exempel långa uträkningar med flera steg.
+	
+	\subsubsection{Relaterade ekvationer: \env{align} och \env{gather}}
+	Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
+	i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
+	\env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
+	Figur~\vref{fig:aligngather} visar hur dessa omgivningar ser ut; den enda
+	skillnaden mellan de två är att man med \env{align} kan placera ekvationer
+	mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
+	
+	\begin{figure}[tb]
+		\centering 
+		\subfloat[Tre ekvationer typsatta med \env{align}]{\fbox{ % align
+			\label{fig:aligngather:align}
+			\begin{minipage}{0.4\textwidth}\vspace{-1.2em}
+				\begin{subequations}
+					\begin{align}
+						y_1 &= x^2 + 2x + 1 \\
+						y_2 &= x^2 - 2x + 1 \\
+						y_3 &= x^2 - 1
+					\end{align}
+				\end{subequations}
+			\end{minipage}
+		}}
+		\quad
+		\subfloat[Tre ekvationer typsatta med \env{gather}]{\fbox{ % gather
+			\begin{minipage}{0.4\textwidth}\vspace{-1.2em}
+				\begin{subequations}
+					\begin{gather}
+						y_1 = x^2 + 2x + 1 \\
+						y_2 = x^2 - 2x + 1 \\
+						y_3 = x^2 - 1
+					\end{gather}	
+				\end{subequations}
+			\end{minipage}
+		}}
+		\caption{Relaterade ekvationer typsatta med \env{align}, \env{gather}
+		och \env{subequations}.} % <FIXME>
+		\label{fig:aligngather}
+	\end{figure}
+	
+	Nya rader skapas i båda omgivningarna med nyradskommandot \verb|\\|, och
+	i \env{align} använder man (på liknande sätt som i \env{tabular}) ett
+	ochtecken (\verb|&|) för att skapa en ”kolumn”. Koden för figur~%
+	\vref{fig:aligngather:align} är således som följer:
+	\begin{latexcode}
+\begin{align}
+  y_1 &= x^2 + 2x + 1 \\
+  y_2 &= x^2 - 2x + 1 \\
+  y_3 &= x^2 - 1
+\end{align}
+	\end{latexcode}
+	
+	I varianterna utan stjärna får varje rad ett eget ekvationsnummer. Detta
+	är helt i sin ordning; \env{align} och \env{gather} ska användas för att
+	gruppera ekvationer, och om man istället vill bryta upp en ekvation på
+	flera rader bör man använda \env{multline}. Man kan dock tvinga \LaTeX{}
+	att utelämna ekvationsnumret för en specifik rad genom att använda
+	kommandot \cmd{nonumber} precis innan man bryter raden. Man kan även
+	sätta en etikett på en enskild rad genom att placera \cmd{label} på samma
+	sätt.
+	
+	\subsubsubsection*{Underekvationer}
+	Förutom \env{align} och \env{gather} visar även figur~%
+	\vref{fig:aligngather} hur omgivningen \env{subequations} fungerar. Denna
+	omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
+	och får bara innehålla en (och endast en) matematikomgivning, inget annat.
+	
+	\subsubsection{Matriser}
+	Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
+	av de omgivningar som visas i figur~\vref{fig:matriser}. Dessa måste
+	användas i matematikläge, det vill säga i en annan omgivning som används
+	för att typsätta matematik. Kolumner separeras med \verb|&| och
+	radbrytningar görs med \verb|\\|.
+	
+	\begin{figure}[t]
+		\centering 
+		\subfloat[\env{Vmatrix}]{
+			\begin{minipage}{0.15\textwidth}
+			\begin{equation*}
+				\begin{Vmatrix}
+					a & b \\
+					c & d 
+				\end{Vmatrix}
+			\end{equation*}
+			\end{minipage}
+		}
+		\subfloat[\env{Bmatrix}]{
+			\begin{minipage}{0.15\textwidth}
+			\begin{equation*}
+				\begin{Bmatrix}
+					a & b \\
+					c & d 
+				\end{Bmatrix}
+			\end{equation*}
+			\end{minipage}
+		}
+		\subfloat[\env{vmatrix}]{
+			\begin{minipage}{0.15\textwidth}
+			\begin{equation*}
+				\begin{vmatrix}
+					a & b \\
+					c & d 
+				\end{vmatrix}
+			\end{equation*}
+			\end{minipage}
+		}
+		\subfloat[\env{bmatrix}]{
+			\begin{minipage}{0.15\textwidth}
+			\begin{equation*}
+				\begin{bmatrix}
+					a & b \\
+					c & d 
+				\end{bmatrix}
+			\end{equation*}
+			\end{minipage}
+		}
+		\subfloat[\env{pmatrix}]{
+			\begin{minipage}{0.15\textwidth}
+			\begin{equation*}
+				\begin{pmatrix}
+					a & b \\
+					c & d 
+				\end{pmatrix}
+			\end{equation*}
+			\end{minipage}
+		}
+		\caption{Fem av de sex matristyper \AmS\LaTeX{} definierar.}
+		\label{fig:matriser}
+	\end{figure}
+	
+	I stora eller repetitiva matriser (till exempel enhetsmatrisen) behöver
+	man inte alltid skriva ut alla element, utan istället använda notation
+	för upprepande element. Detta görs med hjälp av tre kommandon; \cmd{cdots} 
+	(\(\cdots\)), \cmd{vdots} (\(\:\vdots\:\)) och \cmd{ddots} 
+	(\(\ddots\)), vilka kan användas istället för innehåll
+	i kolumnerna i en matris:\label{sec:3:matrispktr}
+	\begin{latexcode}
+\begin{equation*}
+  \lvert I\rvert = \begin{vmatrix}
+    1      & 0      & \cdots & 0      \\
+    0      & 1      & \cdots & 0      \\ 
+    \vdots & \vdots & \ddots & \vdots \\
+    0      & 0      & \cdots & 1
+  \end{vmatrix} = 1
+\end{equation*}
+	\end{latexcode}
 	
 	\subsubsection{Olika fall med \env{cases}}
-	a
+	Omgivningen \env{cases} är mycket användbar då man definierar styckvisa
+	funktioner eller vissa talföljder, till exempel den som behandlas i 
+	Collatz problem.
+	Omgivningen liknar både \env{align} och \env{matrix}-omgivningarna, men
+	har endast två kolumner (som dock separeras av mer mellanrum än i andra
+	omgivningar). Exempel~\vref{ex:cases} visar hur \env{cases} används för
+	att definiera en styckvis funktion (i det här fallet rampfunktionen).
 	
-	% fler??
+	\begin{kod}[tb]
+		\centering 
+		\begin{minipage}[b]{0.325\textwidth} % figur
+			\begin{equation}
+				R(x) = \begin{cases}
+					x, & x \geq 0; \\ 
+					0, & x < 0
+				\end{cases}
+			\end{equation}
+		\end{minipage}
+		\quad
+		\begin{minipage}{0.4\textwidth} % kod
+			\begin{latexcode}
+\begin{equation}
+  R(x) = \begin{cases}	
+    x, & x \geq 0; \\
+    0, & x < 0
+  \end{cases}
+\end{equation}
+			\end{latexcode}
+		\end{minipage}
+		\caption{Rampfunktionens definition typsatt med hjälp av \env{cases}.}
+		\label{ex:cases}
+	\end{kod}
 	
 	
+	\subsection{Mellanrum} % \quad et al
+	Mellanrum i matematikläge ignoreras som sagt av \LaTeX, som automatiskt
+	sätter in korrekt mellanrum där det behövs. Normalt brukar detta bli
+	mycket bra, men ibland (som i fallet med integraler) kan man behöva göra
+	en del manuella justeringar. Detta kan man göra med de kommandon som ges
+	i tabell~\vref{tab:spaces}.
 	
-	\subsection{Avstånd}
-	a
+	\begin{table}[b]
+		\def\abox{\fbox{\phantom{z}}}
+		\centering 
+		\caption[De mellanrum \LaTeX{} definierar.]{De mellanrum \LaTeX{}
+		 definierar. (\(\SI{1}{\mu} = \SI{1/18}{\em}\))}
+		\label{tab:spaces}
+		\begin{tabular}{lrc}
+			\toprule
+			Kommando & \si{\mu} & Exempel  \\
+			\midrule 
+			\cmd{negthickspace} & \(-5\) & \(\abox\negthickspace\abox\)  \\
+			\cmd{negmedspace} & \(-4\) & \(\abox\negmedspace\abox\)  \\
+			\cmd{!}, \cmd{negthinspace} & \(-3\) & \(\abox\!\abox\)  \\ 
+			& \(0\) & \(\abox\abox\)  \\
+			\cmd{,}, \cmd{thinspace} & \(3\) & \(\abox\,\abox\)  \\
+			\cmd{:}, \cmd{medspace} & \(4\) & \(\abox\:\abox\)  \\
+			\cmd{;}, \cmd{thickspace} & \(5\) & \(\abox\;\abox\)  \\
+			\cmd{quad} & \(18\) & \(\abox\quad\abox\)  \\
+			\cmd{qquad} & \(36\) & \(\abox\qquad\abox\)  \\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
+	
+	Det finns både positiva (vanliga) och negativa mellanrum. De negativa
+	flyttar inte helt oväntat text ”bakåt”, och är användbara när man till
+	exempel vill ångra de mellanrum \LaTeX{} lägger in.
+	
+	Vilket mellanrum \LaTeX{} lägger in beror på vilken typ tecknet är och
+	hur omgivningen ser ut; tabell~\vref{tab:types} visar de teckentyper som
+	används i matematikläge samt några exempel och mängden mellanrum som
+	tillförs. Notera dock att tecken av typ 2 (binära operatorer) görs om till
+	typ 0 om de inte har någon text (en operand) till vänster.
+	
+	\begin{table}[tb]
+		\centering 
+		\caption{Avstånd före (\emph{pre}) och efter (\emph{post}) olika typer
+		av tecken i matematikläge.}
+		\label{tab:types}
+		\begin{tabular}{lclrr}
+			\toprule 
+			& & & \multicolumn{2}{c}{Avst. (\si{\mu})} \\
+			\cmidrule{4-5}
+			Typ & & Beskrivning & Pre & Post \\
+			\midrule 
+			0 & \(A 0 \Phi \infty\) & Enkla tecken (”substantiv”) & 0 & 0 \\
+			1 & \(\sum \prod \int\) & Prefixoperatorer & 0 & 3 \\
+			2 & \(+ \cup \wedge\)   & Binära operatorer & 4 & 4 \\
+			3 & \(= < \subset\)     & Jämförelse (”verb”) & 5 & 5 \\
+			4 & \(( [ \{ \langle\)  & Öppnande avgränsare & 0 & 0 \\
+			5 & \() ] \} \rangle\)  & Stängande avgränsare & 0 & 0 \\
+			6 & \(. , ; !\)         & Postfix, punktuation & 0 & 0 \\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
 	
 	\subsubsection{Fantomer}
-	a
+	Ibland finns det även tillfällen då man vill ha mellanrum som är
+	\emph{exakt} lika stora som en viss bit typsatt text. Man använder då
+	fantomer. De viktigaste fantomerna är \cmd{hphantom} (ingen höjd, bredd
+	från dess innehåll) och \cmd{vphantom} (ingen bredd, höjd från dess 
+	innehåll). Dessa kan vara användbara om man till exempel använder
+	\env{multline} för att bryta en ekvation, samtidigt som man använder
+	\cmd{left} och \cmd{right} (som inte fungerar ”runt” radbrytningar).
 	
+	Figur~\vref{fig:phantom} illustrerar problemet och lösningen. Här använder
+	vi \cmd{vphantom}, eftersom vi vill lägga till höjd, och vi fyller den med
+	\verb|\frac{1}{2}| eftersom det är den högsta delen av gruppen vi vill
+	matcha.
 	
-	\subsection{Symboler och funktioner}
-	a % detexify!
+	\begin{figure}[p]
+		\centering
+		\begin{minipage}{\textwidth}
+			\begin{minipage}{0.4\textwidth} % ekvation
+				\begin{multline}
+					p(x) = \left(\frac{1}{2}x^3 + x^2 + \right. \\
+					\left. x + 1 \right) = 0
+				\end{multline}
+			\end{minipage}
+			\hfill
+			\begin{minipage}{0.55\textwidth} % kod
+\begin{latexcode}
+\begin{multline}
+  p(x) = \left(\frac{1}{2}x^3 +
+         x^2 + \right. \\
+  \left. x + 1 \right) = 0
+\end{multline}
+\end{latexcode}
+			\end{minipage}
+		\end{minipage}\\
+		\begin{minipage}{\textwidth}
+			\begin{minipage}{0.4\textwidth} % ekvation
+				\begin{multline}
+					p(x) = \left(\frac{1}{2}x^3 + x^2 + \right. \\
+					\left. x + 1 \vphantom{\frac{1}{2}}\right) = 0
+				\end{multline}
+			\end{minipage}
+			\hfill
+			\begin{minipage}{0.55\textwidth} % kod
+\begin{latexcode}
+\begin{multline}
+  p(x) = \left(\frac{1}{2}x^3 +
+         x^2 + \right. \\
+  \left. x + 1 \vphantom{
+  \frac{1}{2} }\right) = 0
+\end{multline}
+\end{latexcode}
+			\end{minipage}
+		\end{minipage}\\
+		\caption{Problem med \env{multline} och lösningen med \cmd{vphantom}.}
+		\label{fig:phantom}
+	\end{figure}
+	
+	\subsection{Punkter}
+	Även om \LaTeX{} definierar kommandon som \cmd{ldots} och \cmd{cdots} för
+	att typsätta punkter så bör man undvika dessa eftersom de inte berättar
+	vilket sammanhang punkterna används i. Det finns många olika konventioner,
+	och för att enkelt kunna byta mellan dessa är det bättre att använda 
+	\emph{semantiska} punktkommandon. \AmS\LaTeX{} definierar fem sådana
+	(tabell~\vref{tab:pktr}) för olika tillfällen. Använd alltid dessa om det
+	är möjligt!
+	
+	\begin{table}[p]
+		\centering 
+		\caption{Semantiska punktkommandon definierade av \AmS\LaTeX.}
+		\label{tab:pktr}
+		\begin{tabular}{lcp{0.5\textwidth}}
+			\toprule 
+			Kommando & Exempel & Kommentar \\
+			\midrule 
+			\cmd{dotsc} & \(A_1,A_2,\dotsc,A_n\) & Används i anslutning till
+			kommatecken, det vill säga listor och dylikt \eng{\emph{dots} with 
+			\emph{c}ommas}\\ 
+			\cmd{dotsb} & \(A_1+A_2+\dotsb+A_n\) & Används i anslutning till
+			binära operatorer, alltså addition, subtraktion, booleska
+			operatorer och så vidare \eng{\emph{dots} with \emph{b}inary 
+			operators}\\ 
+			\cmd{dotsm} & \(A_1 A_2 \dotsm A_n\) & Används i anslutning till
+			multiplikation \eng{\emph{dots} for \emph{m}ultiplication}\\ 
+			\cmd{dotsi} & \(\int_{A_1}\int_{A_2}\dotsi\int_{A_n}\) & Används
+			med integraler, summor och liknande \eng{\emph{dots} with 
+			\emph{i}ntegrals}\\
+			\cmd{dotso} & \(A_1\dotso A_n\) & Används då inga andra punkter
+			passar \eng{\emph{dots} for \emph{o}ther situations}\\
+			\bottomrule 
+		\end{tabular}
+	\end{table}
 	
 	\subsection{Enheter med \pack{siunitx}}\label{sec:3:siunitx}
-	a
+	Fysiker och matematiker (främst fysiker) behöver ofta typsätta enheter i
+	anslutning till sin text, något som inte alltid är helt enkelt eftersom
+	en del konventioner existerar gällande avstånd och så vidare. Paketet
+	\pack{siunitx} ämnar förenkla detta genom att tillhandahålla kommandon
+	som till exempel \cmd{SI}.
 	
+	Paketet definierar tre funktioner (\cmd{num}, \cmd{ang} och \cmd{SI}) som
+	används för att typsätta tal, vinklar och tal med enheter, respektive. Det
+	tal man vill typsätta kan även inkludera förenklande notation så som
+	\texttt{+-} istället för \cmd{pm}, \texttt{e} för att beteckna tiopotenser
+	och så vidare. Även komplexa tal stöds.
+	
+	Kommandona \cmd{num} och \cmd{ang}, som inte accepterar enheter, kräver
+	endast ett argument, medan \cmd{SI} kräver två; talet som ska typsättas
+	och enheten som hör till. Enheterna ges av \LaTeX-kommandon så som
+	\cmd{metre}, \cmd{per}, \cmd{milli} och så vidare
+	\citeaffixed[ss. 9–12]{Wright11}{en full lista ges av}:
+	\begin{latexcode}
+\num{12345,60} % Typsätter ett tal
+\num{.35e100} % Typsätter ett stort tal
+\num{1+-2i}   % Typsätter ett komplext tal
+\ang{180}     % Typsätter en vinkel
+\SI{15}{\kilogram\metre\per\second\squared} % Tal med enhet
+	\end{latexcode}
+	Dessa kommandon typsätts då sedan som
+	\num{12345,60}, % Typsätter ett tal
+	\num{.35e100}, % Typsätter ett stort tal
+	\num{1+-2i},   % Typsätter ett komplext tal
+	\ang{180} och     % Typsätter en vinkel
+	\SI{15}{\kilogram\metre\per\second\squared},
+	respektive.
+	
+	Som en extra bonus löser \pack{siunitx} även, om man ställt in paketet
+	ordentligt, problemet med tusentals- och decimalseparatorn om \LaTeX{}
+	ofta ger upphov till (eftersom systemet baseras på engelska konventioner).
+	Detta gör man genom att använda \cmd{sisetup} för att sätta 
+	\texttt{locale} till \texttt{DE}\footnote{Tyska konventioner väljs 
+	eftersom  paketet inte innehåller inställningar för svenska, och eftersom 
+	tyska konventioner är mycket nära de svenska.}:
+	\latex|\sisetup{locale=DE}|
+	
+	Paketet kan göra oerhört mycket (man kan även definiera sina egna
+	enheter), och det är omöjligt att gå igenom allt i en kort introduktion.
+	Den intresserade hänvisas till \pack{siunitx}-manualen \cite{Wright11},
+	som utförligt förklarar hur paketet fungerar och vilka inställningar som
+	kan göras.
 	%% (end)
 	
 	%% GRAFIK MED LATEX (fold)
@@ -1702,18 +2725,18 @@ Mandelbrot-mängden, som\ldots{}
 		\item Skapa figuren i ett externt program och spara i rätt format
 		
 		\item Inkludera \pack{graphicx}-paketet genom att skriva
-		\mint{latex}|\usepackage{graphicx}|
+		\latex|\usepackage{graphicx}|
 		i inledningen till dokumentet.
 		
 		\item Inkludera grafiken i en \env{figure}-omgivning med hjälp av
 		kommandot \cmd{includegraphics}:
-		\mint{latex}|\includegraphics[parametrar]{filnamn}|
+		\latex|\includegraphics[parametrar]{filnamn}|
 		
 		Parametrarna här kan vara många. Oftast vill man ställa in bredden på
 		sin bild så att den passar sidan, och detta kan man göra genom att
 		specificera parametern \cli{width} och sätta den till
 		\cmd{textwidth}:
-		\mint{latex}|\includegraphics[width=\textwidth]{filnamn}|
+		\latex|\includegraphics[width=\textwidth]{filnamn}|
 		
 		Andra parametrar som kan användas är \cli{height}, \cli{angle}
 		och \cli{trim}\footnote{Man bör då inte heller glömma att sätta
@@ -1732,7 +2755,7 @@ Mandelbrot-mängden, som\ldots{}
 		\centering
 		\hspace{-0.025\textwidth}
 		\begin{minipage}{0.475\textwidth} % kod
-				\vfil\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{ex/4/graphicx.tex}\vfil
+				\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{ex/4/graphicx.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=10,lastline=17,gobble=2]{latex}{ex/4/graphicx.tex}}\vfil
 		\end{minipage}
 		\hfil
 		\begin{minipage}{0.475\textwidth} % figur
@@ -1775,7 +2798,7 @@ Mandelbrot-mängden, som\ldots{}
 		\centering
 		\begin{minipage}{0.95\textwidth} % kod
 			\vfil
-			\begin{minted}[frame=single]{latex}
+			\begin{latexcode}
 \newcounter{d}\setcounter{d}{0}\def\mcolor{SpringGreen}
 \begin{tikzpicture}
     \path[coordinate] (0,0) coordinate(A) ++( 60:6cm)
@@ -1792,7 +2815,7 @@ Mandelbrot-mängden, som\ldots{}
 				(A)--(B)--(C)--cycle;
     }
 \end{tikzpicture}
-			\end{minted}
+			\end{latexcode}
 			\vfil
 		\end{minipage}
 		\\[1ex]
@@ -1836,17 +2859,95 @@ Mandelbrot-mängden, som\ldots{}
 	
 	%% REFERENSER MED BIBTEX (fold)
 	\section{Referenser med \BibTeX}\label{sec:5}
+	\cite{Patashnik88,Fenn06}
 	%% (end)
 	
 	%% VIDARE LÄSNING (fold)
+	% \appendix tas inte upp någonstans?
+	
 	\section{Vidare läsning}\label{sec:6}
 	
 	\subsection{Andra resurser}
 	\subsubsection{Böcker och artiklar}
+	Det finns mycket material tillgängligt när det gäller \LaTeX{}. Många
+	böcker inom ämnet har publicerats av Addison-Wesley, och det finns även
+	en uppsjö artiklar, böcker och guider tillgängliga på CTAN, och en journal
+	(\emph{The Prac\TeX{} Journal}\footnote{\url{http://tug.org/pracjourn/}})
+	som finns
+	tillgängliga på internet. Nedan följer en lista på några avde böcker och 
+	artiklar som kan vara av intresse för dig som precis börjat med \LaTeX.
+	
+	\begin{description}
+		\item[\emph{An essential guide to \LaTeXe{} usage} \cite{Fenn07}]
+		brukar också refereras till som \pack{l2tabu} (dess namn på CTAN), och
+		ger en kort lista över utdaterade paket, dödssynder inom \LaTeX{} samt
+		några små tips. Förhoppningsvis lär du dig inget nytt av att läsa
+		\pack{l2tabu} (det skulle ju indikera att den här introduktionen är
+		felaktig), men det kan vara värt att skumma igenom den ändå.
+		
+		\item[\emph{The Not So Short Introduction to \LaTeXe} \cite{Oetiker11}]
+		går även under namnet \pack{lshort} och är
+		en kort introduktion till \LaTeX,
+		skriven på engelska. Den går \emph{lite} djupare in på vissa bitar
+		av \LaTeX{}, och fokuserar en del på den nu i princip överflödiga
+		\LaTeX-motorn som skapar \DVI-filer, men har varit en stor inspiration
+		till den här introduktionen. Absolut värd en (snabb) genomläsning.
+		
+		\item[\emph{Math into \LaTeX} \cite{Gratzer96}]
+		ger än ännu längre introduktion till \LaTeX{} än \pack{lshort}, och
+		är även den skriven på engelska. En bra ytterligare referens om det är
+		något man vill veta mer om eller något man tycker är otydligt i den
+		här introduktionen och \pack{lshort}.
+		
+		\item[\emph{\LaTeX{} and Friends} \cite{Dongen10}] % <FIXME>
+		
+		\item[\emph{Math Mode} \cite{Voss10}]
+		ger en mycket ordentlig
+		genomgång av matematiktypsättning både i vanliga \LaTeX{} och med
+		\AmS\LaTeX{}, och är en nästintill oumbärlig referens när man skriver
+		lite mer komplicerade ekvationer. Bokmärk och titta igenom varje gång
+		du skriver matematik i \LaTeX.
+		
+		\item[\emph{Short Math Guide for \LaTeX} \cite{Downes02}]
+		är en kort guide till matematik med \AmS\LaTeX{} skriven av en av
+		huvudpersonerna bakom just \AmS\LaTeX. Ger några små värdefulla tips,
+		en lista över symboler och en introduktion till
+		\cmd{DeclareMathOperator} och några andra \AmS-konstruktioner som inte
+		diskuteras utförligt i den här introduktionen. Sjutton mycket läsvärda
+		sidor.
+		
+		\item[\emph{The \LaTeX{} Companion} \cite{Mittelbach04}]
+		beskriver alla \LaTeX-kommandon och en stor mängd paket. Om du ska
+		skriva ett eget paket eller en egen dokumentklass, eller bara är
+		intresserad av att ”hacka” \LaTeX{} lite, så bör du absolut ta en titt
+		på den här boken. En mycket bra referens för den vane \TeX{}aren.
+		
+		\item[\emph{\LaTeX: A Document Preparation System} \cite{Lamport94}]
+		skrevs av författaren till \LaTeX{} och kan anses vara det närmsta en
+		”manual” till \LaTeX{} man kan komma. Främst av historiskt intresse,
+		och inget för nybörjaren.
+		
+		\item[\emph{\TeX{} by Topic} \cite{Eijkhout92}]
+		ger en utförlig förklaring till \TeX{} och är en relevant referens för
+		alla som ska utföra lågnivåarbete i \TeX{} eller \LaTeX{}. Främst
+		riktad till mycket vana användare av \TeX{} och \LaTeX{}, och absolut
+		inte riktad till nybörjaren.
+		
+		\item[\emph{The \TeX{}book} \cite{Knuth86}]
+		skrevs av skaparen av \TeX{} och förklarar i detalj hur systemet
+		fungerar. Främst av historiskt intresse, och egentligen bara värd att
+		titta på om man vill veta hur \TeX{} \emph{egentligen} fungerar.
+	\end{description}
+	
+	Utöver dessa bör man givetvis även läsa manualerna till de paket man
+	använder (dessa finns alltid på CTAN) och kanske även manualen till
+	\BibTeX{} \cite{Patashnik88} om man behöver det.
+	
 	\subsubsection{Hjälp med specifika problem}
 	% TeX.SE!
 	
 	\subsection{Rekommenderade paket}
+	% mathtools?
 	
 	\subsection{Tips för stora projekt}
 	
