@@ -1,4 +1,4 @@
-\documentclass[draft,swe,12pt,nofont]{skrapport}
+\documentclass[draft,swe,10pt,nofont]{skrapport}
 %% Packages (fold)
 % Packages included by <skrapport>:
 % polyglossia, microtype, icomma, amsmath,
@@ -8,6 +8,8 @@
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{shadows}
+% page size
+\usepackage[c5paper,xetex]{geometry}
 % code
 \usepackage{minted}
 % improvement packages
@@ -211,7 +213,7 @@
 % Front/back page color and graphics
 \def\frontpagecolor{LimeGreen}
 \newcommand\frontpagegraphic{\begin{tikzpicture}[remember picture,overlay]
-	\coordinate [below=4.225cm] (midpoint)
+	\coordinate [below=2.225cm] (midpoint)
 					   at (current page.north);
 	\node [anchor=north,fill=Black,opacity=0.25,
 	minimum width=\paperwidth,
@@ -976,7 +978,7 @@ Mandelbrot-mängden, som\ldots{}
 	fylla den med något (osynligt), till exempel en \cmd{mbox} innan man
 	sidbryter en andra gång.
 	
-	\begin{table}[tb]
+	\begin{table}[tbp]
 		\centering 
 		\caption{Tre kommandon för att skapa sidbrytningar i \LaTeX.}
 		\label{tab:newpage}
@@ -1052,7 +1054,7 @@ Mandelbrot-mängden, som\ldots{}
 	tradition typsätts till exempel paketnamn i \LaTeX-dokumentation med
 	sans-serif-typsnitt.}.
 	
-	\begin{table}[tb]\begin{minipage}{\textwidth}
+	\begin{table}[tbp]\begin{minipage}{\textwidth}
 		\centering
 		\caption[]{Viktiga \LaTeX-kommandon för att ändra textstil.}
 		\label{tab:betoning}
@@ -1236,7 +1238,7 @@ Mandelbrot-mängden, som\ldots{}
 	placera objektet på en egen sida. Sålunda kan man skapa en \emph{float}
 	med följande kod:
 	\begin{latexcode}
-\begin{<floattyp>}[tb] % Får placeras som top eller bottom
+\begin{<floattyp>}[tbp] % Får placeras som top eller bottom
 	% Innehåll i det flytande objektet
 \end{<floattyp>}
 	\end{latexcode}
@@ -1326,7 +1328,7 @@ Mandelbrot-mängden, som\ldots{}
 		\\ \medskip
 		\fbox{\begin{minipage}{0.9\textwidth} % figur
 			\centering \medskip
-			\begin{tabular}{l r p{7.5cm}}
+			\begin{tabular}{l r p{6.5cm}}
 				\toprule 
 				Konstant & Värde & Kort beskrivning \\
 				\midrule 
@@ -1461,7 +1463,7 @@ Mandelbrot-mängden, som\ldots{}
 	och apostrofer (\verb|'|). Tabell~\vref{tab:citat} visar hur dessa används
 	för att citera text.
 	
-	\begin{table}[tb]
+	\begin{table}[tbp]
 		\centering 
 		\caption{Citattecken i \LaTeX.}
 		\label{tab:citat}
@@ -1888,7 +1890,7 @@ Mandelbrot-mängden, som\ldots{}
 	kan rita sin symbol och få en lista över liknande \LaTeX-symboler och
 	deras motsvarande kommandon.
 	
-	\begin{table}[tb]
+	\begin{table}[tbp]
 		\centering 
 		\caption{Diverse användbara symboler i \LaTeX.}
 		\label{tab:symbs}
@@ -1980,7 +1982,7 @@ Mandelbrot-mängden, som\ldots{}
 	för att göra så att \cmd{vec} istället visar variabeln fetstilt:
 	\latex|\renewcommand\vec[1]{\boldmath{#1}}|
 	
-	\begin{table}[tb]
+	\begin{table}[tbp]
 		\centering 
 		\caption{Hattar och dylikt med \LaTeX-kommandon.}
 		\label{tab:hattar}
@@ -2110,7 +2112,7 @@ Mandelbrot-mängden, som\ldots{}
 		\end{tabular}
 	\end{table}
 	
-	\begin{kod}[tb]
+	\begin{kod}[tbp]
 		\centering 
 		\begin{minipage}{0.85\textwidth}
 			\begin{latexcode}
@@ -2170,7 +2172,7 @@ Mandelbrot-mängden, som\ldots{}
 	\verb|^| som tidigare diskuterats \vpageref{sec:3:subscript}:
 	\latex|\sum_{x\in A}\left(\ldots\right)|
 	
-	\begin{table}[tb]
+	\begin{table}[tbp]
 		\centering 
 		\caption{Sum-, produkt- och integraltecken i \LaTeX.}
 		\label{tab:sums}
@@ -2233,7 +2235,7 @@ Mandelbrot-mängden, som\ldots{}
 	är ”en” gräns:
 	\latex|\iint_A f(x) \d{A}|
 	
-	\begin{kod}[tb]
+	\begin{kod}[tbp]
 		\centering
 				\begin{minipage}[b]{0.225\textwidth}
 					\[ \int\limits_0^\infty\int\limits_0^1 f(x,y) dydx \]
@@ -2324,7 +2326,7 @@ Mandelbrot-mängden, som\ldots{}
 	skillnaden mellan de två är att man med \env{align} kan placera ekvationer
 	mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
 	
-	\begin{figure}[tb]
+	\begin{figure}[tbp]
 		\centering 
 		\subfloat[Tre ekvationer typsatta med \env{align}]{\fbox{ % align
 			\label{fig:aligngather:align}
@@ -2471,7 +2473,7 @@ Mandelbrot-mängden, som\ldots{}
 	omgivningar). Exempel~\vref{ex:cases} visar hur \env{cases} används för
 	att definiera en styckvis funktion (i det här fallet rampfunktionen).
 	
-	\begin{kod}[tb]
+	\begin{kod}[tbp]
 		\centering 
 		\begin{minipage}[b]{0.325\textwidth} % figur
 			\begin{equation}
@@ -2537,7 +2539,7 @@ Mandelbrot-mängden, som\ldots{}
 	tillförs. Notera dock att tecken av typ 2 (binära operatorer) görs om till
 	typ 0 om de inte har någon text (en operand) till vänster.
 	
-	\begin{table}[tb]
+	\begin{table}[tbp]
 		\centering 
 		\caption{Avstånd före (\emph{pre}) och efter (\emph{post}) olika typer
 		av tecken i matematikläge.}
@@ -2629,7 +2631,7 @@ Mandelbrot-mängden, som\ldots{}
 		\centering 
 		\caption{Semantiska punktkommandon definierade av \AmS\LaTeX.}
 		\label{tab:pktr}
-		\begin{tabular}{lcp{0.5\textwidth}}
+		\begin{tabular}{lcp{0.4\textwidth}}
 			\toprule 
 			Kommando & Exempel & Kommentar \\
 			\midrule 
@@ -2751,7 +2753,7 @@ Mandelbrot-mängden, som\ldots{}
 	figuren bli för stor annars. Man använder då parametern \cli{width}
 	enligt figur~\vref{fig:graphicx}.% för att specificera detta.
 	
-	\begin{figure}[p]
+	\begin{figure}[tbp]
 		\centering
 		\hspace{-0.025\textwidth}
 		\begin{minipage}{0.475\textwidth} % kod
@@ -2799,20 +2801,24 @@ Mandelbrot-mängden, som\ldots{}
 		\begin{minipage}{0.95\textwidth} % kod
 			\vfil
 			\begin{latexcode}
-\newcounter{d}\setcounter{d}{0}\def\mcolor{SpringGreen}
+\newcounter{d}\setcounter{d}{0}
+\def\mcolor{SpringGreen}
 \begin{tikzpicture}
-    \path[coordinate] (0,0) coordinate(A) ++( 60:6cm)
-                      coordinate(B) ++(-60:6cm) coordinate(C);
-    \draw[fill=Black!\thed!\mcolor] (A) -- (B) -- (C) -- cycle;
+    \path[coordinate] (0,0)
+         coordinate(A) ++( 60:6cm)
+         coordinate(B) ++(-60:6cm) coordinate(C);
+    \draw[fill=Black!\thed!\mcolor]
+         (A) -- (B) -- (C) -- cycle;
     \foreach \x in {1,...,15}{%
         \pgfmathsetcounter{d}{\thed+10}
         \setcounter{d}{\thed}
         \path[coordinate] coordinate(X) at (A){};
-        \path[coordinate] (A) -- (B) coordinate[pos=.15](A)
-                            -- (C) coordinate[pos=.15](B)
-                            -- (X) coordinate[pos=.15](C);
+        \path[coordinate] (A)
+             -- (B) coordinate[pos=.15](A)
+             -- (C) coordinate[pos=.15](B)
+             -- (X) coordinate[pos=.15](C);
         \draw[fill=Black!\thed!\mcolor]
-				(A)--(B)--(C)--cycle;
+             (A)--(B)--(C)--cycle;
     }
 \end{tikzpicture}
 			\end{latexcode}
@@ -2825,8 +2831,8 @@ Mandelbrot-mängden, som\ldots{}
 			\begin{minipage}{0.475\textwidth}
 			\fbox{\begin{tikzpicture}
 			    \path[coordinate] (0,0)  coordinate(A)
-			                ++( 60:6cm) coordinate(B)
-			                ++(-60:6cm) coordinate(C);
+			                ++( 60:0.95\textwidth) coordinate(B)
+			                ++(-60:0.95\textwidth) coordinate(C);
 			    \draw[fill=Black!\thedensity!SpringGreen]
 							(A) -- (B) -- (C) -- cycle;
 			    \foreach \x in {1,...,15}{%
