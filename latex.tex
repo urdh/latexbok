@@ -33,6 +33,8 @@
 \usepackage{subfig}
 \usepackage{cprotect}
 \usepackage{bookmark}
+% Source code line numbers in margin
+\usepackage{srcline}
 % more math
 \let\Finv\relax\let\Game\relax\let\beth\relax\let\gimel\relax\let\daleth\relax
 \usepackage{amssymb}
@@ -41,7 +43,6 @@
 
 %% Draft fixes to minted, tikz (fold)
 \ifdraft{%
-\makeatletter%
 % minted fixes <FIXME> (how do we account for options e.g. border?)
 \renewcommand\mint[3][]{\DefineShortVerb{#3}\fvset{#1}\SaveVerb[aftersave={\UndefineShortVerb{#3}\begin{flushleft}\UseVerb{minted@verb}\end{flushleft}}]{minted@verb}#3}%
 \renewenvironment{minted}[2][]{\VerbatimEnvironment\fvset{#1}\begin{Verbatim}}{\end{Verbatim}}
@@ -49,13 +50,14 @@
 % tikz fixes
 % not nessecary at the moment <FIXME>
 % LaTeX source code
-\newminted{latex}{frame=single}
-\newmint{latex}{frame=single}
-\makeatother%
+\newminted{latex}{frame=single}%
+\newmint{latex}{frame=single}%
+% Line numbers in margin
+%\lnoson% % Disable when not spellchecking/proofreading
 }{%
 % LaTeX source code
-\newminted{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}
-\newmint{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}
+\newminted{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
+\newmint{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
 }
 %% (end)
 
@@ -233,6 +235,10 @@
 \makeatletter
 \renewcommand\d[1]{\ensuremath{\,\mathrm{d}#1\@ifnextchar\d{\!}{}}}
 \makeatother
+% Useful colors
+\definecolor{required}{rgb}{0.000,0.616,0.184}
+\definecolor{optional}{rgb}{1.000,0.973,0.278}
+\definecolor{unavailable}{rgb}{0.937,0.000,0.047}
 %% (end)
 
 %% Redefinitions of style (fold)
@@ -290,6 +296,7 @@
 % <FIXME>
 % * \subsubsubsection needs starred variant to work properly
 % * \cramped typesets a strange bar above (inline?) math
+% * färgerna i bibtex-tabellen sticker ut riktigt mycket - byt ut!
 
 \begin{document}
 	\pagestyle{empty}
@@ -321,6 +328,22 @@
 		\end{abstract}
 	\end{titlepage} % (end)
 	\cleardoublepage
+	
+	\begin{center} % DEDICATION, THANKS AND PUBLISHER
+		\large\vspace*{36pt}
+		{\makeatletter\@titstyle\makeatother\huge Tillägnad}\\[1ex]
+		min underbara flickvän.
+		\bigskip\bigskip\bigskip
+		
+		{\makeatletter\@titstyle\makeatother\Large Tack till}\\[1ex]
+		blah\\ % <FIXME>
+		\vfill 
+		
+		\small
+		Tryck: XXX\\ % <FIXME>
+		Göteborg, 2011
+	\end{center}
+	\cleardoublepage 
 	
 	\frontmatter
 	\pagestyle{thefancy}
@@ -2702,6 +2725,7 @@ Mandelbrot-mängden, som\ldots{}
 	kan göras.
 	%% (end)
 	
+	\addtocontents{toc}{\newpage} % <FIXME> toc hack for c5paper version
 	%% GRAFIK MED LATEX (fold)
 	\section{Grafik med \LaTeX}\label{sec:4}
 	Många dokument kräver att man inkluderar figurer för att presentera
@@ -2865,12 +2889,278 @@ Mandelbrot-mängden, som\ldots{}
 	
 	%% REFERENSER MED BIBTEX (fold)
 	\section{Referenser med \BibTeX}\label{sec:5}
-	\cite{Patashnik88,Fenn06}
+	En stor fördel med \LaTeX{} är att man kan automatisera hanteringen av
+	till exempel referenser. \BibTeX{} är ett verktyg som gör detta ännu
+	enklare och som gör att man kan samla alla sina referenser i en extern
+	databas vilken kan hanteras av ett externt program\footnote{Exempel på
+	sådana är \emph{JabRef}, \emph{BibDesk} och \emph{refbase}.\hfill} eller 
+	(som sig bör när det gäller \LaTeX) med en enkel textredigerare.
+	
+	Systemet består av stilfiler (med filändelse \texttt{.bst}), databaser
+	(\texttt{.bib}) och programmet \texttt{bibtex}. Denna introduktion kommer
+	endast att gå igenom databasformatet och hur denna används från \LaTeX{}; 
+	en ytterligare introduktion ges av \citeasnoun{Fenn06} och en komplett
+	manual är även tillgänglig \cite{Patashnik88a}. Att skapa egna stilfiler
+	involverar en del programmering i ett stackorienterat postfix-språk som
+	dokumenteras av \pack{btxhak} \cite{Patashnik88b}, men detta är inte att
+	rekommendera. Bättre är att använda några av de \BibTeX-stilar som finns
+	på CTAN (eller \pack{chscite}%
+	\footnote{\url{http://blog.sigurdhsson.org/projects/latexhax.html%
+	\#chalmers-style-references-chscite}\label{fn:chscite}} om man vill följa 
+	Chalmers-bibliotekets rekommendationer).
+	
+	\subsection{\BibTeX-databasen}
+	Den databas \BibTeX{} använder är i all sin enkelhet en vanlig textfil.
+	Denna textfil innehåller ett antal block, ett per referens i databasen,
+	som innehåller information om referensen (\emph{fält}). En typisk referens
+	innehåller en nyckel (vilken man sedan använder när man refererar till
+	referensen i \LaTeX-dokumentet), en titel, en författare och ett årtal.
+	Dessutom innehåller varje block information om vilken typ av referens 
+	(bok, artikel och så vidare) det handlar om. 
+	
+	\begin{kod}[tbp]
+		\centering
+		\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single]{latex}{ex/5/bibdata.bib}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{ex/5/bibdata.bib}}\vfil
+		\caption{En enkel exempelreferens ur en \BibTeX-databas.}
+		\label{ex:bibtex}
+	\end{kod}
+	
+	Exempel~\vref{ex:bibtex} visar ett block ur en \BibTeX-databas; blocket
+	inleds med en blocktyp (\texttt{@ARTICLE}) och den nyckel som används då
+	man refererar till källan från \LaTeX{} (\texttt{Hassanpour08}) varefter
+	ett antal självförklarande fält med information följer. Olika blocktyper
+	kräver olika fält, både obligatoriska (till exempel titel och författare)
+	och frivilliga (i det här fallet är bland annat \texttt{month} frivillig)
+	— tabell~\vref{tab:blocktyper} listar de vanligaste blocktyperna och de
+	obligatoriska/frivilliga fält som hör till.
+	
+	\begin{table}[bp]
+		\begin{minipage}{0.98\textwidth}
+			\newlength{\oldfboxsep}\setlength{\oldfboxsep}{\fboxsep}
+			\setlength{\fboxsep}{0pt}
+			\newcommand{\required}{% (fold)
+				\setlength{\fboxsep}{\oldfboxsep}%
+				\colorbox{required}{\color{required}o}%\checkmark}%
+			} % (end)
+			\newcommand{\optional}{% (fold)
+				\setlength{\fboxsep}{\oldfboxsep}%
+				\colorbox{optional}{\color{optional}v}%\Large$\circ$}%
+			} % (end)
+			\newcommand{\unavailable}{% (fold)
+				\setlength{\fboxsep}{\oldfboxsep}%
+				\colorbox{unavailable}{\color{unavailable}x}%$\times$}%
+			} % (end)
+			\centering
+			\caption{\setlength{\oldfboxsep}{0.5\oldfboxsep}%
+				Vanliga referenstyper i \BibTeX{} och deras tillhörande fält.
+				Både typnamn och fältnamn är relativt självförklarande.
+				\emph{Nyckel:} \fbox{\required} obligatoriskt,
+				\fbox{\optional} valfritt och
+				\fbox{\unavailable} otillgängligt fält.
+			}
+			\label{tab:blocktyper}
+			\begin{tabular}{lc@{}c@{}c@{}c@{}c@{}c@{}c@{}c@{}%
+							 c@{}c@{}c@{}c@{}c@{}c@{}c@{}c}
+			\toprule 
+			Blocktyp & % (fold)
+				\rotatebox{90}{\texttt{address}} &
+				\rotatebox{90}{\texttt{author}} &
+				\rotatebox{90}{\texttt{booktitle}} &
+				\rotatebox{90}{\texttt{chapter}} &
+				\rotatebox{90}{\texttt{edition}} &
+				\rotatebox{90}{\texttt{editor}} &
+				\rotatebox{90}{\texttt{journal}} &
+				\rotatebox{90}{\texttt{month}} &
+				\rotatebox{90}{\texttt{number}} &
+				\rotatebox{90}{\texttt{pages}} &
+				\rotatebox{90}{\texttt{publisher}} &
+				\rotatebox{90}{\texttt{school}} &
+				\rotatebox{90}{\texttt{series}} &
+				\rotatebox{90}{\texttt{title}} &
+				\rotatebox{90}{\texttt{volume}} &
+				\rotatebox{90}{\texttt{year}} \\
+			% (end)
+			\midrule 
+			\texttt{@article} & \unavailable & \required & \unavailable & \unavailable & \unavailable & \unavailable & \required & \optional & \optional & \optional & \unavailable & \unavailable & \unavailable & \required & \optional & \required \\
+			\texttt{@book}\footnote{\label{fn:auth-editor}Antingen \texttt{author} \emph{eller} \texttt{editor} ska specificeras, ej båda två.} & \optional & \required & \unavailable & \unavailable & \optional & \required & \unavailable & \optional & \unavailable & \unavailable & \required & \unavailable & \optional & \required & \optional & \required \\
+			\texttt{@booklet} & \optional & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \required & \unavailable & \optional \\
+			\texttt{@inbook}$^\text{\ref{fn:auth-editor}}$\footnote{\label{fn:chap-pages}Det räcker med att specificera ett av fälten \texttt{chapter} och \texttt{pages}.} & \optional & \required & \unavailable & \required & \optional & \required & \unavailable & \optional & \unavailable & \required & \required & \unavailable & \optional & \required & \optional & \required \\
+			\texttt{@incollection} & \optional & \required & \required & \unavailable & \unavailable & \optional & \unavailable & \optional & \unavailable & \optional & \optional & \unavailable & \unavailable & \required & \unavailable & \required \\
+			\texttt{@inproceedings} & \optional & \required & \required & \unavailable & \unavailable & \optional & \unavailable & \optional & \unavailable & \optional & \optional & \unavailable & \unavailable & \required & \unavailable & \required \\
+			\texttt{@manual} & \unavailable & \optional & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \required & \unavailable & \optional \\
+			\texttt{@mastersthesis} & \optional & \required & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \required & \unavailable & \required & \unavailable & \required \\
+			\texttt{@misc} & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \optional \\
+			\texttt{@phdthesis} & \optional & \required & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \required & \unavailable & \required & \unavailable & \required \\
+			\texttt{@proceedings} & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \optional & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \required & \unavailable & \required \\
+			\texttt{@unpublished} & \unavailable & \required & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \required & \unavailable & \optional \\
+			\bottomrule 
+			\end{tabular}
+		\end{minipage}
+	\end{table}
+	
+	Oftast är det dock lättare att hantera sin referensdatabas med någon form
+	av dedikerat verktyg istället för att redigera \texttt{.bib}-filerna
+	för hand med en textredigerare. Programmet JabRef%
+	\footnote{\url{http://jabref.sourceforge.net/}}
+	fungerar mycket bra till detta och finns tillgängligt till alla
+	plattformar.
+	
+	Många webbaserade sökverktyg för akademiska publikationer, till exempel
+	Scopus\footnote{\url{http://www.scopus.com/home.url}}, gör det möjligt att
+	enkelt exportera information om de artiklar man refererar till i \BibTeX-%
+	format, som sedan kan läggas till direkt i den egna referensdatabasen.
+	Detta är oerhört praktiskt i större projekt, så som kandidatuppsatser.
+	
+	\subsection{\BibTeX{} med \LaTeX{}} % <HERE>
+	För att referera till de referenser man har i sin referensdatabas
+	i sitt \LaTeX-dokument krävs ett par olika saker. Först och främst så
+	måste man specificera en bibliografistil och inkludera sin
+	databas i dokumentet där man vill ha sin bibliografi:
+	\begin{latexcode}
+\bibliographystyle{plain}
+\bibliography{databas}
+	\end{latexcode}
+	Notera här att bibliografistilen (mer om dessa\vpageref{sec:5:stilar})
+	måste specificeras
+	innan databasen inkluderas, och att databasen inkluderas med sitt namn
+	\emph{utan filändelsen}; koden ovan inkluderar alltså referenser från
+	filen \texttt{databas.bib}. Man kan specificera flera olika databaser
+	genom att separera dem med kommatecken.
+	
+	När man sedan kompilerar sitt dokument måste man även köra \BibTeX{} på
+	sitt dokument; detta görs genom att köra kommandot \texttt{bibtex 
+	"dokument"} (om \TeX-dokumentet heter \texttt{dokument.tex}) — notera
+	avsaknaden av filändelse även här. Därefter måste man köra \LaTeX{} ännu
+	en gång för att referenserna ska dyka upp. En normal kompileringsrunda
+	med \BibTeX{} är alltså \LaTeX$\to$\BibTeX$\to$\LaTeX$\to$\LaTeX. Med
+	extra verktyg så som \texttt{latexmk} görs detta automatiskt.
+	
+	\BibTeX{} inkluderar dock endast de referenser som används i dokumentet
+	(det vill säga sådana som refereras till direkt i texten), så om din
+	referenslista inte dyker upp ska du inte vara orolig. Det finns ett antal
+	olika sätt att referera till källor med \BibTeX{}; två stycken inbyggda
+	(\cmd{cite} och \cmd{nocite}) samt de som definieras av olika paket (till
+	exempel \pack{harvard}, vilket diskuteras~\vpageref{sec:5:harvard}).
+	
+	Kommandot \cmd{cite} refererar till en källa i databasen och skriver ut
+	en hänvisning till bibliografin. För de ursprungliga stilarna i \BibTeX{}
+	är denna hänvisning en siffra eller nyckel inom hakparanteser (alltså
+	något i stil med ”[1]”), men detta kan modifieras av diverse paket och
+	bibliografistilar. Kommandot tar ett obligatoriskt argument, nyckeln till
+	källan i databasen, och ett frivilligt som lägger till text efter
+	hänvisningen. Det frivilliga argumentet kan alltså användas för att 
+	hänvisa till specifika sidor eller delar av en källa:
+	\begin{latexcode}
+\cite{Hassanpour08}       % Skriver ut ”[1]”
+\cite[s.~5]{Hassanpour08} % Skriver ut ”[1, s. 5]”
+	\end{latexcode}
+	
+	Notera här att det obligatoriska argumentet ska motsvara den nyckel som
+	anges i databasen; här refererar vi till den källa som visas i
+	exempel~\vref{ex:bibtex}.
+	Man kan även referera till flera källor samtidigt genom att separera
+	dessa med kommatecken:
+	\latex|\cite{Hassanpour08,Khan10} % Skriver ut ”[1,2]”|
+	
+	Kommandot \cmd{nocite} gör samma sak som \cmd{cite} men skriver inte ut
+	någon hänvisning. Detta kommando kan därför användas om man vill
+	inkludera en källa i bibliografin utan att faktiskt referera till den i
+	text. Här finns endast det obligatoriska argumentet. Vill man inkludera
+	alla källor i databasen i sitt dokument kan man istället för en nyckel
+	ange ”\texttt{*}”:
+	\latex|\nocite{*}|
+	
+	\subsubsection{Bibliografistilar}\label{sec:5:stilar}
+	Det finns en uppsjö olika sätt att referera till källor när man skriver
+	vetenskapliga rapporter, och dessa kan variera kraftigt i stil. Några
+	använder siffror (IEEE, Vancouver) eller nycklar (\AmS) för att hänvisa 
+	till källor i text medan andra (Harvard, Chicago, APA) använder sig av
+	författarnamnen.
+	\BibTeX, i sitt grundutförande, kan endast skapa bibliografier och
+	referenser med nycklar eller siffror. Vissa paket så som \pack{harvard}
+	och \pack{chscite} implementerar dock Harvard- och Chicago-stilen.
+	
+	Även själva bibliografin, alltså listan över källor, kan utformas på
+	oerhört många sätt. Figur~\vref{fig:bibstyle} visar några av de stilar
+	som finns tillgängliga med \BibTeX{} och på CTAN. Vilken stil man vill
+	använda är upp till författaren (eller kanske oftare förläggaren), men
+	generellt sett så brukar man i matematiska kretsar använda 
+	\texttt{alpha.bst}, i (elektro)ingenjörskretsar \texttt{ieeetr.bst} (som
+	ej visas i figuren) och i humanistiska vetenskaper Harvard-stilen (eller
+	någon närliggande stil). Chalmers avviker från detta och rekommenderar att
+	man använder en Chicago-liknande stil~\cite{ChsLib10}.
+	
+	%Notera att man oftast bör använda \pack{harvard}
+	%eller liknande paket om man vill ha en sådan stil, och att man oftast 
+	%inte ska använda \texttt{apalike.bst}.
+	
+	\begin{figure}[tp]
+		\centering
+		\subfloat[\texttt{abbrv.bst}]{\label{fig:bibstyle:abbrv}% (fold)
+			\fbox{\includegraphics[width=0.45\textwidth,%
+								   trim=0 -14 0 0]{ex/5/abbrv.pdf}}
+		} \hfil % (end)
+		\subfloat[\texttt{alpha.bst}]{% (fold)
+			\fbox{\includegraphics[width=0.45\textwidth]{ex/5/alpha.pdf}}
+		} \\ % (end)
+		\subfloat[\texttt{apalike.bst}]{\label{fig:bibstyle:apalike}% (fold)
+			\fbox{\includegraphics[width=0.45\textwidth]{ex/5/apalike.pdf}}
+		} \hfil % (end)
+		\subfloat[\texttt{chscite.bst} från \pack{chscite}]{% (fold)
+			\label{fig:bibstyle:chscite}%
+			\fbox{\includegraphics[width=0.45\textwidth,%
+								   trim=0 -22 0 0]{ex/5/chscite.pdf}}
+		} \\ % (end)
+		\subfloat[\texttt{dcu.bst} från \pack{harvard}]{% (fold)
+			\fbox{\includegraphics[width=0.45\textwidth,%
+								   trim=0 -11.5 0 0]{ex/5/harvard-dcu.pdf}}
+		} \hfil % (end)
+		\subfloat[\texttt{jurabib.bst} från \pack{jurabib}]{% (fold)
+			\label{fig:bibstyle:jurabib}%
+			\fbox{\includegraphics[width=0.45\textwidth,%
+								   trim=0 0 0 5,clip=true]{ex/5/jurabib.pdf}}
+		} \\ % (end)
+		\caption[Några av de bibliografistilar som kan åstadkommas med
+		hjälp av \BibTeX.]{Några av de bibliografistilar som kan åstadkommas
+		med hjälp av \BibTeX.
+		Figurerna~\subref{fig:bibstyle:abbrv}–\subref{fig:bibstyle:apalike} 
+		visar standardstilar, medan  
+		figurerna~\subref{fig:bibstyle:chscite}–\subref{fig:bibstyle:jurabib} 
+		visar stilar som definieras av olika paket.}
+		\label{fig:bibstyle}
+	\end{figure}
+	
+	\subsubsubsection*{Harvard- och Chicago-stilen: \pack{harvard} och \pack{chscite}}\label{sec:5:harvard}
+	Harvard- och Chicago-stilarna, varav den senare beskrivs utförligt i
+	\emph{The Chicago Manual of Style} \cite{Chicago10},
+	är sätt att referera till källor baserat
+	på deras författare, och används ofta i de humanistiska vetenskaperna.
+	Fördelen med dessa stilar är att referenserna smälter in bättre med den
+	omgivande texten och ger ett bättre sammanhang.
+	
+	Tyvärr så är \BibTeX{} från början inte gjort för att stödja de här
+	referensstilarna, varför det har dykt upp ett antal olika paket som
+	gör det möjligt. Ett av dessa paket är \pack{harvard}, som beskrivs
+	utförligt av \citeasnoun{Williams08}. Paketet definierar, förutom det
+	vanliga kommandot \cmd{cite}, tre relativt självförklarande kommandon:
+	\cmd{citeasnoun}, som refererar till en källa som ett substantiv,
+	\cmd{possessivecite}, som refererar till en källa i genitivform,
+	och \cmd{citeaffixed}, som refererar som \cmd{cite} men med ett tillägg.
+	Hur dessa bör användas i text är illustreras av följande exempel:
+	\begin{latexcode}
+...vilket visades av \citeasnoun{Hassanpour08}.
+\possessivecite{Hassanpour08} undersökning visade att...
+...flera rapporter \citeaffixed{Hassanpour08}{t.ex.}...
+	\end{latexcode}
+		
+	Även Chalmers rekommenderar att man använder en stil baserad på Chicago-%
+	stilen \cite{ChsLib10}, och dessa rekommendationer implementeras av 
+	paketet \pack{chscite} som bygger på \pack{harvard} och därför fungerar
+	på samma sätt. Detta paket finns ännu inte på
+	CTAN; se istället länken i fotnoten~\vpageref{fn:chscite}.
 	%% (end)
 	
 	%% VIDARE LÄSNING (fold)
-	% \appendix tas inte upp någonstans?
-	
 	\section{Vidare läsning}\label{sec:6}
 	
 	\subsection{Andra resurser}
@@ -2947,7 +3237,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	Utöver dessa bör man givetvis även läsa manualerna till de paket man
 	använder (dessa finns alltid på CTAN) och kanske även manualen till
-	\BibTeX{} \cite{Patashnik88} om man behöver det.
+	\BibTeX{} \cite{Patashnik88a} om man behöver det.
 	
 	\subsubsection{Hjälp med specifika problem}
 	% TeX.SE!
@@ -2962,9 +3252,11 @@ Mandelbrot-mängden, som\ldots{}
 	\subsubsection{Skripta med \hologo{LuaTeX}}
 	%% (end)
 	
+	%% BIBLIOGRAFI/REFERENSLISTA (fold)
 	\let\oldurl=\url\renewcommand\url[1]{\newline{\small\oldurl{#1}}}
 	\bibliography{referenser}
 	\addcontentsline{toc}{section}{\hspace{1.3em}Referenser}
+	%% (end)
 	
 	\appendix
 	%% EN ENKEL MALL (fold)
@@ -2972,7 +3264,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	%% (end)
 
-	\backmatter 
+	\backmatter
 	\pagestyle{empty}
 	\cleardoublepage\hbox{}\newpage
 	{ % EXTERNAL BACK PAGE (fold)
