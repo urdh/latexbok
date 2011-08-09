@@ -35,10 +35,6 @@
 \usepackage{bookmark}
 % Source code line numbers in margin
 \usepackage{srcline}
-% more math
-\let\Finv\relax\let\Game\relax\let\beth\relax\let\gimel\relax\let\daleth\relax
-\usepackage{amssymb}
-%\usepackage{mathtools}
 %% (end)
 
 %% Draft fixes to minted, tikz (fold)
@@ -1041,6 +1037,7 @@ Mandelbrot-mängden, som\ldots{}
 	enkelt inkludera paketet med rätt inställning:
 	\latex|\usepackage[swedish]{babel} % Dokumentet är på svenska|
 	
+	% <FIXME> polyglossia fungerar inte med pdflatex
 	Det andra paketet, \pack{polyglossia}, är en ny och förbättrad variant av
 	\pack{babel}. Det innehåller bland annat kraftigt förbättrade
 	avstavningsregler. Att använda \pack{polyglossia} är nästan lika enkelt
@@ -2171,6 +2168,7 @@ Mandelbrot-mängden, som\ldots{}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 	\end{latexcode}
+	% <FIXME> \DeclarePairedDelimiter kräver \pack{mathtools}!
 	Dessa kan sedan enkelt användas i matematikläge:
 	\latex|\norm{x}_1 = \sum_{i=1}^n\abs{x_i}|
 	
@@ -3162,8 +3160,11 @@ Mandelbrot-mängden, som\ldots{}
 	
 	%% VIDARE LÄSNING (fold)
 	\section{Vidare läsning}\label{sec:6}
+	% <FIXME> Bullshit text here
 	
 	\subsection{Andra resurser}
+	% <FIXME> Bullshit text here
+	
 	\subsubsection{Böcker och artiklar}
 	Det finns mycket material tillgängligt när det gäller \LaTeX{}. Många
 	böcker inom ämnet har publicerats av Addison-Wesley, och det finns även
@@ -3194,8 +3195,6 @@ Mandelbrot-mängden, som\ldots{}
 		är även den skriven på engelska. En bra ytterligare referens om det är
 		något man vill veta mer om eller något man tycker är otydligt i den
 		här introduktionen och \pack{lshort}.
-		
-		\item[\emph{\LaTeX{} and Friends} \cite{Dongen10}] % <FIXME>
 		
 		\item[\emph{Math Mode} \cite{Voss10}]
 		ger en mycket ordentlig
@@ -3240,10 +3239,21 @@ Mandelbrot-mängden, som\ldots{}
 	\BibTeX{} \cite{Patashnik88a} om man behöver det.
 	
 	\subsubsection{Hjälp med specifika problem}
-	% TeX.SE!
+	Det tar lång tid att bemästra \LaTeX{} fullt ut, och i början kommer man
+	garanterat att stöta på problem. Några av dem kanske går att lösa med den
+	hjälp som ges i den här introduktionen och de andra böcker och artiklar
+	som presenteras, men vissa måste man fråga någon om.
 	
-	\subsection{Rekommenderade paket}
-	% mathtools?
+	Det finns så klart en uppsjö olika maillistor, forum och sökmotorer (och
+	phaddrar, för dig som går på en teknisk högskola) som kan användas för att
+	lösa problem, ställa frågor och utforska \LaTeX. En oerhört bra resurs är
+	\emph{\TeX{} Stack Exchange}\footnote{\url{http://tex.stackexchange.com/}}
+	där man kan ställa frågor om \TeX, \LaTeX{} och andra relaterade system.
+	Många stora namn i \TeX-världen dyker upp där lite då och då, och undrar
+	man något om \LaTeX{} så är det ett utmärkt ställe att fråga.
+	
+	\subsection{Rekommenderade paket} % <HERE>
+	% mathtools? många fler!
 	
 	\subsection{Tips för stora projekt}
 	
@@ -3261,7 +3271,21 @@ Mandelbrot-mängden, som\ldots{}
 	\appendix
 	%% EN ENKEL MALL (fold)
 	\section{En enkel mall}\label{app:1}
+	Följande mall är tänkt att användas för att skriva enklare rapporter på
+	Chalmers Tekniska Högskola. Eftersom \LaTeX-installationen på deras
+	datorer saknar en del paket (\pack{siunitx} och \pack{chscite}) är dessa
+	bortkommenterade. Vill man ändå använda dem kan man installera dessa i
+	sin hemmapp, under \texttt{\textasciitilde/texmf/}%
+	\footnote{Detta förklaras närmre av \citeasnoun[ss.~89–90]{Oetiker11}%
+	\hfill}.
 	
+	Kommentarerna och texten i mallen bör förklara och motivera vad som görs
+	vilka paket som inkluderas någorlunda. Om något är oklart, referera till
+	motsvarande del av den här introduktionen. Hela mallen finns dessutom
+	tillgänglig som en \texttt{.tex}-fil för nedladdning%
+	\footnote{\url{http://blog.sigurdhsson.org/projects/latexbok.html}}.
+	
+	\ifdraft{\inputminted[frame=single]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{ex/A/mall.tex}}
 	%% (end)
 
 	\backmatter
