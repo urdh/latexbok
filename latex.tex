@@ -31,10 +31,19 @@
 \usepackage{titlesec}
 \usepackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
 \usepackage{subfig}
+\usepackage{sidecap}
 \usepackage{cprotect}
 \usepackage{bookmark}
+\usepackage{xspace}
 % Source code line numbers in margin
 \usepackage{srcline}
+% Paket som demonstreras i del 6
+\usepackage{braket}
+\usepackage{amscd}
+\DeclareMathOperator\add{add}
+\DeclareMathOperator\cov{cov}
+\DeclareMathOperator\non{non}
+\DeclareMathOperator\cf{cf}
 %% (end)
 
 %% Draft fixes to minted, tikz (fold)
@@ -47,12 +56,14 @@
 % not nessecary at the moment <FIXME>
 % LaTeX source code
 \newminted{latex}{frame=single}%
+\newminted{text}{frame=single}%
 \newmint{latex}{frame=single}%
 % Line numbers in margin
 %\lnoson% % Disable when not spellchecking/proofreading
 }{%
 % LaTeX source code
 \newminted{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
+\newminted{text}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
 \newmint{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
 }
 %% (end)
@@ -193,21 +204,21 @@
 % (end)
 
 %% Convenient definitions (fold)
-\newcommand\PDF{\textsc{PDF}}							% PDF format
-\newcommand\DVI{\textsc{DVI}}							% DVI format
-\newcommand\EPS{\textsc{EPS}}							% EPS format
-\newcommand\UTF{\textsc{UTF-8}}							% UTF-8 standard
+\newcommand\PDF{\textsc{PDF}\xspace}					% PDF format
+\newcommand\DVI{\textsc{DVI}\xspace}					% DVI format
+\newcommand\EPS{\textsc{EPS}\xspace}					% EPS format
+\newcommand\UTF{\textsc{UTF-8}\xspace}					% UTF-8 standard
 \newcommand\cli[1]{\texttt{#1}}							% Command-line input
 \newcommand\opt[1]{\texttt{\emph{#1}}}					% CLI option
 \newcommand\pack[1]{\textsf{#1}}						% LaTeX package
-\newcommand\pdfLaTeX{\hologo{pdfLaTeX}}					% pdfLaTeX logotype
-\newcommand\BibTeX{\textsc{Bib}\TeX}					% BibTeX logotype
-\newcommand\PGFTikZ{PGF/Ti\emph{k}Z}					% PGF/TikZ logotype
-\newcommand\XeTeX{\hologo{XeTeX}}						% XeTeX logotype
-\newcommand\LyX{L\!\raisebox{-.5ex}{Y}\!X}				% LyX logotype
-\newcommand\eng[1]{(eng.~\emph{#1})}					% english translation
-\newcommand\cmd[1]{\texttt{\textbackslash{}#1}}			% LaTeX command
-\newcommand\env[1]{\texttt{#1}}							% LaTeX environment
+\newcommand\pdfLaTeX{\hologo{pdfLaTeX}\xspace}			% pdfLaTeX logotype
+\newcommand\BibTeX{\textsc{Bib}\TeX\xspace}				% BibTeX logotype
+\newcommand\PGFTikZ{PGF/Ti\emph{k}Z\xspace}				% PGF/TikZ logotype
+\newcommand\XeTeX{\hologo{XeTeX}\xspace}				% XeTeX logotype
+\newcommand\LyX{L\!\raisebox{-.5ex}{Y}\!X\xspace}		% LyX logotype
+\newcommand\eng[1]{(eng.~\textenglish{\emph{#1})}}		% english translation
+\newcommand\cmd[1]{\textenglish{\texttt{\textbackslash{}#1}}}% LaTeX command
+\newcommand\env[1]{\textenglish{\texttt{#1}}}			% LaTeX environment
 % Front/back page color and graphics
 \def\frontpagecolor{LimeGreen}
 \newcommand\frontpagegraphic{\begin{tikzpicture}[remember picture,overlay]
@@ -293,6 +304,7 @@
 % * \subsubsubsection needs starred variant to work properly
 % * \cramped typesets a strange bar above (inline?) math
 % * färgerna i bibtex-tabellen sticker ut riktigt mycket - byt ut!
+% * generera omslaget i ett externt dokument!
 
 \begin{document}
 	\pagestyle{empty}
@@ -332,11 +344,17 @@
 		\bigskip\bigskip\bigskip
 		
 		{\makeatletter\@titstyle\makeatother\Large Tack till}\\[1ex]
-		blah\\ % <FIXME>
+		\emph{Phaddergrupp 255},\\
+		som korrekturläst och\\
+		hjälpt till att förbättra boken\\[1ex]
+		{\makeatletter\@titstyle\makeatother\Large och}\\[1ex]
+		\emph{Christian von Schultz},\\
+		\emph{Tobias Oetiker} och \emph{Herbert Voß}\\
+		för inspirerande texter på samma tema.  % <FIXME>
 		\vfill 
 		
 		\small
-		Tryck: XXX\\ % <FIXME>
+		%Tryck: XXX\\ % <FIXME>
 		Göteborg, 2011
 	\end{center}
 	\cleardoublepage 
@@ -492,8 +510,8 @@
 	ibland nödvändiga) funktioner. Dessa paket kommer oftast att beskrivas
 	lite kort, men vill man se fullständig dokumentation för varje paket
 	kan man leta på \emph{the Comprehensive \TeX{} Archive Network}
-	(CTAN)\footnote{\url{http://www.ctan.org/}}. Det lättaste sättet att hitta
-	paket på CTAN är att använda dess
+	(CTAN)\footnote{\url{http://www.ctan.org/}\label{sec:ctan}}.
+	Det lättaste sättet att hitta paket på CTAN är att använda dess
 	sökfunktion\footnote{\url{http://www.ctan.org/search/}}.
 	%% (end)
 	 
@@ -708,11 +726,13 @@
 	Några av paket finns alltid och är mycket viktiga eftersom de berättar för
 	\LaTeX{} hur in- och utdata (ska) formateras:
 	\begin{description}[font=\sffamily]
+		\label{pack:fontenc}
 		\item[fontenc] berättar för \LaTeX{} vilken sorts typsnitt det
 		typsatta dokumentet ska använda; de vanligaste är \texttt{T3} och
 		\texttt{T1} — oftast vill man ha \texttt{T1}, som är vektorbaserad:
 		\latex|\usepackage[T1]{fontenc}|
 		
+		\label{pack:inputenc}
 		\item[inputenc] berättar för \LaTeX{} vilken teckenkodning indatan har
 		skrivits i. \LaTeX{} (som
 		stammar från 80-talet) antar att teckenkodningen är
@@ -1277,7 +1297,7 @@ Mandelbrot-mängden, som\ldots{}
 	\begin{kod}
 		\centering\hspace{0.0075\textwidth}
 		\begin{minipage}{0.75\textwidth} % kod
-				\vfil\inputminted[frame=single,firstline=10,lastline=16]{latex}{ex/2/figure.tex}\vfil
+				\vfil\ifdraft{\inputminted[frame=single,firstline=10,lastline=16]{latex}{ex/2/figure.tex}}{\inputminted[frame=single,firstline=10,lastline=16,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{ex/2/figure.tex}}\vfil
 		\end{minipage}
 		\\ \medskip
 		\begin{minipage}{0.725\textwidth} % figur
@@ -1300,7 +1320,7 @@ Mandelbrot-mängden, som\ldots{}
 	eftersom den omgivningen lägger till extra tomrum både före och efter är
 	det lämpligare att bara använda \cmd{centering}.
 	
-	\subsubsubsection*{Tabeller}% \pack{booktabs}!
+	\subsubsubsection*{Tabeller}\label{pack:booktabs}
 	Tabeller är ett annat vanligt flytande objekt, och är ett alldeles
 	förträffligt verktyg när det gäller presentation av data som till exempel
 	mätserier eller liknande. \LaTeX{} definierar två tabellrelaterade
@@ -1428,7 +1448,7 @@ Mandelbrot-mängden, som\ldots{}
 		\end{tabular}
 	\end{table}
 	
-	\subsubsection{Etiketter och korsreferenser} %% <HERE>
+	\subsubsection{Etiketter och korsreferenser}\label{sec:labels}
 	Eftersom figurer får (och bör får) flyta en bit bort, i vissa fall till 
 	andra sidor måste man kunna referera till dem i texten. Detta görs med så
 	kallade korsreferenser till etiketter. En etikett kan man definiera med
@@ -1563,6 +1583,7 @@ Mandelbrot-mängden, som\ldots{}
 	% fler? <FIXME>
 	
 	\subsubsection{Skarpare typsnitt: \pack{fontenc} och \pack{lmodern}}
+	\label{sec:2:lmodern}
 	Eftersom \LaTeX{} och dess tillhörande typsnitt (Computer Modern) är
 	relativt gamla, och eftersom de designats för att fungera väl med det
 	mycket gamla \textsc{PostScript}-formatet, så uppstår det ibland lite
@@ -2163,12 +2184,13 @@ Mandelbrot-mängden, som\ldots{}
 	samt \cmd{lVert} och \cmd{rVert} som motsvarar dubbla vertikala streck.
 	Man kan således definiera absolutbelopps- och normkommandon i \LaTeX%
 	\footnote{Tack till Lev Bishop för grunden till dessa definitioner 
-	(\url{http://bit.ly/lev-bishop-abs-norm}).}:
+	(\url{http://bit.ly/lev-bishop-abs-norm}).}\footnote{Kommandot
+	\cmd{DeclarePairedDelimiter} definieras av paketet \pack{mathtools}}:
 	\begin{latexcode}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
 	\end{latexcode}
-	% <FIXME> \DeclarePairedDelimiter kräver \pack{mathtools}!
+	\label{cmd:declarepaireddelimiter}
 	Dessa kan sedan enkelt användas i matematikläge:
 	\latex|\norm{x}_1 = \sum_{i=1}^n\abs{x_i}|
 	
@@ -3160,10 +3182,38 @@ Mandelbrot-mängden, som\ldots{}
 	
 	%% VIDARE LÄSNING (fold)
 	\section{Vidare läsning}\label{sec:6}
-	% <FIXME> Bullshit text here
-	
+	Den här introduktionen har förhoppningsvis gett dig en bra \LaTeX-grund
+	som låter dig typsätta både rapporter och artiklar utan problem. Tyvärr
+	kommer du, eftersom \LaTeX är ett så stort system, sannolikt att behöva
+	ytterligare hjälp, tips och resurser allt eftersom du använder \LaTeX 
+	och stöter på problem eller svårigheter.
+
+	Denna del av introduktionen ämnar ge dig några tips på sådana resurser.
+	Delen inleds med några relevanta resurser så som böcker och journaler
+	som behandlar \TeX{} och \LaTeX på en mer eller mindre avancerad nivå,
+	samt några tips när det gäller att få hjälp med specifika problem.
+	Därefter följer några tips gällande stora projekt, som du sannolikt kommer
+	att ha nytta av förr eller senare, speciellt om du studerar på en högskola
+	eller ämnar författa böcker och liknande.
+
+	Därefter följer en lista av viktiga och nyttiga \LaTeX-paket, som man bör
+	åtminstone skumma igenom för att få en hyfsad uppfattning om vilka paket
+	som finns och när man bör använda dem. Avslutningsvis ges även en lista
+	över andra projekt som liknar \LaTeX, till exempel det tidigare nämnda
+	\XeTeX.
+
 	\subsection{Andra resurser}
-	% <FIXME> Bullshit text here
+	Även om denna introduktion siktar på att ge dig allt du behöver för att
+	lära dig \LaTeX{} är det inte säkert att den är tillräcklig. Man kan inte
+	diskutera allt i en kort introduktion, och vill man lära sig mer om den
+	inre strukturen hos \TeX{} eller \LaTeX så finns det redan mycket bra och
+	utförliga resurser tillgängliga.
+	Dessutom kan man i en kort introduktion inte diskutera specifika problem
+	i detalj, eftersom dessa ofta beror på den specifika situationen.
+
+	Nedan följer därför en lista över resurser, i form av böcker, journaler
+	och forum, som kan hjälpa dig släcka din kunskapstörst eller lösa dina
+	\LaTeX-problem.
 	
 	\subsubsection{Böcker och artiklar}
 	Det finns mycket material tillgängligt när det gäller \LaTeX{}. Många
@@ -3252,20 +3302,460 @@ Mandelbrot-mängden, som\ldots{}
 	Många stora namn i \TeX-världen dyker upp där lite då och då, och undrar
 	man något om \LaTeX{} så är det ett utmärkt ställe att fråga.
 	
-	\subsection{Rekommenderade paket} % <HERE>
-	% mathtools? många fler!
-	
 	\subsection{Tips för stora projekt}
+	För stora \LaTeX{}projekt (till exempel kandidatarbeten, examensarbeten
+	och liknande) är det viktigt att kunna ha en ordentlig ordning på sitt
+	dokument. Är det dessutom ett dokument många ska samarbeta med är det
+	ännu viktigare att det är strukturerat.
+	
+	Den första tumregeln, som även bör tillämpas vid mindre projekt, är att
+	man bör lägga varje \LaTeX-dokument (eller projekt) i en egen undermapp.
+	Ännu bättre blir det om man även lägger alla externa filer (figurer,
+	inkluderad programkod och så vidare) i ännu en undermapp. En bra
+	mappstruktur skulle alltså kunna se ut ungefär som i exempel
+	\vref{ex:mapp}.
+	
+	\begin{kod}
+		\begin{textcode}
+.
+`-- FFM233-projekt
+    |-- img
+    |   |-- degradering-1.png
+    |   |-- degradering-2.png
+    |   |-- ...
+    |   |-- triangel-1.png
+    |   `-- triangel-2.png
+    |-- kod
+    |   |-- diffekv.m
+    |   |-- ode.m
+    |   `-- plot.m
+    |-- projekt.tex
+    `-- referenser.bib
+		\end{textcode}
+		\caption{En bra mappstruktur för ett enkelt \LaTeX-projekt.}
+		\label{ex:mapp}
+	\end{kod}
+	
+	Utöver detta kan man se till att försöka abstrahera bort till exempel
+	kommandodefinitioner eller stiländringar till ett eget paket eller en
+	egen dokumentklass, om möjligt. Att göra detta lämnas som en övning åt
+	läsaren, men mer information om hur man gör sådant ges av bland annat
+	\citeasnoun{Flynn06}, \citeasnoun{LaTeX3} och \citeasnoun{Robertson06}.
+	
+	\subsubsection{Versionshantering}
+	För större projekt och projekt som utförs i grupp är det mycket praktiskt
+	att kunna spåra ändringar och ändra dokumentet från många olika platser
+	(gärna samtidigt). Med hjälp av ett versionshanteringssystem så som 
+	Git\footnote{\url{http://git-scm.com/}} eller
+	Subversion\footnote{\url{http://subversion.tigris.org/}} blir detta
+	enkelt. Ännu bättre blir det om man använder ett distribuerat system så
+	som Mercurial\footnote{\url{http://mercurial.selenic.com/}}, hostat helt
+	gratis av något snällt företag, till exempel på
+	Bitbucket\footnote{\url{https://bitbucket.org/}}.
+	
+	Att utförligt förklara hur Mercurial fungerar är utanför den här bokens
+	område, men är man intresserad bör man läsa
+	\emph{Hg Init}\footnote{\url{http://hginit.com/}}, som trots sitt bruk av
+	Comic Sans är en utmärkt resurs för den som vill lära sig Mercurial och
+	versionshantering.
+	
+	\subsubsection{Uppdelning av dokumentet}
+	Stora projekt (med flera kapitel eller stora delar) kan med fördel delas
+	upp på flera filer. Man har då en grundfil (säg, \texttt{projekt.tex}) som
+	refererar till flera olika underfiler (kanske en per kapitel, lämpligen
+	placerade i en undermapp till projektet). Dessa kan man sedan inkludera
+	i grundfilen på ett antal olika sätt, varpå man bara kompilerar
+	
+	Den första metoden för att inkludera underfilerna är \cmd{input}, som i
+	princip lägger in koden från underfilen direkt där kommandot används och
+	fortsätter kompilera som om koden alltid funnits där. Detta är praktiskt
+	om man av någon anledning inte vill använda den andra metoden.
+	
+	Den andra metoden, \cmd{include}, är i princip ekvivalent till \cmd{input}
+	med den skillnaden att en sidbrytning läggs in före och efter den 
+	inkluderade koden. Dessutom kan man med hjälp av kommandot
+	\cmd{includeonly} bestämma \emph{vilka} underfiler som inkluderas, för att
+	till exempel spara tid vid kompileringen om man bara är intresserad av en
+	specifik del.
+	
+	Den tredje och sista metoden är med paketet \pack{subfiles}. Denna är
+	generellt sett att föredra om den är tillgänglig, och fungerar ungefär som
+	metod ett men med undantaget att man även kan kompilera underfilerna
+	var för sig, om man är intresserad av detta. Det kan vara lämpligt att
+	göra om man bara redigerar ett kapitel, och inte vill kompilera hela
+	projektet under tiden. Paketet \pack{subfiles} finns på CTAN men inte i
+	Chalmers datorsystem eller i \TeX{} Live.
+	
+	\subsection{Rekommenderade paket}
+	Eftersom \TeX{} är Turingkomplett kan i princip allt göras med språket,
+	även om det främst är tänkt för typsättning. Således kan det mesta i 
+	typsättningsväg lösas relativt enkelt. Kan det inte det, och problemet
+	man vill lösa är ett relativt vanligt problem, så finns det sannolikt ett
+	paket som löser problemet. Dessa paket finns listade på CTAN (se sida
+	\pageref{sec:ctan}) och kan, om man använder \TeX{} Live, installeras
+	med verktyget \texttt{tlmgr}.
+	
+	Paket i kursiv stil finns inte på Chalmers-datorer utan måste installeras
+	manuellt i hemmappen. Dokumentation för alla paket finns på CTAN och kan
+	även visas genom att skriva \texttt{texdoc \emph{paketnamn}} i terminalen.
+	
+	\subsubsection{Allmänt nyttiga paket}
+	Dessa paket finns i princip alltid och tillhandahåller så grundläggande
+	funktionalitet att man alltid bör använda dem. Det handlar om allt från
+	tecken- och typsnittskodning till avstavning och interna länkar.
+	
+	\begin{description}
+		\item[\pack{babel}]
+		översätter interna strängar (till exempel ”Referenser” och 
+		”Sammanfattning”) till det språk som önskas och gör det möjligt för
+		dessa språk att avstavas ordentligt. Paketet är ett måste då man
+		använder \LaTeX, men har ersatts av \pack{polyglossia} i \XeTeX.
+		
+		\item[\pack{fixltx2e}]
+		korrigerar en del buggar i \LaTeXe-kärnan och gör till 
+		exempel matematikkommandon robusta. Inkludera alltid.
+		
+		\item[\pack{fontenc}]
+		låter användaren välja typsnittskodning. Från början använder \LaTeX{}
+		\texttt{OT1}, som inte innehåller icke-anglikanska tecken så som
+		\emph{å}, \emph{ä} och \emph{ö}. Detta medför problem när det gäller
+		bland annat avstavning, och man bör därför istället använda 
+		\texttt{T1}. Detta diskuteras närmre \vpageref{pack:fontenc}.
+		
+		\item[\pack{hyperref}]
+		gör om innehållsförteckningar, referenser och URIer till riktiga
+		länkar i de fall detta stöds (det vill säga om slutformatet är \PDF).
+		Dessutom skapar den inbyggda innehållsförteckningar som kan användas
+		för att navigera i dokumentet i en del \PDF-läsare (till exempel Skim
+		och Acrobat Reader).
+		Ett oumbärligt paket som alltid bör inkluderas.
+		
+		\item[\pack{inputenc}]
+		är ett paket som låter användaren berätta för \LaTeX{} vilken
+		teckenkodning indatan sparats med. De vanigaste inställningarna är
+		\texttt{utf8} och \texttt{latin1}, men många andra teckenkodningar
+		stöds också.
+		Detta paket introducerades lite kort \vpageref{pack:inputenc}.
+		
+		\item[\pack{lmodern}]
+		inkluderar typsnittet \emph{Latin Modern} för att ersätta
+		\emph{Computer Modern}, standardtypsnittet i \LaTeX. Latin Modern ser
+		i princip likadant ut som Computer Modern, men är skarpare och har
+		fler glyfer. Det här paketet motiveras lite närmre
+		\vpageref{sec:2:lmodern}.
+		
+		\item[\emph{\pack{nag}}]
+		försöker upptäcka saker som är \emph{bad practice}, saker som kanske
+		inte fungerar som man tänkt sig, och liknande. Bör inkluderas med
+		alternativen \texttt{l2tabu} och \texttt{orthodox}:
+		\latex|\usepackage[l2tabu,orthodox]{nag}|
+	\end{description}
+	
+	\subsubsection{Paket för snyggare typsättning}
+	Även om \LaTeX{} är mycket bra på att typsätta så blir det ibland inte
+	så snyggt som man kanske kan önska. Vid dessa tillfällen kan man
+	applicera diverse olika paket för att få hjälp med detta. Det gäller
+	till exempel tabeller, figurtexter, SI-enheter och matematik.
+	
+	\begin{description}
+		\item[\pack{booktabs}]
+		är ett paket som gör det möjligt att skapa mycket snygga tabeller.
+		Paketet diskuteras redan \vpageref{pack:booktabs}, och är i princip
+		ett måste om man ska inkludera tabeller i sitt \LaTeX-dokument.
+	
+		\item[\pack{caption}]
+		gör det möjligt att ändra stilen på figur- och tabelltexter så att de
+		syns tydligare och inte smälter in i texten.
+		
+		\item[\emph{\pack{siunitx}}]
+		gör det enklare att typsätta SI-enheter, decimaltal och vinklar på ett
+		korrekt sätt för icke engelskspråkiga rapporter. Mycket användbart
+		paket som tyvärr inte finns på Chalmers datorer. Förklaras lite kort
+		\vpageref{sec:3:siunitx}.
+	\end{description}
+	
+	\subsubsubsection*{Paket för matematiktypsättning}
+	Som teknisk matematiker (eller fysiker) kommer stora delar av de rapporter
+	man skriver oundvikligen innehålla matematik. Även om \LaTeX{} för sig
+	självt är relativt bra på att typsätta matematik kan det ibland behövas
+	några tillägg för att göra det enklare. Många av dessa tillhandahålls av
+	\AmS{} i det som kallas \AmS\LaTeX, men det finns fler relevanta
+	matematikpaket.
+	
+	\begin{description}
+		\item[\pack{amscd}]
+		ger möjlighet att skapa kommutationsdiagram med \LaTeX:
+		\begin{equation*}
+			\begin{CD}
+				\cov(\mathcal{L}) @>>> \non(\mathcal{K}) @>>> \cf(\mathcal{K}) @>>> \cf(\mathcal{L})\\
+				@VVV @AAA @AAA @VVV\\
+				\add(\mathcal{L}) @>>> \add(\mathcal{K}) @>>> \cov(\mathcal{K}) @>>> \non(\mathcal{L})
+			\end{CD}
+		\end{equation*}
+		
+		\item[\pack{amsmath}]
+		gås igenom av del~\ref{sec:3} och är i princip oumbärligt om man ska
+		typsätta matematik med \LaTeX. Inkludera alltid detta paket om du
+		skriver något som kan tänkas innefatta ekvationer.
+	
+		\item[\pack{amssymb}]
+		definierar en hel del matematiska symboler, till exempel 
+		\cmd{therefore} (\(\therefore\)) och \cmd{ggg} (\(\ggg\)), och 
+		kommandot \cmd{mathbb} som ger krittavletecken (som
+		används för de grundläggande talmängderna).
+		
+		\item[\pack{amsthm}]
+		definierar omgivningar för att typsätta teorem, satser, lemman, bevis
+		och dylikt. Användbart i vissa sammanhang, främst för att typsätta
+		föreläsningsanteckningar eller uppgifter. 
+		
+		\item[\pack{mathtools}]
+		lagar några småfel i \pack{amsmath} och definierar kommandon som till
+		exempel \cmd{DeclarePairedDelimiter}, som introducerades
+		\vpageref{cmd:declarepaireddelimiter}.
+	\end{description}
+	
+	\subsubsection{Paket för grafik}
+	Grafik i form av figurer eller illustrationer är givetvis en viktig del
+	av många rapporter, vare sig det är figurer av uppställningar, plottar
+	eller flödesscheman. Det finns tre relevanta paket när det gäller grafik
+	i \LaTeX; ett som används för att importera grafik från externa filer och
+	två som används för att rita direkt med \LaTeX-kommandon.
+	
+	\begin{description}
+		\item[\pack{graphicx}]
+		förklaras kort i del \vref{sec:4} och gör det möjligt att inkludera
+		figurer från externa filer i sitt \LaTeX-dokument. Mycket användbart
+		om man har data från till exempel MATLAB eller Mathematica.
+		
+		\item[\pack{tikz}]
+		nämns också i del \ref{sec:4} och gör det möjligt att rita
+		vektorbaserade figurer direkt i \LaTeX. Mycket användbart om man
+		vill rita exempelvis uppställningar, enklare illustrationer eller 
+		flödesscheman, men kan användas till otroligt mycket mer. Fungerar
+		endast med \pdfLaTeX{} i \PDF-läge eller moderna varianter som
+		\XeTeX.
+	
+		\item[\pack{pstricks}]
+		är en slags motsvarighet till \pack{tikz} som endast fungerar med de
+		\LaTeX-varianter som genererar \DVI- eller \textsc{PS}-filer. Inte
+		lika användbart som \pack{tikz} eftersom det inte fungerar med 
+		\pdfLaTeX{} i \PDF-läge.
+	\end{description}
+	
+	\subsubsection{Paket för bibliografier}
+	Även om \BibTeX ofta är tillräckligt för att kunna typsätta dokument som
+	ska skickas till journaler eller förläggare (eftersom verktyget
+	inkluderar många vanliga engelskspråkiga bibliografistilar) så är det inte
+	alltid tillräckligt. Till exempel så rekommenderar Chalmers bibliotek
+	en bibliografistil som inte finns med i \BibTeX och som till råga på allt
+	ska vara på svenska. Sådana problem löses enkelt av diverse paket.
+	
+	\begin{description}
+		\item[\emph{\pack{chscite}}]
+		är ett paket som skapats för att implementera de rekommendationer
+		Chalmers Bibliotek publicerat \cite{ChsLib10} i \BibTeX.
+		Rekommenderas absolut för alla sorters rapporter, artiklar och
+		publikationer du kan tänkas producera under din studietid, så länge
+		det inte finns krav på stil från annat håll.
+		
+%		\item[\emph{\pack{harvard}}] % <FIXME>
+	
+%		\item[\pack{natbib}] % <FIXME>
+	\end{description}
+	
+	\subsubsection{Paket som löser problem}
+	Ibland vill man göra något som är väldigt svårt att göra med vanlig
+	\LaTeX-kod, till exempel ändra sidstorlek eller skapa underfigurer. Då
+	många sådana problem är vanligt förekommande finns det ofta paket som
+	löser dem.
+	
+	\begin{description}
+		\item[\pack{float}]
+		definierar ett kommando \cmd{newfloat} som skapar nya sorters flytande
+		objekt (vilka diskuterats \vpageref{sec:floats}).
+		
+		\item[\pack{geometry}]
+		kan användas för att ändra en del mått i \LaTeX (till exempel sidans
+		storlek eller marginalerna) om så önskas. Oftast behöver man inte göra
+		detta, eftersom dokumentklassen har definierat de mått den har av en
+		anledning. Kan vara värdefullt om man vill skapa dokument för A5-%
+		eller A6-papper (eller andra ovanliga storlekar).
+	
+		\item[\pack{multirow}]
+		gör det möjligt att i tabeller skapa celler som spänner över flera
+		rader.
+		
+		\item[\pack{sidecap}]
+		definierar omgivningen \env{SCfigure} som typsätter en figur med
+		figurtexten brevid istället för under eller över figuren. Kan vara
+		användbart om man har smala figurer med lång figurtext.
+		
+		\item[\pack{subfig}]
+		definierar kommandon som möjliggör skapandet av ”underfigurer”, det
+		vill säga grupper av relaterade figurer som alla kan refereras till
+		antingen som grupp (till exempel ”Figur 1”) eller individuellt (till
+		exempel ”Figur 1a”).
+		
+		\item[\pack{varioref}]
+		gör det möjligt att, med hjälp av kommandot \cmd{vref},
+		skapa korsreferenser (se \vpageref{sec:labels})
+		som inte bara refererar till etiketterna med nummer utan även till den
+		sida figuren eller tabellen finns på. Detta görs på ett intelligent
+		sätt, så att referensen blir ”figur X på nästa sida” om figuren är på
+		nästa sida, och så vidare. Mycket relevant paket, speciellt i större
+		rapporter.
+		
+		\item[\pack{wrapfig}]
+		skapar ett nytt flytande objekt \texttt{wrapfig} som placerar figuren
+		till höger eller vänster på sidan och låter övrig text ”flyta” runt
+		figuren.
+	\end{description}
+	
+	\subsubsection{Paket för att ändra utseende}
+	Standardklasserna lämnar ofta en del att önska i termer av utseende. Vill
+	man göra något åt detta kan man använda paket som utformats för att låta
+	dig ändra stilen av vissa element, till exempel rubriker eller sidhuvuden.
+	
+	\begin{description}
+		\item[\pack{fancyhdr}]
+		låter dig förändra sidhuvud och sidfot för att införa snyggare, mer
+		informativa eller tydligare stilar. Till exempel så kan texten i
+		sidhuvudet ändras för att visa sidnummer och kapitel, medan sidfoten
+		ändras för att visa till exempel kontakt- eller copyrightinformation.
+		
+		\item[\pack{titlesec}]
+		gör det möjligt att ändra stilen på rubrikerna i dokumentet, till
+		exempel genom att byta textstil eller sättet rubriken typsätts.
+	
+		\item[\pack{tocloft}]
+		definierar kommandon för att styra utseendet av
+		innehållsförteckningen.
+	\end{description}
+	
+	\subsubsection{Andra specialiserade paket}
+	För en del snäva områden så som kvantfysik eller datavetenskap, finns det
+	specialiserade paket som löser specifika uppgifter. Dessa kan med fördel
+	användas om man skriver rapporter inom området, eller rör vid ämnet i
+	någon inlämningsuppgift.
+	
+	\begin{description}
+		\item[\pack{algorithmic}]
+		är ett paket för typsättning av algoritmer och pseudokod.
+		
+		\item[\emph{\pack{braket}}]
+		definierar kommandon för att handskas med braket-notationen som
+		används inom kvantfysik. Kommandot \cmd{Braket} kan således resultera
+		i följande ekvation:
+		\begin{equation*}
+			\Braket{\phi|\dfrac{\partial^2}{\partial t^2}|\psi}
+		\end{equation*}
+		
+		Paketet definierar även kommandot \cmd{Set}, för att på liknande
+		sätt typsätta mängddefinitioner:
+		\begin{equation*}
+			\Set{x\in\mathbf{R}^2|0<{|x|}<5}
+		\end{equation*}
+		
+		\item[\pack{listings}]
+		kan användas för att inkludera programkod i \LaTeX-dokument. Det finns
+		möjlighet att skriva ut radnummer, lägga till ramar, associera
+		figurtexter och även en mycket enkel syntaxfärgning \eng{syntax
+		highlighting}. Fungerar inte om koden innehåller svenska tecken, även
+		om paketet \emph{\pack{listingsutf8}} försöker lösa detta. Använder 
+		man \XeTeX uppstår inte detta problem.
+		
+		\item[\emph{\pack{minted}}]
+		kan sägas vara en förbättring av \pack{listings} som använder Python-%
+		programmet \emph{Pygments} för att även sätta färg på koden. Ett bra
+		alternativ om man ska inkludera kod och vill ha fullständig
+		syntaxfärgning. Paketet lider dock av samma problem med svenska tecken
+		som \pack{listings}.
+	\end{description}
 	
 	\subsection{Andra \TeX-baserade projekt}
+	\LaTeX{} är inte det enda användbara \TeX-baserade projektet, även om det
+	är det makropaket som används mest i praktiken. Det finns alternativ
+	som baseras på \LaTeX{} men löser problem (till exempel \XeTeX och
+	\hologo{LuaTeX}) men även alternativa makropaket som är mycket olika
+	\LaTeX{} i sin struktur (till exempel \hologo{ConTeXt}). Dessutom finns
+	det projekt för att utveckla \LaTeXe{} och göra vissa saker som till 
+	exempel utveckling av dokumentklasser mycket enklare.
+	
 	\subsubsection{Unicode-baserade \XeTeX}
+	\XeTeX är, precis som \pdfLaTeX, en \TeX-kompilator. Denna kan användas
+	på samma sätt som vanliga \TeX{} och \pdfLaTeX (dvs. den kan köras på i
+	princip samma kod) med hjälp av dess program, \texttt{xelatex}.
+	
+	Skillnaden mellan \pdfLaTeX{} och \XeTeX som gör att man kanske föredrar
+	det senare är relativt stor, sett till de djupa delarna av \TeX: \XeTeX 
+	förutsätter, till skillnad från \pdfLaTeX, att all indata är \UTF och kan
+	därmed läsa \UTF-dokument på ett korrekt sätt. Detta innebär bland annat
+	att saker som inte fungerar i \pdfLaTeX, även med \pack{inputenc}, till
+	exempel svenska tecken i kodlistingar eller inkluderade filer kommer att
+	fungera utmärkt med \XeTeX.
+	
+	Dessutom kan man med hjälp av speciella kommandon välja typsnitt på ett
+	mycket enklare sätt, eftersom \XeTeX stödjer \textsc{OTF}- och
+	\textsc{TTF}-typsnitt, och kan hitta alla typsnitt som är installerade
+	på datorn, inte bara de som finns i form av \LaTeX-paket.
+	
+	En relativt övergripande bild av vad som är nytt i \XeTeX ges av
+	\citeasnoun{Robertson11}; för det mesta kan man förutsätta att \LaTeX-kod
+	kommer att fungera precis likadant i \XeTeX.
+	
 	\subsubsection{Skripta med \hologo{LuaTeX}}
+	\Hologo{LuaTeX} är en kombination av programmeringsspråket Lua och
+	typsättningsspråket \TeX. Introduktionen till \hologo{LuaLaTeX},
+	som är \hologo{LuaTeX}s motsvarighet till vanliga \LaTeX,
+	beskriver systemet som uppföljaren till \pdfLaTeX:
+	\begin{quote}
+		\begin{english}
+			It is the designated successor of pdf\TeX{} and includes all of 
+			its core features: direct generation of \PDF files with support 
+			for advanced \PDF features and micro-typographic enhancements to 
+			\TeX{} typographic algorithms.
+			
+			\hfill\cite{Gonnard10}\hspace{-1ex}%
+		\end{english}
+	\end{quote}
+	
+	I många avseenden är \hologo{LuaTeX} mycket likt \XeTeX; man kan använda
+	konventionella typsnitt med båda motorerna (med paketet \pack{fontspec}), 
+	och de hanterar båda \UTF 
+	mycket bättre än sina företrädare. Skillnaden är att \hologo{LuaTeX}
+	även gör det möjligt att bädda in Lua-kod direkt i dokumentet, vilket gör
+	en del saker mycket enklare eftersom man har tillgång till ett fullgott
+	skriptspråk.
+	
+	\subsubsection{Ett alternativ: \hologo{ConTeXt}}
+	\Hologo{ConTeXt} är ett alternativt makropaket för \TeX{} som utvecklats
+	parallellt med \LaTeX{} men med en annan inriktning. Medan \LaTeX{}
+	försöker isolera användaren från typografiska beslut, vilket gör det
+	lämpligt för att till exempel skicka in artiklar till förlag, så
+	försöker \hologo{ConTeXt} ge användaren en lite mer strukturerad tillgång
+	till de typografiska funktionerna i \TeX.
+	
+	Det finns en del artiklar som jämför \hologo{ConTeXt} och \LaTeX{}
+	\citeaffixed{Hoekwater98}{till exempel}, men kontentan av det hela är att
+	\LaTeX{} är vanligare i akademiska kretsar och bättre på att typsätta
+	matematik, och att man därför oftast bör hålla sig till \LaTeX. Är man
+	trots detta intresserad av \hologo{ConTeXt} bör man referera till
+	\hologo{ConTeXt}-manualen \cite{Hagen01}.
+	
+	%\subsubsection{Framtiden: \LaTeX3}
+	%\cite{Rowley99}
+	
 	%% (end)
 	
 	%% BIBLIOGRAFI/REFERENSLISTA (fold)
-	\let\oldurl=\url\renewcommand\url[1]{\newline{\small\oldurl{#1}}}
-	\bibliography{referenser}
-	\addcontentsline{toc}{section}{\hspace{1.3em}Referenser}
+	\begin{english}
+		\renewcommand\refname{Referenser}
+		\let\oldurl=\url\renewcommand\url[1]{\newline{\small\oldurl{#1}}}
+		\cleardoublepage
+		\addcontentsline{toc}{section}{\hspace{1.3em}Referenser}
+		\bibliography{referenser}
+	\end{english}
 	%% (end)
 	
 	\appendix
