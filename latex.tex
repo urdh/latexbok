@@ -35,6 +35,7 @@
 \usepackage{cprotect}
 \usepackage{bookmark}
 \usepackage{xspace}
+\usepackage{mathtools}
 % Source code line numbers in margin
 \usepackage{srcline}
 % Paket som demonstreras i del 6
@@ -81,7 +82,7 @@
 ]{Hoefler Text}
 \newfontfamily\utffont{Times New Roman}% Change this?
 \newfontfamily\tipafont{DejaVu Serif}
-\setmathrm{Asana Math}
+%\setmathrm{Asana Math}
 %\setmathsf{}
 %\setmathtt{}
 %\setboldmathrm{}
@@ -103,9 +104,9 @@
      }% 
    }% 
 }
-% Force cramped style on inline math (actually smashes instead)
-%\def\(#1\){\relax\ifmmode\@badmath\else$\fi\cramped{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
-\def\(#1\){\relax\ifmmode\@badmath\else$\fi\smash{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
+% Force cramped style on inline math
+\def\(#1\){\relax\ifmmode\@badmath\else$\fi\cramped{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
+%\def\(#1\){\relax\ifmmode\@badmath\else$\fi\smash{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
 % Varioref seems broken with XeLaTeX
 \def\reftextfaceafter{på \reftextvario{motstående}{nästa} sida}%
 \def\reftextfacebefore{på \reftextvario{motstående}{föregående} sida}%
