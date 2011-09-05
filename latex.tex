@@ -48,12 +48,9 @@
 
 %% Draft fixes to minted, tikz (fold)
 \ifdraft{%
-% minted fixes <FIXME> (how do we account for options e.g. border?)
 \renewcommand\mint[3][]{\DefineShortVerb{#3}\fvset{#1}\SaveVerb[aftersave={\UndefineShortVerb{#3}\begin{flushleft}\UseVerb{minted@verb}\end{flushleft}}]{minted@verb}#3}%
 \renewenvironment{minted}[2][]{\VerbatimEnvironment\fvset{#1}\begin{Verbatim}}{\end{Verbatim}}
 \renewcommand\inputminted[3][]{\fvset{#1}\VerbatimInput{#3}}
-% tikz fixes
-% not nessecary at the moment <FIXME>
 % LaTeX source code
 \newminted{latex}{frame=single}%
 \newminted{text}{frame=single}%
@@ -263,7 +260,6 @@
 \renewcommand\thesection{\Roman{section}}
 \titleformat{\section}[block]{\centering\Huge\@titstyle}{\makebox[\textwidth]{\fontsize{36pt}{36pt}\selectfont\centering\thesection}}{0pt}{\newline}[\bigskip]
 % Holy shit, hacking my own class
-% <FIXME> Buggigt utan stjärna på subsubsubsection. Varför?
 \let\c@paragraph\relax\let\c@subparagraph\relax 
 \let\paragraph\relax\let\subparagraph\relax
 \newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
@@ -299,12 +295,6 @@
 \regarding{Nybörjarguide i \LaTeX}
 \date{första upplagan.}
 %% (end)
-
-% <FIXME>
-% * \subsubsubsection needs starred variant to work properly
-% * \cramped typesets a strange bar above (inline?) math
-% * färgerna i bibtex-tabellen sticker ut riktigt mycket - byt ut!
-% * generera omslaget i ett externt dokument!
 
 \begin{document}
 	\pagestyle{empty}
@@ -350,11 +340,11 @@
 		{\makeatletter\@titstyle\makeatother\Large och}\\[1ex]
 		\emph{Christian von Schultz},\\
 		\emph{Tobias Oetiker} och \emph{Herbert Voß}\\
-		för inspirerande texter på samma tema.  % <FIXME>
+		för inspirerande texter på samma tema.
 		\vfill 
 		
 		\small
-		%Tryck: XXX\\ % <FIXME>
+		%Tryck: XXX\\
 		Göteborg, 2011
 	\end{center}
 	\cleardoublepage 
@@ -1057,7 +1047,7 @@ Mandelbrot-mängden, som\ldots{}
 	enkelt inkludera paketet med rätt inställning:
 	\latex|\usepackage[swedish]{babel} % Dokumentet är på svenska|
 	
-	% <FIXME> polyglossia fungerar inte med pdflatex
+	
 	Det andra paketet, \pack{polyglossia}, är en ny och förbättrad variant av
 	\pack{babel}. Det innehåller bland annat kraftigt förbättrade
 	avstavningsregler. Att använda \pack{polyglossia} är nästan lika enkelt
@@ -1578,9 +1568,7 @@ Mandelbrot-mängden, som\ldots{}
 		
 	Enheter ska typsättas med ett (litet) mellanrum mellan tal och
 		enhet. Detta görs enklast med paketet \pack{siunitx}, som förklaras
-		närmre på sida~\pageref{sec:3:siunitx}.
-		
-	% fler? <FIXME>
+		närmre \vpageref{sec:3:siunitx}.
 	
 	\subsubsection{Skarpare typsnitt: \pack{fontenc} och \pack{lmodern}}
 	\label{sec:2:lmodern}
@@ -1611,7 +1599,7 @@ Mandelbrot-mängden, som\ldots{}
 	\latex|\usepackage{lmodern}|
 	
 	\subsection{Andra viktiga delar}
-	% <FIXME> Skriva något här?
+	
 	
 	\subsubsection{Titelsidan}% +abstracts, sammanfattning och båda samtidigt
 	Det kan vara trevligt att i sitt arbete ha en fin titelsida. Även denna
@@ -1744,7 +1732,7 @@ Mandelbrot-mängden, som\ldots{}
 	olika anledningar och på olika sätt. I \LaTeX{} kan figurer infogas
 	\emph{inline} (det vill säga i löpande text) eller i omgivningar (vilket
 	frilägger ekvationen, något som är lämpligt för längre ekvationer eller
-	ekvationer av större vikt). %% <FIXME> utveckla...
+	ekvationer av större vikt).
 	
 	\subsubsection{Ekvationer i löpande text}
 	Ekvationer i löpande text kan infogas på två olika sätt; dels genom att
@@ -1838,8 +1826,6 @@ Mandelbrot-mängden, som\ldots{}
 		bör skrivas in med kommandot \cmd{text}.
 	\end{itemize}
 	
-	% <FIXME> mer, övergång?
-	
 	\subsubsection{Enkla konstruktioner} % \frac, \choose, etc.
 	Det finns ett antal enkla konstruktioner inom matematiken som var man
 	(och kvinna) bör känna till och kunna typsätta. Dessa är konstruktioner
@@ -1858,12 +1844,9 @@ Mandelbrot-mängden, som\ldots{}
 			\(n\)-rot & \verb|\sqrt[n]{x}| & \(\sqrt[n]{x}\) \\
 			Binomialkoefficient & \verb|\binom{n}{k}| & \(\binom{n}{k}\) \\
 			Kvot & \verb|\frac{a}{b}| & \(\frac{a}{b}\) \\
-			%% <FIXME> fler?
 			\bottomrule 
 		\end{tabular}
 	\end{table}
-	
-	%% <FIXME> förklara tab:math:enkla närmre?
 	
 	Ibland kan det även vara önskvärt att markera bitar av ekvationer med små
 	kommentarer ovan och under matematiken. Detta kan göras med kommandona
@@ -1891,8 +1874,6 @@ Mandelbrot-mängden, som\ldots{}
 		\label{ex:overbrace}
 	\end{kod}
 	
-	%% <FIXME> mer?
-	
 	\subsubsection{Funktioner etc.} % sin, lim, sup, etc.
 	Många välanvända eller kända funktioner och operatorer (alltså inte 
 	\(f(x)\) och \(g(x)\) utan trigonometriska funktioner och liknande) har
@@ -1908,8 +1889,6 @@ Mandelbrot-mängden, som\ldots{}
 	oftast satsa på att den finns. Finns den inte så kan man skapa den med
 	hjälp av kommandot \cmd{DeclareMathOperator}:
 	\latex|\DeclareMathOperator{gcd} % Största gemensamma nämnare|
-	
-	%% <FIXME> behöver detta utvecklas?
 	
 	\subsubsection{Symboler}\label{sec:3:symbs}
 	Matematiken innehåller ett stort antal symboler, däribland det grekiska
@@ -2396,7 +2375,7 @@ Mandelbrot-mängden, som\ldots{}
 			\end{minipage}
 		}}
 		\caption{Relaterade ekvationer typsatta med \env{align}, \env{gather}
-		och \env{subequations}.} % <FIXME>
+		och \env{subequations}.}
 		\label{fig:aligngather}
 	\end{figure}
 	
@@ -2745,7 +2724,7 @@ Mandelbrot-mängden, som\ldots{}
 	kan göras.
 	%% (end)
 	
-	\addtocontents{toc}{\newpage} % <FIXME> toc hack for c5paper version
+	\addtocontents{toc}{\newpage} % toc hack for c5paper version
 	%% GRAFIK MED LATEX (fold)
 	\section{Grafik med \LaTeX}\label{sec:4}
 	Många dokument kräver att man inkluderar figurer för att presentera
@@ -3031,7 +3010,7 @@ Mandelbrot-mängden, som\ldots{}
 	format, som sedan kan läggas till direkt i den egna referensdatabasen.
 	Detta är oerhört praktiskt i större projekt, så som kandidatuppsatser.
 	
-	\subsection{\BibTeX{} med \LaTeX{}} % <HERE>
+	\subsection{\BibTeX{} med \LaTeX{}}
 	För att referera till de referenser man har i sin referensdatabas
 	i sitt \LaTeX-dokument krävs ett par olika saker. Först och främst så
 	måste man specificera en bibliografistil och inkludera sin
@@ -3110,10 +3089,6 @@ Mandelbrot-mängden, som\ldots{}
 	någon närliggande stil). Chalmers avviker från detta och rekommenderar att
 	man använder en Chicago-liknande stil~\cite{ChsLib10}.
 	
-	%Notera att man oftast bör använda \pack{harvard}
-	%eller liknande paket om man vill ha en sådan stil, och att man oftast 
-	%inte ska använda \texttt{apalike.bst}.
-	
 	\begin{figure}[tp]
 		\centering
 		\subfloat[\texttt{abbrv.bst}]{\label{fig:bibstyle:abbrv}% (fold)
@@ -3173,6 +3148,7 @@ Mandelbrot-mängden, som\ldots{}
 ...flera rapporter \citeaffixed{Hassanpour08}{t.ex.}...
 	\end{latexcode}
 		
+	\label{sec:chscite}
 	Även Chalmers rekommenderar att man använder en stil baserad på Chicago-%
 	stilen \cite{ChsLib10}, och dessa rekommendationer implementeras av 
 	paketet \pack{chscite} som bygger på \pack{harvard} och därför fungerar
@@ -3557,11 +3533,8 @@ Mandelbrot-mängden, som\ldots{}
 		Chalmers Bibliotek publicerat \cite{ChsLib10} i \BibTeX.
 		Rekommenderas absolut för alla sorters rapporter, artiklar och
 		publikationer du kan tänkas producera under din studietid, så länge
-		det inte finns krav på stil från annat håll.
-		
-%		\item[\emph{\pack{harvard}}] % <FIXME>
-	
-%		\item[\pack{natbib}] % <FIXME>
+		det inte finns krav på stil från annat håll. Diskuteras även
+		\vpageref{sec:chscite}.
 	\end{description}
 	
 	\subsubsection{Paket som löser problem}
