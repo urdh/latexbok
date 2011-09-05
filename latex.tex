@@ -374,8 +374,8 @@
 	illusionen att ett estetiskt tilltalande dokument även är ett bra dokument
 	rent typografiskt. Så är givetvis inte fallet.
 	
-	För att få snygga dokument måste man återskapa den gamla ordningen då
-	varje uppgift löstes av någon som var bra på det. En författare ska inte
+	För att få snygga dokument måste man återskapa den gamla ordningen där
+	varje uppgift löses av någon som är bra på det. En författare ska inte
 	behöva berätta \emph{hur} saker ska se ut — det ska designern göra —
 	författaren ska bara berätta \emph{vad} saker är\footnote{Detta är inte
 	helt olikt den uppdelning som görs mellan HTML och CSS.}. \LaTeX{} låter
@@ -384,7 +384,7 @@
 	\subsection*{Vad är \LaTeX{}?}
 	\addcontentsline{toc}{subsection}{Vad är \LaTeX{}?}
 	\LaTeX{} (uttalas \textipa{\tipafont[\textprimstress lA:tEx]}) är i princip en
-	påbyggnad till \TeX{}, ett typsättningssystem. Man kan även se det som att
+	påbyggnad till \TeX{}, ett typsättningssystem. Man kan se det som att
 	\LaTeX{} är designern, och \TeX{} är typsättaren. \LaTeX{} berättar i
 	någon mening för \TeX{} hur den tror att du vill ha ditt dokument (utifrån
 	dokumentklassen samt den kod du skriver) och låter sedan \TeX{} typsätta
@@ -392,7 +392,7 @@
 	
 	Men \LaTeX{} är inte bara ett typsättningssystem; både språket dokumenten
 	skrivs i och den kompilator som omvandlar dokumenten till \DVI-filer
-	kallas också \LaTeX{} (men just kompilatorn brukar benämnas \cli{latex},
+	kallas \LaTeX{} (men just kompilatorn brukar benämnas \cli{latex},
 	eftersom det är så den körs från terminalen). Det finns även modernare
 	versioner av \LaTeX{}-kompilatorn, till exempel \pdfLaTeX{} som skapar
 	\PDF-dokument
@@ -402,7 +402,7 @@
 	
 	\subsection*{Varför \LaTeX?}
 	\addcontentsline{toc}{subsection}{Varför \LaTeX{}?}
-	Fördelen med \LaTeX{} är då att författaren endast behöver lära sig några
+	Fördelen med \LaTeX{} är att författaren endast behöver lära sig några
 	enkla kommandon — sådana som gör texten kursiv eller infogar en figur
 	— men att dokumentet ändå håller mycket hög standard, precis som om
 	det typsatts av en riktig typsättare.
@@ -449,7 +449,7 @@
 		\item[{Del \ref{sec:3}, \hyperref[sec:3]{Matematik med \LaTeX{} och 
 		\AmS}}]
 		beskriver hur man på bästa sätt använder \LaTeX{} tillsammans med
-		\AmS-paketen för att typsätta det \LaTeX{} typsätter bäst; matematik,
+		\AmS-paketen för att typsätta det \LaTeX{} typsätter bäst, matematik,
 		och går även kort in på hur man typsätter en del fysik med paketet
 		\pack{siunitx}.
 		
@@ -461,7 +461,7 @@
 		
 		\item[{Del \ref{sec:5}, \hyperref[sec:5]{Referenser med \BibTeX}}]
 		beskriver hur du använder \BibTeX{} för att hålla koll på och använda
-		referenser i \LaTeX. Beskriver i korthet paketet \pack{chscite} som
+		referenser i \LaTeX, och beskriver även i korthet paketet \pack{chscite} som
 		hjälper dig att typsätta referenser på det sätt Chalmers bibliotek
 		rekommenderar. Efter denna delen bör du kunna skriva långa arbeten
 		(till exempel kandidatrapporter) i \LaTeX.
@@ -486,7 +486,7 @@
 	att vara nyfiken!
 	
 	\LaTeX{} finns till många plattformar, och finns installerat på Chalmers
-	Linuxdatorer. Vill du installera \LaTeX{} på din egen dator finns det
+	Linux\-da\-to\-rer. Vill du installera \LaTeX{} på din egen dator finns det
 	sannolikt i din pakethanterare (om du använder Linux), alternativt i form
 	av \TeX{} Live\footnote{\url{http://www.tug.org/texlive/}}. Använder du
 	Mac OS~X finns det istället
@@ -540,9 +540,9 @@
 	och läsa, även om man inte är en särskilt bevandrad \TeX{}niker.
 	
 	\subsubsection{Specialtecken}
-	Vissa tecken är speciella för \LaTeX{}. Dessa används i \LaTeX{} och dess
-	kommandon, och om man använder dem direkt i sin text så kan vad som helst
-	hända. Vanligtvis slutar det bara med att tecknet inte syns, men det kan
+	Vissa tecken är speciella för \LaTeX{}. Dessa används internt av \LaTeX{} 
+	för att representera speciella konstruktioner, och kan inte användas hur som helst i ett \LaTeX-dokument. Gör man det ändå
+	slutar det vanligtvis bara med att tecknet inte syns, men det kan
 	potentiellt göra att ditt dokument inte ens kompilerar. Specialtecknen
 	är inte särskilt många:
 	\latex|# ^ & _ { } ~ \ % $|
@@ -554,13 +554,13 @@
 	radbrytning — vill man ha ett \cmd{} använder man istället
 	\cmd{textbackslash}).
 	När det gäller \verb|^| och \verb|~| måste man
-	dessutom lägga till måsvingar efteråt, eftersom dessa kan användas för att
+	dessutom lägga till måsvingar efteråt, eftersom dessa tecken normalt används för att
 	modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
 	\latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
 	
 	\subsubsection{\LaTeX-kommandon}
-	För att säga åt \LaTeX{} vad som ska göras används kommandon. De flesta
-	kommandona i \LaTeX{} följer några enkla regler:
+	För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
+	kommandon följer några enkla regler:
 	\begin{itemize}
 		\item De börjar med ett bakvänd snedstreck (\cmd{}) och följs av sitt
 		namn, som bara får innehålla bokstäver%
@@ -585,7 +585,7 @@
 	
 	Vissa kommandon kräver en obligatorisk och/eller frivillig parameter som
 	på ett eller annat sätt bestämmer hur kommandot beter sig. Den generella
-	strukturen hos ett kommando, med dessa parametrar, är relativt enkel:
+	strukturen hos ett kommando med sådana parametrar är relativt enkel:
 	\latex|\kommando[frivillig parameter]{obligatorisk parameter}|
 	
 	Finns det ingen obligatorisk parameter, eller om den frivilliga parametern
@@ -594,7 +594,7 @@
 	
 	\subsubsection{Kommentarer}
 	Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
-	ignorera) vissa bitar av till dokument. Det kan vara för att förklara
+	ignorera) vissa bitar av dokumentet. Det kan vara för att förklara
 	olika kommandon eller definitioner, eller för att ta bort ett stycke man
 	inte är helt säker på. Detta görs med procenttecknet; när \LaTeX{} stöter
 	på ett sådant (såvida det inte sitter ett \cmd{} före) så ignorerar den
@@ -604,21 +604,21 @@
 	\subsubsection{Grundläggande struktur}
 	När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
 	kommenterar delar av dina filer är det dags att förklara lite närmre hur
-	en typisk \LaTeX{}-fil ser ut. Kompilatorn förväntar sig en viss struktur,
+	en typisk \LaTeX{}-fil ser ut. Kompilatorn förväntar sig en viss struktur;
 	till exempel så måste varje dokument inledas med kommandot
 	\latex|\documentclass{...}|
 	som berättar för \LaTeX{} vilken dokumentstil du vill använda (det finns
 	ett antal olika, för till exempel rapporter, böcker eller brev).
 	
-	Därefter bör man köra de kommandon som påverkar hela dokumentet, till
-	exempel så kan man ladda in extra paket eller definiera nya kommandon.
+	Därefter bör man köra kommandon som påverkar hela dokumentet, till
+	exempel genom att ladda in extra paket eller definiera nya kommandon.
 	Paket laddar man in med kommandot \cmd{usepackage}:
 	\latex|\usepackage{...}|
 	
-	Båda dessa kommandon tar en obligatorisk parameter (namnet på 
+	Både \cmd{documentclass} och \cmd{usepackage} tar en obligatorisk parameter (namnet på 
 	stilen/paketet) och en frivillig parameter som används för att skicka
 	inställningar till stilen eller paketet som laddas in — en närmare
-	förklaring av båda dessa kommandon finns \vpageref{sec:1:layout}.
+	förklaring av båda dessa kommandon kommer senare.
 	
 	När allt förarbete är gjort kan man inleda dokumentet. Först berättar man
 	för \LaTeX{} att innehållet börjar med hjälp av kommandot
@@ -626,14 +626,17 @@
 	och därefter följer dokumentets innehåll. När allt innehåll är slut
 	avslutar man dokumentet med det snarlika kommandot
 	\latex|\end{document}|
-	som säger åt \LaTeX{} att det inte finns något mer som ska typsättas.
+	som säger åt \LaTeX{} att det inte finns något mer som ska typsättas. Vad
+	man egentligen gör här är att skapa en omgivning med namnet 
+	\texttt{document}, som betecknar att detta är
+	dokumentets innehåll. Omgivningar förklaras utförligt \vpageref{sec:omg}.
 	
 	\subsection{Dokumentets layout}\label{sec:1:layout}
 	\LaTeX{} är inte helt oflexibelt, och man kan med hjälp av olika kommandon
-	i inledningen till dokumentet ändra både utseendet och beteendet av
-	dokumentet. Utseendet ändrar man med så kallade dokumentklasser (varje
-	dokument måste specificera exakt en sådan), och extra funktionalitet
-	lägger man till i form av så kallade paket.
+	i inledningen till dokumentet ändra både utseendet och beteendet hos
+	detsamma. Utseendet ändrar man med så kallade dokumentklasser (varje
+	dokument måste specificera exakt en sådan), medan extra funktionalitet
+	läggs till i form av så kallade paket.
 	
 	\subsubsection{Dokumentklasser}
 	Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
@@ -647,7 +650,7 @@
 	kontakt med relativt ofta:
 	\begin{description}[font=\sffamily]
 		\item[article] är en klass för artiklar till tidsskrifter, korta
-		rapporter, dokumentation, och annat som inte har någon specifik
+		rapporter, dokumentation, och annat som inte har någon annan, specifik
 		klass. Om du inte vet vilken klass du vill ha, börja med 
 		\pack{article}.
 		
@@ -698,7 +701,7 @@
 	När du skriver ett dokument kommer du troligtvis att märka att vissa saker
 	är svåra eller ointuitiva (kanske rent av omöjliga\footnote{Tekniskt sett
 	är de inte omöjliga, eftersom \TeX{} är Turingkomplett. Nästan alla paket
-	är implementerade med \LaTeX-kod}) att göra med grundläggande \LaTeX-kod.
+	är implementerade med \LaTeX-kod.}) att göra med grundläggande \LaTeX-kod.
 	Lyckligvis finns det då nästan alltid ett paket på CTAN som förenklar
 	det du vill göra. Installerade paket kan inkluderas med kommandot
 	\cmd{usepackage}:
@@ -714,12 +717,12 @@
 	\cli{texdoc}, men ibland kan det vara lättare att leta upp motsvarande
 	paket på CTAN och kolla på dokumentationen där istället.
 	
-	Några av paket finns alltid och är mycket viktiga eftersom de berättar för
+	Några paket finns alltid och är mycket viktiga eftersom de berättar för
 	\LaTeX{} hur in- och utdata (ska) formateras:
 	\begin{description}[font=\sffamily]
 		\label{pack:fontenc}
 		\item[fontenc] berättar för \LaTeX{} vilken sorts typsnitt det
-		typsatta dokumentet ska använda; de vanligaste är \texttt{T3} och
+		typsatta dokumentet ska använda; de vanligaste är \texttt{T3}, \texttt{OT1} och
 		\texttt{T1} — oftast vill man ha \texttt{T1}, som är vektorbaserad:
 		\latex|\usepackage[T1]{fontenc}|
 		
@@ -737,20 +740,20 @@
 	För att skapa ett typsatt \PDF-dokument utifrån en \LaTeX-fil måste man
 	köra den genom den så kallade kompilatorn. \LaTeX{} kommer inte med något
 	fint GUI med behändiga knappar att trycka på\footnote{Även om det finns
-	sådana verktyg, till exempel \LyX{} och \TeX{}nicCenter}; man måste
+	sådana verktyg, till exempel \LyX{} och \TeX{}nicCenter.}; man måste
 	istället köra kompilatorn från terminalen.
 	
 	Normalt måste man köra kompilatorn åtminstone två gånger, så att \LaTeX{}
 	får en chans att förbättra och korrigera småsaker som referenser,
 	innehållsförteckningar med mera\footnote{Detta är en konsekvens av hur
-	\TeX{} fungerar; den läser filen bit för bit och expanderar kommandon —
+	\TeX{} fungerar; kompilatorn läser filen bit för bit och expanderar kommandon —
 	det går inte att röra sig ”bakåt” i filen, så vill man ändra på något
 	man redan gått förbi måste man spara information om detta i en extern fil
 	som man läser in under nästa körning.}.
 	Kompilatorn brukar varna om detta och
 	be om ännu en körning. Använder man vissa externa verktyg som \BibTeX{}
 	måste man även köra detta program; arbetsflödet blir då 
-	\LaTeX{\utffont →}\BibTeX{\utffont →}\LaTeX{\utffont →}\LaTeX.
+	\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\BibTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX.
 	
 	\subsubsection{Kompilatorn: \pdfLaTeX}
 	Det finns ett antal olika kompilatorer att tillgå (den vanligaste heter
@@ -1135,7 +1138,7 @@ Mandelbrot-mängden, som\ldots{}
 	grupperar sådana företeelser och gör det tydligt hur textens struktur
 	verkligen är. Denna konstruktion kan på svenska kallas för en omgivning.
 	
-	\subsubsection{Omgivningar \eng{environments}}
+	\subsubsection{Omgivningar \eng{environments}}\label{sec:omg}
 	Omgivningar i \LaTeX{} definieras utifrån två kommandon; \cmd{begin} och
 	\cmd{end}. De kan nästlas, på det sättet att en omgivning kan innehålla
 	en annan, men kan inte överlappa (varje omgivning måste avslutas innan
