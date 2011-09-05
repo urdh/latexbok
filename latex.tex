@@ -57,7 +57,7 @@
 \newminted{text}{frame=single}%
 \newmint{latex}{frame=single}%
 % Line numbers in margin
-%\lnoson% % Disable when not spellchecking/proofreading
+\lnoson% % Disable when not spellchecking/proofreading
 }{%
 % LaTeX source code
 \newminted{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
@@ -1036,7 +1036,7 @@ Mandelbrot-mängden, som\ldots{}
 	\subsubsection{Avstavning}
 	Avstavning sköts automatiskt av \LaTeX{}, förutsatt att det finns
 	avstavningsdata för det språk man använder. Denna kan man ladda in med
-	hjälp av två olika paket, \pack{babel} och \pack{polyglossia}.
+	hjälp av paketet \pack{babel}.
 	
 	Det första, \pack{babel}, är ett relativt gammalt paket som följer med i
 	princip alla \LaTeX-installationer. Paketet innehåller avstavningsregler
@@ -1047,16 +1047,6 @@ Mandelbrot-mängden, som\ldots{}
 	för dokument med mer än ett språk, men oftast räcker det med att helt
 	enkelt inkludera paketet med rätt inställning:
 	\latex|\usepackage[swedish]{babel} % Dokumentet är på svenska|
-	
-	
-	Det andra paketet, \pack{polyglossia}, är en ny och förbättrad variant av
-	\pack{babel}. Det innehåller bland annat kraftigt förbättrade
-	avstavningsregler. Att använda \pack{polyglossia} är nästan lika enkelt
-	som att använda \pack{babel}:
-	\begin{latexcode}
-\usepackage{polyglossia}
-\setmainlanguage{swedish} % Dokumentet är på svenska
-	\end{latexcode}
 	
 	Inga avstavningspaket är dock kompletta, och skriver man tekniska 
 	rapporter är risken stor att något ord inte finns med eller avstavas på
@@ -1633,17 +1623,8 @@ Mandelbrot-mängden, som\ldots{}
 	för båda språken (notera att det sista språket i listan är aktivt från
 	dokumentets start):
 	\latex|\usepackage[english,swedish]{babel}|
-	Använder man \pack{polyglossia} är förfarandet snarlikt:
-	\begin{latexcode}
-\usepackage{polyglossia}
-\setmainlanguage{swedish}
-\setotherlanguage{english}
-	\end{latexcode}
 	
- 	Därefter byter man helt enkelt språk när man vill ha sitt \emph{abstract}%
-	\footnote{Lyckligtvis är \pack{polyglossia} delvis bakåtkompatibelt med
-	\pack{babel}, så kodstycket för att byta språk fungerar med båda dessa
-	paket.}:
+ 	Därefter byter man helt enkelt språk när man vill ha sitt \emph{abstract}:
 	\begin{latexcode}
 \begin{otherlanguage}{english}
     \begin{abstract}
