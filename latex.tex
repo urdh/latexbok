@@ -867,11 +867,13 @@
 	%% TYPSÄTTNING MED LATEX (fold)
 	\section{Typsättning med \LaTeX}\label{sec:2}
 	När du nu vet hur den grundläggande strukturen i ett \LaTeX-dokument ser
-	ut är det dags att börja typsätta riktiga dokument. Det är dock något som
-	tål att tänkas på; den här delen kommer därför inte bara gå igenom vanliga
-	\LaTeX-konstruktioner och kommandon, utan kommer även att inleda med en
+	ut är det dags att börja typsätta riktiga dokument. Att typsätta dokument
+	är dock något som
+	tål att tänkas på — den här delen kommer därför inte bara gå igenom
+	vanliga \LaTeX-konstruktioner och kommandon, utan även att inleda med en
 	kort diskussion gällande struktur och språk. Efter den här delen bör du
-	med andra ord inte ha några problem med att producera riktiga dokument.
+	med andra ord inte ha några problem med att producera riktiga dokument,
+	varken \LaTeX- eller strukturmässigt.
 	
 	\subsection{Text- och språkstruktur}
 	Struktur är mycket viktigt för att läsaren ska kunna ta del av de idéer
@@ -881,15 +883,16 @@
 	
 	\LaTeX{} skiljer sig från andra typsättningssystem (och ordbehandlare) på
 	det sättet att du endast behöver berätta för \LaTeX{} vilken logisk och
-	semantisk struktur din text har. Dessutom så främjar den en god struktur
+	semantisk struktur din text har. Dessutom så främjar det en god struktur
 	genom det sätt språket är uppbyggt. När man berättat för \LaTeX{} vilken
-	struktur texten har tolkar kompilatorn denna förklaringar efter
+	struktur texten har tolkar kompilatorn dessa förklaringar efter
 	förbestämda regler (givna av dokumentklassen och de paket som används) och
-	skapar den typografiska strukturen utifrån dessa.
+	skapar den typografiska strukturen utifrån dessa. Du får alltså vara
+	författaren, och \LaTeX{} tar rollen som typsättare.
 	
 	\subsubsection{Textstycket}
-	Den mest grundläggande modulen i \LaTeX{} (och både typografi och 
-	författande) är stycket. Vi kallar det ”modul” eftersom ett stycke är
+	Den mest grundläggande byggstenen i \LaTeX{} (och både typografi och 
+	författande) är stycket. Vi kallar det ”byggsten” eftersom ett stycke är
 	en typografisk enhet som ska förmedla en tanke eller en idé. Om en ny
 	tanke påbörjas ska alltså även ett nytt stycke påbörjas, och om så inte är
 	fallet ska endast radbrytningar användas\footnote{Notera dock att det
@@ -907,8 +910,7 @@
 	texten. Ta
 	en snabb titt på exempel~\vref{ex:stycken} och försök lista ut varför
 	tomma rader (det vill säga ett nytt stycke) används i vissa tillfällen 
-	men inte
-	andra.
+	men inte andra — det är en subtil men mycket viktig skillnad.
 	
 	\begin{kod}[tbp]
 		\begin{latexcode}
@@ -949,13 +951,14 @@ Mandelbrot-mängden, som\ldots{}
 	Nästa enhet i sammanhanget är en mening. I engelska texter används ett
 	extra stort mellanrum i slutet av varje mening; detta gör vi inte i
 	svenskan\footnote{Det finns ganska många saker \LaTeX{} gör som inte bör
-	göras i svensk typografi; det mesta kommer att tas upp senare i den här 
+	göras i svensk typografi — det mesta kommer att tas upp senare i den här 
 	delen.} och eftersom \LaTeX{} försöker lista ut var den ska lägga in
 	större mellanrum måste man berätta för \LaTeX{} att den ska låta bli,
+	vilket görs
 	med hjälp av kommandot \cmd{frenchspacing}. Skriver man på engelska ska
 	man alltså utelämna detta kommando, och \LaTeX{} kommer att efter bästa
-	förmåga gissa var dina meningar tar slut. Gör den fel får man ersätta
-	det mellanslag den förlänger med ett fast mellaslag (\verb|~|).
+	förmåga gissa var dina meningar tar slut. Gör kompilatorn fel får man 
+	ersätta det mellanslag den förlänger med ett fast mellaslag (\verb|~|).
 	
 	\subsubsection{Rubriker}
 	Det andra strukturelementet man måste tänka på\footnote{Undantaget
@@ -1003,8 +1006,9 @@ Mandelbrot-mängden, som\ldots{}
 	\subsubsection{Rad- och sidbrytningar}
 	Med \LaTeX{} behöver man i princip aldrig bry sig om att rad- eller
 	sidbryta eftersom detta görs automatiskt. Vid vissa tillfällen kan det
-	dock vara önskvärt att göra detta manuellt ändå; framför allt kan det vara
-	intressant att lägga in manuella sidbrytningar. Tabell~\vref{tab:newpage}
+	dock vara önskvärt att göra det manuellt ändå; framför allt kan det vara
+	intressant att lägga in manuella sidbrytningar för att undvika änkor, 
+	horungar eller störande avbrott i textflödet. Tabell~\vref{tab:newpage}
 	listar några av de kommandon som kan användas för att åstadkomma
 	sidbrytningar.
 	
@@ -1044,21 +1048,21 @@ Mandelbrot-mängden, som\ldots{}
 	avstavningsdata för det språk man använder. Denna kan man ladda in med
 	hjälp av paketet \pack{babel}.
 	
-	Det första, \pack{babel}, är ett relativt gammalt paket som följer med i
-	princip alla \LaTeX-installationer. Paketet innehåller avstavningsregler
+	Paketet \pack{babel} följer med i princip alla \LaTeX-installationer. 
+	Det innehåller avstavningsregler
 	och översättningar till inbyggda kommandon (rubriker till
 	innehållsförteckning, referenslista och så vidare) för ett stort antal
 	språk, däribland svenska och engelska. Det är enkelt att använda
 	\pack{babel} (paketet förklaras närmre i del~\ref{sec:6}), till och med
-	för dokument med mer än ett språk, men oftast räcker det med att helt
+	för dokument flera olika språk, och oftast räcker det med att helt
 	enkelt inkludera paketet med rätt inställning:
 	\latex|\usepackage[swedish]{babel} % Dokumentet är på svenska|
 	
 	Inga avstavningspaket är dock kompletta, och skriver man tekniska 
 	rapporter är risken stor att något ord inte finns med eller avstavas på
-	fel sätt. Man kan då berätta för \LaTeX{} hur man vill att ordet
-	avstavas med hjälp av kommandot \cmd{hyphenate}. Kommandots argument ska
-	vara en lista av ord (separerade med mellanslag) som har bindestreck
+	fel sätt. Man kan då berätta för \LaTeX{} hur man vill att ordet ska
+	avstavas med hjälp av kommandot \cmd{hyphenate}. Kommandots argument är
+	en lista av ord (separerade med mellanslag) som har bindestreck
 	placerade där \LaTeX{} får bryta ordet. Sålunda kan raden
 	\latex|\hyphenate{FORTRAN span-ku-le-ra}|
 	användas för att berätta för \LaTeX{} att ordet ”\textsc{FORTRAN}” inte 
@@ -1071,16 +1075,15 @@ Mandelbrot-mängden, som\ldots{}
 	flesta fall gör just detta; kursiverar texten. Det finns dock andra
 	tillfällen då man använder kursiv text, och det är givetvis dumt att i
 	sådana stycken kursivera för att betona text; i sådana fall använder
-	\LaTeX{} därför helt vanlig, upprätt text.
+	\LaTeX{} därför helt vanlig, upprätt text (för nästan alla 
+	dokumentklasser, i alla fall).
 	
-	Tabell~\vref{tab:betoning}, utöver kommandot \cmd{emph} som används för
-	betoning, ett antal andra textförändrande kommandon som kan vara bra att
+	Tabell~\vref{tab:betoning} visar utöver kommandot \cmd{emph} som används 
+	för betoning ett antal andra textförändrande kommandon som kan vara bra 
+	att
 	känna till. Exempelvis så finns \cmd{textsc}, som typsätter texten med
 	kapitäler (”små versaler”), och \cmd{textsf} som typsätter med ett
-	sans-serif-typsnitt istället för det vanliga serif-typsnittet\footnote{Av
-	tradition typsätts till exempel paketnamn i \LaTeX-dokumentation med
-	sans-serif-typsnitt.}.
-	
+	sans-serif-typsnitt istället för det vanliga serif-typsnittet.	
 	\begin{table}[tbp]\begin{minipage}{\textwidth}
 		\centering
 		\caption[]{Viktiga \LaTeX-kommandon för att ändra textstil.}
@@ -1137,32 +1140,33 @@ Mandelbrot-mängden, som\ldots{}
 	vissa kemiska formler, citat och algoritmer, för att nämna några
 	ytterligare exempel.} har i sin \LaTeX-representation en sak gemensamt;
 	de kräver mer än enkla kommandon för att kunna uttryckas på ett enkelt
-	sätt. Istället har man i \LaTeX{} valt att införa en konstruktion som
+	sätt. Därför har man i \LaTeX{} valt att införa en konstruktion som
 	grupperar sådana företeelser och gör det tydligt hur textens struktur
-	verkligen är. Denna konstruktion kan på svenska kallas för en omgivning.
+	verkligen ser ut — denna konstruktion kan på svenska kallas för en 
+	omgivning.
 	
 	\subsubsection{Omgivningar \eng{environments}}\label{sec:omg}
 	Omgivningar i \LaTeX{} definieras utifrån två kommandon; \cmd{begin} och
-	\cmd{end}. De kan nästlas, på det sättet att en omgivning kan innehålla
-	en annan, men kan inte överlappa (varje omgivning måste avslutas innan
-	dess ”förälder” avslutas), vilket gör att de ger en tydlig trädliknande
+	\cmd{end}. De kan nästlas (på det sättet att en omgivning kan innehålla
+	en annan) men kan inte överlappa — varje omgivning måste avslutas innan
+	dess ”förälder” avslutas, vilket gör att de ger en tydlig trädliknande
 	struktur. En omgivning (här \texttt{verbatim}) kan alltså skrivas
 	\begin{latexcode}
 \begin{verbatim}
     Det här är omgivningens innehåll
 \end{verbatim}
 	\end{latexcode}
-	där omgivningens innehåll med fördel kan indenteras för att göra
+	där omgivningens innehåll (oftast) med fördel kan indenteras för att göra
 	strukturen tydlig.
 	
-	Det finns som sagt många omgivningar, och de fyller alla olika syften. De
+	Det finns många omgivningar, och de fyller alla olika syften. De
 	viktigaste bildar listor, figurer, tabeller och ekvationer, men en
 	omgivning kan i princip göra vad som helst.
 	
 	\subsubsection{Tre sorters listor}
 	De första omgivningarna vi ska bekanta oss med är de som skapar listor.
-	I \LaTeX{} finns det tre användbara sorters listor (som alla går att
-	nästla i varandra utan problem) som löser tre distinkta problem:
+	I \LaTeX{} finns det tre användbara sorters listor, som alla går att
+	nästla i varandra utan problem och som löser tre distinkta problem:
 	numrerade listor (\texttt{enumerate}), onumrerade listor 
 	(\texttt{itemize}) och beskrivningslistor (\texttt{description}). Dessa
 	används tillsammans med kommandot \cmd{item} för att bygga enkla listor
@@ -1245,7 +1249,7 @@ Mandelbrot-mängden, som\ldots{}
 	ett effektiv sätt. De är också mycket speciella objekt rent typografiskt,
 	eftersom de till skillnad från vanliga textstycken inte kan brytas över
 	sidor hur som helst. För att placera figurer och tabeller på ett
-	tillfredsställande sätt använder \LaTeX{} sig av få kallade \emph{floats},
+	tillfredsställande sätt använder \LaTeX{} sig av så kallade \emph{floats},
 	vilket innebär att objektet får ”flyta iväg” en bit ifrån det ställe där
 	det från början definieras. Detta undviker fula halvtomma sidor och andra
 	obehagliga resultat.
@@ -1272,14 +1276,14 @@ Mandelbrot-mängden, som\ldots{}
 	
 	Flytande objekt kan även ha figurtexter, som definieras med kommandot
 	\cmd{caption}. En figurtext ska komplettera figuren och förklara vad som
-	visas; inte varför det visas. Slutsatser och liknande dras istället i
+	visas, inte varför det visas. Slutsatser och liknande dras istället i
 	brödtexten som refererar till figuren. Figurer har sin figurtext undertill
 	medan tabeller har figurtexten ovanför tabellen.
 	
 	\subsubsubsection*{Figurer}
 	Figurer är den kanske vanligaste typen av flytande objekt, och dessa
 	(grafer, illustrationer, diagram och så vidare) infogas i omgivningen
-	\texttt{figure}, vilket visas i exempel~\vref{ex:figure}.
+	\texttt{figure}, vilken visas i exempel~\vref{ex:figure}.
 	
 	\begin{kod}
 		\centering\hspace{0.0075\textwidth}
@@ -1342,8 +1346,8 @@ Mandelbrot-mängden, som\ldots{}
 	\(\gamma\) & \(0,577\) & Skillnaden mellan den
 	 harmoniska summan från \(1\) till \(n\) och den
 	 naturliga logaritmen av \(n\) då \(n\to\infty\).\\
-	\(e\) & \(2,718\) & Den konstant med egenskapen
-	att \((e^x)' = e^x\). \\
+	\(e\) & \(2,718\) & Den konstant som har
+	egenskapen att \((e^x)' = e^x\). \\
 	\(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
 	 omkrets och dess diameter. Mycket viktig
 	 konstant i många sammanhang; dyker upp
@@ -1362,8 +1366,8 @@ Mandelbrot-mängden, som\ldots{}
 				\(\gamma\) & \(0,577\) & Skillnaden mellan den
 				 harmoniska summan från \(1\) till \(n\) och den
 				 naturliga logaritmen av \(n\) då \(n\to\infty\).\\
-				\(e\) & \(2,718\) & Den konstant med egenskapen
-				att \((e^x)' = e^x\). \\
+				\(e\) & \(2,718\) & Den konstant som har
+				egenskapen att \((e^x)' = e^x\). \\
 				\(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
 				 omkrets och dess diameter. Mycket viktig
 				 konstant i många sammanhang; dyker upp
@@ -1388,7 +1392,7 @@ Mandelbrot-mängden, som\ldots{}
 	måste varje rad markeras med explicita nyrader (\verb|\\|), och kolumnerna
 	separeras med och-tecken (\verb|&|). Notera även de kommandon som skapar
 	horisontella linjer; dessa är från \pack{booktabs} och används enligt
-	exemplet.
+	exempel~\ref{ex:tabular}.
 	
 	Det är även viktigt att komma ihåg några typografiska regler när det
 	gäller tabeller. Alla dessa ges av \citeasnoun[s.~3]{Fear05}. Fritt
@@ -1401,15 +1405,16 @@ Mandelbrot-mängden, som\ldots{}
 			\item Lägg enheter i tabellhuvudet.
 			\item Decimalkomma ska alltid föregås av en siffra; alltså \(0,1\) 
 			\emph{inte} bara \(,1\).
-			\item Använd inte upprepningstecken eller sådana konventioner för
-			att repetera föregående värde. I många fall räcker det med en tom
-			cell. Gör det inte det, repetera värdet.
+			\item Använd inte upprepningstecken eller liknande konventioner 
+			för att repetera föregående värde. I många fall räcker det med en 
+			tom cell. Gör det inte det, repetera värdet.
 		\end{enumerate}
 	\end{quotation}
 	
 	Punkt ett och två är enkla att följa om man använder \pack{booktabs} som
 	manualen föreskriver, och punkt tre och fem är snarare arbetsbesparande än
-	ansträngande att hålla sig till. Punkt fyra är enkel att följa. Följer man
+	ansträngande att hålla sig till. Även punkt fyra är enkel att följa. 
+	Följer man
 	dessa fem punkter får man snygga tabeller varje gång\footnote{Läs gärna
 	igenom \citeasnoun{Fear05} ordentligt de tre-fyra första gångerna du
 	sitter med tabeller i \LaTeX, så går användandet in i ryggmärgen.}.
@@ -1436,8 +1441,8 @@ Mandelbrot-mängden, som\ldots{}
 	\end{table}
 	
 	\subsubsection{Etiketter och korsreferenser}\label{sec:labels}
-	Eftersom figurer får (och bör får) flyta en bit bort, i vissa fall till 
-	andra sidor måste man kunna referera till dem i texten. Detta görs med så
+	Eftersom figurer får (och bör få) flyta en bit bort, i vissa fall till 
+	andra sidor, måste man kunna referera till dem i texten. Detta görs med så
 	kallade korsreferenser till etiketter. En etikett kan man definiera med
 	kommandot \cmd{label}, inte bara för figurer och tabeller utan även för
 	rubriker, ekvationer och annat. För flytande objekt och andra omgivningar
@@ -1471,7 +1476,7 @@ Mandelbrot-mängden, som\ldots{}
 	göra referenserna till länkar i den slutgiltiga \PDF-filen. Med dessa kan
 	man alltså lättare navigera i dokumentet. Förutom detta så lägger
 	\pack{hyperref} dessutom till en innehållsförteckning som \PDF-läsaren
-	kan visa i programmet, och annan \PDF-specifik funktionalitet. Detta paket
+	kan visa i programmet, och annan \PDF-specifik funktionalitet. Paketet
 	rekommenderas starkt om du använder \pdfLaTeX.
 	
 	\subsection{Typografiska betänkligheter}
@@ -1550,7 +1555,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	För att få \LaTeX{} att använda mellanrum istället för indrag bör man
 	egentligen skriva helt nya dokumentklasser, men eftersom detta är ett
-	stort jobb kan man istället ”laga” \LaTeX{}. Detta görs av
+	stort jobb kan man istället ”\eng{patcha}” \LaTeX{}. Detta görs av
 	paketet \pack{parskip}:
 	\latex|\usepackage{parskip}|
 	
@@ -1560,7 +1565,7 @@ Mandelbrot-mängden, som\ldots{}
 		
 	Decimalavskiljare i svensk skrift är kommatecknet. För att
 		\LaTeX{} inte ska lägga in mellanrum efter kommatecken i matteläge
-		(då det uppfattas som en koordinat) bör man inkludera paketet
+		(\LaTeX{} tolkar det som en koordinat) bör man inkludera paketet
 		\pack{icomma}. I engelsk skrift används punkt som decimalavskiljare.
 		
 	Enheter ska typsättas med ett (litet) mellanrum mellan tal och
@@ -1571,7 +1576,7 @@ Mandelbrot-mängden, som\ldots{}
 	\label{sec:2:lmodern}
 	Eftersom \LaTeX{} och dess tillhörande typsnitt (Computer Modern) är
 	relativt gamla, och eftersom de designats för att fungera väl med det
-	mycket gamla \textsc{PostScript}-formatet, så uppstår det ibland lite
+	mycket gamla \textsc{PostScript}-formatet, så uppstår det ibland några
 	smärre problem. Det första problemet som brukar dyka upp i samband med
 	typsnitt i \LaTeX{} är att texten blir otydlig och suddig i det typsatta
 	\PDF-dokumentet. Detta beror på att de typsnitt som används är baserade
@@ -1589,7 +1594,7 @@ Mandelbrot-mängden, som\ldots{}
 	byta typsnitt.
 
 	Det typsnitt som brukar användas istället för Computer Modern är dess
-	(ironiskt nog) mer moderna klonen \emph{Latin Modern}. Detta typsnitt ser
+	mer moderna klon \emph{Latin Modern}. Detta typsnitt ser
 	i princip ut som Computer Modern, men innehåller alla de glyfer som behövs
 	för att typsätta svensk (och annan icke-anglikansk) text. För att använda
 	Latin Modern inkluderar man paketet \pack{lmodern}:
@@ -1597,8 +1602,9 @@ Mandelbrot-mängden, som\ldots{}
 	
 	\subsection{Andra viktiga delar}
 	Även om innehållet är det viktigaste så finns det andra delar av en
-	rapport eller artikel som också är viktiga att ge lite uppmärksamhet.
-	Titelsidor bör man alltid ha, och det är även viktigt att ha koll på
+	rapport eller artikel som också måste ges lite uppmärksamhet.
+	Titelsidor bör man till exempel alltid ha, och det är även viktigt att ha 
+	koll på
 	hur man citerar och vilken teckenkodning man använder. I vissa fall
 	kan man även vilja referera till vissa längder, eller använda kommandon
 	som \LaTeX{} anser vara ”ömtåliga” i situationer de inte är tänkta att
@@ -1622,7 +1628,7 @@ Mandelbrot-mängden, som\ldots{}
 	Kommandot \cmd{thanks} kan användas för att infoga korta tack eller extra
 	information om titel eller författare, så som mailadresser eller
 	liknande. Den typografiska effekten av \cmd{thanks} (i standardklasserna)
-	en fotnot.
+	än en fotnot.
 	
 	Man kan dessutom infoga en sammanfattning \eng{abstract} med hjälp av
 	omgivningen \texttt{abstract}. Denna omgivning inkluderas lämpligen direkt
