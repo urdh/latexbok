@@ -1706,16 +1706,17 @@ Mandelbrot-mängden, som\ldots{}
 	%% MATEMATIK MED LATEX OCH AMS (fold)
 	\section{Matematik med \LaTeX{} och \AmS}\label{sec:3}
 	\LaTeX{} är ett mycket bra system för typsättning, och ett av de områden
-	\LaTeX{} är starkast inom är typsättning av just matematik. För att utöka
-	grundläggande mekanismer \LaTeX{} har för typsättning av matematik har
-	dessutom \textit{American Mathematical Society}, \AmS, skapat ett antal
-	paket (främst \pack{amsmath} och \pack{amssymb}) som kollektivt refereras
-	till som \AmS\LaTeX{} och som gör typsättning av matematik med \LaTeX{}
-	oändligt mycket bättre.
+	\LaTeX{} är starkast inom är typsättning av matematik. För att utöka och
+	förenkla de grundläggande mekanismer \LaTeX{} har för typsättning av 
+	matematik har \textit{American Mathematical Society}, \AmS, skapat ett 
+	antal paket (främst \pack{amsmath} och \pack{amssymb}) som kollektivt 
+	refereras till som \AmS\LaTeX{} och som gör typsättning av matematik med 
+	\LaTeX{} oändligt mycket bättre.
 	
 	Dessa paket är dock enorma, och det finns hela böcker tillägnade endast
-	typsättning av matematik i \LaTeX{} \cite[som för övrigt är en mycket bra
-	referens att ha till hands när man typsätter matematik i \LaTeX]{Voss10}.
+	typsättning av matematik i \LaTeX{} \citeaffixed[som för övrigt är en 
+	mycket bra referens att ha till hands när man typsätter matematik i 
+	\LaTeX]{Voss10}{till exempel}.
 	Den här delen kommer att ge en kort introduktion till de allra enklaste
 	och vanligaste konstruktionerna man stöter på när man typsätter matematik
 	i \LaTeX, och tar mycket inspiration från \citeasnoun{Voss10}.
@@ -1752,11 +1753,11 @@ Mandelbrot-mängden, som\ldots{}
 	\latex|Ett helt varv runt cirkeln är \(2\pi\)...|
 	
 	\subsubsection{Ekvationer som ekvationer}\label{sec:3:ekvsomekv}
-	Längre och/eller viktigare ekvationer bör inte typsättas i löpande text.
-	Man bör istället använda en av de många omgivningar (\AmS)\LaTeX{} ger
+	Längre och viktigare ekvationer bör inte typsättas i löpande text —
+	man bör istället använda en av de många omgivningar (\AmS)\LaTeX{} ger
 	tillgång till. Den allra enklaste omgivningen (som fungerar i de flesta
-	fall) är \texttt{equation}. Den finns i en vanlig variant, och ger då en
-	numrerad ekvation, samt en variant (\texttt{equation*}) som ger en
+	fall) är \texttt{equation}, som finns i en vanlig variant som skapar 
+	en numrerad ekvation samt en stjärnvariant (\texttt{equation*}) som ger en
 	onumrerad ekvation. Som en tumregel bör man endast använda den numrerade
 	varianten om man behöver referera till ekvationen, eller om det är en
 	viktig definition som andra kan tänkas vilja referera till.
@@ -1764,11 +1765,12 @@ Mandelbrot-mängden, som\ldots{}
 	Fristående ekvationer kan typsättas mycket bättre eftersom de inte är 
 	begränsade av omgivande text. Integraler och summor kan göras så höga som
 	det krävs, och paranteser kan växa nästan obegränsat. Det är dock viktigt
-	att komma ihåg att en fristående ekvation \emph{inte} ska vara ett eget
+	att komma ihåg att en fristående ekvation \emph{oftast} inte ska vara ett 
+	eget
 	stycke. Exempel~\vref{ex:stycken} visade hur ett antal ekvationer och
 	mellanrumet mellan dessa och den omgivande texten varierade beroende på
-	ekvationens plats i stycket. Slutsatsen som ska dras är alltså att man
-	trots att ekvationen är ”fristående” bör behandla den ungefär som en
+ 	ekvationens plats i stycket. Trots att ekvationen är ”fristående” bör
+ 	man alltså behandla den precis som en
 	ekvation i löpande text. Skillnaden är främst typografisk.
 	
 	\subsubsection{Referera till ekvationer}
@@ -1822,7 +1824,8 @@ Mandelbrot-mängden, som\ldots{}
 		
 		\item Alla bokstäver anses vara variabler och typsätts därför med
 		kursiv text. De bokstäver som inte är variabler (till exempel
-		differentieringsoperatorn \(\text{d}\)) måste skrivas in med kommandot
+		differentieringsoperatorn \(\mathrm{d}\)) måste skrivas in med 
+		kommandot
 		\cmd{mathrm\{...\}}, och längre bitar text (hela ord och så vidare)
 		bör skrivas in med kommandot \cmd{text}.
 	\end{itemize}
@@ -1876,11 +1879,11 @@ Mandelbrot-mängden, som\ldots{}
 	\end{kod}
 	
 	\subsubsection{Funktioner etc.} % sin, lim, sup, etc.
-	Många välanvända eller kända funktioner och operatorer (alltså inte 
-	\(f(x)\) och \(g(x)\) utan trigonometriska funktioner och liknande) har
-	långa namn som för skrivas i upprätt text, det vill säga med \cmd{mathrm}.
-	Då detta är både tidskrävande och inelegant definierar (\AmS)\LaTeX{}
-	några
+	Många välanvända eller kända funktioner och operatorer (trigonometriska 
+	funktioner och liknande) har
+	långa namn som bör skrivas i upprätt text (det vill säga med
+	\cmd{mathrm}), men då detta är både tidskrävande och inelegant ur en 
+	semantisk synpunkt definierar (\AmS)\LaTeX{} några
 	av dessa som kommandon istället — sinus blir \cmd{sin}, cosinus \cmd{cos}
 	och så vidare.
 	
@@ -1895,7 +1898,7 @@ Mandelbrot-mängden, som\ldots{}
 	Matematiken innehåller ett stort antal symboler, däribland det grekiska
 	alfabetet, talmängder, oändligheter, tomma mängden och så vidare (och då
 	inkluderar vi inte de pilar, operatorer, hattar och olikhetstecken som
-	diskuteras \vpageref{sec:3:operatorer}). Några av dessa symboler listas i
+	diskuteras senare). Några av dessa symboler listas i
 	tabell~\vrefrange{tab:symbs}{tab:grekiska} — notera att några av de 
 	grekiska bokstäverna inte har några kommandon för versaler, eftersom dessa
 	är identiska med latinska bokstäver, samt att några har ”varianter” som
@@ -1973,14 +1976,14 @@ Mandelbrot-mängden, som\ldots{}
 	\end{table}
 	
 	\subsubsubsection*{Operatorer}\label{sec:3:operatorer}%
-	Förutom symbolerna som diskuterades \vpageref{sec:3:symbs} finns även en
+	Förutom symbolerna som nyss diskuterades finns även en
 	mycket stor mängd operatorer inom matematiken. Även dessa kan man leta
 	fram med hjälp av Detexify, men de flesta (åtminstone de som används
-	oftast) har logiska namn; nabla-operatorn (\(\nabla\)) heter till exempel
-	\cmd{nabla}, och tillhörandeoperatorn (\(\in\)) heter \cmd{in}. Tabell~%
-	\ref{tab:pilar} till \ref{tab:operatorer} \vpageref{tab:pilar} 
-	listar de vanligaste pilarna,
-	relationssymbolerna och operatorerna i \LaTeX.
+	frekvent) har logiska namn; nabla-operatorn (\(\nabla\)) heter till 
+	exempel
+	\cmd{nabla}, och tillhörandeoperatorn (\(\in\)) heter \cmd{in}. Listor
+	över de vanligaste pilarna, relationssymbolerna och operatorerna i 
+	\LaTeX{} återfinns i tabell~\vrefrange{tab:pilar}{tab:operatorer}. 
 	
 	\subsubsubsection*{Hattar, prickar, primtecken och liknande}
 	Ibland vill man även modifiera variablers betydelse, kanske för att
@@ -1990,8 +1993,7 @@ Mandelbrot-mängden, som\ldots{}
 	\vref{tab:hattar}, tillsammans med en kort förklaring av notationens
 	innebörd.
 	
-	Just för vektorer existerar det dock flera olika notationer för. En 
-	populär
+	Just för vektorer existerar det dock flera olika notationer. En populär
 	variant (som \LaTeX{} främjar) är att sätta dit en liten pil ovanför
 	variabeln (\(\vec{a}\)), vilket görs med \cmd{vec}. Andra föredrar att
 	skriva variabeln fetstilt eller med krittavletypsnitt,
@@ -2088,7 +2090,7 @@ Mandelbrot-mängden, som\ldots{}
 	\subsubsection{Paranteser och dylikt}
 	Paranteser är mycket viktiga inom matematiken för att visa olika typer av
 	grupper, och besitter dessutom egenskapen att de måste skalas med sin
-	omgivning för att de ska se bra ut. I \LaTeX{} skapar man så kallade
+	omgivning för att de ska se bra ut. I \LaTeX{} skapar man sådana
 	grupper av paranteser med kommandona \cmd{left} och \cmd{right}, vilket
 	gör att dessa paranteser automatiskt sträcks ut för att bli lika höga som
 	innehållet i gruppen (vilket visas i exempel~\vref{ex:paranteser}). Man 
@@ -2109,7 +2111,8 @@ Mandelbrot-mängden, som\ldots{}
 	
 	Att ha omatchade paranteser kan vara önskvärt inom till exempel
 	kvantfysik, där man har bra-ket-notation (se dock notisen om \cmd{mid}
-	\vpageref{sec:3:mid}):
+	\vpageref{sec:3:mid} och paketet \pack{braket} som förklaras~%
+	\vpageref{pack:braket}):
 	\latex|\left\langle\psi\right\vert|
 	
 	\begin{table}[t]
@@ -2180,7 +2183,7 @@ Mandelbrot-mängden, som\ldots{}
 	kan se ut så här: \label{sec:3:mid}
 	\latex|\left\langle\psi\mid\Psi\right\rangle|
 	
-	Dessutom kan den användas som en operator,
+	Dessutom kan det användas som en operator,
 	exempelvis för att visa insättning av en variabel som ett led i
 	integrering (\(\int_1^e\! x^{-1}\d{x}=\ln x\vert_{x=1}^e=1 \)) i vilket
 	fall man istället skriver \cmd{vert}:
@@ -2226,7 +2229,7 @@ Mandelbrot-mängden, som\ldots{}
 	\latex|\lim\limits_{x\to\infty} \frac{1}{x}| 
 	
 	\subsubsubsection*{Snyggare (och mer korrekta) integraler}
-	Integraler, så som \LaTeX typsätter dem från början, blir ofta felaktiga
+	Integraler, så som \LaTeX{} typsätter dem från början, blir ofta felaktiga
 	i det avseendet att avståndet mellan integraltecken och innehåll
 	blir stort, samtidigt som avståndet till differentieringsoperatorn
 	(som dessutom
@@ -2234,7 +2237,7 @@ Mandelbrot-mängden, som\ldots{}
 	problemet (som i viss mån även finns för summor) kan åtgärdas genom att
 	lägga in ett negativt mellanrum (\cmd{!}) mellan integraltecken och
 	innehåll:
-	\latex|\int_0^1\! x^2 \d{x}|
+	\latex|\int_0^1\! x^2 dx|
 	
 	Det andra problemet kan också lösas genom att lägga till mellanrum (i
 	kombination med att typsätta \(dx\) med \cmd{mathrm}), men eftersom
@@ -2256,7 +2259,7 @@ Mandelbrot-mängden, som\ldots{}
 	egna gränser. Integraltecknet \cmd{iint} används istället med fördel när
 	man ska visa integrering över exempelvis ett område \(A\), då detta bara
 	är ”en” gräns:
-	\latex|\iint_A f(x) \d{A}|
+	\latex|\iint_A\! f(x) \d{A}|
 	
 	\begin{kod}[tbp]
 		\centering
@@ -2333,7 +2336,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	Precis som \env{equation} finns \env{multline} både med och utan stjärna,
 	och på exakt samma sätt har varianten utan stjärna ett ekvationsnummer,
-	vilket den med stjärna inte har. I övrig finns det inga skillnader mellan
+	vilket den med stjärna inte har. I övrigt finns det inga skillnader mellan
 	de båda. Notera att varje \env{multline}-omgivning endast får \emph{ett}
 	ekvationsnummer; vill man ha ett per rad ska man istället använda
 	\env{align}.
@@ -2382,7 +2385,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	Nya rader skapas i båda omgivningarna med nyradskommandot \verb|\\|, och
 	i \env{align} använder man (på liknande sätt som i \env{tabular}) ett
-	ochtecken (\verb|&|) för att skapa en ”kolumn”. Koden för figur~%
+	et-tecken (\verb|&|) för att skapa en ”kolumn”. Koden för Figur~%
 	\vref{fig:aligngather:align} är således som följer:
 	\begin{latexcode}
 \begin{align}
@@ -2405,7 +2408,16 @@ Mandelbrot-mängden, som\ldots{}
 	Förutom \env{align} och \env{gather} visar även figur~%
 	\vref{fig:aligngather} hur omgivningen \env{subequations} fungerar. Denna
 	omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
-	och får bara innehålla en (och endast en) matematikomgivning, inget annat.
+	och får bara innehålla en (och endast en) matematikomgivning, inget annat:
+	\begin{latexcode}
+\begin{subequations}
+  \begin{align}
+    y_1 &= x^2 + 2x + 1 \\
+    y_2 &= x^2 - 2x + 1 \\
+    y_3 &= x^2 - 1
+  \end{align}
+\end{subequations}
+	\end{latexcode}
 	
 	\subsubsection{Matriser}
 	Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
@@ -2472,9 +2484,9 @@ Mandelbrot-mängden, som\ldots{}
 	
 	I stora eller repetitiva matriser (till exempel enhetsmatrisen) behöver
 	man inte alltid skriva ut alla element, utan istället använda notation
-	för upprepande element. Detta görs med hjälp av tre kommandon; \cmd{cdots} 
-	(\(\cdots\)), \cmd{vdots} (\(\:\vdots\:\)) och \cmd{ddots} 
-	(\(\ddots\)), vilka kan användas istället för innehåll
+	för upprepande element. Detta görs med hjälp av tre kommandon; 
+ 	\cmd{cdots}, \cmd{vdots} och \cmd{ddots}, som skapar horisontella,
+ 	vertikala och diagonala punkter vilka kan användas istället för innehåll
 	i kolumnerna i en matris:\label{sec:3:matrispktr}
 	\begin{latexcode}
 \begin{equation*}
@@ -2498,7 +2510,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	\begin{kod}[tbp]
 		\centering 
-		\begin{minipage}[b]{0.325\textwidth} % figur
+		\begin{minipage}[b]{0.35\textwidth} % figur
 			\begin{equation}
 				R(x) = \begin{cases}
 					x, & x \geq 0; \\ 
@@ -2507,7 +2519,7 @@ Mandelbrot-mängden, som\ldots{}
 			\end{equation}
 		\end{minipage}
 		\quad
-		\begin{minipage}{0.4\textwidth} % kod
+		\begin{minipage}{0.375\textwidth} % kod
 			\begin{latexcode}
 \begin{equation}
   R(x) = \begin{cases}	
@@ -2683,14 +2695,14 @@ Mandelbrot-mängden, som\ldots{}
 	\pack{siunitx} ämnar förenkla detta genom att tillhandahålla kommandon
 	som till exempel \cmd{SI}.
 	
-	Paketet definierar tre funktioner (\cmd{num}, \cmd{ang} och \cmd{SI}) som
+	Paketet definierar tre kommandon (\cmd{num}, \cmd{ang} och \cmd{SI}) som
 	används för att typsätta tal, vinklar och tal med enheter, respektive. Det
 	tal man vill typsätta kan även inkludera förenklande notation så som
 	\texttt{+-} istället för \cmd{pm}, \texttt{e} för att beteckna tiopotenser
 	och så vidare. Även komplexa tal stöds.
 	
 	Kommandona \cmd{num} och \cmd{ang}, som inte accepterar enheter, kräver
-	endast ett argument, medan \cmd{SI} kräver två; talet som ska typsättas
+	endast ett argument medan \cmd{SI} kräver två; talet som ska typsättas
 	och enheten som hör till. Enheterna ges av \LaTeX-kommandon så som
 	\cmd{metre}, \cmd{per}, \cmd{milli} och så vidare
 	\citeaffixed[ss. 9–12]{Wright11}{en full lista ges av}:
@@ -2710,7 +2722,7 @@ Mandelbrot-mängden, som\ldots{}
 	respektive.
 	
 	Som en extra bonus löser \pack{siunitx} även, om man ställt in paketet
-	ordentligt, problemet med tusentals- och decimalseparatorn om \LaTeX{}
+	ordentligt, problemet med tusentals- och decimalseparatorn som \LaTeX{}
 	ofta ger upphov till (eftersom systemet baseras på engelska konventioner).
 	Detta gör man genom att använda \cmd{sisetup} för att sätta 
 	\texttt{locale} till \texttt{DE}\footnote{Tyska konventioner väljs 
@@ -3619,7 +3631,7 @@ Mandelbrot-mängden, som\ldots{}
 		\item[\pack{algorithmic}]
 		är ett paket för typsättning av algoritmer och pseudokod.
 		
-		\item[\emph{\pack{braket}}]
+		\item[\emph{\pack{braket}}]\label{pack:braket}
 		definierar kommandon för att handskas med braket-notationen som
 		används inom kvantfysik. Kommandot \cmd{Braket} kan således resultera
 		i följande ekvation:
