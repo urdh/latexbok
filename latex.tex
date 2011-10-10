@@ -3169,13 +3169,13 @@ Mandelbrot-mängden, som\ldots{}
 	\section{Vidare läsning}\label{sec:6}
 	Den här introduktionen har förhoppningsvis gett dig en bra \LaTeX-grund
 	som låter dig typsätta både rapporter och artiklar utan problem. Tyvärr
-	kommer du, eftersom \LaTeX är ett så stort system, sannolikt att behöva
-	ytterligare hjälp, tips och resurser allt eftersom du använder \LaTeX 
+	kommer du, eftersom \LaTeX{} är ett så stort system, sannolikt att behöva
+	ytterligare hjälp, tips och resurser allt eftersom du använder \LaTeX{} 
 	och stöter på problem eller svårigheter.
 
 	Denna del av introduktionen ämnar ge dig några tips på sådana resurser.
 	Delen inleds med några relevanta resurser så som böcker och journaler
-	som behandlar \TeX{} och \LaTeX på en mer eller mindre avancerad nivå,
+	som behandlar \TeX{} och \LaTeX{} på en mer eller mindre avancerad nivå,
 	samt några tips när det gäller att få hjälp med specifika problem.
 	Därefter följer några tips gällande stora projekt, som du sannolikt kommer
 	att ha nytta av förr eller senare, speciellt om du studerar på en högskola
@@ -3191,13 +3191,12 @@ Mandelbrot-mängden, som\ldots{}
 	Även om denna introduktion siktar på att ge dig allt du behöver för att
 	lära dig \LaTeX{} är det inte säkert att den är tillräcklig. Man kan inte
 	diskutera allt i en kort introduktion, och vill man lära sig mer om den
-	inre strukturen hos \TeX{} eller \LaTeX så finns det redan mycket bra och
-	utförliga resurser tillgängliga.
+	inre strukturen hos \TeX{} eller \LaTeX{} så finns det redan mycket bra 
+	och utförliga resurser tillgängliga.
 	Dessutom kan man i en kort introduktion inte diskutera specifika problem
 	i detalj, eftersom dessa ofta beror på den specifika situationen.
-
-	Nedan följer därför en lista över resurser, i form av böcker, journaler
-	och forum, som kan hjälpa dig släcka din kunskapstörst eller lösa dina
+	Nedan följer därför en lista över resurser i form av böcker, journaler
+	och forum som kan hjälpa dig släcka din kunskapstörst eller lösa dina
 	\LaTeX-problem.
 	
 	\subsubsection{Böcker och artiklar}
@@ -3206,7 +3205,7 @@ Mandelbrot-mängden, som\ldots{}
 	en uppsjö artiklar, böcker och guider tillgängliga på CTAN, och en journal
 	(\emph{The Prac\TeX{} Journal}\footnote{\url{http://tug.org/pracjourn/}})
 	som finns
-	tillgängliga på internet. Nedan följer en lista på några avde böcker och 
+	tillgänglig på internet. Nedan följer en lista på några av de böcker och 
 	artiklar som kan vara av intresse för dig som precis börjat med \LaTeX.
 	
 	\begin{description}
@@ -3240,7 +3239,7 @@ Mandelbrot-mängden, som\ldots{}
 		
 		\item[\emph{Short Math Guide for \LaTeX} \cite{Downes02}]
 		är en kort guide till matematik med \AmS\LaTeX{} skriven av en av
-		huvudpersonerna bakom just \AmS\LaTeX. Ger några små värdefulla tips,
+		huvudpersonerna bakom paketsamlingen. Ger några små värdefulla tips,
 		en lista över symboler och en introduktion till
 		\cmd{DeclareMathOperator} och några andra \AmS-konstruktioner som inte
 		diskuteras utförligt i den här introduktionen. Sjutton mycket läsvärda
@@ -3288,7 +3287,7 @@ Mandelbrot-mängden, som\ldots{}
 	man något om \LaTeX{} så är det ett utmärkt ställe att fråga.
 	
 	\subsection{Tips för stora projekt}
-	För stora \LaTeX{}projekt (till exempel kandidatarbeten, examensarbeten
+	För stora \LaTeX-projekt (till exempel kandidatarbeten, examensarbeten
 	och liknande) är det viktigt att kunna ha en ordentlig ordning på sitt
 	dokument. Är det dessutom ett dokument många ska samarbeta med är det
 	ännu viktigare att det är strukturerat.
@@ -3479,7 +3478,7 @@ Mandelbrot-mängden, som\ldots{}
 		\end{equation*}
 		
 		\item[\pack{amsmath}]
-		gås igenom av del~\ref{sec:3} och är i princip oumbärligt om man ska
+		gås igenom i del~\ref{sec:3} och är i princip oumbärligt om man ska
 		typsätta matematik med \LaTeX. Inkludera alltid detta paket om du
 		skriver något som kan tänkas innefatta ekvationer.
 	
@@ -3558,7 +3557,7 @@ Mandelbrot-mängden, som\ldots{}
 		objekt (vilka diskuterats \vpageref{sec:floats}).
 		
 		\item[\pack{geometry}]
-		kan användas för att ändra en del mått i \LaTeX (till exempel sidans
+		kan användas för att ändra en del mått i \LaTeX{} (till exempel sidans
 		storlek eller marginalerna) om så önskas. Oftast behöver man inte göra
 		detta, eftersom dokumentklassen har definierat de mått den har av en
 		anledning. Kan vara värdefullt om man vill skapa dokument för A5-%
@@ -3567,10 +3566,10 @@ Mandelbrot-mängden, som\ldots{}
      	\item[\pack{multicol}]
      	löser problemet med att typsätta text i kolumner på ett mycket bättre
      	sätt än standardklasserna, med hjälp av omgivningen \env{multicols}.
-     	Paketet stödjer bland annat korrekt balanserade kolumner, 
+     	Paketet stödjer bland annat korrekt balanserade kolumner.
      	
 		\item[\pack{multirow}]
-		gör det möjligt att i tabeller skapa celler som spänner över flera
+		gör det möjligt att skapa tabellceller som spänner över flera
 		rader.
 		
 		\item[\pack{sidecap}]
@@ -3586,7 +3585,7 @@ Mandelbrot-mängden, som\ldots{}
 		
 		\item[\pack{varioref}]
 		gör det möjligt att, med hjälp av kommandot \cmd{vref},
-		skapa korsreferenser (se \vpageref{sec:labels})
+		skapa korsreferenser
 		som inte bara refererar till etiketterna med nummer utan även till den
 		sida figuren eller tabellen finns på. Detta görs på ett intelligent
 		sätt, så att referensen blir ”figur X på nästa sida” om figuren är på
@@ -3597,12 +3596,19 @@ Mandelbrot-mängden, som\ldots{}
 		skapar ett nytt flytande objekt \texttt{wrapfig} som placerar figuren
 		till höger eller vänster på sidan och låter övrig text ”flyta” runt
 		figuren.
+		
+		\item[\pack{xspace}]
+		definierar ett kommando \cmd{xspace} som kan läggas till på slutet av
+		kommandodefinitioner för att de ska bete sig snällare i brödtext, så
+		att man slipper skriva \texttt{\{\}} efter kommandot.
 	\end{description}
 	
 	\subsubsection{Paket för att ändra utseende}
 	Standardklasserna lämnar ofta en del att önska i termer av utseende. Vill
 	man göra något åt detta kan man använda paket som utformats för att låta
-	dig ändra stilen av vissa element, till exempel rubriker eller sidhuvuden.
+	dig ändra stilen av vissa element, till exempel rubriker eller sidhuvuden%
+	\footnote{Vill man lösa problemet på riktigt ska man givetvis använda en
+	dokumentklass som ser bättre ut istället.}.
 	
 	\begin{description}
 		\item[\pack{fancyhdr}]
@@ -3621,7 +3627,7 @@ Mandelbrot-mängden, som\ldots{}
 	\end{description}
 	
 	\subsubsection{Andra specialiserade paket}
-	För en del snäva områden så som kvantfysik eller datavetenskap, finns det
+	För en del snäva områden så som kvantfysik eller datavetenskap finns det
 	specialiserade paket som löser specifika uppgifter. Dessa kan med fördel
 	användas om man skriver rapporter inom området, eller rör vid ämnet i
 	någon inlämningsuppgift.
@@ -3678,8 +3684,8 @@ Mandelbrot-mängden, som\ldots{}
 	det senare är relativt stor, sett till de djupa delarna av \TeX: \XeTeX 
 	förutsätter, till skillnad från \pdfLaTeX, att all indata är \UTF och kan
 	därmed läsa \UTF-dokument på ett korrekt sätt. Detta innebär bland annat
-	att saker som inte fungerar i \pdfLaTeX, även med \pack{inputenc}, till
-	exempel svenska tecken i kodlistingar eller inkluderade filer kommer att
+	att saker som inte fungerar i \pdfLaTeX ens med \pack{inputenc}, till
+	exempel svenska tecken i kodlistingar eller inkluderade filer, kommer att
 	fungera utmärkt med \XeTeX.
 	
 	Dessutom kan man med hjälp av speciella kommandon välja typsnitt på ett
