@@ -2903,7 +2903,7 @@ Mandelbrot-mängden, som\ldots{}
 	En stor fördel med \LaTeX{} är att man kan automatisera hanteringen av
 	till exempel referenser. \BibTeX{} är ett verktyg som gör detta ännu
 	enklare och som gör att man kan samla alla sina referenser i en extern
-	databas vilken kan hanteras av ett externt program\footnote{Exempel på
+	databas, vilken kan hanteras av ett externt program\footnote{Exempel på
 	sådana är \emph{JabRef}, \emph{BibDesk} och \emph{refbase}.\hfill} eller 
 	(som sig bör när det gäller \LaTeX) med en enkel textredigerare.
 	
@@ -3011,14 +3011,14 @@ Mandelbrot-mängden, som\ldots{}
 	av dedikerat verktyg istället för att redigera \texttt{.bib}-filerna
 	för hand med en textredigerare. Programmet JabRef%
 	\footnote{\url{http://jabref.sourceforge.net/}}
-	fungerar mycket bra till detta och finns tillgängligt till alla
+	fungerar mycket bra till detta och finns tillgängligt för alla
 	plattformar.
 	
 	Många webbaserade sökverktyg för akademiska publikationer, till exempel
 	Scopus\footnote{\url{http://www.scopus.com/home.url}}, gör det möjligt att
 	enkelt exportera information om de artiklar man refererar till i \BibTeX-%
 	format, som sedan kan läggas till direkt i den egna referensdatabasen.
-	Detta är oerhört praktiskt i större projekt, så som kandidatuppsatser.
+	Detta är oerhört praktiskt i större projekt så som kandidatuppsatser.
 	
 	\subsection{\BibTeX{} med \LaTeX{}}
 	För att referera till de referenser man har i sin referensdatabas
@@ -3146,12 +3146,12 @@ Mandelbrot-mängden, som\ldots{}
 	Tyvärr så är \BibTeX{} från början inte gjort för att stödja de här
 	referensstilarna, varför det har dykt upp ett antal olika paket som
 	gör det möjligt. Ett av dessa paket är \pack{harvard}, som beskrivs
-	utförligt av \citeasnoun{Williams08}. Paketet definierar, förutom det
-	vanliga kommandot \cmd{cite}, tre relativt självförklarande kommandon:
+	utförligt av \citeasnoun{Williams08}. Paketet definierar förutom det
+	vanliga kommandot \cmd{cite} tre relativt självförklarande kommandon:
 	\cmd{citeasnoun}, som refererar till en källa som ett substantiv,
 	\cmd{possessivecite}, som refererar till en källa i genitivform,
 	och \cmd{citeaffixed}, som refererar som \cmd{cite} men med ett tillägg.
-	Hur dessa bör användas i text är illustreras av följande exempel:
+	Hur dessa bör användas i text illustreras av följande exempel:
 	\begin{latexcode}
 ...vilket visades av \citeasnoun{Hassanpour08}.
 \possessivecite{Hassanpour08} undersökning visade att...
@@ -3159,7 +3159,7 @@ Mandelbrot-mängden, som\ldots{}
 	\end{latexcode}
 		
 	\label{sec:chscite}
-	Även Chalmers rekommenderar att man använder en stil baserad på Chicago-%
+	Chalmers rekommenderar att man använder en stil baserad på Chicago-%
 	stilen \cite{ChsLib10}, och dessa rekommendationer implementeras av 
 	paketet \pack{chscite} som bygger på \pack{harvard} och därför fungerar
 	på samma sätt. Även detta paket finns på CTAN.
