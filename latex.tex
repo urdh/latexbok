@@ -2763,8 +2763,7 @@ Mandelbrot-mängden, som\ldots{}
 		\item Skapa figuren i ett externt program och spara i rätt format
 		
 		\item Inkludera \pack{graphicx}-paketet genom att skriva
-		\latex|\usepackage{graphicx}|
-		i inledningen till dokumentet.
+		\cmd{usepackage\{graphicx\}} i inledningen till dokumentet.
 		
 		\item Inkludera grafiken i en \env{figure}-omgivning med hjälp av
 		kommandot \cmd{includegraphics}:
@@ -2807,9 +2806,9 @@ Mandelbrot-mängden, som\ldots{}
 	\subsubsection{Rätt format?}
 	En nackdel med \pdfLaTeX{} när det gäller \pack{graphicx} är att det inte
 	finns särskilt många bildformat som fungerar (dock fler än för gamla
-	\LaTeX{}, som bara accepterade \EPS). De enda format som kan inkluderas
+	\LaTeX{}, som bara accepterade \EPS). De format som kan inkluderas
 	med \pack{graphicx} när man använder \pdfLaTeX{} är \textsc{PNG},
-	\textsc{JPEG} och \PDF. Oftast vill man använda \PDF{} för figurer,
+	\textsc{JPEG} och \PDF, och oftast vill man använda \PDF{} för figurer
 	eftersom
 	det är det enda vektorbaserade formatet som fungerar, medan man för
 	fotografier och dylikt använder \textsc{JPEG}. \textsc{PNG} kan man
