@@ -223,7 +223,7 @@
 % Front/back page color and graphics
 \def\frontpagecolor{LimeGreen}
 \newcommand\frontpagegraphic{\begin{tikzpicture}[remember picture,overlay]
-	\coordinate [below=2.225cm] (midpoint)
+	\coordinate [below=3.225cm] (midpoint)
 					   at (current page.north);
 	\node [anchor=north,fill=Black,opacity=0.25,
 	minimum width=\paperwidth,
@@ -482,6 +482,7 @@
 		kommandon som definieras.
 	\end{description}
 	
+	\newpage % Undviker horunge i nästa stycke
 	Det är viktigt att läsa delarna i rätt ordning; varje del bygger på de
 	föregående, och de är ju trots allt inte särskilt långa. Se till att
 	studera och förstå de exempel som presenteras, och lek gärna lite själv
@@ -604,6 +605,7 @@
 	hela resten av den raden i \TeX{}-filen:
 	\latex|Lite text\ldots{} % ...och en kommentar|
 	
+	\newpage % Undviker konstig radbrytning innan kodstycke
 	\subsubsection{Grundläggande struktur}
 	När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
 	kommenterar delar av dina filer är det dags att förklara lite närmre hur
@@ -912,7 +914,7 @@
 	tomma rader (det vill säga ett nytt stycke) används i vissa tillfällen 
 	men inte andra — det är en subtil men mycket viktig skillnad.
 	
-	\begin{kod}[tbp]
+	\begin{kod}[p]
 		\begin{latexcode}
 % Exempel ett
 \ldots{}med hjälp av identiteten
@@ -3768,7 +3770,10 @@ Mandelbrot-mängden, som\ldots{}
 	tillgänglig som en \texttt{.tex}-fil för nedladdning%
 	\footnote{\url{http://blog.sigurdhsson.org/projects/latexbok.html}}.
 	
-	\ifdraft{\inputminted[frame=single]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{ex/A/mall.tex}}
+	\ifdraft{\inputminted[frame=single,firstline=1,lastline=24]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=1,lastline=24]{latex}{ex/A/mall.tex}}
+	\newpage
+	\ifdraft{\inputminted[frame=single,firstline=25,lastline=80]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=25,lastline=80]{latex}{ex/A/mall.tex}}
+	\ifdraft{\inputminted[frame=single,firstline=81,lastline=118]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=81,lastline=118]{latex}{ex/A/mall.tex}}
 	%% (end)
 
 	\backmatter
