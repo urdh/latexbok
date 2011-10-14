@@ -10,11 +10,12 @@
 \usetikzlibrary{shadows}
 % page size
 \usepackage[c5paper,xetex]{geometry}
+\usepackage[cam,info,a4,center]{crop}
 % code
 \usepackage{minted}
 % improvement packages
 \usepackage{multirow}
-\usepackage[hyperfootnotes=false,colorlinks=true,linkcolor=Red,urlcolor=Magenta]{hyperref}
+\usepackage[hyperfootnotes=false,colorlinks=false,linkcolor=Red,urlcolor=Magenta]{hyperref}
 \usepackage[swedish]{varioref}
 \usepackage[para,perpage,ragged,bottom,stable]{footmisc}
 \usepackage{enumitem}
@@ -226,7 +227,7 @@
 	\coordinate [below=2.225cm] (midpoint)
 					   at (current page.north);
 	\node [anchor=north,fill=Black,opacity=0.25,
-	minimum width=\paperwidth,
+	minimum width=2\paperwidth,
 	minimum height=6cm] at (midpoint) {};
 \end{tikzpicture}}
 % minted style
