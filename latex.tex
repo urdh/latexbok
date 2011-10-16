@@ -765,11 +765,11 @@
 \usepackage[T1]{fontenc}
 
 \begin{document}
-	Det här är ett första stycke, ett exempel
-	på hur    text    typsätts    av \LaTeX{}.
-	
-	Oj, ett nytt stycke! (Två stycken i samma
-	dokument, kan du tänka dig?)
+    Det här är ett första stycke, ett exempel
+    på hur    text    typsätts    av \LaTeX{}.
+    
+    Oj, ett nytt stycke! (Två stycken i samma
+    dokument, kan du tänka dig?)
 \end{document}
 		\end{latexcode}
 		\caption{Ett mycket enkelt \LaTeX-dokument med endast det allra
@@ -900,8 +900,8 @@
 % Exempel ett
 \ldots{}med hjälp av identiteten
 \begin{equation}
-	\int\limits_{-1}^1\!\sqrt{1-x^2}\;\mathrm{d}x
-	= \frac{\pi}{2}
+    \int\limits_{-1}^1\!\sqrt{1-x^2}\;\mathrm{d}x
+    = \frac{\pi}{2}
 \end{equation}
 kan man alltså med Monte Carlo-integration ta fram
 ett approximativt värde på \(\pi\).
@@ -911,7 +911,7 @@ ett approximativt värde på \(\pi\).
 matematikern Waloddi Weibull, har den kumulativa
 fördelningsfunktionen
 \begin{equation}
-	F(x) = 1 - e^{-(x/\alpha)^\beta} \;.
+    F(x) = 1 - e^{-(x/\alpha)^\beta} \;.
 \end{equation}
 
 Från denna kan vi med derivering\ldots{}
@@ -920,7 +920,7 @@ Från denna kan vi med derivering\ldots{}
 \ldots{}relativt ointressanta observationer.
 
 \begin{equation}
-	z_{n+1} = z_n^2 + c
+    z_{n+1} = z_n^2 + c
 \end{equation}
 ger å andra sidan upphov till den mycket kända
 Mandelbrot-mängden, som\ldots{}
@@ -1252,7 +1252,7 @@ Mandelbrot-mängden, som\ldots{}
 	med följande kod:
 	\begin{latexcode}
 \begin{<floattyp>}[tbp] % Får placeras som top eller bottom
-	% Innehåll i det flytande objektet
+    % Innehåll i det flytande objektet
 \end{<floattyp>}
 	\end{latexcode}
 	
@@ -1301,9 +1301,9 @@ Mandelbrot-mängden, som\ldots{}
 	flytande objekt och används precis som \texttt{figure}:
 	\begin{latexcode}
 \begin{table}[tpb]
-	\centering 
-	\caption{En beskrivning av tabellen}
-	% Här ska själva tabellen in
+    \centering 
+    \caption{En beskrivning av tabellen}
+    % Här ska själva tabellen in
 \end{table}
 	\end{latexcode}
 	
@@ -1322,19 +1322,19 @@ Mandelbrot-mängden, som\ldots{}
 		\begin{minipage}{0.9\textwidth} % kod
 			\begin{latexcode}
 \begin{tabular}{l r p{4cm}}
-	\toprule 
-	Konstant & Värde & Kort beskrivning \\
-	\midrule 
-	\(\gamma\) & \(0,577\) & Skillnaden mellan den
-	 harmoniska summan från \(1\) till \(n\) och den
-	 naturliga logaritmen av \(n\) då \(n\to\infty\).\\
-	\(e\) & \(2,718\) & Den konstant som har
-	egenskapen att \((e^x)' = e^x\). \\
-	\(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
-	 omkrets och dess diameter. Mycket viktig
-	 konstant i många sammanhang; dyker upp
-	 lite varstans. \\
-	\bottomrule
+    \toprule 
+    Konstant & Värde & Kort beskrivning \\
+    \midrule 
+    \(\gamma\) & \(0,577\) & Skillnaden mellan den
+     harmoniska summan från \(1\) till \(n\) och den
+     naturliga logaritmen av \(n\) då \(n\to\infty\).\\
+    \(e\) & \(2,718\) & Den konstant som har
+    egenskapen att \((e^x)' = e^x\). \\
+    \(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
+     omkrets och dess diameter. Mycket viktig
+     konstant i många sammanhang; dyker upp
+     lite varstans. \\
+    \bottomrule
 \end{tabular}
 			\end{latexcode}
 		\end{minipage}
@@ -1733,8 +1733,7 @@ Mandelbrot-mängden, som\ldots{}
 	se tilltryckta ut. Oftast bör man dock inte använda matematik i löpande
 	text vid de tillfällen då det kommer se ”fel” ut, eftersom ett block då
 	är mer logiskt, textmässigt. Matematik i löpande text är istället oftast
-	konstanter, enstaka värden och kanske någon olikhet:
-	\latex|Ett helt varv runt cirkeln är \(2\pi\)...|
+	konstanter, enstaka värden och kanske någon olikhet.
 	
 	\subsubsection{Ekvationer som ekvationer}\label{sec:3:ekvsomekv}
 	Längre och viktigare ekvationer bör inte typsättas i löpande text —
@@ -1764,8 +1763,7 @@ Mandelbrot-mängden, som\ldots{}
 	för att referera med hjälp av \cmd{ref} eller \cmd{vref} bör man använda
 	\cmd{eqref} för att referera till ekvationer. Sådana referenser typsätts
 	lite annorlunda, och bör inte heller föregås av någon text som indikerar
-	att det är en referens:
-	\latex|Det är uppenbart från \eqref{eq:cauchy-schwartz} att...|
+	att det är en referens.
 	
 	
 	\subsection{En snabbkurs i \LaTeX-matematik}
@@ -2324,9 +2322,6 @@ Mandelbrot-mängden, som\ldots{}
 	de båda. Notera att varje \env{multline}-omgivning endast får \emph{ett}
 	ekvationsnummer; vill man ha ett per rad ska man istället använda
 	\env{align}.
-	
-	Förutom långa ekvationer kan \env{multline} även med fördel användas i
-	till exempel långa uträkningar med flera steg.
 	
 	\subsubsection{Relaterade ekvationer: \env{align} och \env{gather}}
 	Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
