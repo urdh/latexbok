@@ -221,15 +221,6 @@
 \newcommand\eng[1]{(eng.~\textenglish{\emph{#1})}}		% english translation
 \newcommand\cmd[1]{\textenglish{\texttt{\textbackslash{}#1}}}% LaTeX command
 \newcommand\env[1]{\textenglish{\texttt{#1}}}			% LaTeX environment
-% Front/back page color and graphics
-\def\frontpagecolor{LimeGreen}
-\newcommand\frontpagegraphic{\begin{tikzpicture}[remember picture,overlay]
-	\coordinate [below=3.225cm] (midpoint)
-					   at (current page.north);
-	\node [anchor=north,fill=Black,opacity=0.25,
-	minimum width=2\paperwidth,
-	minimum height=6cm] at (midpoint) {};
-\end{tikzpicture}}
 % minted style
 \usemintedstyle{solarized}
 \definecolor{mintedbg}{rgb}{0.9665,0.9550,0.9175}
@@ -304,17 +295,6 @@
 \begin{document}
 	\pagestyle{empty}
 	\pagenumbering{Alph}
-	
-	{ % EXTERNAL FRONT PAGE (fold)
-		\pagecolor{\frontpagecolor}
-		\color{White}
-		\frontpagegraphic
-		\maketitlennp		
-		\normalcolor
-		\newpage
-		\pagecolor{White}
-	} % (end)
-	\cleardoublepage
 	
 	\begin{titlepage} % INTERNAL TITLE PAGE (fold)
 		\license{%Senast uppdaterad \moddate{}.\\
@@ -3779,18 +3759,4 @@ Mandelbrot-mängden, som\ldots{}
 	%% (end)
 
 	\backmatter
-	\pagestyle{empty}
-	\cleardoublepage\hbox{}\newpage
-	{ % EXTERNAL BACK PAGE (fold)
-		\pagecolor{\frontpagecolor}
-		\color{White}
-		\frontpagegraphic
-		\begin{tikzpicture}[remember picture,overlay]
-			\node [anchor=south east,above=2cm,right=-3.75cm] at (current page.south east)
-			 			{\includegraphics[width=3cm]{qrcode.pdf}};
-		\end{tikzpicture}
-		\normalcolor
-		\newpage
-		\pagecolor{White}
-	} % (end)
 \end{document}
