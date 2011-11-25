@@ -233,7 +233,7 @@
 \DeclareMathOperator{\erfc}{erfc}
 \renewcommand{\frac}[2]{\genfrac{}{}{}{}{\displaystyle #1}{\displaystyle #2}}
 \makeatletter
-\renewcommand\d[1]{\ensuremath{\,\mathrm{d}#1\@ifnextchar\d{\!}{}}}
+\renewcommand\d[1]{\ensuremath{\;\mathrm{d}#1\@ifnextchar\d{\!}{}}}
 \makeatother
 % Useful colors
 \definecolor{required}{rgb}{0.384,0.576,0.000}
@@ -298,9 +298,8 @@
 	
 	\begin{titlepage} % INTERNAL TITLE PAGE (fold)
 		\license{%Senast uppdaterad \moddate{}.\\
-		Licenserad under Creative Commons By-Nc-Nd-2.5.\\
-		\url{http://creativecommons.org/licenses/by-nc-nd/2.5/se/}\\
-		För användning utanför licensen, kontakta författaren.}
+		Licenserad under Creative Commons By-Sa 3.0.\\
+		\url{http://creativecommons.org/licenses/by-sa/3.0/}}
 		\maketitle
 		\begin{abstract}
 			En inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
@@ -341,19 +340,20 @@
 	
 	\mainmatter
 	%% INLEDNING (fold)
-	\section*{Inledning}
+	\phantomsection
 	\addcontentsline{toc}{section}{\hspace{1.3em}Inledning}
+	\section*{Inledning}
 	Att publicera något, oavsett om det är långa böcker eller korta artiklar,
 	är inte helt enkelt. Förr, innan det fanns en dator i varje hem och innan
-	programvaror som Microsoft Word och OpenOffice blev tillgängliga för var
+	programvaror som Microsoft Word och Open\-Office blev tillgängliga för var
 	man så var publicering något komplext, något som utfördes av många olika
 	personer. Arbetet delades upp i olika bitar och en expert inom varje
 	område fick sköta den biten; författande, typsättning, design och så
 	vidare.
 	
 	Moderna programvaror (ordbehandlare, främst) fungerar på ett helt annat
-	sätt. De ger all makt till författaren, som givetvis inte alltid är
-	särskilt bra på det där med typsättning eller design. Som en konsekvens
+	sätt. De ger all makt till författaren, som kanske varken vill eller bör
+	(författaren är ju inte typsättare) ha makt över typografin. Som en konsekvens
 	blir typsättningen av dokument inte alltid bra — användarna är under
 	illusionen att ett estetiskt tilltalande dokument även är ett bra dokument
 	rent typografiskt. Så är givetvis inte fallet.
@@ -365,9 +365,10 @@
 	helt olikt den uppdelning som görs mellan HTML och CSS.}. \LaTeX{} låter
 	dig som författare göra just detta.
 	
-	\subsection*{Vad är \LaTeX{}?}
+	\phantomsection
 	\addcontentsline{toc}{subsection}{Vad är \LaTeX{}?}
-	\LaTeX{} (uttalas \textipa{\tipafont[\textprimstress lA:tEx]}) är i princip en
+	\subsection*{Vad är \LaTeX{}?}
+	\LaTeX{} (uttalas \textipa{\tipafont[la\textprimstress tES]}) är i princip en
 	påbyggnad till \TeX{}, ett typsättningssystem. Man kan se det som att
 	\LaTeX{} är designern, och \TeX{} är typsättaren. \LaTeX{} berättar i
 	någon mening för \TeX{} hur den tror att du vill ha ditt dokument (utifrån
@@ -384,8 +385,9 @@
 	\XeTeX{}, som baseras helt på \textsc{Unicode} och har bättre stöd för
 	diverse typsnitt.
 	
-	\subsection*{Varför \LaTeX?}
+	\phantomsection
 	\addcontentsline{toc}{subsection}{Varför \LaTeX{}?}
+	\subsection*{Varför \LaTeX?}
 	Fördelen med \LaTeX{} är att författaren endast behöver lära sig några
 	enkla kommandon — sådana som gör texten kursiv eller infogar en figur
 	— men att dokumentet ändå håller mycket hög standard, precis som om
@@ -398,14 +400,15 @@
 	vilket gör att \LaTeX{} kan koncentreras på att vara bra på \emph{en} sak:
 	att typsätta dokument. Saker som är komplicerade eller omöjliga att göra
 	i en vanlig ordbehandlare, till exempel korsreferenser, figurer, tabeller,
-	fotnoter, referenslistor och dylikt är oerhört enkla att göra i \LaTeX{}
+	fotnoter, referenslistor och dylikt är mycket enkla att göra i \LaTeX{}
 	och oftast fullt automatiserade.
 	
 	Dessutom har \LaTeX{} traditionellt använts av akademiker eftersom det gör 
-	typsättning av just matematik och fysik både enkel och visuellt attraktiv. 
+	typsättning av just matematik och fysik både enkelt och visuellt attraktivt. 
 	
-	\subsection*{I denna introduktion}
+	\phantomsection
 	\addcontentsline{toc}{subsection}{I denna introduktion}
+	\subsection*{I denna introduktion}
 	Den här korta introduktionen kommer att visa dig hur man på ett enkelt
 	sätt typsätter dokument med \LaTeX{} i vanliga tillämpningar.
 	Dessutom kommer den framåt slutet peka på specifika paket eller
@@ -501,8 +504,8 @@
 	
 	\subsection{\LaTeX-dokument}
 	De dokument \LaTeX{} läser in är enkla textfiler, oftast med filändelsen
-	\cli{.tex}. Dessa kan skapas med vilken textredigerare som helst (till
-	exempel Emacs på Linux-system), men det rekommenderas att man använder
+	\cli{.tex}. Dessa kan skapas med vilken textredigerare som helst,
+	men det rekommenderas att man använder
 	en textredigerare med syntaxfärgning (då det underlättar felsökande) och
 	stavningskontroll. Oftast sparar man filen med teckenkodningen \UTF{} 
 	(detta gör de flesta moderna textredigerare), men det finns en risk att
@@ -575,7 +578,10 @@
 	
 	Finns det ingen obligatorisk parameter, eller om den frivilliga parametern
 	inte används, kan hela biten inklusive hakparantes/måsvinge helt
-	utelämnas.
+	utelämnas. Ibland kan den frivilliga parametern innehålla många bitar
+	information, till exempel olika flaggor till paket. Dessa brukar då
+	separeras med ett kommatecken.
+	
 	
 	\subsubsection{Kommentarer}
 	Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
@@ -617,6 +623,7 @@
 	\texttt{document}, som betecknar att detta är
 	dokumentets innehåll. Omgivningar förklaras utförligt \vpageref{sec:omg}.
 	
+	\phantomsection
 	\subsection{Dokumentets layout}\label{sec:1:layout}
 	\LaTeX{} är inte helt oflexibelt, och man kan med hjälp av olika kommandon
 	i inledningen till dokumentet ändra både utseendet och beteendet hos
@@ -722,6 +729,7 @@
 		\label{sec:1:inputenc}
 	\end{description}
 	
+	\phantomsection
 	\subsection{Från \TeX{} till \PDF}
 	För att skapa ett typsatt \PDF-dokument utifrån en \LaTeX-fil måste man
 	köra den genom den så kallade kompilatorn. \LaTeX{} kommer inte med något
@@ -886,7 +894,7 @@
 	troligtvis bort, och om du påbörjar en ny tanke mitt i ett stycke så ska
 	det förmodligen brytas.
 	
-	Många underskattar vikten av välgenomtänkta styckesindelningar. Många vet
+	Många underskattar vikten av välgenomtänkta styckesindelningar. Andra vet
 	inte ens vad syftet med en styckesindelning är, eller (speciellt i 
 	\LaTeX{}) introducerar nya stycken utan att vara medvetna om det. Detta
 	misstag är mycket lätt att göra om till exempel ekvationer används i 
@@ -981,7 +989,8 @@ Mandelbrot-mängden, som\ldots{}
 	hjälp av kommandot \cmd{tableofcontents}, där endast de numrerade
 	rubrikerna inkluderas\footnote{Vill man inkludera även onumrerade rubriker
 	i sin innehållsförteckning måste man uttryckligen lägga till dessa med
-	kommandot \cmd{addcontentsline}.}.
+	kommandot \cmd{addcontentsline}. Detta läggs lämpligen till på raden efter
+	rubriken.}.
 	Djupet på innehållsförteckningen styrs med räknaren \texttt{tocdepth}:
 	\latex|\setcounter{tocdepth}{2}|
 	
@@ -1518,13 +1527,18 @@ Mandelbrot-mängden, som\ldots{}
 	intervall, och skrivs med hjälp av två bindestreck (\verb|--|):
 	\latex|...det kan ta upp emot 3--4 timmar att...|
 	
-	Det fjärde och sista strecket kallas tankstreck (—) och är det längsta av
-	strecken. Tankstrecket är relativt ovanligt inom svensk typografi, men det
+	Det fjärde och sista strecket kallas långt tankstreck (—) och är det längsta av
+	strecken. Det långa tankstrecket är relativt ovanligt inom svensk typografi, men det
 	finns ingen anledning att undvika det\footnote{För tankar (\emph{no pun
 	intended}) angående användningen av tankstreck, se 
 	\citeasnoun[ss.~46–47]{LIU98} — observera dock att man \emph{inte} som 
 	\citename{LIU98} föreslår ska använda tankstrecket i intervall eller
-	punktlistor.}. Ett tankstreck skriver man med tre bindestreck i följd
+	punktlistor. Det \citeasnoun{Sprakradet08} och \citename{LIU98} betecknar som
+	”tankstreck” är i själva verket mycket närmre det som i \LaTeX{} anses vara ett
+	intervallstreck, det vill säga ett lite kortare tecken. Personligen föredrar jag 
+	att göra skillnad på de två, och gör man det bör intervallstrecket användas till
+	intervall, och det långa tankstrecket som alternativ till kommatecknet.}.
+	Ett långt tankstreck skriver man med tre bindestreck i följd
 	(\verb|---|), och man bör omge det med mellanslag:
 	\latex|...det är --- för tillfället åtminstone --- omöjligt att...|
 	
@@ -1695,7 +1709,7 @@ Mandelbrot-mängden, som\ldots{}
 	matematik har \textit{American Mathematical Society}, \AmS, skapat ett 
 	antal paket (främst \pack{amsmath} och \pack{amssymb}) som kollektivt 
 	refereras till som \AmS\LaTeX{} och som gör typsättning av matematik med 
-	\LaTeX{} oändligt mycket bättre.
+	\LaTeX{} mycket bättre.
 	
 	Dessa paket är dock enorma, och det finns hela böcker tillägnade endast
 	typsättning av matematik i \LaTeX{} \citeaffixed[som för övrigt är en 
@@ -1765,10 +1779,10 @@ Mandelbrot-mängden, som\ldots{}
 	lite annorlunda, och bör inte heller föregås av någon text som indikerar
 	att det är en referens.
 	
-	
+	\phantomsection
 	\subsection{En snabbkurs i \LaTeX-matematik}
 	Nu när du vet hur man skapar förutsättningarna för att typsätta matematik
-	är det dags att gå in på detaljerna. Det finns oerhört många konventioner
+	är det dags att gå in på detaljerna. Det finns många konventioner
 	och betänkligheter när det gäller typsättning av matematik, så det är
 	svårt att göra något annat än att skrapa på ytan, men sidorna framöver
 	ämnar presentera tillräckligt mycket för att du ska klara att typsätta
@@ -1776,7 +1790,7 @@ Mandelbrot-mängden, som\ldots{}
 	eller Teknisk Matematik.
 	
 	\label{sec:3:subscript}
-	Till att börja med måste två oerhört elementära operationer förklaras;
+	Till att börja med måste två elementära operationer förklaras;
 	\emph{superskript} (för potenser och dylikt) och \emph{subskript} (för 
 	index och liknande). Ett superskript inför man i \LaTeX{} med hjälp av
 	en cirkumflex (\verb|^|); koden \verb|\(e^x\)| producerar alltså \(e^x\).
@@ -1791,7 +1805,10 @@ Mandelbrot-mängden, som\ldots{}
 	direkt efter variabeln (eller operatorn):
 	\latex|\(x_i^2\)|
 	Dessa två exempel producerar alltså \(x_{i,j}\) och \(x_i^2\), 
-	respektive.
+	respektive. Det skall även nämnas att man kan sätta sub- och superskript
+	framför en tom grupp, vilket är användbart om man vill beteckna exempelvis
+	isotoper: \verb|{}_{92}^{235}\textrm{U}| kan till exempel beteckna en uranatom
+	och typsätts \({}_{92}^{235}\textrm{U}\).
 	
 	Det finns även några viktiga skillnader mellan matematiktypsättning och
 	vanlig texttypsättning, som främst har att göra med mellanrum:
@@ -1807,8 +1824,8 @@ Mandelbrot-mängden, som\ldots{}
 		\item Alla bokstäver anses vara variabler och typsätts därför med
 		kursiv text. De bokstäver som inte är variabler (till exempel
 		differentieringsoperatorn \(\mathrm{d}\)) måste skrivas in med 
-		kommandot
-		\cmd{mathrm\{...\}}, och längre bitar text (hela ord och så vidare)
+		kommandot \cmd{mathrm\{...\}}. Längre bitar text (eller snarare text
+		som egentligen skulle kunna vara brödtext)
 		bör skrivas in med kommandot \cmd{text}.
 	\end{itemize}
 	
@@ -1885,7 +1902,10 @@ Mandelbrot-mängden, som\ldots{}
 	grekiska bokstäverna inte har några kommandon för versaler, eftersom dessa
 	är identiska med latinska bokstäver, samt att några har ”varianter” som
 	ser något annorlunda ut (till exempel \cmd{varepsilon}, som är mer lik
-	det lilla epsilon man brukar rita för hand än \cmd{epsilon}).
+	det lilla epsilon man brukar rita för hand än \cmd{epsilon}). Notera även att
+	de inte typsätts i kursiv stil, vilket oftast är lämpligt. I så fall bör man använda
+	paketet \pack{fixmath}, som ser till att även de grekiska bokstäverna typsätts
+	som de variabler de faktiskt brukar vara.
 	
 	Det är givetvis svårt (en del
 	skulle säga omöjligt) att hålla reda på motsvarande \LaTeX-kommandon för
@@ -1999,6 +2019,8 @@ Mandelbrot-mängden, som\ldots{}
 			\cmd{vec\{a\}} & \(\vec{a}\) & Vektorer (alternativ notation existerar) \\
 			\cmd{dot\{a\}} & \(\dot{a}\)& Förstaderviata med avseende på tid\\
 			\cmd{ddot\{a\}} &\(\ddot{a}\)& Andraderivata med avseende på tid\\
+			\cmd{a'} & \(a'\)& Generell förstaderivata\\
+			\cmd{a''} & \(a''\)& Generell andraderivata\\
 			\cmd{bar\{a\}} & \(\bar{a}\) & Statistiskt medelvärde \\
 			\cmd{tilde\{a\}} & \(\tilde{a}\) & Statistisk median \\
 			\cmd{widehat\{abc\}} & \(\widehat{abc}\) & Variant av \cmd{hat} för flera tecken \\
@@ -2229,7 +2251,7 @@ Mandelbrot-mängden, som\ldots{}
 	\begin{latexcode}
 \makeatletter
 \renewcommand\d[1]{\ensuremath{%
-  \,\mathrm{d}#1\@ifnextchar\d{\!}{}}}
+  \;\mathrm{d}#1\@ifnextchar\d{\!}{}}}
 \makeatother
 	\end{latexcode}
 	\label{sec:3:integ:kod}
@@ -2336,17 +2358,18 @@ Mandelbrot-mängden, som\ldots{}
 		\subfloat[Tre ekvationer typsatta med \env{align}]{\fbox{ % align
 			\label{fig:aligngather:align}
 			\begin{minipage}{0.4\textwidth}\vspace{-1.2em}
-				\begin{subequations}
+%				\begin{subequations}
 					\begin{align}
 						y_1 &= x^2 + 2x + 1 \\
 						y_2 &= x^2 - 2x + 1 \\
 						y_3 &= x^2 - 1
 					\end{align}
-				\end{subequations}
+%				\end{subequations}
 			\end{minipage}
 		}}
 		\quad
 		\subfloat[Tre ekvationer typsatta med \env{gather}]{\fbox{ % gather
+			\label{fig:aligngather:gather}
 			\begin{minipage}{0.4\textwidth}\vspace{-1.2em}
 				\begin{subequations}
 					\begin{gather}
@@ -2385,7 +2408,7 @@ Mandelbrot-mängden, som\ldots{}
 	
 	\subsubsubsection*{Underekvationer}
 	Förutom \env{align} och \env{gather} visar även figur~%
-	\vref{fig:aligngather} hur omgivningen \env{subequations} fungerar. Denna
+	\vref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
 	omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
 	och får bara innehålla en (och endast en) matematikomgivning, inget annat:
 	\begin{latexcode}
@@ -2709,7 +2732,7 @@ Mandelbrot-mängden, som\ldots{}
 	tyska konventioner är mycket nära de svenska.}:
 	\latex|\sisetup{locale=DE}|
 	
-	Paketet kan göra oerhört mycket (man kan även definiera sina egna
+	Paketet kan göra väldigt mycket (man kan även definiera sina egna
 	enheter), och det är omöjligt att gå igenom allt i en kort introduktion.
 	Den intresserade hänvisas till \pack{siunitx}-manualen \cite{Wright11},
 	som utförligt förklarar hur paketet fungerar och vilka inställningar som
@@ -2997,7 +3020,7 @@ Mandelbrot-mängden, som\ldots{}
 	Scopus\footnote{\url{http://www.scopus.com/home.url}}, gör det möjligt att
 	enkelt exportera information om de artiklar man refererar till i \BibTeX-%
 	format, som sedan kan läggas till direkt i den egna referensdatabasen.
-	Detta är oerhört praktiskt i större projekt så som kandidatuppsatser.
+	Detta är mycket praktiskt i större projekt så som kandidatuppsatser.
 	
 	\subsection{\BibTeX{} med \LaTeX{}}
 	För att referera till de referenser man har i sin referensdatabas
@@ -3069,7 +3092,7 @@ Mandelbrot-mängden, som\ldots{}
 	och \pack{chscite} implementerar dock Harvard- och Chicago-stilen.
 	
 	Även själva bibliografin, alltså listan över källor, kan utformas på
-	oerhört många sätt. Figur~\vref{fig:bibstyle} visar några av de stilar
+	många sätt. Figur~\vref{fig:bibstyle} visar några av de stilar
 	som finns tillgängliga med \BibTeX{} och på CTAN. Vilken stil man vill
 	använda är upp till författaren (eller kanske oftare förläggaren), men
 	generellt sett så brukar man i matematiska kretsar använda 
@@ -3259,12 +3282,15 @@ Mandelbrot-mängden, som\ldots{}
 	
 	Det finns så klart en uppsjö olika maillistor, forum och sökmotorer (och
 	phaddrar, för dig som går på en teknisk högskola) som kan användas för att
-	lösa problem, ställa frågor och utforska \LaTeX. En oerhört bra resurs är
+	lösa problem, ställa frågor och utforska \LaTeX. En mycket bra resurs är
 	\emph{\TeX{} Stack Exchange}\footnote{\url{http://tex.stackexchange.com/}}
 	där man kan ställa frågor om \TeX, \LaTeX{} och andra relaterade system.
 	Många stora namn i \TeX-världen dyker upp där lite då och då, och undrar
-	man något om \LaTeX{} så är det ett utmärkt ställe att fråga.
+	man något om \LaTeX{} så är det ett utmärkt ställe att fråga. Använder man
+	IRC kan man också med fördel besöka \verb|#latex|-kanalen på Freenode%
+	\footnote{\url{irc://chat.freenode.net}}.
 	
+	\phantomsection
 	\subsection{Tips för stora projekt}
 	För stora \LaTeX-projekt (till exempel kandidatarbeten, examensarbeten
 	och liknande) är det viktigt att kunna ha en ordentlig ordning på sitt
@@ -3309,12 +3335,13 @@ Mandelbrot-mängden, som\ldots{}
 	För större projekt och projekt som utförs i grupp är det mycket praktiskt
 	att kunna spåra ändringar och ändra dokumentet från många olika platser
 	(gärna samtidigt). Med hjälp av ett versionshanteringssystem så som 
-	Git\footnote{\url{http://git-scm.com/}} eller
 	Subversion\footnote{\url{http://subversion.tigris.org/}} blir detta
 	enkelt. Ännu bättre blir det om man använder ett distribuerat system så
-	som Mercurial\footnote{\url{http://mercurial.selenic.com/}}, hostat helt
-	gratis av något snällt företag, till exempel på
-	Bitbucket\footnote{\url{https://bitbucket.org/}}.
+	som Mercurial\footnote{\url{http://mercurial.selenic.com/}} eller
+	Git\footnote{\url{http://git-scm.com/}}, hostat helt gratis av något snällt
+	företag, till exempel på Bitbucket\footnote{\url{https://bitbucket.org/}}
+	(Github\footnote{\url{https://github.com/}} eller Gitorious%
+	\footnote{\url{http://gitorious.org/}} om man föredrar Git framför Mercurial).
 	
 	Att utförligt förklara hur Mercurial fungerar är utanför den här bokens
 	område, men är man intresserad bör man läsa
@@ -3472,6 +3499,11 @@ Mandelbrot-mängden, som\ldots{}
 		och dylikt. Användbart i vissa sammanhang, främst för att typsätta
 		föreläsningsanteckningar eller uppgifter. 
 		
+		\item[\pack{fixmath}]
+		korrigerar typsättningen av grekiska bokstäver, så att även dessa typsätts
+		kursivt (som variabler). Gör det även möjligt att typsätta matematik fetstilt,
+		med hjälp av kommandot \cmd{mathbold}.
+		
 		\item[\pack{mathtools}]
 		lagar några småfel i \pack{amsmath} och definierar kommandon som till
 		exempel \cmd{DeclarePairedDelimiter}, som introducerades
@@ -3531,6 +3563,11 @@ Mandelbrot-mängden, som\ldots{}
 	löser dem.
 	
 	\begin{description}
+		\item[\pack{enumitem}]
+		gör det möjligt att definiera egna sorters listor, och modifierar 
+		\env{enumerate}	så att man även kan specificera en egen etikett, återuppta
+		numreringen från förra listan, och mycket mer.
+		
 		\item[\pack{float}]
 		definierar ett kommando \cmd{newfloat} som skapar nya sorters flytande
 		objekt (vilka diskuterats \vpageref{sec:floats}).
@@ -3643,6 +3680,11 @@ Mandelbrot-mängden, som\ldots{}
 		alternativ om man ska inkludera kod och vill ha fullständig
 		syntaxfärgning. Paketet lider dock av samma problem med svenska tecken
 		som \pack{listings}.
+		
+		\item[\emph{\pack{todonotes}}]
+		låter dig infoga (synliga) ”att göra”-anteckningar i ditt dokument, tillsammans
+		med en lista över dessa. Paketet innehåller även ett kommando \cmd{missingfigure},
+		som kan användas för att markera en saknad figur.
 	\end{description}
 	
 	\subsection{Andra \TeX-baserade projekt}
@@ -3725,6 +3767,7 @@ Mandelbrot-mängden, som\ldots{}
 		\renewcommand\refname{Referenser}
 		\let\oldurl=\url\renewcommand\url[1]{\newline{\small\oldurl{#1}}}
 		\cleardoublepage
+		\phantomsection
 		\addcontentsline{toc}{section}{\hspace{1.3em}Referenser}
 		\bibliography{referenser}
 	\end{english}
