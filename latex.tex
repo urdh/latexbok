@@ -406,7 +406,7 @@
 	Dessutom har \LaTeX{} traditionellt använts av akademiker eftersom det gör 
 	typsättning av just matematik och fysik både enkelt och visuellt attraktivt. 
 	
-	\phantomsection
+	\phantomsection\vspace{-1em}
 	\addcontentsline{toc}{subsection}{I denna introduktion}
 	\subsection*{I denna introduktion}
 	Den här korta introduktionen kommer att visa dig hur man på ett enkelt
@@ -660,6 +660,7 @@
 	\pack{koma-script}, \pack{octavo} och \pack{refman}. Den intresserade
 	uppmanas att leta upp dokumentationen för dessa på CTAN.
 	
+	\newpage
 	Standardklasserna har också ett antal inställningar som kan ges som en
 	kommaseparerad lista i den frivilliga parametern till \cmd{documentclass}:
 	\begin{description}[font=\ttfamily]
@@ -1385,6 +1386,7 @@ Mandelbrot-mängden, som\ldots{}
 	horisontella linjer; dessa är från \pack{booktabs} och används enligt
 	exempel~\ref{ex:tabular}.
 	
+	\newpage
 	Det är även viktigt att komma ihåg några typografiska regler när det
 	gäller tabeller. Alla dessa ges av \citeasnoun[s.~3]{Fear05}. Fritt
 	översatt:
@@ -1800,6 +1802,7 @@ Mandelbrot-mängden, som\ldots{}
 	vill upphöja/nedsänka mer än ett tecken (eller kommando), så måste man
 	omsluta dessa med måsvingar:
 	\latex|\(x_{i,j}\)|
+	\newpage
 	Detta innebär även att om man vill ha både superskript och subskript efter
 	en variabel så är det inget problem; man inkluderar bara dessa i följd
 	direkt efter variabeln (eller operatorn):
@@ -1807,7 +1810,7 @@ Mandelbrot-mängden, som\ldots{}
 	Dessa två exempel producerar alltså \(x_{i,j}\) och \(x_i^2\), 
 	respektive. Det skall även nämnas att man kan sätta sub- och superskript
 	framför en tom grupp, vilket är användbart om man vill beteckna exempelvis
-	isotoper: \verb|{}_{92}^{235}\textrm{U}| kan till exempel beteckna en uranatom
+	isotoper: \verb|{}_{92}^{235}|\\\verb|\textrm{U}| kan till exempel beteckna en uranatom
 	och typsätts \({}_{92}^{235}\textrm{U}\).
 	
 	Det finns även några viktiga skillnader mellan matematiktypsättning och
@@ -1835,7 +1838,7 @@ Mandelbrot-mängden, som\ldots{}
 	som kvoter, binomialkoefficienter, rötter och så vidare. Dessa visas
 	kollektivt i tabell~\vref{tab:math:enkla}.
 	
-	\begin{table}[t]
+	\begin{table}[p]
 		\centering
 		\caption{Enkla matematiska konstruktioner i \LaTeX{}.}
 		\label{tab:math:enkla}
@@ -1856,7 +1859,7 @@ Mandelbrot-mängden, som\ldots{}
 	\cmd{overbrace} och \cmd{underbrace}, vilket visas i
 	exempel~\vref{ex:overbrace}.
 	
-	\begin{kod}[b]
+	\begin{kod}[p]
 		\centering
 		\begin{minipage}{0.8\textwidth} % kod
 			\begin{latexcode}
@@ -1916,7 +1919,7 @@ Mandelbrot-mängden, som\ldots{}
 	kan rita sin symbol och få en lista över liknande \LaTeX-symboler och
 	deras motsvarande kommandon.
 	
-	\begin{table}[tbp]
+	\begin{table}[p]
 		\centering 
 		\caption{Diverse användbara symboler i \LaTeX.}
 		\label{tab:symbs}
@@ -1977,6 +1980,7 @@ Mandelbrot-mängden, som\ldots{}
 		\end{tabular}
 	\end{table}
 	
+	\vspace{-.5em}
 	\subsubsubsection*{Operatorer}\label{sec:3:operatorer}%
 	Förutom symbolerna som nyss diskuterades finns även en
 	mycket stor mängd operatorer inom matematiken. Även dessa kan man leta
@@ -1987,6 +1991,7 @@ Mandelbrot-mängden, som\ldots{}
 	över de vanligaste pilarna, relationssymbolerna och operatorerna i 
 	\LaTeX{} återfinns i tabell~\vrefrange{tab:pilar}{tab:operatorer}. 
 	
+	\vspace{-.5em}
 	\subsubsubsection*{Hattar, prickar, primtecken och liknande}
 	Ibland vill man även modifiera variablers betydelse, kanske för att
 	beteckna en transformerad variabel, en vektor 
@@ -2007,7 +2012,7 @@ Mandelbrot-mängden, som\ldots{}
 	för att göra så att \cmd{vec} istället visar variabeln fetstilt:
 	\latex|\renewcommand\vec[1]{\boldmath{#1}}|
 	
-	\begin{table}[tbp]
+	\begin{table}[p]
 		\centering 
 		\caption{Hattar och dylikt med \LaTeX-kommandon.}
 		\label{tab:hattar}
@@ -2091,6 +2096,7 @@ Mandelbrot-mängden, som\ldots{}
 	\end{table}
 	%% (end)
 	
+	\vspace{-.5em}
 	\subsubsection{Paranteser och dylikt}
 	Paranteser är mycket viktiga inom matematiken för att visa olika typer av
 	grupper, och besitter dessutom egenskapen att de måste skalas med sin
@@ -2317,7 +2323,7 @@ Mandelbrot-mängden, som\ldots{}
 	Ibland (oroväckande ofta, till och med) stöter man på ekvationer som är
 	alldeles för långa för att få plats på en rad. Hamnar man i en sådan
 	situation är det \env{multline} (notera avsaknandet av ett \texttt{i})
-	man bör använda. Omgivningen typsätter matematik på flera rader, där den
+	man bör använda.\newpage  Omgivningen typsätter matematik på flera rader, där den
 	första raden vänsterjusteras, sista raden högerjusteras och rader 
 	däremellan centreras — ett exempel kan ses i \eqref{eq:multline}.
 	
@@ -2345,15 +2351,7 @@ Mandelbrot-mängden, som\ldots{}
 	ekvationsnummer; vill man ha ett per rad ska man istället använda
 	\env{align}.
 	
-	\subsubsection{Relaterade ekvationer: \env{align} och \env{gather}}
-	Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
-	i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
-	\env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
-	Figur~\vref{fig:aligngather} visar hur dessa omgivningar ser ut; den enda
-	skillnaden mellan de två är att man med \env{align} kan placera ekvationer
-	mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
-	
-	\begin{figure}[tbp]
+	\begin{figure}[b]
 		\centering 
 		\subfloat[Tre ekvationer typsatta med \env{align}]{\fbox{ % align
 			\label{fig:aligngather:align}
@@ -2384,6 +2382,15 @@ Mandelbrot-mängden, som\ldots{}
 		och \env{subequations}.}
 		\label{fig:aligngather}
 	\end{figure}
+	\clearpage
+	
+	\subsubsection{Relaterade ekvationer: \env{align} och \env{gather}}
+	Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
+	i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
+	\env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
+	Figur~\vref{fig:aligngather} visar hur dessa omgivningar ser ut; den enda
+	skillnaden mellan de två är att man med \env{align} kan placera ekvationer
+	mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
 	
 	Nya rader skapas i båda omgivningarna med nyradskommandot \verb|\\|, och
 	i \env{align} använder man (på liknande sätt som i \env{tabular}) ett
@@ -2406,29 +2413,7 @@ Mandelbrot-mängden, som\ldots{}
 	sätta en etikett på en enskild rad genom att placera \cmd{label} på samma
 	sätt.
 	
-	\subsubsubsection*{Underekvationer}
-	Förutom \env{align} och \env{gather} visar även figur~%
-	\vref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
-	omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
-	och får bara innehålla en (och endast en) matematikomgivning, inget annat:
-	\begin{latexcode}
-\begin{subequations}
-  \begin{align}
-    y_1 &= x^2 + 2x + 1 \\
-    y_2 &= x^2 - 2x + 1 \\
-    y_3 &= x^2 - 1
-  \end{align}
-\end{subequations}
-	\end{latexcode}
-	
-	\subsubsection{Matriser}
-	Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
-	av de omgivningar som visas i figur~\vref{fig:matriser}. Dessa måste
-	användas i matematikläge, det vill säga i en annan omgivning som används
-	för att typsätta matematik. Kolumner separeras med \verb|&| och
-	radbrytningar görs med \verb|\\|.
-	
-	\begin{figure}[t]
+	\begin{figure}[b]
 		\centering 
 		\subfloat[\env{Vmatrix}]{
 			\begin{minipage}{0.15\textwidth}
@@ -2483,6 +2468,29 @@ Mandelbrot-mängden, som\ldots{}
 		\caption{Fem av de sex matristyper \AmS\LaTeX{} definierar.}
 		\label{fig:matriser}
 	\end{figure}
+	
+	\clearpage
+	\subsubsubsection*{Underekvationer}
+	Förutom \env{align} och \env{gather} visar även figur~%
+	\vref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
+	omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
+	och får bara innehålla en (och endast en) matematikomgivning, inget annat:
+	\begin{latexcode}
+\begin{subequations}
+  \begin{align}
+    y_1 &= x^2 + 2x + 1 \\
+    y_2 &= x^2 - 2x + 1 \\
+    y_3 &= x^2 - 1
+  \end{align}
+\end{subequations}
+	\end{latexcode}
+	
+	\subsubsection{Matriser}
+	Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
+	av de omgivningar som visas i figur~\vref{fig:matriser}. Dessa måste
+	användas i matematikläge, det vill säga i en annan omgivning som används
+	för att typsätta matematik. Kolumner separeras med \verb|&| och
+	radbrytningar görs med \verb|\\|.
 	
 	I stora eller repetitiva matriser (till exempel enhetsmatrisen) behöver
 	man inte alltid skriva ut alla element, utan istället använda notation
@@ -2543,7 +2551,7 @@ Mandelbrot-mängden, som\ldots{}
 	en del manuella justeringar. Detta kan man göra med de kommandon som ges
 	i tabell~\vref{tab:spaces}.
 	
-	\begin{table}[b]
+	\begin{table}[tbp]
 		\def\abox{\fbox{\phantom{z}}}
 		\centering 
 		\caption[De mellanrum \LaTeX{} definierar.]{De mellanrum \LaTeX{}
@@ -2612,7 +2620,7 @@ Mandelbrot-mängden, som\ldots{}
 	\verb|\frac{1}{2}| eftersom det är den högsta delen av gruppen vi vill
 	matcha.
 	
-	\begin{figure}[p]
+	\begin{figure}[tbp]
 		\centering
 		\begin{minipage}{\textwidth}
 			\begin{minipage}{0.4\textwidth} % ekvation
@@ -2661,10 +2669,10 @@ Mandelbrot-mängden, som\ldots{}
 	vilket sammanhang punkterna används i. Det finns många olika konventioner,
 	och för att enkelt kunna byta mellan dessa är det bättre att använda 
 	\emph{semantiska} punktkommandon. \AmS\LaTeX{} definierar fem sådana
-	(tabell~\vref{tab:pktr}) för olika tillfällen. Använd alltid dessa om det
+	(tabell~\ref{tab:pktr}) för olika tillfällen. Använd alltid dessa om det
 	är möjligt!
 	
-	\begin{table}[p]
+	\begin{table}[tbp]
 		\centering 
 		\caption{Semantiska punktkommandon definierade av \AmS\LaTeX.}
 		\label{tab:pktr}
@@ -3053,6 +3061,7 @@ Mandelbrot-mängden, som\ldots{}
 	(\cmd{cite} och \cmd{nocite}) samt de som definieras av olika paket (till
 	exempel \pack{harvard}, vilket diskuteras~\vpageref{sec:5:harvard}).
 	
+	\newpage
 	Kommandot \cmd{cite} refererar till en källa i databasen och skriver ut
 	en hänvisning till bibliografin. För de ursprungliga stilarna i \BibTeX{}
 	är denna hänvisning en siffra eller nyckel inom hakparanteser (alltså
@@ -3091,6 +3100,7 @@ Mandelbrot-mängden, som\ldots{}
 	referenser med nycklar eller siffror. Vissa paket så som \pack{harvard}
 	och \pack{chscite} implementerar dock Harvard- och Chicago-stilen.
 	
+	\newpage
 	Även själva bibliografin, alltså listan över källor, kan utformas på
 	många sätt. Figur~\vref{fig:bibstyle} visar några av de stilar
 	som finns tillgängliga med \BibTeX{} och på CTAN. Vilken stil man vill
@@ -3248,13 +3258,13 @@ Mandelbrot-mängden, som\ldots{}
 		sidor.
 		
 		\item[\emph{The \LaTeX{} Companion} \cite{Mittelbach04}]
-		beskriver alla \LaTeX-kommandon och en stor mängd paket. Om du ska
+		beskriver alla \LaTeX-\\kommandon och en stor mängd paket. Om du ska
 		skriva ett eget paket eller en egen dokumentklass, eller bara är
 		intresserad av att ”hacka” \LaTeX{} lite, så bör du absolut ta en titt
 		på den här boken. En mycket bra referens för den vane \TeX{}aren.
 		
 		\item[\emph{\LaTeX: A Document Preparation System} \cite{Lamport94}]
-		skrevs av författaren till \LaTeX{} och kan anses vara det närmsta en
+		skrevs av\\ författaren till \LaTeX{} och kan anses vara det närmsta en
 		”manual” till \LaTeX{} man kan komma. Främst av historiskt intresse,
 		och inget för nybörjaren.
 		
@@ -3343,6 +3353,7 @@ Mandelbrot-mängden, som\ldots{}
 	(Github\footnote{\url{https://github.com/}} eller Gitorious%
 	\footnote{\url{http://gitorious.org/}} om man föredrar Git framför Mercurial).
 	
+	\newpage
 	Att utförligt förklara hur Mercurial fungerar är utanför den här bokens
 	område, men är man intresserad bör man läsa
 	\emph{Hg Init}\footnote{\url{http://hginit.com/}}, som trots sitt bruk av
@@ -3361,6 +3372,7 @@ Mandelbrot-mängden, som\ldots{}
 	fortsätter kompilera som om koden alltid funnits där. Detta är praktiskt
 	om man av någon anledning inte vill använda den andra metoden.
 	
+	\newpage
 	Den andra metoden, \cmd{include}, är i princip ekvivalent till \cmd{input}
 	med den skillnaden att en sidbrytning läggs in före och efter den 
 	inkluderade koden. Dessutom kan man med hjälp av kommandot
@@ -3401,6 +3413,7 @@ Mandelbrot-mängden, som\ldots{}
 		dessa språk att avstavas ordentligt. Paketet är ett måste då man
 		använder \LaTeX, men har ersatts av \pack{polyglossia} i \XeTeX.
 		
+		\newpage
 		\item[\pack{fixltx2e}]
 		korrigerar en del buggar i \LaTeXe-kärnan och gör till 
 		exempel matematikkommandon robusta. Inkludera alltid.
@@ -3790,10 +3803,11 @@ Mandelbrot-mängden, som\ldots{}
 	tillgänglig som en \texttt{.tex}-fil för nedladdning%
 	\footnote{\url{http://blog.sigurdhsson.org/projects/latexbok.html}}.
 	
-	\ifdraft{\inputminted[frame=single,firstline=1,lastline=24]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=1,lastline=24]{latex}{ex/A/mall.tex}}
+	\ifdraft{\inputminted[frame=single,firstline=1,lastline=12]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=1,lastline=12]{latex}{ex/A/mall.tex}}
 	\newpage
-	\ifdraft{\inputminted[frame=single,firstline=25,lastline=80]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=25,lastline=80]{latex}{ex/A/mall.tex}}
-	\ifdraft{\inputminted[frame=single,firstline=81,lastline=118]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=81,lastline=118]{latex}{ex/A/mall.tex}}
+	\ifdraft{\inputminted[frame=single,firstline=13,lastline=53]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=13,lastline=53]{latex}{ex/A/mall.tex}}
+	\ifdraft{\inputminted[frame=single,firstline=54,lastline=94]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=54,lastline=94]{latex}{ex/A/mall.tex}}
+	\ifdraft{\inputminted[frame=single,firstline=95,lastline=118]{latex}{ex/A/mall.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=95,lastline=118]{latex}{ex/A/mall.tex}}
 	%% (end)
 
 	\backmatter
