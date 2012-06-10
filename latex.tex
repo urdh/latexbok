@@ -1,4 +1,4 @@
-\documentclass[swe,10pt,nofont]{skrapport}
+\documentclass[swe,10pt,nofont,nocolor]{skrapport}
 %% Packages (fold)
 % Packages included by <skrapport>:
 % polyglossia, microtype, icomma, amsmath,
@@ -96,18 +96,18 @@
 %% Hacks (fold)
 \makeatletter
 % Fix \hologo{XeTeX}
-\def\HoLogo@Xe#1{% 
-   X% 
-   \kern-.1em\relax 
-   \ltx@IfUndefined{HOLOGO@ReflectBox\hologodriver} 
-     {\ltx@IfUndefined{HOLOGO@ReflectBox}\ltx@firstoftwo\ltx@secondoftwo} 
-     \ltx@secondoftwo 
-   {e}{% 
-     \lower.5ex\hbox{% 
-       \HOLOGO@ReflectBox{E}% 
-     }% 
-   }% 
-}
+%\def\HoLogo@Xe#1{% 
+%   X% 
+%   \kern-.1em\relax 
+%   \ltx@IfUndefined{HOLOGO@ReflectBox\hologodriver} 
+%     {\ltx@IfUndefined{HOLOGO@ReflectBox}\ltx@firstoftwo\ltx@secondoftwo} 
+%     \ltx@secondoftwo 
+%   {e}{% 
+%     \lower.5ex\hbox{% 
+%       \HOLOGO@ReflectBox{E}% 
+%     }% 
+%   }% 
+%}
 % Force cramped style on inline math
 \def\(#1\){\relax\ifmmode\@badmath\else$\fi\cramped{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
 %\def\(#1\){\relax\ifmmode\@badmath\else$\fi\smash{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
