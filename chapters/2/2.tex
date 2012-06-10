@@ -1,0 +1,846 @@
+\documentclass[../../latex.tex]{subfiles}
+\begin{document}
+\section{Typsättning med \LaTeX}\label{sec:2}
+När du nu vet hur den grundläggande strukturen i ett \LaTeX-dokument ser
+ut är det dags att börja typsätta riktiga dokument. Att typsätta dokument
+är dock något som
+tål att tänkas på — den här delen kommer därför inte bara gå igenom
+vanliga \LaTeX-konstruktioner och kommandon, utan även att inleda med en
+kort diskussion gällande struktur och språk. Efter den här delen bör du
+med andra ord inte ha några problem med att producera riktiga dokument,
+varken \LaTeX- eller strukturmässigt.
+
+\subsection{Text- och språkstruktur}
+Struktur är mycket viktigt för att läsaren ska kunna ta del av de idéer
+och den information texten förmedlar. Strukturen ska givetvis framgå
+direkt ur texten, men med väl genomtänkt typografi förstärks denna
+struktur och hjälper läsaren (och författaren) en bit på vägen.
+
+\LaTeX{} skiljer sig från andra typsättningssystem (och ordbehandlare) på
+det sättet att du endast behöver berätta för \LaTeX{} vilken logisk och
+semantisk struktur din text har. Dessutom så främjar det en god struktur
+genom det sätt språket är uppbyggt. När man berättat för \LaTeX{} vilken
+struktur texten har tolkar kompilatorn dessa förklaringar efter
+förbestämda regler (givna av dokumentklassen och de paket som används) och
+skapar den typografiska strukturen utifrån dessa. Du får alltså vara
+författaren, och \LaTeX{} tar rollen som typsättare.
+
+\subsubsection{Textstycket}
+Den mest grundläggande byggstenen i \LaTeX{} (och både typografi och 
+författande) är stycket. Vi kallar det ”byggsten” eftersom ett stycke är
+en typografisk enhet som ska förmedla en tanke eller en idé. Om en ny
+tanke påbörjas ska alltså även ett nytt stycke påbörjas, och om så inte är
+fallet ska endast radbrytningar användas\footnote{Notera dock att det
+oftast är helt meningslöst att bry sig om radbrytningar i \LaTeX, eftersom
+systemet både avstavar och radbryter bra på egen hand.}. Tvekar du på om
+du borde ha ett nytt stycke, tänk på din text som en förmedlare av tankar;
+om du har en styckesindelning men din gamla tanke fortsätter, så ska den
+troligtvis bort, och om du påbörjar en ny tanke mitt i ett stycke så ska
+det förmodligen brytas.
+
+Många underskattar vikten av välgenomtänkta styckesindelningar. Andra vet
+inte ens vad syftet med en styckesindelning är, eller (speciellt i 
+\LaTeX{}) introducerar nya stycken utan att vara medvetna om det. Detta
+misstag är mycket lätt att göra om till exempel ekvationer används i 
+texten. Ta
+en snabb titt på exempel~\vref{ex:stycken} och försök lista ut varför
+tomma rader (det vill säga ett nytt stycke) används i vissa tillfällen 
+men inte andra — det är en subtil men mycket viktig skillnad.
+
+\begin{kod}[p]
+	\begin{latexcode}
+% Exempel ett
+\ldots{}med hjälp av identiteten
+\begin{equation}
+\int\limits_{-1}^1\!\sqrt{1-x^2}\;\mathrm{d}x
+= \frac{\pi}{2}
+\end{equation}
+kan man alltså med Monte Carlo-integration ta fram
+ett approximativt värde på \(\pi\).
+
+% Exempel två
+\ldots{}Weibullfördelningen, döpt efter den svenska
+matematikern Waloddi Weibull, har den kumulativa
+fördelningsfunktionen
+\begin{equation}
+F(x) = 1 - e^{-(x/\alpha)^\beta} \;.
+\end{equation}
+
+Från denna kan vi med derivering\ldots{}
+
+% Exempel tre
+\ldots{}relativt ointressanta observationer.
+
+\begin{equation}
+z_{n+1} = z_n^2 + c
+\end{equation}
+ger å andra sidan upphov till den mycket kända
+Mandelbrot-mängden, som\ldots{}
+
+	\end{latexcode}
+	\caption{Tre exempel på korrekt styckesindelning i samband med
+	ekvationer.}
+	\label{ex:stycken}
+\end{kod}
+
+Nästa enhet i sammanhanget är en mening. I engelska texter används ett
+extra stort mellanrum i slutet av varje mening; detta gör vi inte i
+svenskan\footnote{Det finns ganska många saker \LaTeX{} gör som inte bör
+göras i svensk typografi — det mesta kommer att tas upp senare i den här 
+delen.} och eftersom \LaTeX{} försöker lista ut var den ska lägga in
+större mellanrum måste man berätta för \LaTeX{} att den ska låta bli,
+vilket görs
+med hjälp av kommandot \cmd{frenchspacing}. Skriver man på engelska ska
+man alltså utelämna detta kommando, och \LaTeX{} kommer att efter bästa
+förmåga gissa var dina meningar tar slut. Gör kompilatorn fel får man 
+ersätta det mellanslag den förlänger med ett fast mellaslag (\verb|~|).
+
+\subsubsection{Rubriker}
+Det andra strukturelementet man måste tänka på\footnote{Undantaget
+strukturen i meningar, som är den del av svenska språket och som förklaras
+bättre av \citeasnoun{LIU98}.} är rubriker. Dessa skapar en logisk
+struktur som delar upp innehållet, och den typografiska effekten av att
+införa en rubrik är så stark att det nästan är självklart hur man ska
+använda dessa för att strukturera sin text.
+
+Standardklasserna i \LaTeX{} har sex rubriknivåer:
+\begin{latexcode}
+\part{...}          % Ingen nivå
+\section{...}       % Nivå 1
+\subsection{...}    % Nivå 2
+\subsubsection{...} % Nivå 3
+\paragraph{...}     % Nivå 4
+\subparagraph{...}  % Nivå 5
+\end{latexcode}
+
+Dessutom finns det i \pack{report}- och \pack{book}-klasserna en
+rubriknivå till, nivå noll, som ges av \cmd{chapter}. 
+Eftersom \pack{article}-klassen inte känner igen \cmd{chapter} kan man
+enkelt inkludera artiklar som kapitel i till exempel en bok.
+
+Rubriknivån som ges av \cmd{part} påverkar inte de andra numreringarna,
+medan alla andra rubrikkommandon återställer numreringen av lägre nivåer.
+Detta gör att man kan dela upp sitt dokument i delar, som
+\LaTeX{} dessutom per automatik numrerar ner till en viss nivå. Denna
+definieras av dokumentklassen men kan ändras genom att ställa in
+den inbyggda räknaren \texttt{secnumdepth}:
+\latex|\setcounter{secnumdepth}{2} % Numrera ner till subsection|
+Dessutom kan man införa onumrerade rubriker genom att lägga till en
+stjärna efter rubrikkommandot:
+\latex|\section*{Inledning} % Onumrerad rubrik|
+
+Dessa rubriker kan sedan om så önskas listas i en innehållsförteckning med
+hjälp av kommandot \cmd{tableofcontents}, där endast de numrerade
+rubrikerna inkluderas\footnote{Vill man inkludera även onumrerade rubriker
+i sin innehållsförteckning måste man uttryckligen lägga till dessa med
+kommandot \cmd{addcontentsline}. Detta läggs lämpligen till på raden efter
+rubriken.}.
+Djupet på innehållsförteckningen styrs med räknaren \texttt{tocdepth}:
+\latex|\setcounter{tocdepth}{2}|
+
+\subsubsection{Rad- och sidbrytningar}
+Med \LaTeX{} behöver man i princip aldrig bry sig om att rad- eller
+sidbryta eftersom detta görs automatiskt. Vid vissa tillfällen kan det
+dock vara önskvärt att göra det manuellt ändå; framför allt kan det vara
+intressant att lägga in manuella sidbrytningar för att undvika änkor, 
+horungar eller störande avbrott i textflödet. Tabell~\vref{tab:newpage}
+listar några av de kommandon som kan användas för att åstadkomma
+sidbrytningar.
+
+Notera dock att \LaTeX{} inte lyder kommandoföljder à la
+”\cmd{newpage}\cmd{newpage}” då sidbrytningskommandon endast inforgar en
+sidbrytning \emph{om det behövs}. Vill man ha en tom sida måste man alltså
+fylla den med något (osynligt), till exempel en \cmd{mbox} innan man
+sidbryter en andra gång.
+
+\begin{table}[tbp]
+	\centering 
+	\caption{Tre kommandon för att skapa sidbrytningar i \LaTeX.}
+	\label{tab:newpage}
+	\begin{tabular}{lp{0.65\textwidth}}
+		\toprule 
+		Kommando & Resultat \\
+		\midrule
+		\cmd{newpage} & Skapar en ny sida. \\
+		\cmd{clearpage} & Skapar en ny sida och tvingar alla \emph{floats}
+		(mer om dessa~\vpageref{sec:floats}) att läggas ut innan den nya 
+		sidan. 
+		Bättre än \cmd{newpage} om syftet är att bryta för ett nytt 
+		kapitel eller liknande. \\
+		\cmd{cleardoublepage} & Gör samma sak som \cmd{clearpage}, men ser
+		till att den nya sidan är en udda sida, förutsatt att dokumentet
+		är tvåsidigt. Gör exakt samma sak som \cmd{clearpage} i 
+		enkelsidiga dokument. \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+Radbrytningar kan enkelt göras med hjälp av \verb|\\| eller \cmd{newline}
+i de fall då de behövs; oftast är styckesindelning fullt tillräckligt.
+
+\subsubsection{Avstavning}
+Avstavning sköts automatiskt av \LaTeX{}, förutsatt att det finns
+avstavningsdata för det språk man använder. Denna kan man ladda in med
+hjälp av paketet \pack{babel}.
+
+Paketet \pack{babel} följer med i princip alla \LaTeX-installationer. 
+Det innehåller avstavningsregler
+och översättningar till inbyggda kommandon (rubriker till
+innehållsförteckning, referenslista och så vidare) för ett stort antal
+språk, däribland svenska och engelska. Det är enkelt att använda
+\pack{babel} (paketet förklaras närmre i del~\ref{sec:6}), till och med
+för dokument flera olika språk, och oftast räcker det med att helt
+enkelt inkludera paketet med rätt inställning:
+\latex|\usepackage[swedish]{babel} % Dokumentet är på svenska|
+
+Inga avstavningspaket är dock kompletta, och skriver man tekniska 
+rapporter är risken stor att något ord inte finns med eller avstavas på
+fel sätt. Man kan då berätta för \LaTeX{} hur man vill att ordet ska
+avstavas med hjälp av kommandot \cmd{hyphenate}. Kommandots argument är
+en lista av ord (separerade med mellanslag) som har bindestreck
+placerade där \LaTeX{} får bryta ordet. Sålunda kan raden
+\latex|\hyphenate{FORTRAN span-ku-le-ra}|
+användas för att berätta för \LaTeX{} att ordet ”\textsc{FORTRAN}” inte 
+får brytas, medan ordet ”spankulera” får brytas på de angivna 
+positionerna.
+
+\subsubsection{Betoning, med mera}
+För att betona text i exempelvis böcker använder man \emph{kursiv} text. I
+\LaTeX{} kan man betona text med hjälp av kommandot \cmd{emph}, som i de
+flesta fall gör just detta; kursiverar texten. Det finns dock andra
+tillfällen då man använder kursiv text, och det är givetvis dumt att i
+sådana stycken kursivera för att betona text; i sådana fall använder
+\LaTeX{} därför helt vanlig, upprätt text (för nästan alla 
+dokumentklasser, i alla fall).
+
+Tabell~\vref{tab:betoning} visar utöver kommandot \cmd{emph} som används 
+för betoning ett antal andra textförändrande kommandon som kan vara bra 
+att
+känna till. Exempelvis så finns \cmd{textsc}, som typsätter texten med
+kapitäler (”små versaler”), och \cmd{textsf} som typsätter med ett
+sans-serif-typsnitt istället för det vanliga serif-typsnittet.	
+\begin{table}[tbp]\begin{minipage}{\textwidth}
+	\centering
+	\caption[]{Viktiga \LaTeX-kommandon för att ändra textstil.}
+	\label{tab:betoning}
+	\begin{tabular}{lp{0.225\textwidth}p{0.375\textwidth}}
+		\toprule 
+		\LaTeX-kommando & Resultat & Kommentar \\
+		\midrule 
+		\cmd{textnormal\{\ldots\}}	&
+			\textnormal{Dokumentets standardtypsnitt} &
+			{Det typsnitt som används för ”vanlig” text
+			 i dokumentet.} \\
+		\cmd{emph\{\ldots\}}		&
+			\emph{Betonad text} &
+			{Ska alltid användas för betoning då kommandot 
+			 automatiskt hanterar nästlade betoningar på ett bra sätt.} \\
+		\cmd{textrm\{\ldots\}}		&
+			\textrm{Serif-typsnitt} &
+			\\
+		\cmd{textsf\{\ldots\}}		&
+			\textsf{Sans serif-typsnitt} &
+			\\
+		\cmd{texttt\{\ldots\}}		&
+			\texttt{Teletype-typsnitt} &
+			{Detta typsnitt har fast bredd och kan användas
+			 för att typsätta till exempel kodstycken.} \\
+		\cmd{textit\{\ldots\}}		&
+			\textit{Kursiv text} &
+			{Använd \cmd{emph} istället för detta 
+			 kommando för att betona text.} \\
+		\cmd{textbf\{\ldots\}}		&
+			\textbf{Fetstilt text} &
+		 	{Använd \cmd{emph} istället för detta 
+			 kommando för att betona text.} \\
+		\cmd{textsc\{\ldots\}}		&
+			\textsc{Kapitäler} &
+			\\
+		\bottomrule 
+	\end{tabular}
+\end{minipage}\end{table}
+
+Man bör dock inte använda dessa kommandon direkt, utan istället med hjälp
+av \cmd{newcommand} definiera kommandon som beskriver \emph{vad} som
+typsätts, inte \emph{hur} det ska typsättas. Säg till exempel att du vill
+typsätta namn på \LaTeX-paket med sans-serif-typsnitt. Vi kan då definiera
+ett kommando \cmd{package} som i sin tur tillämpar \cmd{textsf}:
+\latex|\newcommand\package[1]{\textsf{#1}}|
+När detta sedan används i dokumentet ser man direkt att det är ett paket
+som beskrivs; att det sedan typsätts med sans-serif-typsnitt är inte så
+intressant just när man skriver dokumentet.
+
+\subsection{Figurer, tabeller, listor}
+Figurer, tabeller och listor\footnote{Men även ekvationer, programkod,
+vissa kemiska formler, citat och algoritmer, för att nämna några
+ytterligare exempel.} har i sin \LaTeX-representation en sak gemensamt;
+de kräver mer än enkla kommandon för att kunna uttryckas på ett enkelt
+sätt. Därför har man i \LaTeX{} valt att införa en konstruktion som
+grupperar sådana företeelser och gör det tydligt hur textens struktur
+verkligen ser ut — denna konstruktion kan på svenska kallas för en 
+omgivning.
+
+\subsubsection{Omgivningar \eng{environments}}\label{sec:omg}
+Omgivningar i \LaTeX{} definieras utifrån två kommandon; \cmd{begin} och
+\cmd{end}. De kan nästlas (på det sättet att en omgivning kan innehålla
+en annan) men kan inte överlappa — varje omgivning måste avslutas innan
+dess ”förälder” avslutas, vilket gör att de ger en tydlig trädliknande
+struktur. En omgivning (här \texttt{verbatim}) kan alltså skrivas
+\begin{latexcode}
+\begin{verbatim}
+Det här är omgivningens innehåll
+\end{verbatim}
+\end{latexcode}
+där omgivningens innehåll (oftast) med fördel kan indenteras för att göra
+strukturen tydlig.
+
+Det finns många omgivningar, och de fyller alla olika syften. De
+viktigaste bildar listor, figurer, tabeller och ekvationer, men en
+omgivning kan i princip göra vad som helst.
+
+\subsubsection{Tre sorters listor}
+De första omgivningarna vi ska bekanta oss med är de som skapar listor.
+I \LaTeX{} finns det tre användbara sorters listor, som alla går att
+nästla i varandra utan problem och som löser tre distinkta problem:
+numrerade listor (\texttt{enumerate}), onumrerade listor 
+(\texttt{itemize}) och beskrivningslistor (\texttt{description}). Dessa
+används tillsammans med kommandot \cmd{item} för att bygga enkla listor
+(se exempel~\vref{ex:listor}) och är relativt självförklarande.
+
+\begin{kod}[tp]
+	\centering
+	\cprotect{\subfloat[En numrerad lista]}{
+		\begin{minipage}{0.475\textwidth} % kod
+			\begin{latexcode}
+\begin{enumerate}
+\item Skapa en lista
+\item Lägg till ett element
+\item Upprepa steg 2 om så
+    önskas
+\end{enumerate}
+			\end{latexcode}
+		\end{minipage}
+		\hfil
+		\begin{minipage}{0.475\textwidth} % figur
+			\fbox{\parbox{\textwidth}{
+				\begin{enumerate}
+					\item Skapa en lista
+					\item Lägg till ett element
+					\item Upprepa steg 2 om så önskas
+				\end{enumerate}
+			}}
+		\end{minipage}
+	}\\
+	\cprotect{\subfloat[En onumrerad lista]}{
+		\begin{minipage}{0.475\textwidth} % kod
+			\begin{latexcode}
+\begin{itemize}
+\item Tyskland
+\item Topologi
+\item Teknolog
+\end{itemize}
+			\end{latexcode}
+		\end{minipage}
+		\hfil
+		\begin{minipage}{0.475\textwidth} % figur
+			\fbox{\parbox{\textwidth}{
+				\begin{itemize}
+				  \item Tyskland
+				  \item Topologi
+				  \item Teknolog
+				\end{itemize}
+			}}
+		\end{minipage}
+	}\\
+	\cprotect{\subfloat[En beskrivningslista]}{
+		\begin{minipage}{0.475\textwidth} % kod
+			\begin{latexcode}
+\begin{description}
+\item[Häst] ett stort,
+    fyrbent däggdjur.
+\item[Öl] en mycket god
+    dryck.
+\end{description}
+			\end{latexcode}
+		\end{minipage}
+		\hfil
+		\begin{minipage}{0.475\textwidth} % figur
+			\fbox{\parbox{\textwidth}{
+				\begin{description}
+			  \item[Häst] ett stort,
+			        fyrbent däggdjur.
+			  \item[Öl] en mycket god
+			        dryck.
+				\end{description}
+			}}
+		\end{minipage}
+	}
+	\caption{De tre enkla listomgivningar \LaTeX{} tillhandahåller.}
+	\label{ex:listor}
+\end{kod}
+
+\subsubsection{Flytande objekt \eng{floats}}\label{sec:floats}
+Tabeller och figurer är viktiga verktyg för att förmedla resultat på
+ett effektiv sätt. De är också mycket speciella objekt rent typografiskt,
+eftersom de till skillnad från vanliga textstycken inte kan brytas över
+sidor hur som helst. För att placera figurer och tabeller på ett
+tillfredsställande sätt använder \LaTeX{} sig av så kallade \emph{floats},
+vilket innebär att objektet får ”flyta iväg” en bit ifrån det ställe där
+det från början definieras. Detta undviker fula halvtomma sidor och andra
+obehagliga resultat.
+
+I många böcker typsätts figurer och tabeller så att de antingen flyter
+till toppen av en sida, botten av en sida, eller så att de tar upp en hel
+sida. Man typsätter i princip aldrig figurer och tabeller så att de bryter
+texten. Man kan även göra samma sak med till exempel kod, men detta är
+inte lika vanligt. Även om det finns sätt att tvinga \LaTeX{} att lägga en
+figur där den definieras så rekommenderas detta alltså inte.
+
+Ett flytande objekt definieras av en omgivning, och har ett valfritt
+argument som berättar för \LaTeX{} hur objektet får placeras. Detta kan
+innehålla bland annat \texttt{t} (\emph{top}), \texttt{p} (\emph{page})
+och \texttt{b} (\emph{bottom}) och är en lista över alla de sätt \LaTeX{}
+tillåts placera objektet. Om inget av dessa fungerar kommer \LaTeX{} att
+placera objektet på en egen sida. Sålunda kan man skapa en \emph{float}
+med följande kod:
+\begin{latexcode}
+\begin{<floattyp>}[tbp] % Får placeras som top eller bottom
+% Innehåll i det flytande objektet
+\end{<floattyp>}
+\end{latexcode}
+
+Flytande objekt kan även ha figurtexter, som definieras med kommandot
+\cmd{caption}. En figurtext ska komplettera figuren och förklara vad som
+visas, inte varför det visas. Slutsatser och liknande dras istället i
+brödtexten som refererar till figuren. Figurer har sin figurtext undertill
+medan tabeller har figurtexten ovanför tabellen.
+
+\subsubsubsection*{Figurer}
+Figurer är den kanske vanligaste typen av flytande objekt, och dessa
+(grafer, illustrationer, diagram och så vidare) infogas i omgivningen
+\texttt{figure}, vilken visas i exempel~\vref{ex:figure}.
+
+\begin{kod}
+	\centering\hspace{0.0075\textwidth}
+	\begin{minipage}{0.75\textwidth} % kod
+			\vfil\ifdraft{\inputminted[frame=single,firstline=10,lastline=16]{latex}{chapters/../examples/2/figure.tex}}{\inputminted[frame=single,firstline=10,lastline=16,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{ex/2/figure.tex}}\vfil
+	\end{minipage}
+	\\ \medskip
+	\begin{minipage}{0.725\textwidth} % figur
+		\fbox{\includegraphics[width=\textwidth,clip=true,trim=25 -2 25 -2]{chapters/../examples/2/figure.pdf}}
+	\end{minipage}
+	\caption{Ett exempel på hur man skapar ett flytande objekt med
+	\texttt{figure}.}
+	\label{ex:figure}
+\end{kod}
+
+Att infoga själva figuren kan göras på några olika sätt; man kan skapa den
+med ett externt program (till exempel \cli{gnuplot} eller Inkscape), 
+exportera den direkt från MATLAB eller Mathematica, eller till och med
+rita den direkt i \LaTeX. Hur man gör detta diskuteras närmre i
+del~\ref{sec:4}~\vpagerefrange{sec:4}{sec:4:end}.
+
+För att centrera innehållet i figuren använder man kommandot 
+\cmd{centering}, som centrerar allt innehåll i resten av omgivningen. En
+del får för sig att istället använda omgivningen \texttt{center}, men
+eftersom den omgivningen lägger till extra tomrum både före och efter är
+det lämpligare att bara använda \cmd{centering}.
+
+\subsubsubsection*{Tabeller}\label{pack:booktabs}
+Tabeller är ett annat vanligt flytande objekt, och är ett alldeles
+förträffligt verktyg när det gäller presentation av data som till exempel
+mätserier eller liknande. \LaTeX{} definierar två tabellrelaterade
+omgivningar; \texttt{table} och \texttt{tabular}. Det förstnämnda är ett
+flytande objekt och används precis som \texttt{figure}:
+\begin{latexcode}
+\begin{table}[tpb]
+\centering 
+\caption{En beskrivning av tabellen}
+% Här ska själva tabellen in
+\end{table}
+\end{latexcode}
+
+Den andra omgivningen, \texttt{tabular}, är den som faktiskt används för
+att definiera tabellen. \LaTeX{} kan i denna omgivning hjälpa till med att
+rita linjer både kors och tvärs, och definiera kolumner på ett antal olika
+sätt, men för att hålla sig till en enkel (om än bokinspirerad) devis så
+bör man ta paketet \pack{booktabs} till hjälp när man skapar tabeller i
+\LaTeX\footnote{Exakt varför detta är en bra idé förklaras mycket bra av
+\pack{booktabs}-manualen \cite{Fear05}.}.
+En enkel tabell skapad med hjälp av \pack{booktabs} kan se ut som
+tabellen i exempel~\vref{ex:tabular}.
+
+\begin{kod}[tbp]
+	\centering 
+	\begin{minipage}{0.9\textwidth} % kod
+		\begin{latexcode}
+\begin{tabular}{l r p{4cm}}
+\toprule 
+Konstant & Värde & Kort beskrivning \\
+\midrule 
+\(\gamma\) & \(0,577\) & Skillnaden mellan den
+ harmoniska summan från \(1\) till \(n\) och den
+ naturliga logaritmen av \(n\) då \(n\to\infty\).\\
+\(e\) & \(2,718\) & Den konstant som har
+egenskapen att \((e^x)' = e^x\). \\
+\(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
+ omkrets och dess diameter. Mycket viktig
+ konstant i många sammanhang; dyker upp
+ lite varstans. \\
+\bottomrule
+\end{tabular}
+		\end{latexcode}
+	\end{minipage}
+	\\ \medskip
+	\fbox{\begin{minipage}{0.9\textwidth} % figur
+		\centering \medskip
+		\begin{tabular}{l r p{6.5cm}}
+			\toprule 
+			Konstant & Värde & Kort beskrivning \\
+			\midrule 
+			\(\gamma\) & \(0,577\) & Skillnaden mellan den
+			 harmoniska summan från \(1\) till \(n\) och den
+			 naturliga logaritmen av \(n\) då \(n\to\infty\).\\
+			\(e\) & \(2,718\) & Den konstant som har
+			egenskapen att \((e^x)' = e^x\). \\
+			\(\pi\) & \(3,1415\) & Kvoten mellan en cirkels
+			 omkrets och dess diameter. Mycket viktig
+			 konstant i många sammanhang; dyker upp
+			 lite varstans. \\
+			\bottomrule
+		\end{tabular}
+		\medskip
+	\end{minipage}}
+	\caption{En tabell skapad med hjälp av \pack{booktabs}.}
+	\label{ex:tabular}
+\end{kod}
+
+Som vi ser tar \texttt{tabular}-omgivningen ett obligatoriskt argument,
+som beskriver de kolumner tabellen innehåller. Tabell~\vref{tab:kolumner}
+listar de vanligaste kolumntyperna och deras användningsområden.
+Kolumntyperna anges direkt efter varandra, men kan om man vill separeras
+med exempelvis mellanslag. Den speciella separatorn \texttt{|} skapar en
+vertikal linje mellan två kolumner, men detta är inte att rekommendera
+\cite{Fear05}.
+
+Efter att omgivningen inletts med \cmd{begin} följer tabellens rader. Här
+måste varje rad markeras med explicita nyrader (\verb|\\|), och kolumnerna
+separeras med och-tecken (\verb|&|). Notera även de kommandon som skapar
+horisontella linjer; dessa är från \pack{booktabs} och används enligt
+exempel~\ref{ex:tabular}.
+
+\newpage
+Det är även viktigt att komma ihåg några typografiska regler när det
+gäller tabeller. Alla dessa ges av \citeasnoun[s.~3]{Fear05}. Fritt
+översatt:
+
+\begin{quotation}
+	\begin{enumerate}
+		\item Använd aldrig någonsin lodräta linjer.
+		\item Använd aldrig dubbla linjer.
+		\item Lägg enheter i tabellhuvudet.
+		\item Decimalkomma ska alltid föregås av en siffra; alltså \(0,1\) 
+		\emph{inte} bara \(,1\).
+		\item Använd inte upprepningstecken eller liknande konventioner 
+		för att repetera föregående värde. I många fall räcker det med en 
+		tom cell. Gör det inte det, repetera värdet.
+	\end{enumerate}
+\end{quotation}
+
+Punkt ett och två är enkla att följa om man använder \pack{booktabs} som
+manualen föreskriver, och punkt tre och fem är snarare arbetsbesparande än
+ansträngande att hålla sig till. Även punkt fyra är enkel att följa. 
+Följer man
+dessa fem punkter får man snygga tabeller varje gång\footnote{Läs gärna
+igenom \citeasnoun{Fear05} ordentligt de tre-fyra första gångerna du
+sitter med tabeller i \LaTeX, så går användandet in i ryggmärgen.}.
+
+\begin{table}[tbp]
+	\centering 
+	\caption{De fyra viktigaste kolumntyperna i \texttt{tabular}.}
+	\label{tab:kolumner}
+	\begin{tabular}{l p{0.65\textwidth}}
+		\toprule 
+		Typ & Kommentar \\
+		\midrule 
+		\texttt{l} & Vänsterjusterar innehållet. Använd till text, datum
+					 och så vidare. \\
+		\texttt{c} & Centrerar innehållet. Använd inte. \\
+		\texttt{r} & Högerjusterar innehållet. Använd till tal, 
+				     mätresultat och så vidare. \\
+		\texttt{p\{...\}} & Avstavat textstycke med angiven bredd. Använd
+							när texten är så lång att tabellen bli för
+							bred för sidan, eller när du skriver långa
+							beskrivningar och/eller kommentarer. \\
+		\bottomrule 
+	\end{tabular}
+\end{table}
+
+\subsubsection{Etiketter och korsreferenser}\label{sec:labels}
+Eftersom figurer får (och bör få) flyta en bit bort, i vissa fall till 
+andra sidor, måste man kunna referera till dem i texten. Detta görs med så
+kallade korsreferenser till etiketter. En etikett kan man definiera med
+kommandot \cmd{label}, inte bara för figurer och tabeller utan även för
+rubriker, ekvationer och annat. För flytande objekt och andra omgivningar
+placerar man \cmd{label}-kommandot inuti omgivningen (men efter 
+\cmd{caption} om denna används), medan man för rubriker placerar etiketten
+direkt efter \cmd{section} (eller motsvarande).
+
+En etikett kan innehålla många olika tecken, men det kan vara bra att
+hålla sig till (amerikanska) bokstäver, siffror samt kolon (\texttt{:}) 
+som separator.
+För att kunna hålla koll på sina etiketter bör man även namnge dem på ett
+logiskt sätt (varje etikett bör beskriva det den refererar till) och gärna
+inleda varje etikett med en liten beskrivande förkortning. Man kan till
+exempel märka en figur som visar \(\beta\)-sönderfall med följande etikett:
+\latex|\label{fig:betasonderfall}|
+
+Etiketterna kan man sedan referera till med \cmd{ref}, som skriver ut det
+nummer figuren (eller motsvarande) har. Dessutom finns \cmd{pageref}, som
+skriver ut vilken sida figuren ligger på. Dessa kommandon är dock inte
+medvetna om vilken typ av objekt man refererar till, så detta måste man
+berätta:
+\latex|...som man ser i figur~\ref{fig:betasonderfall}...|
+
+Paketet \pack{varioref} inför det något mer intelligenta kommandot
+\cmd{vref} (och även \cmd{vpageref}) som formulerar referensen på ett
+något bättre sätt, beroende på var figuren ligger. Ligger figuren på samma
+sida är \cmd{vref} i princip ekvivalent med \cmd{ref}, men om figuren är
+på en annan sida skriver \cmd{vref} även ut vilken sida detta är.
+
+Paketet \pack{hyperref} förbättrar både \cmd{ref} och \cmd{vref} genom att
+göra referenserna till länkar i den slutgiltiga \PDF-filen. Med dessa kan
+man alltså lättare navigera i dokumentet. Förutom detta så lägger
+\pack{hyperref} dessutom till en innehållsförteckning som \PDF-läsaren
+kan visa i programmet, och annan \PDF-specifik funktionalitet. Paketet
+rekommenderas starkt om du använder \pdfLaTeX.
+
+\subsection{Typografiska betänkligheter}
+När man skriver rapporter är det även viktigt att hålla sig till de
+typografiska regler \LaTeX{} inte håller reda på; sådana som har med
+citattecken, tankstreck och annat att göra. Även datum, decimalavskiljare
+och liknande är viktigt att tänka på. Dessa typografiska regler kommer i
+korthet att förklaras på de närmsta sidorna, till vilka viss inspiration 
+tagits från \citeasnoun{Schultz05}.
+
+\subsubsection{Citattecken}
+Det mest grundläggande man bör uppmärksamma i \LaTeX{}, eftersom det är en
+grop man lätt faller i, är citattecken. Man kan inte i \LaTeX{} använda
+det vanliga citattecknet (\verb|"|) för att generera ett citattecken, utan
+man måste istället använda kombinationer av \emph{backticks} (\verb|`|)
+och apostrofer (\verb|'|). Tabell~\vref{tab:citat} visar hur dessa används
+för att citera text.
+
+\begin{table}[tbp]
+	\centering 
+	\caption{Citattecken i \LaTeX.}
+	\label{tab:citat}
+	\begin{tabular}{l l p{0.5\textwidth}}
+		\toprule 
+		\LaTeX-kod & Resultat & Kommentar \\ 
+		\midrule 
+		\verb|``Text''| & “Text” & Engelska citattecken. Använd inte i
+		svensk text! \\
+		\verb|`Text'| & ‘Text’ & Nästlade engelska citattecken (för citat
+		inuti citat). Använd inte i svensk text! \\ 
+		\verb|''Text''| & ”Text” & Svenska citattecken. \\
+		\verb|'Text'| & ’Text’ & Nästlade svenska citattecken (för citat
+		inuti citat). \\
+		\bottomrule 
+	\end{tabular}
+\end{table}
+
+\subsubsection{Streck av olika längd}
+Det kan tyckas vara ett rent typografinörderi man inte behöver bry sig om,
+men faktum är att det finns olika sorters streck (lite på samma sätt som
+att det finns olika skiljetecken). Det är relativt viktigt att skilja på
+dessa och se till att använda rätt streck vid rätt tillfälle.
+
+Det första strecket, minustecknet, är relativt långt (\(-\)) och går i
+princip inte att missa eller missbruka. Det infogas av \LaTeX då man
+använder ett vanligt bindestreck (\verb|-|) i matematikläge\footnote{
+Mer om detta i del~\ref{sec:3}.}:
+\latex|...och ett flyttal kan därför ha värdet \(-0\).|
+
+Nästa tecken, det vanliga bindestrecket (-), behöver man i princip aldrig
+använda själv. Det infogas av \LaTeX{} då ord avstavas, men kan även
+infogas manuellt genom att helt enkelt skriva ett vanligt bindestreck
+i \LaTeX{}-koden.
+
+Det tredje strecket kallas intervallstreck (–) och är något längre än
+bindestrecket. Detta används som namnet antyder för att typsätta
+intervall, och skrivs med hjälp av två bindestreck (\verb|--|):
+\latex|...det kan ta upp emot 3--4 timmar att...|
+
+Det fjärde och sista strecket kallas långt tankstreck (—) och är det längsta av
+strecken. Det långa tankstrecket är relativt ovanligt inom svensk typografi, men det
+finns ingen anledning att undvika det\footnote{För tankar (\emph{no pun
+intended}) angående användningen av tankstreck, se 
+\citeasnoun[ss.~46–47]{LIU98} — observera dock att man \emph{inte} som 
+\citename{LIU98} föreslår ska använda tankstrecket i intervall eller
+punktlistor. Det \citeasnoun{Sprakradet08} och \citename{LIU98} betecknar som
+”tankstreck” är i själva verket mycket närmre det som i \LaTeX{} anses vara ett
+intervallstreck, det vill säga ett lite kortare tecken. Personligen föredrar jag 
+att göra skillnad på de två, och gör man det bör intervallstrecket användas till
+intervall, och det långa tankstrecket som alternativ till kommatecknet.}.
+Ett långt tankstreck skriver man med tre bindestreck i följd
+(\verb|---|), och man bör omge det med mellanslag:
+\latex|...det är --- för tillfället åtminstone --- omöjligt att...|
+
+\subsubsection{Avstånd mellan stycken}
+Det finns två vedertagna sätt att separera stycken; indrag och
+mellanrum. Man tillämpar endast \emph{ett} av dessa åt gången, och
+traditionellt sett så brukar man i svensk typografi använda mellanrum,
+medan man i amerikansk typografi använder indrag (varför detta är vad
+\LaTeX{} gör \emph{out-of-the-box}).
+
+För att få \LaTeX{} att använda mellanrum istället för indrag bör man
+egentligen skriva helt nya dokumentklasser, men eftersom detta är ett
+stort jobb kan man istället ”\eng{patcha}” \LaTeX{}. Detta görs av
+paketet \pack{parskip}:
+\latex|\usepackage{parskip}|
+
+\subsubsection{Andra saker att hålla reda på}
+\begin{itemize}
+ \item Datum skrivs på bästa sätt i ISO-format (YYYY–MM–DD), där man
+använder intervallstreck för att skilja delarna åt.
+	
+\item Decimalavskiljare i svensk skrift är kommatecknet. För att
+	\LaTeX{} inte ska lägga in mellanrum efter kommatecken i matteläge
+	(\LaTeX{} tolkar det som en koordinat) bör man inkludera paketet
+	\pack{icomma}. I engelsk skrift används punkt som decimalavskiljare.
+	
+\item Enheter ska typsättas med ett (litet) mellanrum mellan tal och
+	enhet. Detta görs enklast med paketet \pack{siunitx}, som förklaras
+	närmre \vpageref{sec:3:siunitx}.
+\end{itemize}
+
+\subsubsection{Skarpare typsnitt: \pack{fontenc} och \pack{lmodern}}
+\label{sec:2:lmodern}
+Eftersom \LaTeX{} och dess tillhörande typsnitt (Computer Modern) är
+relativt gamla, och eftersom de designats för att fungera väl med det
+mycket gamla \textsc{PostScript}-formatet, så uppstår det ibland några
+smärre problem. Det första problemet som brukar dyka upp i samband med
+typsnitt i \LaTeX{} är att texten blir otydlig och suddig i det typsatta
+\PDF-dokumentet. Detta beror på att de typsnitt som används är baserade
+på bitmappar, som inte skalar särskilt väl. Därför måste man använda
+paketet \pack{fontenc} för att säga åt \LaTeX{} att använda vektorbaserade
+typsnitt istället:
+\latex|\usepackage[T1]{fontenc}|
+
+Det är då man brukar stöta på nästa problem, som yttrar sig i att text
+(främst skandinaviska tecken och andra tecken som inte finns 
+representerade i \textsc{ANSI}) inte kopieras på ett korrekt sätt. Detta
+är en konsekvens av att de mycket gamla Computer Modern-typsnitten inte
+innehåller de glyfer som motsvarar sådana tecken, och istället används då
+(något fulhackade) komposita tecken istället. För att lösa detta måste man
+byta typsnitt.
+
+Det typsnitt som brukar användas istället för Computer Modern är dess
+mer moderna klon \emph{Latin Modern}. Detta typsnitt ser
+i princip ut som Computer Modern, men innehåller alla de glyfer som behövs
+för att typsätta svensk (och annan icke-anglikansk) text. För att använda
+Latin Modern inkluderar man paketet \pack{lmodern}:
+\latex|\usepackage{lmodern}|
+
+\subsection{Andra viktiga delar}
+Även om innehållet är det viktigaste så finns det andra delar av en
+rapport eller artikel som också måste ges lite uppmärksamhet.
+Titelsidor bör man till exempel alltid ha, och det är även viktigt att ha 
+koll på
+hur man citerar och vilken teckenkodning man använder. I vissa fall
+kan man även vilja referera till vissa längder, eller använda kommandon
+som \LaTeX{} anser vara ”ömtåliga” i situationer de inte är tänkta att
+användas. Avslutningen på detta kapitel kommer därför att gå igenom dessa
+småsaker.
+
+\subsubsection{Titelsidan}% +abstracts, sammanfattning och båda samtidigt
+Det kan vara trevligt att i sitt arbete ha en fin titelsida. Även denna
+kan \LaTeX{} (åtminstone standardklasserna) typsätta åt dig. Detta är
+enkelt att göra, och fungerar i princip så att man definierar sin
+metadata (titel, datum, författare) med hjälp av ett par kommandon, varpå
+man kör kommandot \cmd{maketitle} för att skriva ut en titelsida:
+\begin{latexcode}
+\title{En fantastisk rapport\thanks{Tack till DD-gudarna
+   för visad barmhärtighet och stabila filservrar.}}
+\date{2011--12--13}
+\author{E.~Johansson\thanks{erik.johansson@example.org}}
+\maketitle
+\end{latexcode}
+
+Kommandot \cmd{thanks} kan användas för att infoga korta tack eller extra
+information om titel eller författare, så som mailadresser eller
+liknande. Den typografiska effekten av \cmd{thanks} (i standardklasserna)
+än en fotnot.
+
+Man kan dessutom infoga en sammanfattning \eng{abstract} med hjälp av
+omgivningen \texttt{abstract}. Denna omgivning inkluderas lämpligen direkt
+efter \cmd{maketitle}, och skapar automatisk ett litet textstycke med
+rubriken ”Sammanfattning” (eller, om engelska valts som språk,
+”Abstract”).
+
+Vill man (säg, i ett kandidatarbete) ha både \emph{abstract} och
+sammanfattning måste man använda \pack{babel}s funktioner för att byta
+språk mitt i dokumentet. Man måste då först ladda in \pack{babel} med stöd 
+för båda språken (notera att det sista språket i listan är aktivt från
+dokumentets start):
+\latex|\usepackage[english,swedish]{babel}|
+
+	Därefter byter man helt enkelt språk när man vill ha sitt \emph{abstract}:
+\begin{latexcode}
+\begin{otherlanguage}{english}
+\begin{abstract}
+    % Abstract
+\end{abstract}
+\end{otherlanguage}
+\begin{abstract}
+% Sammanfattning
+\end{abstract}
+\end{latexcode}
+
+\subsubsection{Citat}
+Det finns två omgivningar i \LaTeX{} som kan användas för att märka upp
+så kallade blockcitat \eng{blockquotes}, alltså lite längre citat på ett
+eller flera stycken; \texttt{quote} och \texttt{quotation}. Det första,
+\texttt{quote}, är tänkt att användas till citat på högst ett stycke,
+medan \texttt{quotation} ska användas för flera stycken.
+
+\subsubsection{Teckenkodning (\UTF)}
+Teckenkodning, som kort nämndes på sidan~\vpageref{sec:1:inputenc}, är
+viktigt att hålla koll på. Det finns två större teckenkodningar på Linux-%
+plattformar, \UTF{} och \textsc{iso-8859-1}, och en till på Windows-%
+system, \textsc{cp-1252}. Det är viktigt att man vet vilken teckenkodning
+man skriver sina dokument i, då man måste berätta detta för \LaTeX. Gör
+man inte det förutsätter \LaTeX{} att dokumentet är skrivet i
+\textsc{iso-8859-1}, och är det då inte det så kommer hemska saker hända.
+Teckenkodningen specificeras med paketet \pack{inputenc}:
+\latex|\usepackage[<teckenkodning>]{inputenc}|
+Här refererar man till \UTF{} som \texttt{utf8}, \textsc{iso-8859-1} som
+\texttt{latin1} och \textsc{CP-1252} som \texttt{ansinew}. Det finns även
+en del mer obskyra teckenkodningar\footnote{De som stöds av 
+\pack{inputenc} listas i paketets manual.}, men det är troligtvis de tre
+nämnda du kommer att stöta på.
+
+\subsubsection{Längder}
+Titt som tätt behöver man i \LaTeX{} använda längder för att till exempel
+kontrollera bredden på figurer och liknande. Den viktigaste fördefinierade
+längden är \cmd{textwidth}, som representerar bredden av det område på
+sidan som får fyllas med text. Genom att lägga till ett flyttal innan
+längden kan man dessutom berätta för \LaTeX{} att man till exempel vill
+ha en figur som endast täcker \num{3/4} av bredden:
+\latex|0.75\textwidth|
+
+Det finns en stor mängd längder i \LaTeX, och många av dem relaterar till
+olika mått på sidan \cite[s.~132]{Oetiker11}, medan andra (till exempel
+\cmd{smallskipamount}) är mer obskyra och godtyckliga.
+
+\subsubsection{Ömtåliga kommandon}
+En del text, så som rubriker, figurtexter med mera, kan dyka upp mer än en
+gång i ett dokument (till exempel i innehållsförteckningen). Argument till
+sådana kommandon kallas för rörliga \eng{moving arguments} och kan ställa
+till med en del problem. Det finns nämligen kommandon (\cmd{footnote},
+till exempel) som är ”ömtåliga” \eng{fragile}, och som därför inte kan
+användas i rörliga argument utan vidare. Vill man göra det måste man
+skydda dem, något som görs med kommandot \cmd{protect}:
+\latex|\section{En rubrik\protect\footnote{Med en fotnot.}}|
+\end{document}

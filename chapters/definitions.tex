@@ -1,0 +1,33 @@
+\newcommand\PDF{\textsc{PDF}\xspace}					% PDF format
+\newcommand\DVI{\textsc{DVI}\xspace}					% DVI format
+\newcommand\EPS{\textsc{EPS}\xspace}					% EPS format
+\newcommand\UTF{\textsc{UTF-8}\xspace}					% UTF-8 standard
+\newcommand\cli[1]{\texttt{#1}}							% Command-line input
+\newcommand\opt[1]{\texttt{\emph{#1}}}					% CLI option
+\newcommand\pack[1]{\textsf{#1}}						% LaTeX package
+\newcommand\pdfLaTeX{\hologo{pdfLaTeX}\xspace}			% pdfLaTeX logotype
+\newcommand\BibTeX{\textsc{Bib}\TeX\xspace}				% BibTeX logotype
+\newcommand\PGFTikZ{PGF/Ti\emph{k}Z\xspace}				% PGF/TikZ logotype
+\newcommand\XeTeX{\hologo{XeTeX}\xspace}				% XeTeX logotype
+\newcommand\LyX{L\!\raisebox{-.5ex}{Y}\!X\xspace}		% LyX logotype
+\newcommand\eng[1]{(eng.~\textenglish{\emph{#1})}}		% english translation
+\newcommand\cmd[1]{\textenglish{\texttt{\textbackslash{}#1}}}% LaTeX command
+\newcommand\env[1]{\textenglish{\texttt{#1}}}			% LaTeX environment
+% minted style
+\usemintedstyle{solarized}
+\definecolor{mintedbg}{rgb}{0.9665,0.9550,0.9175}
+% Unit definitions
+\DeclareSIUnit\point{pt}
+\DeclareSIUnit\em{em}
+\DeclareSIUnit\mu{mu}
+\sisetup{locale=DE}
+% Math redefinitions
+\DeclareMathOperator{\erfc}{erfc}
+\renewcommand{\frac}[2]{\genfrac{}{}{}{}{\displaystyle #1}{\displaystyle #2}}
+\makeatletter
+\renewcommand\d[1]{\ensuremath{\;\mathrm{d}#1\@ifnextchar\d{\!}{}}}
+\makeatother
+% Useful colors
+\definecolor{required}{rgb}{0.384,0.576,0.000}
+\definecolor{optional}{rgb}{0.992,0.843,0.000}
+\definecolor{unavailable}{rgb}{0.863,0.196,0.184}

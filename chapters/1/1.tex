@@ -1,0 +1,362 @@
+\documentclass[../../latex.tex]{subfiles}
+\begin{document}
+\section{Grundläggande begrepp}\label{sec:1}
+Introduktionen har förklarat lite kort vad \TeX/\LaTeX{} är och varför du
+bör använda systemet för att typsätta dina rapporter, artiklar och böcker.
+Denna del kommer att inleda din \TeX-bana genom att lite kort förklara hur
+ett \LaTeX-dokument är uppbyggt, några viktiga begrepp samt hur
+\LaTeX-kompilatorn (i det här fallet \cli{pdflatex}) fungerar.
+
+\subsection{\LaTeX-dokument}
+De dokument \LaTeX{} läser in är enkla textfiler, oftast med filändelsen
+\cli{.tex}. Dessa kan skapas med vilken textredigerare som helst,
+men det rekommenderas att man använder
+en textredigerare med syntaxfärgning (då det underlättar felsökande) och
+stavningskontroll. Oftast sparar man filen med teckenkodningen \UTF{} 
+(detta gör de flesta moderna textredigerare), men det finns en risk att
+filerna sparas med teckenkodningen \textsc{iso-8559-1}\footnote{Det finns 
+även andra teckenkodningar som kan dyka upp; Windows-1252 är en sådan.}, 
+och då måste man ha koll på detta eftersom man måste berätta för \LaTeX{}
+hur filen ska läsas in.
+
+\subsubsection{Tomrum}
+Tomrumstecken, det vill säga mellanslag, tabbar och liknande behandlas
+alla som ”tomrum” av \LaTeX{}. Flera sådana tecken i rad tolkas som ett
+enda tomrum, vilket gör att man kan ex. indentera textstycken i sin
+\LaTeX-fil utan att detta påverkar resultatet. Tomrum i början av en rad
+ignoreras generellt sett, och ett enkelt nyradstecken tolkas också som
+tomrum.
+
+Två nyradstecken på rad (det vill säga en tom rad mellan två textrader) tolkas som
+styckesindelning, och flera tomma rader efter varandra tolkas som en enda
+tom rad. Detta gör att \LaTeX{}-filerna blir mycket enkla att både skriva
+och läsa, även om man inte är en särskilt bevandrad \TeX{}niker.
+
+\subsubsection{Specialtecken}
+Vissa tecken är speciella för \LaTeX{}. Dessa används internt av \LaTeX{} 
+för att representera speciella konstruktioner, och kan inte användas hur som helst i ett \LaTeX-dokument. Gör man det ändå
+slutar det vanligtvis bara med att tecknet inte syns, men det kan
+potentiellt göra att ditt dokument inte ens kompilerar. Specialtecknen
+är inte särskilt många:
+\latex|# ^ & _ { } ~ \ % $|
+
+För att använda dem måste man lägga till ett (bakvänt) snedstreck,
+\cmd{}, innan tecknet man vill använda (dock ej innan
+\cmd{} självt, eftersom \LaTeX{} tolkar
+\cmd{\textbackslash} som att man vill tvinga fram en
+radbrytning — vill man ha ett \cmd{} använder man istället
+\cmd{textbackslash}).
+När det gäller \verb|^| och \verb|~| måste man
+dessutom lägga till måsvingar efteråt, eftersom dessa tecken normalt används för att
+modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
+\latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
+
+\subsubsection{\LaTeX-kommandon}
+För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
+kommandon följer några enkla regler:
+\begin{itemize}
+	\item De börjar med ett bakvänd snedstreck (\cmd{}) och följs av sitt
+	namn, som bara får innehålla bokstäver%
+	\footnote{Det finns även ett antal kommandon som består av \cmd{} och
+	exakt en icke-bokstav, till exempel \cmd{\&}.}.
+	Kommandon avslutas av ett
+	mellanslag, en siffra eller annan godtycklig ”icke-bokstav”.
+	
+	\item De är skriftlägeskänsliga (\cmd{Kommando} är inte samma sak som
+	\cmd{kommando}).
+	
+	\item Vissa kommandon har även en ”stjärnvariant”, då en stjärna
+	(\texttt{*}) läggs till på slutet av kommandonamnet.
+\end{itemize}
+
+\LaTeX{} ignorerar tomrum efter ett kommando. Det är därför nödvändigt, om
+man vill ha ett mellanslag efter ett kommando, att lägga till antingen en
+tom parameter \texttt{\{\}} och ett mellanslag eller ett speciellt
+mellanslagskommando (till exempel \texttt{\~{}}) mellan
+kommandot och nästa ord. Detta stoppar \LaTeX{} från att äta upp allt
+tomrum efter kommandot.
+
+Vissa kommandon kräver en obligatorisk och/eller frivillig parameter som
+på ett eller annat sätt bestämmer hur kommandot beter sig. Den generella
+strukturen hos ett kommando med sådana parametrar är relativt enkel:
+\latex|\kommando[frivillig parameter]{obligatorisk parameter}|
+
+Finns det ingen obligatorisk parameter, eller om den frivilliga parametern
+inte används, kan hela biten inklusive hakparantes/måsvinge helt
+utelämnas. Ibland kan den frivilliga parametern innehålla många bitar
+information, till exempel olika flaggor till paket. Dessa brukar då
+separeras med ett kommatecken.
+
+
+\subsubsection{Kommentarer}
+Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
+ignorera) vissa bitar av dokumentet. Det kan vara för att förklara
+olika kommandon eller definitioner, eller för att ta bort ett stycke man
+inte är helt säker på. Detta görs med procenttecknet; när \LaTeX{} stöter
+på ett sådant (såvida det inte sitter ett \cmd{} före) så ignorerar den
+hela resten av den raden i \TeX{}-filen:
+\latex|Lite text\ldots{} % ...och en kommentar|
+
+\newpage % Undviker konstig radbrytning innan kodstycke
+\subsubsection{Grundläggande struktur}
+När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
+kommenterar delar av dina filer är det dags att förklara lite närmre hur
+en typisk \LaTeX{}-fil ser ut. Kompilatorn förväntar sig en viss struktur;
+till exempel så måste varje dokument inledas med kommandot
+\latex|\documentclass{...}|
+som berättar för \LaTeX{} vilken dokumentstil du vill använda (det finns
+ett antal olika, för till exempel rapporter, böcker eller brev).
+
+Därefter bör man köra kommandon som påverkar hela dokumentet, till
+exempel genom att ladda in extra paket eller definiera nya kommandon.
+Paket laddar man in med kommandot \cmd{usepackage}:
+\latex|\usepackage{...}|
+
+Både \cmd{documentclass} och \cmd{usepackage} tar en obligatorisk parameter (namnet på 
+stilen/paketet) och en frivillig parameter som används för att skicka
+inställningar till stilen eller paketet som laddas in — en närmare
+förklaring av båda dessa kommandon kommer senare.
+
+När allt förarbete är gjort kan man inleda dokumentet. Först berättar man
+för \LaTeX{} att innehållet börjar med hjälp av kommandot
+\latex|\begin{document}|
+och därefter följer dokumentets innehåll. När allt innehåll är slut
+avslutar man dokumentet med det snarlika kommandot
+\latex|\end{document}|
+som säger åt \LaTeX{} att det inte finns något mer som ska typsättas. Vad
+man egentligen gör här är att skapa en omgivning med namnet 
+\texttt{document}, som betecknar att detta är
+dokumentets innehåll. Omgivningar förklaras utförligt \vpageref{sec:omg}.
+
+\phantomsection
+\subsection{Dokumentets layout}\label{sec:1:layout}
+\LaTeX{} är inte helt oflexibelt, och man kan med hjälp av olika kommandon
+i inledningen till dokumentet ändra både utseendet och beteendet hos
+detsamma. Utseendet ändrar man med så kallade dokumentklasser (varje
+dokument måste specificera exakt en sådan), medan extra funktionalitet
+läggs till i form av så kallade paket.
+
+\subsubsection{Dokumentklasser}
+Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
+är vilken typ av dokument författaren vill skapa. Detta specificeras med
+hjälp av kommandot \cmd{documentclass}:
+\latex|\documentclass[inställningar]{klass}|
+
+Här berättar \opt{klass} vilken sort dokument som ska skapas, eller vilken
+stil som ska användas. Med de flesta \LaTeX{}-distributioner följer ett 
+antal standardklasser, och av dessa är det fyra man kan tänkas komma i
+kontakt med relativt ofta:
+\begin{description}[font=\sffamily]
+	\item[article] är en klass för artiklar till tidsskrifter, korta
+	rapporter, dokumentation, och annat som inte har någon annan, specifik
+	klass. Om du inte vet vilken klass du vill ha, börja med 
+	\pack{article}.
+	
+	\item[report] är en klass för längre rapporter (sådana med flera delar
+	eller kapitel), kortare böcker, kandidatrapporter, examensarbeten och
+	doktorsavhandlingar.
+	
+	\item[book] är en klass för riktiga böcker, som ska gå till tryck.
+	
+	\item[beamer] är en klass för presentationer och overhead-bilder.
+\end{description}
+
+Utöver dessa finns det även mer esoteriska klasser så som \pack{memoir},
+\pack{koma-script}, \pack{octavo} och \pack{refman}. Den intresserade
+uppmanas att leta upp dokumentationen för dessa på CTAN.
+
+\newpage
+Standardklasserna har också ett antal inställningar som kan ges som en
+kommaseparerad lista i den frivilliga parametern till \cmd{documentclass}:
+\begin{description}[font=\ttfamily]
+	\item[10pt,11pt,12pt] sätter textstorleken (för brödtext) i
+	dokumentet. Om ingen av dessa anges är \texttt{10pt} standard.
+	
+	\item[a4paper,\ldots{}] definierar pappersstorleken. Det finns ett
+	antal olika, bland annat \texttt{a5paper} och \texttt{b5paper}, men
+	standard är \texttt{letterpaper} — se därför till att ändra,
+	eftersom denna pappersstorlek inte används i Sverige.
+	
+	\item[onecolumn,twocolumn] sätter antalet kolumner i dokumentet.
+	Standard är en kolumn (\texttt{onecolumn}),
+	och vill man ha två kolumner
+	rekommenderas det att man använder paketet \pack{multicol} istället
+	för alternativet \texttt{twocolumn}.
+	
+	\item[twoside,oneside] specificerar om man vill ha ett dubbel- eller 
+	enkelsidigt dokument. \pack{article} och \pack{report} är enkelsidiga
+	och \pack{book} är dubbelsidig om inget annat anges. Notera att detta
+	bara påverkar dokumentets stil; \texttt{twoside} berättar \emph{inte}
+	för din skrivare att du vill ha dubbelsidiga utskrifter.
+\end{description}
+
+Säg till exempel att du vill skriva en rapport och att du vill använda den
+allmänt accepterade textstorleken \SI{12}{\point} på ett A4-papper. Det är
+ingen lång rapport, kanske till och med en inlämningsuppgift, och du
+bestämmer dig därför för att använda \pack{article}-klassen:
+\latex|\documentclass[12pt,a4paper]{article}|
+
+\subsubsection{Paket}
+När du skriver ett dokument kommer du troligtvis att märka att vissa saker
+är svåra eller ointuitiva (kanske rent av omöjliga\footnote{Tekniskt sett
+är de inte omöjliga, eftersom \TeX{} är Turingkomplett. Nästan alla paket
+är implementerade med \LaTeX-kod.}) att göra med grundläggande \LaTeX-kod.
+Lyckligvis finns det då nästan alltid ett paket på CTAN som förenklar
+det du vill göra. Installerade paket kan inkluderas med kommandot
+\cmd{usepackage}:
+\latex|\usepackage[inställningar]{paketnamn}|
+
+Notera dock att du måste installera dessa paket innan du kan inkludera dem
+i ditt \LaTeX-dokument. Din \LaTeX-distribution kommer förmodligen med de
+flesta paket förinstallerade, men om du får ett felmeddelande när du
+försöker använda ett paket beror det troligtvis på att det inte är
+installerat. I \TeX{} Live och Mac\TeX{} kan man installera nya paket med
+kommandot \cli{tlmgr install \opt{paketnamn}}.
+De flesta paketen kommer även med dokumentation, som kan nås med kommandot
+\cli{texdoc}, men ibland kan det vara lättare att leta upp motsvarande
+paket på CTAN och kolla på dokumentationen där istället.
+
+Några paket finns alltid och är mycket viktiga eftersom de berättar för
+\LaTeX{} hur in- och utdata (ska) formateras:
+\begin{description}[font=\sffamily]
+	\label{pack:fontenc}
+	\item[fontenc] berättar för \LaTeX{} vilken sorts typsnitt det
+	typsatta dokumentet ska använda; de vanligaste är \texttt{T3}, \texttt{OT1} och
+	\texttt{T1} — oftast vill man ha \texttt{T1}, som är vektorbaserad:
+	\latex|\usepackage[T1]{fontenc}|
+	
+	\label{pack:inputenc}
+	\item[inputenc] berättar för \LaTeX{} vilken teckenkodning indatan har
+	skrivits i. \LaTeX{} (som
+	stammar från 80-talet) antar att teckenkodningen är
+	\textsc{iso-8859-1} om inget annat anges, men många moderna system
+	använder \UTF vilket man då måste berätta:
+	\latex|\usepackage[utf8]{inputenc}|
+	\label{sec:1:inputenc}
+\end{description}
+
+\phantomsection
+\subsection{Från \TeX{} till \PDF}
+För att skapa ett typsatt \PDF-dokument utifrån en \LaTeX-fil måste man
+köra den genom den så kallade kompilatorn. \LaTeX{} kommer inte med något
+fint GUI med behändiga knappar att trycka på\footnote{Även om det finns
+sådana verktyg, till exempel \LyX{} och \TeX{}nicCenter.}; man måste
+istället köra kompilatorn från terminalen.
+
+Normalt måste man köra kompilatorn åtminstone två gånger, så att \LaTeX{}
+får en chans att förbättra och korrigera småsaker som referenser,
+innehållsförteckningar med mera\footnote{Detta är en konsekvens av hur
+\TeX{} fungerar; kompilatorn läser filen bit för bit och expanderar kommandon —
+det går inte att röra sig ”bakåt” i filen, så vill man ändra på något
+man redan gått förbi måste man spara information om detta i en extern fil
+som man läser in under nästa körning.}.
+Kompilatorn brukar varna om detta och
+be om ännu en körning. Använder man vissa externa verktyg som \BibTeX{}
+måste man även köra detta program; arbetsflödet blir då 
+\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\BibTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX.
+
+\subsubsection{Kompilatorn: \pdfLaTeX}
+Det finns ett antal olika kompilatorer att tillgå (den vanligaste heter
+bara \cli{latex} och genererar \DVI-filer), men den som är att föredra är
+\pdfLaTeX{}. Fördelen med denna kompilator är att den har utökat stöd för
+vissa mikrotypografiska funktioner, till exempel hängande punktuation
+\cite{Thanh00}, men framför allt så kompilerar den dina \LaTeX-filer till
+\PDF-dokument, istället för de \DVI-filer \cli{latex} producerar.
+
+Användningen är enkel; när du vill kompilera ditt dokument (vilket du som
+sagt vill göra några gånger i rad) anropar du helt enkelt programmet
+\cli{pdflatex} (testa gärna på koden i exempel~\vref{ex:initio}):
+\mint{sh}|pdflatex filnamn.tex|
+
+Detta gör att \pdfLaTeX{} kompilerar ditt program och skapar ett antal
+filer, däribland \texttt{filnamn.pdf}, som är det slutgiltiga (eller, så
+slutgiltigt \LaTeX{} hunnit göra det) \PDF-dokumentet.
+
+\begin{kod}[tbp]
+	\begin{latexcode}
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+Det här är ett första stycke, ett exempel
+på hur    text    typsätts    av \LaTeX{}.
+
+Oj, ett nytt stycke! (Två stycken i samma
+dokument, kan du tänka dig?)
+\end{document}
+	\end{latexcode}
+	\caption{Ett mycket enkelt \LaTeX-dokument med endast det allra
+	nödvändigaste.}
+	\label{ex:initio}
+\end{kod}
+
+\subsubsection{Automatisera med \cli{latexmk}}
+Det kan vara tröttsamt att konstant kompilera sina filer och hålla koll på
+hur många gånger man ska köra \LaTeX{} och andra verktyg. Lyckligtvis 
+finns det sätt att automatisera processen, och ett av det enklaste är
+Perl-skriptet \cli{latexmk}, som finns tillgängligt på CTAN%
+\footnote{\url{http://www.ctan.org/tex-archive/support/latexmk/}}.
+Skriptet kör \LaTeX{} och tolkar loggen som skapas för att avgöra om det
+behövs fler körningar, och kan även konfigureras för att kontinuerligt
+kolla efter ändringar i \LaTeX-filen (och andra berörda filer) och
+kompilera om hela dokumentet när dessa ändras.
+
+Att köra \cli{latexmk} är lika lätt som att köra \cli{pdflatex}:
+\mint{sh}|latexmk -pdf filnamn.tex|
+
+\subsection{Filer du kanske stöter på}
+När man arbetar med \LaTeX{} finner man ganska snabbt att det dyker upp en
+stor mängd olika filer (därför bör man också ha varje dokument i en egen
+mapp) med mer eller mindre uppenbara filändelser. Vissa behövs för att
+\LaTeX{} ska fungera, vissa genereras av \LaTeX{} och används i senare
+körningar och vissa är relativt överflödiga.
+
+Eftersom olika paket också kan skapa filer av godtycklig typ kommer listan
+nedan inte vara fullständig, men förhoppningsvis innehåller den de filer
+man oftast stöter på i sitt arbete med \LaTeX{}.
+
+\subsubsubsection*{Filer som används av \LaTeX{}}
+\begin{description}[font=\ttfamily]
+	\item[.tex] Ett \TeX- eller \LaTeX-dokument. Kompileras med
+	\cli{pdflatex} (eller \cli{latex}, om man vill ha \DVI-filer).
+	
+	\item[.sty] Ett \LaTeX-paket, som kan inkluderas med \cli{usepackage}.
+	
+	\item[.dtx] Dokumenterad \TeX-kod. Hittar du en sån här fil så är det
+	troligtvis ett distribuerat paket, och det borde följa med en fil med
+	ändelsen \texttt{.ins}. Om du kör \LaTeX{} på en \texttt{.dtx}-fil så
+	kommer dokumentationen för motsvarande \LaTeX-paket genereras.
+	
+	\item[.ins] Installationsfil för en motsvarande \texttt{.dtx}-fil. Kör
+	man \LaTeX{} på denna så kommer den oftast att generera en 
+	\texttt{.sty}- eller \texttt{.cls}-fil (detta beror så klart på vad
+	paketet i fråga innehåller).
+	
+	\item[.cls] En dokumentklass. Denna kan väljas med 
+	\cli{documentclass}.
+\end{description}
+
+\subsubsubsection*{Filer som genereras av \LaTeX{}}
+\begin{description}[font=\ttfamily]
+	\item[.pdf] \PDF-dokument \eng{Portable Document File}. Det här är
+	sannolikt den fil \LaTeX{} genererat från din \texttt{.tex}-fil,
+	förutsatt att du inte lagrar andra \PDF-dokument i samma mapp (vilket
+	du inte bör göra).
+	
+	\item[.log] En detaljerad logg som berättar vad som hände under den
+	senaste körningen av \cli{pdflatex}.
+	
+	\item[.toc] Lagrar alla rubriker, och läses in av \LaTeX{} under nästa
+	körning då den genererar en innehållsförteckning (om en sådan ska 
+	finnas med i dokumentet).
+	
+	\item[.lof] Som \texttt{.toc}, fast med en lista över figurer.
+	
+	\item[.lot] Som \texttt{.toc} och \texttt{.lof}, fast med en lista 
+	över tabeller.
+	
+	\item[.aux] En fil som innehåller information om korsreferenser,
+	etiketter och annat. Läses in vid nästa körning av \cli{pdflatex}.
+\end{description}
+\end{document}

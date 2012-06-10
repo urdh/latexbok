@@ -1,0 +1,41 @@
+\documentclass[../../latex.tex]{subfiles}
+\begin{document}
+\pagestyle{empty}
+\pagenumbering{Alph}
+
+\begin{titlepage} % INTERNAL TITLE PAGE (fold)
+	\license{%Senast uppdaterad \moddate{}.\\
+	Licenserad under Creative Commons By-Sa 3.0.\\
+	\url{http://creativecommons.org/licenses/by-sa/3.0/}}
+	\maketitle
+	\begin{abstract}
+		En inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
+		till studenter på Chalmers Tekniska Högskola, specifikt programmen
+		Teknisk Matematik och Teknisk Fysik.
+		Inspiration har tagits från bland annat \citeasnoun{Schultz05} och
+		\citeasnoun{Voss10}, men främst från \citeasnoun{Oetiker11}.
+	\end{abstract}
+\end{titlepage} % (end)
+\cleardoublepage
+
+\begin{center} % DEDICATION, THANKS AND PUBLISHER
+	\large\vspace*{36pt}
+%		{\makeatletter\@titstyle\makeatother\huge Tillägnad}\\[1ex]
+%		någon?
+%		\bigskip\bigskip\bigskip
+	
+	{\makeatletter\@titstyle\makeatother\Large Tack till}\\[1ex]
+	\emph{Phaddergrupp 255},\\
+	som korrekturläst och\\
+	hjälpt till att förbättra boken\\[1ex]
+	{\makeatletter\@titstyle\makeatother\Large och}\\[1ex]
+	\emph{Christian von Schultz},\\
+	\emph{Tobias Oetiker} och \emph{Herbert Voß}\\
+	för inspirerande texter på samma tema.
+	\vfill 
+	
+	\small
+	%Tryck: XXX\\
+	Göteborg, 2012
+\end{center}
+\end{document}

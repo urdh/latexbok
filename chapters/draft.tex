@@ -1,0 +1,16 @@
+\ifdraft{%
+\renewcommand\mint[3][]{\DefineShortVerb{#3}\fvset{#1}\SaveVerb[aftersave={\UndefineShortVerb{#3}\begin{flushleft}\UseVerb{minted@verb}\end{flushleft}}]{minted@verb}#3}%
+\renewenvironment{minted}[2][]{\VerbatimEnvironment\fvset{#1}\begin{Verbatim}}{\end{Verbatim}}
+\renewcommand\inputminted[3][]{\fvset{#1}\VerbatimInput{#3}}
+% LaTeX source code
+\newminted{latex}{frame=single}%
+\newminted{text}{frame=single}%
+\newmint{latex}{frame=single}%
+% Line numbers in margin
+%\lnoson% % Disable when not spellchecking/proofreading
+}{%
+% LaTeX source code
+\newminted{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
+\newminted{text}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
+\newmint{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
+}

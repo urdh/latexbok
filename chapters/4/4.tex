@@ -1,0 +1,160 @@
+\documentclass[../../latex.tex]{subfiles}
+\begin{document}
+\section{Grafik med \LaTeX}\label{sec:4}
+Många dokument kräver att man inkluderar figurer för att presentera
+resultat eller förtydliga resonemang. Dessa typsätts i \LaTeX{} med hjälp
+av flytande objekt, vilket diskuteras i del~\ref{sec:2}, men i dessa
+flytande objekt måste man även importera eller generera sin grafik.
+
+\LaTeX{} ger genom diverse paket många möjligheter att göra detta. Med den
+klassiska \LaTeX{}-motorn, som genererar \DVI-filer, kunde man importera
+\EPS-filer eller rita direkt med \textsc{PostScript}-kommandon, men
+eftersom man i dagsläget oftast använder (och bör använda) \pdfLaTeX{}
+måste man använda något annorlunda metoder. Denna del förklarar två av
+dessa: \pack{graphicx} och \PGFTikZ.
+
+\subsection{Inkludera grafik med \pack{graphicx}}
+Det enklaste sättet att inkludera grafik är att skapa sina figurer i ett
+externt program (det kan till exempel vara fördelaktigt att exportera sina
+figurer direkt från den programvara man använder) och sedan importera
+dessa till \LaTeX{}-dokumentet. Detta gör man med paketet \pack{graphicx}.
+
+Proceduren är enkel:
+\begin{enumerate}
+	\item Skapa figuren i ett externt program och spara i rätt format
+	
+	\item Inkludera \pack{graphicx}-paketet genom att skriva
+	\cmd{usepackage\{graphicx\}} i inledningen till dokumentet.
+	
+	\item Inkludera grafiken i en \env{figure}-omgivning med hjälp av
+	kommandot \cmd{includegraphics}:
+	\latex|\includegraphics[parametrar]{filnamn}|
+	
+	Parametrarna här kan vara många. Oftast vill man ställa in bredden på
+	sin bild så att den passar sidan, och detta kan man göra genom att
+	specificera parametern \cli{width} och sätta den till
+	\cmd{textwidth}:
+	\latex|\includegraphics[width=\textwidth]{filnamn}|
+	
+	Andra parametrar som kan användas är \cli{height}, \cli{angle}
+	och \cli{trim}\footnote{Man bör då inte heller glömma att sätta
+	\cli{clip=true}.\hfil}. En komplett beskrivning av paketet och de 
+	parametrar som finns att tillgå finns i dokumentationen på
+	CTAN\footnote{\url{http://www.ctan.org/archive/macros/latex/required/graphics/grfguide.pdf}}.
+\end{enumerate}
+
+Säg att man till exempel vill inkludera filen \cli{interpolation.png}
+i sitt dokument för att illustrera konceptet interpolation. Man bestämmer
+sig dock för att figuren bara ska ta upp 25\,\% av textbredden, eftersom
+figuren bli för stor annars. Man använder då parametern \cli{width}
+enligt figur~\vref{fig:graphicx}.% för att specificera detta.
+
+\begin{figure}[tbp]
+	\centering
+	\hspace{-0.025\textwidth}
+	\begin{minipage}{0.475\textwidth} % kod
+			\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}\vfil
+	\end{minipage}
+	\hfil
+	\begin{minipage}{0.475\textwidth} % figur
+		\fbox{\includegraphics[width=\textwidth,clip=true,trim=80 0 80 0]{chapters/../examples/4/graphicx.pdf}}
+	\end{minipage}
+	\caption{Koden till vänster inkluderar filen \cli{interpolation.png} i
+	\LaTeX-dokumentet och ger det resultat som ses till höger.}
+	\label{fig:graphicx}
+\end{figure}
+
+\subsubsection{Rätt format?}
+En nackdel med \pdfLaTeX{} när det gäller \pack{graphicx} är att det inte
+finns särskilt många bildformat som fungerar (dock fler än för gamla
+\LaTeX{}, som bara accepterade \EPS). De format som kan inkluderas
+med \pack{graphicx} när man använder \pdfLaTeX{} är \textsc{PNG},
+\textsc{JPEG} och \PDF, och oftast vill man använda \PDF{} för figurer
+eftersom
+det är det enda vektorbaserade formatet som fungerar, medan man för
+fotografier och dylikt använder \textsc{JPEG}. \textsc{PNG} kan man
+använda då man egentligen bör använda \PDF{} men detta inte är möjligt.
+
+Eftersom många verktyg och programvaror fortfarande sparar filer i
+\EPS-format kan det vara praktiskt att kunna konvertera dessa till ett
+format som fungerar. Detta kan göras med verktyget \cli{epstopdf}, som
+finns tillgängligt på CTAN.
+
+\subsection{Rita med \PGFTikZ}
+Ett lite mer komplicerat sätt att inkludera grafik (men ofta 
+föredelaktigt, eftersom allt innehåll stannar i \TeX-filen) är att använda
+\PGFTikZ, ett paket skrivet för att användas med \pdfLaTeX{} för att rita
+figurer i \LaTeX{}. Med det kan man direkt i sitt \LaTeX-dokument skapa
+enklare figurer som flödesscheman, träd, grafer eller liknande; se exempel
+i figur~\vref{fig:tikz}. Även mer avancerade figurer är möjliga, men att
+förklara hela \PGFTikZ{} tar allt för lång tid för denna introduktion. Den
+intresserade läsaren hänvisas istället till \citeasnoun{Mertz07} som har
+en bra introduktion till ämnet, och \PGFTikZ-manualen \cite{Tantau10} som
+utförligt beskriver hur paketet fungerar.
+
+\begin{figure}[p]
+	\centering
+	\begin{minipage}{0.95\textwidth} % kod
+		\vfil
+		\begin{latexcode}
+\newcounter{d}\setcounter{d}{0}
+\def\mcolor{SpringGreen}
+\begin{tikzpicture}
+\path[coordinate] (0,0)
+     coordinate(A) ++( 60:6cm)
+     coordinate(B) ++(-60:6cm) coordinate(C);
+\draw[fill=Black!\thed!\mcolor]
+     (A) -- (B) -- (C) -- cycle;
+\foreach \x in {1,...,15}{%
+    \pgfmathsetcounter{d}{\thed+10}
+    \setcounter{d}{\thed}
+    \path[coordinate] coordinate(X) at (A){};
+    \path[coordinate] (A)
+         -- (B) coordinate[pos=.15](A)
+         -- (C) coordinate[pos=.15](B)
+         -- (X) coordinate[pos=.15](C);
+    \draw[fill=Black!\thed!\mcolor]
+         (A)--(B)--(C)--cycle;
+}
+\end{tikzpicture}
+		\end{latexcode}
+		\vfil
+	\end{minipage}
+	\\[1ex]
+	\begin{minipage}{0.95\textwidth} % figur
+		\centering
+		\newcounter{density}\setcounter{density}{0}
+		\begin{minipage}{0.475\textwidth}
+		\fbox{\begin{tikzpicture}
+		    \path[coordinate] (0,0)  coordinate(A)
+		                ++( 60:0.95\textwidth) coordinate(B)
+		                ++(-60:0.95\textwidth) coordinate(C);
+		    \draw[fill=Black!\thedensity!SpringGreen]
+						(A) -- (B) -- (C) -- cycle;
+		    \foreach \x in {1,...,15}{%
+		        \pgfmathsetcounter{density}{\thedensity+10}
+		        \setcounter{density}{\thedensity}
+		        \path[coordinate] coordinate(X) at (A){};
+		        \path[coordinate] (A) -- (B) coordinate[pos=.15](A)
+		                            -- (C) coordinate[pos=.15](B)
+		                            -- (X) coordinate[pos=.15](C);
+		        \draw[fill=Black!\thedensity!SpringGreen]
+						(A)--(B)--(C)--cycle;
+		    }
+		\end{tikzpicture}}
+		\end{minipage}\hfil
+		\begin{minipage}{0.475\textwidth}
+		\caption[Koden ovan tolkas av \PGFTikZ{} och resulterar i den
+		itererade triangeln till vänster]{
+		Koden ovan tolkas av \PGFTikZ{} och resulterar i den
+		itererade triangeln till vänster.
+		Fler exempel finns i
+		\citeasnoun{Mertz07} och \citeasnoun{Tantau10}. Tack till Alain 
+		Matthes för originalkoden\footnote{\url{http://www.texample.net/tikz/examples/rotated-triangle/}}.}
+		\label{fig:tikz}
+		\end{minipage}
+	\end{minipage}
+\end{figure}
+
+\label{sec:4:end}
+\end{document}
