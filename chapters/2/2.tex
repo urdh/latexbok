@@ -799,11 +799,31 @@ dokumentets start):
 \end{latexcode}
 
 \subsubsection{Citat}
-Det finns två omgivningar i \LaTeX{} som kan användas för att märka upp
+% FIXME: Korrekturläs och förbättra
+I \LaTeX{} används ofta \verb|``| och \verb|''| för att typsätta citattecken,
+och dessa teckenkombinationer resulterar då i det öppnande och stängande
+citattecknet så som det används i engelsk typografi. I svensk typografi
+används endast det senare, så skriver du på svenska ska du bara använda
+\verb|''|. Använder man UTF-8 i sina dokument (vilket man bör) kan man
+även använda citattecknet \verb|”| självt (notera att detta inte är det
+tecken som normalt produceras med Shift+2 utan ett korrekt citattecken).
+
+Det finns även två omgivningar i \LaTeX{} som kan användas för att märka upp
 så kallade blockcitat \eng{blockquotes}, alltså lite längre citat på ett
 eller flera stycken; \texttt{quote} och \texttt{quotation}. Det första,
 \texttt{quote}, är tänkt att användas till citat på högst ett stycke,
 medan \texttt{quotation} ska användas för flera stycken.
+
+För att det här med citattecken, längre citat och även källhänvisning ska
+kunna hanteras på ett enklare och mer konsekvent sätt skapades paketet
+\pack{csquotes}. Det är ett paket som varmt rekommenderas och som inför
+ett antal användbara kommandon. Bland annat definieras kommandot
+\cmd{enquote}, som automatiskt omsluter texten med rätt citattecken även
+för citat inuti citat, och
+\cmd{textquote}, som är en variant som även lägger till en källhänvisning.
+Dessutom definieras omgivningen \env{displayquote}, som ersätter både
+\env{quote} och \env{quotation}. Paketets dokumentation, som finns på CTAN,
+är värd en genomläsning då paketet har många användbara kommandon.
 
 \subsubsection{Teckenkodning (\UTF)}
 Teckenkodning, som kort nämndes på sidan~\vpageref{sec:1:inputenc}, är
