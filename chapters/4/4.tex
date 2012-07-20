@@ -1,6 +1,34 @@
 \documentclass[../../latex.tex]{subfiles}
 \begin{document}
 \section{Grafik med \LaTeX}\label{sec:4}
+
+\subsection{Vad är bra grafik?}
+% Se #26 på bitbucket
+
+\subsection{Inkludera grafik}
+\subsubsubsection{Varför hamnar figuren fel?}
+\subsubsection{Paketet \pack{graphicx}}
+\subsubsection{Rita med \PGFTikZ}
+
+\subsection{Exportera grafik}
+\subsubsection{Exportera i \PGFTikZ-format}
+\subsubsubsection{Från \Rlogo med \texttt{tikzDevice}}
+% Att tänka på: ggplot2
+\subsubsubsection{Från \MATLAB med \texttt{matlab2tikz}}
+%\subsubsubsection{Från \Mathematica med ???}
+\subsubsubsection{Från \gnuplot med \TikZ-terminalen}
+
+\subsubsection{Exportera i \PDF eller \PNG-fomat}
+% Förklara; PDF>PNG eftersom vektorgrafik
+\subsubsubsection{Från \Rlogo till \PDF}
+% Att tänka på: ggplot2
+\subsubsubsection{Från \MATLAB till \PNG}
+% Att tänka på: http://tex.stackexchange.com/questions/5559/how-to-avoid-large-margins-around-matlab-plot-in-pdf
+\subsubsubsection{Från \Mathematica till \PDF}
+% http://mathematica.stackexchange.com/a/750/1519
+\subsubsubsection{Från \gnuplot till \PDF}
+
+\iffalse
 Många dokument kräver att man inkluderar figurer för att presentera
 resultat eller förtydliga resonemang. Dessa typsätts i \LaTeX{} med hjälp
 av flytande objekt, vilket diskuteras i del~\ref{sec:2}, men i dessa
@@ -53,7 +81,7 @@ enligt figur~\vref{fig:graphicx}.% för att specificera detta.
 	\centering
 	\hspace{-0.025\textwidth}
 	\begin{minipage}{0.475\textwidth} % kod
-			\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}\vfil
+			%\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}\vfil
 	\end{minipage}
 	\hfil
 	\begin{minipage}{0.475\textwidth} % figur
@@ -155,6 +183,6 @@ utförligt beskriver hur paketet fungerar.
 		\end{minipage}
 	\end{minipage}
 \end{figure}
-
+\fi
 \label{sec:4:end}
 \end{document}
