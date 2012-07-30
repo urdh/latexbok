@@ -4,29 +4,57 @@
 
 \subsection{Vad är bra grafik?}
 % Se #26 på bitbucket
+\subsubsection{Bra \Rlogo-figurer med \texttt{ggplot2}}
+% Att tänka på: ggplot2
+\subsubsection{Bättre \MATLAB-figurer}
+% ???
 
 \subsection{Inkludera grafik}
-\subsubsubsection{Varför hamnar figuren fel?}
 \subsubsection{Paketet \pack{graphicx}}
 \subsubsection{Rita med \PGFTikZ}
+\subsubsection{Varför hamnar figuren fel?}
 
 \subsection{Exportera grafik}
+När man väl skapat sin grafik i det program man arbetar med och är nöjd
+med denna måste man exportera den till ett format som kan användas med
+\LaTeX. Använder man \pdfLaTeX (vilket man bör) så stöds formaten \JPEG,
+\PNG och \PDF. Av dessa lämpar sig \JPEG bäst till fotografier, medan
+\PNG och \PDF lämpar sig väl till figurer och grafer.
+Generellt sett är \PDF att föredra då formatet är vektorbaserat och
+därför kan skalas både upp och ner utan att man förlorar någon kvalitet.
+
+Om möjligheten finns är det bästa dock att exportera sina figurer som
+\PGFTikZ-kod, vilket innebär att \LaTeX{} kommer att rendera dem och att
+man därför har något större frihet när det gäller finjustering av figuren
+i efterhand, och även att axlar och dylikt typsätts på samma sätt som
+dokumentets brödtext vilket ger ett enhetligt intryck.
+
+Det finns många (matematiska) programvaror, och det är orimligt att
+inkludera instruktioner till alla i detta kapitel. Jag har därför valt
+att beskriva hur man enklast exporterar figurer som \PGFTikZ-kod eller
+i \PDF-format (i nödfall \PNG) från fyra vanliga programvaror:
+\Rlogo, \MATLAB, \Mathematica och \gnuplot.
+
 \subsubsection{Exportera i \PGFTikZ-format}
-\subsubsubsection{Från \Rlogo med \texttt{tikzDevice}}
-% Att tänka på: ggplot2
-\subsubsubsection{Från \MATLAB med \texttt{matlab2tikz}}
+\PGFTikZ brukar inte vara ett format som normalt stöds av kommersiella
+(eller fria) programvaror, och därför är funktionen ofta implementerad
+som någon form av tillägg. Lyckligtvis brukar dessa vara öppna och fria
+att använda för vem som helst.
+
+\subsubsubsection*{Från \Rlogo med \texttt{tikzDevice}}
+\subsubsubsection*{Från \MATLAB med \texttt{matlab2tikz}}
 %\subsubsubsection{Från \Mathematica med ???}
-\subsubsubsection{Från \gnuplot med \TikZ-terminalen}
+\subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
 
 \subsubsection{Exportera i \PDF eller \PNG-fomat}
 % Förklara; PDF>PNG eftersom vektorgrafik
-\subsubsubsection{Från \Rlogo till \PDF}
+\subsubsubsection*{Från \Rlogo till \PDF}
 % Att tänka på: ggplot2
-\subsubsubsection{Från \MATLAB till \PNG}
+\subsubsubsection*{Från \MATLAB till \PNG}
 % Att tänka på: http://tex.stackexchange.com/questions/5559/how-to-avoid-large-margins-around-matlab-plot-in-pdf
-\subsubsubsection{Från \Mathematica till \PDF}
+\subsubsubsection*{Från \Mathematica till \PDF}
 % http://mathematica.stackexchange.com/a/750/1519
-\subsubsubsection{Från \gnuplot till \PDF}
+\subsubsubsection*{Från \gnuplot till \PDF}
 
 \iffalse
 Många dokument kräver att man inkluderar figurer för att presentera
