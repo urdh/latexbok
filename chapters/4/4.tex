@@ -4,9 +4,12 @@
 
 \subsection{Vad är bra grafik?}
 % Se #26 på bitbucket
-\subsubsection{Bra \Rlogo-figurer med \texttt{ggplot2}}
-% Att tänka på: ggplot2
-\subsubsection{Bättre \MATLAB-figurer}
+\subsubsection{Almänna tips}
+\subsubsection{Programspecifika tips}
+\subsubsubsection*{Bra \Rlogo-figurer med \texttt{ggplot2}}
+\label{sec:ggplot2}
+% Att tänka på: ggplot2 \cite{Hadley09}
+\subsubsubsection*{Bättre \MATLAB-figurer}
 % ???
 
 \subsection{Inkludera grafik}
@@ -42,6 +45,40 @@ som någon form av tillägg. Lyckligtvis brukar dessa vara öppna och fria
 att använda för vem som helst.
 
 \subsubsubsection*{Från \Rlogo med \texttt{tikzDevice}}
+\Rlogo-paketet \texttt{tikzDevice} \cite{Sharpsteen12} gör det möjligt
+att i \Rlogo exportera figurer som \PGFTikZ-kod. Det kan som många andra
+\Rlogo-paket hittas på CRAN och installeras enklast genom att köra
+\Rlogo-kommandot \verb|install.packages("tikzDevice")|. Man använder
+sedan kommandot \texttt{tikz} för att berätta för \Rlogo att grafiken
+ska skrivas som \PGFTikZ-kod, och filen som skapas kan sedan inkluderas
+i \LaTeX-dokument med kommandot \cmd{input}.
+Exempel~\vref{ex:tikzdevice} visar resultatet av detta.
+
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+		\input{chapters/../examples/4/tikzdevice.tex}
+	\end{minipage}
+	\\[1ex]
+	\begin{minipage}{\textwidth}
+		\begin{rcode*}{mathescape=true}
+require(tikzDevice)
+# width och height specificeras i tum
+tikz('figur.tex', width=4, height=2.5)
+# exempel med ggplot2, som diskuteras$\text{\vpageref{sec:ggplot2}}$
+require(ggplot2)
+ggplot(diamonds, aes(depth, fill = cut)) +
+  + geom_density(alpha = 0.2) + xlim(55, 70)
+# stäng $\text{\TikZ}$-filen
+dev.off()
+		\end{rcode*}
+	\end{minipage}
+	\caption{\Rlogo-koden nederst genererar den \PGFTikZ-bild som
+	syns överst.}
+	\label{ex:tikzdevice}
+\end{kod}
+
 \subsubsubsection*{Från \MATLAB med \texttt{matlab2tikz}}
 %\subsubsubsection{Från \Mathematica med ???}
 \subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
