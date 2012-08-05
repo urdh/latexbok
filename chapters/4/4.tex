@@ -85,8 +85,41 @@ dev.off()
 
 \subsubsection{Exportera i \PDF eller \PNG-fomat}
 % Förklara; PDF>PNG eftersom vektorgrafik
+
 \subsubsubsection*{Från \Rlogo till \PDF}
-% Att tänka på: ggplot2
+\Rlogo har ett antal inbyggda så kallade enheter \eng{device} som kan
+användas för att rita diagram, grafer och liknande, bland annat för \EPS,
+\PNG och \textsc{SVG} \cite[s.~713]{RCoreTeam12}. Enheten vi är mest
+intresserade av är den som producerar \PDF-filer. Denna används enkelt
+genom att köra kommandot \texttt{pdf}, som tar samma parametrar som
+\texttt{tikz}-kommandot som beskrevs tidigare. \PDF-filen som genereras
+kan sedan enkelt inkluderas i ett \LaTeX-dokument med \cmd{includegraphics}.
+Exempel~\vref{ex:pdfdevice} visar hur det kan se ut.
+
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+		\includegraphics{chapters/../examples/4/pdfdevice.pdf}
+	\end{minipage}
+	\\[1ex]
+	\begin{minipage}{\textwidth}
+		\begin{rcode*}{mathescape=true}
+# width och height specificeras i tum
+pdf('figur.tex', width=4, height=2.5)
+# exempel med ggplot2, som diskuteras$\text{\vpageref{sec:ggplot2}}$
+require(ggplot2)
+ggplot(diamonds, aes(depth, fill = cut)) +
+  + geom_density(alpha = 0.2) + xlim(55, 70)
+# stäng $\text{\PDF}$-filen
+dev.off()
+		\end{rcode*}
+	\end{minipage}
+	\caption{\Rlogo-koden nederst genererar den \PDF-bild som
+	syns överst.}
+	\label{ex:pdfdevice}
+\end{kod}
+
 \subsubsubsection*{Från \MATLAB till \PNG}
 % Att tänka på: http://tex.stackexchange.com/questions/5559/how-to-avoid-large-margins-around-matlab-plot-in-pdf
 \subsubsubsection*{Från \Mathematica till \PDF}
