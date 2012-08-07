@@ -8,7 +8,40 @@
 \subsubsection{Programspecifika tips}
 \subsubsubsection*{Bra \Rlogo-figurer med \texttt{ggplot2}}
 \label{sec:ggplot2}
-% Att tänka på: ggplot2 \cite{Hadley09}
+Standardgrafiken i \Rlogo är överlag ganska bra när det gäller statistisk
+analys, men bristande på andra områden. På många sätt är det dessutom svårt
+att göra lite mer involverade saker som att ändra färger, sätta ordentliga
+axlar, enheter och så vidare. \Rlogo-paketet \texttt{ggplot2}
+skapades för att åtgärda detta, och skapar snyggare grafer på enklare sätt.
+
+Att installera och använda \texttt{ggplot2} är enkelt. Efter att ha installerat
+paketet genom att köra kommandot \verb|install.packages("ggplot2")| i \Rlogo
+använder man det genom att inkludera paketet och använda funktionen
+\texttt{ggplot} i kombination med någon av paketets många plot-funktioner.
+Man kan även kombinera olika grafer:
+\begin{rcode}
+require(ggplot2)
+# Exempeldata
+df <- data.frame(
++   trt = factor(c(1, 1, 2, 2)),
++   resp = c(1, 5, 3, 4), 
++   group = factor(c(1, 2, 1, 2)),
++   se = c(0.1, 0.3, 0.3, 0.2)
++) 
+df2 <- df[c(1,3),] 
+# Toppen/botten på errorbars
+limits <- aes(ymax = resp + se, ymin=resp - se)
+dodge <- position_dodge(width=0.9)
+# Plotta!
+p <- ggplot(df, aes(fill=group, y=resp, x=trt))
+p + geom_bar(position=dodge) +
+  + geom_errorbar(limits, position=dodge, width=0.25)
+\end{rcode}
+
+En mer utförlig referens över alla kommandon i \texttt{ggplot2} finns på internet%
+\footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig genomgång ges av
+\citeasnoun{Hasley09}.
+% Att tänka på: ggplot2 
 \subsubsubsection*{Bättre \MATLAB-figurer}
 % ???
 
@@ -100,7 +133,8 @@ Exempel~\vref{ex:pdfdevice} visar hur det kan se ut.
 	\centering
 	\begin{minipage}{\textwidth}
 		\centering
-		\includegraphics{chapters/../examples/4/pdfdevice.pdf}
+		%\includegraphics{chapters/../examples/4/pdfdevice.pdf}
+		\includegraphics{../../examples/4/pdfdevice.pdf}
 	\end{minipage}
 	\\[1ex]
 	\begin{minipage}{\textwidth}
