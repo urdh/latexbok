@@ -45,6 +45,15 @@
 	\subfile{chapters/5/5.tex}
 	%% VIDARE LÄSNING
 	\subfile{chapters/6/6.tex}
+	%% BIBLIOGRAFI
+	\begin{english}
+		\renewcommand\refname{Referenser}
+		\let\oldurl=\url\renewcommand\url[1]{\newline{\small\oldurl{#1}}}
+		\cleardoublepage
+		\phantomsection
+		\addcontentsline{toc}{section}{\hspace{1.3em}Referenser}
+		\bibliography{referenser}
+	\end{english}
 	%% EN ENKEL MALL
 	\appendix
 	\subfile{chapters/meta/appendix.tex}
