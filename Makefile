@@ -1,7 +1,7 @@
 info:
 	@echo "Please make a specific target (a4 or c5), or explicitly run \"make all\"."
 
-.PHONY: all a4 c5
+.PHONY: all a4 c5 latexbok-a4.pdf latexbok-c5.pdf
 all: latexbok-a4.pdf latexbok-c5.pdf
 a4: latexbok-a4.pdf
 c5: latexbok-a5.pdf
