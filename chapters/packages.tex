@@ -9,8 +9,14 @@
 \usepackage{tikz}
 \usetikzlibrary{shadows}
 % page size
-\usepackage[c5paper,xetex]{geometry}
-\usepackage[cam,info,a4,center]{crop}
+\paper{a4}{%
+	\usepackage[a4paper,xetex]{geometry}%
+	\usepackage[cam,info,a4,center]{crop}%
+}
+\paper{c5}{%
+	\usepackage[c5paper,xetex]{geometry}%
+	\usepackage[cam,info,c5,center]{crop}%
+}
 % code
 \usepackage{minted}
 % improvement packages

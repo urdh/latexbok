@@ -30,3 +30,6 @@
 *.vrb
 *.xdy
 *.tdo
+*.pdf
+*.DS_Store
+*~
