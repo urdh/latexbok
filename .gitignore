@@ -33,3 +33,5 @@
 *.pdf
 *.DS_Store
 *~
+*.fls
+*.cpt
