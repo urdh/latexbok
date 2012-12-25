@@ -4,7 +4,7 @@ info:
 .PHONY: all a4 c5 latexbok-a4.pdf latexbok-c5.pdf
 all: latexbok-a4.pdf latexbok-c5.pdf
 a4: latexbok-a4.pdf
-c5: latexbok-a5.pdf
+c5: latexbok-c5.pdf
 
 latexbok-a4.pdf:
 	latexmk -pdflatex="xelatex --shell-escape %O %S" -pdf -dvi- -ps- \
