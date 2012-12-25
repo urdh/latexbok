@@ -1,5 +1,5 @@
 \RequirePackage{xstring,xparse}
-\NewDocumentCommand\paper{mm}{\IfStrEq{\paper}{#1}{#2}{}}
+\NewDocumentCommand\paper{mm}{\IfStrEq{\papersize}{#1}{#2}{}}
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \documentclass[swe,10pt,nofont,nomath]{skrapport}
 %% Packages
