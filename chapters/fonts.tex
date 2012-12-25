@@ -4,19 +4,28 @@
 	Contextuals=Swash,%
 	SmallCapsFeatures={Letters=SmallCaps,Scale=0.96,Weight=0.8},%
 }
-\setmainfont[Scale=1.1,SmallCapsFont={ArnhemSmallCaps}]{Baskerville}
-%\setsansfont[Scale=0.935]{Frutiger LT Std}
-\setsansfont[Scale=0.935]{Myriad Pro}
-%\setmonofont[Scale=0.935]{Prestige Elite Std}
-\setmonofont[Scale=0.935]{Anonymous Pro}
-\newfontfamily\titlefont[%
-	Alternate=0,%
-	%Ligatures={Rare,Historic,Common,Required,Contextual}%
-]{Hoefler Text}
-\newfontfamily\utffont{Times New Roman}% Change this?
-\newfontfamily\tipafont{DejaVu Serif}
-%\setmathrm{Asana Math}
-%\setmathsf{}
-%\setmathtt{}
-%\setboldmathrm{}
+%% Main font: Alegreya
+\setmainfont[Scale=1.05,Path=fonts/alegreya/,
+				ItalicFont=Alegreya-Italic.ttf,
+				BoldFont=Alegreya-Bold.ttf,
+				BoldItalicFont=Alegreya-BoldItalic.ttf
+			]{Alegreya-Regular.ttf}
+%% Sans serif font: Open Sans
+\setsansfont[Scale=0.9,Path=fonts/open-sans/,
+				ItalicFont=OpenSans-Italic.ttf,
+				BoldFont=OpenSans-Bold.ttf,
+				BoldItalicFont=OpenSans-BoldItalic.ttf
+			]{OpenSans-Regular.ttf}
+%% Monospace font: Consola mono
+\setmonofont[Scale=0.9,Path=fonts/consola-mono/,
+				BoldFont=ConsolaMono-Bold.ttf,
+			]{ConsolaMono-Regular.ttf}
+%% Title font: Avería Serif
+\newfontfamily\titlefont[Scale=1.05,Path=fonts/averia-serif/,
+							ItalicFont=AveriaSerif-Italic.ttf,
+							BoldFont=AveriaSerif-Bold.ttf,
+							BoldItalicFont=AveriaSerif-BoldItalic.ttf
+						]{AveriaSerif-Regular.ttf}
+\let\utffont\rmfamily
+\let\tipafont\sffamily
 \makeatletter\renewcommand\@titstyle{\titlefont}\makeatother
