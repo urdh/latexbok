@@ -1,4 +1,5 @@
-\documentclass[a4paper,11pt]{article}
+\RequirePackage[l2tabu]{nag}
+\documentclass[a4paper,11pt]{scrartcl}
 % Allmängiltiga paket
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -8,7 +9,6 @@
 \usepackage{icomma}
 \usepackage{graphicx}
 \usepackage{fixltx2e}
-%\usepackage[l2tabu]{nag} % finns ej på Chalmers-datorer
 % Matematikpaket
 \usepackage[intlimits]{amsmath}
 \usepackage{amssymb}
@@ -24,7 +24,7 @@
             textfont=it]{caption}
 % Länkade och intelligenta referenser
 \usepackage{hyperref}
-\usepackage[swedish]{varioref}
+\usepackage{cleveref}
 % Chalmers-källförteckning
 %\usepackage{chscite} % finns ej på Chalmers-datorer
 
@@ -86,15 +86,15 @@
     
     \subsection{Ett underavsnitt}
     Man kan även infoga tabeller i \LaTeX{} (se tabell
-    \ref{tab}, till exempel) och figurer (figur
-    \ref{fig}). Dessa kan man referera till på olika
+    \ref{tab:priser}, till exempel) och figurer (figur
+    \ref{fig:rulltarta}). Dessa kan man referera till på olika
     sätt, till exempel med kommandot
-    \texttt{\textbackslash vref}: ``figur \vref{fig}''.
+    \texttt{\textbackslash cref}: ``\cref{fig:rulltarta}''.
     
     \begin{table}[tp]
         \centering 
-        \label{tab}
         \caption{En tabell över fiktiva priser}
+        \label{tab:priser}
         \begin{tabular}{lp{0.4\textwidth}r}
             \toprule 
             Namn & Beskrivning & Pris (\$) \\
@@ -110,9 +110,9 @@
             
     \begin{figure}[bp]
         \centering 
-        \includegraphics[width=0.8\textwidth%
-                         ]{bilder/rulltarta.png}
+%        \includegraphics[width=0.8\textwidth%
+%                         ]{bilder/rulltarta.png}
         \caption{En mycket god rulltårta}
-        \label{fig}
+        \label{fig:rulltarta}
     \end{figure}
 \end{document}
