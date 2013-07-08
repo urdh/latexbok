@@ -1,22 +1,53 @@
 \ifdraft{%
-\renewcommand\mint[3][]{\DefineShortVerb{#3}\fvset{#1}\SaveVerb[aftersave={\UndefineShortVerb{#3}\begin{flushleft}\UseVerb{minted@verb}\end{flushleft}}]{minted@verb}#3}%
-\renewenvironment{minted}[2][]{\VerbatimEnvironment\fvset{#1}\begin{Verbatim}}{\end{Verbatim}}
-\renewcommand\inputminted[3][]{\fvset{#1}\VerbatimInput{#3}}
-% LaTeX source code
-\newminted{latex}{frame=single}%
-\newminted{text}{frame=single}%
-\newminted{r}{frame=single}%
-\newminted{matlab}{frame=single}%
-\newminted{gnuplot}{frame=single}%
-\newmint{latex}{frame=single}%
-% Line numbers in margin
-%\lnoson% % Disable when not spellchecking/proofreading
+	% Replace minted with regular environments
+	\RenewDocumentCommand\mint{omm}{%
+		\DefineShortVerb{#3}%
+		\fvset{#1}%
+		\SaveVerb[aftersave={%
+			\UndefineShortVerb{#3}%
+			\begin{flushleft}%
+				\UseVerb{minted@verb}%
+			\end{flushleft}%
+		}]{minted@verb}%
+		#3%
+	}
+	\RenewDocumentEnvironment{minted}{om}{%
+		\VerbatimEnvironment%
+		\fvset{#1}%
+		\begin{Verbatim}%
+	}{%
+		\end{Verbatim}%
+	}
+	\RenewDocumentCommand\inputminted{omm}{%
+		\fvset{#1}%
+		\VerbatimInput{#3}%
+	}
+	% LaTeX source code
+	\newminted{latex}{frame=single}%
+	\newminted{text}{frame=single}%
+	\newminted{r}{frame=single}%
+	\newminted{matlab}{frame=single}%
+	\newminted{gnuplot}{frame=single}%
+	\newmint{latex}{frame=single}%
+	% Line numbers in margin
+	%\lnoson% % Disable when not spellchecking/proofreading
 }{%
-% LaTeX source code
-\newminted{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
-\newminted{text}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
-\newminted{r}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
-\newminted{matlab}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
-\newminted{gnuplot}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
-\newmint{latex}{frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}}%
+	% LaTeX source code
+	\ExplSyntaxOn
+	% Common options
+	\cs_set_nopar:Nn\l__tmpa_cs:{
+		frame=single,
+		bgcolor=mintedbg,
+		rulecolor=\color{mintedbg}
+	}
+	% Define environments
+	\exp_args:Nnx\newminted{latex}{\l__tmpa_cs:}
+	\exp_args:Nnx\newminted{text}{\l__tmpa_cs:}
+	\exp_args:Nnx\newminted{r}{\l__tmpa_cs:}
+	\exp_args:Nnx\newminted{matlab}{\l__tmpa_cs:}
+	\exp_args:Nnx\newminted{gnuplot}{\l__tmpa_cs:}
+	\exp_args:Nnx\newmint{latex}{\l__tmpa_cs:}
+	% Undefine the temporary macro
+	\cs_undefine:N\l__tmpa_cs:
+	\ExplSyntaxOff
 }

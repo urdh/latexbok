@@ -1,31 +1,54 @@
-\defaultfontfeatures{%
-	Numbers={Proportional,OldStyle},%
-	Ligatures={Historic,Common,Required,Contextual},%
-	Contextuals=Swash,%
-	SmallCapsFeatures={Letters=SmallCaps,Scale=0.96,Weight=0.8},%
+\ExplSyntaxOn
+
+%% Set the font directory
+\cs_if_exist:NF\latexbokFontdir
+	{\cs_gset:Npn\latexbokFontdir{fonts}}
+
+%% Font features
+\defaultfontfeatures{
+	Numbers={Proportional,OldStyle},
+	Ligatures={Historic,Common,Required,Contextual},
+	Contextuals=Swash,
+	SmallCapsFeatures={
+		Letters=SmallCaps,
+		Scale=0.96,
+		Weight=0.8
+	},
 }
 %% Main font: Alegreya
-\setmainfont[Scale=1.05,Path=fonts/alegreya/,
-				ItalicFont=Alegreya-Italic.ttf,
-				BoldFont=Alegreya-Bold.ttf,
-				BoldItalicFont=Alegreya-BoldItalic.ttf
-			]{Alegreya-Regular.ttf}
+\setmainfont[Scale=1.05,
+		Path=\latexbokFontdir/alegreya/,
+		ItalicFont=Alegreya-Italic.ttf,
+		BoldFont=Alegreya-Bold.ttf,
+		BoldItalicFont=Alegreya-BoldItalic.ttf
+	]{Alegreya-Regular.ttf}
 %% Sans serif font: Open Sans
-\setsansfont[Scale=0.9,Path=fonts/open-sans/,
-				ItalicFont=OpenSans-Italic.ttf,
-				BoldFont=OpenSans-Bold.ttf,
-				BoldItalicFont=OpenSans-BoldItalic.ttf
-			]{OpenSans-Regular.ttf}
+\setsansfont[Scale=0.9,
+		Path=\latexbokFontdir/open-sans/,
+		ItalicFont=OpenSans-Italic.ttf,
+		BoldFont=OpenSans-Bold.ttf,
+		BoldItalicFont=OpenSans-BoldItalic.ttf
+	]{OpenSans-Regular.ttf}
 %% Monospace font: Consola mono
-\setmonofont[Scale=0.9,Path=fonts/consola-mono/,
-				BoldFont=ConsolaMono-Bold.ttf,
-			]{ConsolaMono-Regular.ttf}
+\setmonofont[Scale=0.9,
+		Path=\latexbokFontdir/consola-mono/,
+		BoldFont=ConsolaMono-Bold.ttf,
+	]{ConsolaMono-Regular.ttf}
 %% Title font: Avería Serif
-\newfontfamily\titlefont[Scale=1.05,Path=fonts/averia-serif/,
-							ItalicFont=AveriaSerif-Italic.ttf,
-							BoldFont=AveriaSerif-Bold.ttf,
-							BoldItalicFont=AveriaSerif-BoldItalic.ttf
-						]{AveriaSerif-Regular.ttf}
-\let\utffont\rmfamily
-\let\tipafont\sffamily
-\makeatletter\renewcommand\@titstyle{\titlefont}\makeatother
+\newfontfamily\titlefont[Scale=1.05,
+		Path=\latexbokFontdir/averia-serif/,
+		ItalicFont=AveriaSerif-Italic.ttf,
+		BoldFont=AveriaSerif-Bold.ttf,
+		BoldItalicFont=AveriaSerif-BoldItalic.ttf
+	]{AveriaSerif-Regular.ttf}
+
+%% UTF and TIPA fonts
+\cs_set_eq:NN\utffont\rmfamily
+\cs_set_eq:NN\tipafont\sffamily
+
+%% Patch the title style to include the new font
+\cs_generate_variant:Nn\cs_set_protected:Nn{No}
+\cs_set_protected:No\__skrapport_title_style:
+	{\__skrapport_title_style:\exp_not:N\titlefont}
+
+\ExplSyntaxOff

@@ -1,41 +1,65 @@
-\setcounter{secnumdepth}{1}				% Section numbering depth
-\setcounter{tocdepth}{2}				% Table of contents depth
-\renewcommand{\cftsecfont}{\bfseries}	% Table of contents bf sections
-\fancypagestyle{thefancy}{%
+\ExplSyntaxOn
+% Section numbering depth
+\setcounter{secnumdepth}{1}
+% Table of contents depth
+\setcounter{tocdepth}{2}
+% Table of contents bf sections
+\RenewDocumentCommand\cftsecfont{}{\bfseries}
+% Fancy page style
+\fancypagestyle{thefancy}{
 	\fancyhead{}
 	\fancyfoot{}
 	\fancyhead[LE,RO]{\thepage}
-	\renewcommand{\headrulewidth}{0.1pt}
+	\cs_gset_nopar:Npn\headrulewidth{0.1pt}
 }
-\headheight 15pt
-\makeatletter
-\renewcommand\thesection{\Roman{section}}
-\titleformat{\section}[block]{\centering\Huge\@titstyle}{\makebox[\textwidth]{\fontsize{36pt}{36pt}\selectfont\centering\thesection}}{0pt}{\newline}[\bigskip]
+\dim_set:Nn\headheight{15pt}
+% Restyle the section command
+\RenewDocumentCommand\thesection{}{\Roman{section}}
+%  \iffalse%TODO why are we overriding our hack?
+%  \titleformat{\section}[block]{
+%    \centering\Huge\__skrapport_title_style:
+%  }{
+%    \makebox[\textwidth]{
+%      \fontsize{36pt}{36pt}\selectfont
+%      \centering\thesection
+%    }
+%  }{0pt}{\newline}[\bigskip]
+%  \fi
 % Holy shit, hacking my own class
-\let\c@paragraph\relax\let\c@subparagraph\relax 
-\let\paragraph\relax\let\subparagraph\relax
-\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
-  {-2ex \@plus .5ex \@minus -.5ex}%
-  {.125ex \@plus.125ex}%
-  {\normalfont\large\@titstyle\itshape}}
-\newcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
-  {1ex \@plus .25ex \@minus -.25ex}%
-  {-1em}%
-  {\normalfont\normalsize\bfseries}}
-\newcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
-  {1ex \@plus .25ex \@minus -.25ex}%
-  {-1em}%
-  {\normalfont\normalsize\itshape}}
+% Undefine paragraph counters
+\makeatletter
+\cs_undefine:N\c@paragraph
+\cs_undefine:N\c@subparagraph
+\cs_undefine:N\paragraph
+\cs_undefine:N\subparagraph
+\makeatother
+% Define new subsubsubsection
+\skip_const:Nn\c__skrapport_subsubsubsection_pre_skip
+  {-2ex~plus~.5ex~minus~-.5ex}
+\skip_const:Nn\c__skrapport_subsubsubsection_post_skip
+  {.125ex~plus~.125ex}
+\dim_const:Nn \c__skrapport_subsubsubsection_indent_dim
+  {\c_zero_dim}
+\cs_set_protected:Nn\__skrapport_subsubsection_style:
+  {\normalfont\large\__skrapport_title_style:\itshape}
+\DeclareDocumentCommand\subsubsubsection{som}{
+  \__skrapport_generic_section:nnnnn{subsubsubsection}{3}{#1}{#2}{#3}
+}
+% Redefine TOC entries to match
 \newlistentry[subsubsection]{subsubsubsection}{toc}{3}
 \newlistentry[subsubsubsection]{paragraph}{toc}{4}
 \newlistentry[paragraph]{subparagraph}{toc}{5}
 \cftsetindents{subsubsubsection}{6.45em}{4.15em}
 \cftsetindents{paragraph}{10.6em}{5.15em}
 \cftsetindents{subparagraph}{15.75em}{6.15em}
-\providecommand*{\toclevel@subsubsubsection}{4}
-\providecommand*{\toclevel@paragraph}{5}
-\providecommand*{\toclevel@subparagraph}{6}
-\renewcommand\thesubsubsubsection{\thesubsubsection.\@arabic\c@subsubsubsection}
-\renewcommand\theparagraph{\thesubsubsubsection.\@arabic\c@paragraph}
-\renewcommand\thesubparagraph{\theparagraph.\@arabic\c@subparagraph}
-\makeatother
+\cs_set:Npn\toclevel@subsubsubsection{4}
+\cs_set:Npn\toclevel@paragraph{5}
+\cs_set:Npn\toclevel@subparagraph{6}
+% Redefine the counter macros
+\cs_set_nopar:Npn\thesubsubsubsection
+  {\thesubsubsection.\arabic{subsubsubsection}}
+\cs_set_nopar:Npn\theparagraph
+  {\thesubsubsubsection.\arabic{paragraph}}
+\cs_set_nopar:Npn\thesubparagraph
+  {\theparagraph.\arabic{subparagraph}}
+\ExplSyntaxOff

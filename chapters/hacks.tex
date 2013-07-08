@@ -1,109 +1,97 @@
-\makeatletter
-% Fix \hologo{XeTeX}
-%\def\HoLogo@Xe#1{% 
-%   X% 
-%   \kern-.1em\relax 
-%   \ltx@IfUndefined{HOLOGO@ReflectBox\hologodriver} 
-%     {\ltx@IfUndefined{HOLOGO@ReflectBox}\ltx@firstoftwo\ltx@secondoftwo} 
-%     \ltx@secondoftwo 
-%   {e}{% 
-%     \lower.5ex\hbox{% 
-%       \HOLOGO@ReflectBox{E}% 
-%     }% 
-%   }% 
-%}
+\ExplSyntaxOn
 % Force cramped style on inline math
-\def\(#1\){\relax\ifmmode\@badmath\else$\fi\cramped{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
-%\def\(#1\){\relax\ifmmode\@badmath\else$\fi\smash{#1}\relax\ifmmode\ifinner $\else\@badmath\fi\else\@badmath\fi}
-% Varioref seems broken with XeLaTeX
-\def\reftextfaceafter{på \reftextvario{motstående}{nästa} sida}%
-\def\reftextfacebefore{på \reftextvario{motstående}{föregående} sida}%
-\def\reftextafter{på \reftextvario{följande}{nästa} sida}%
-\def\reftextbefore{på föregående sida}%
-\def\reftextcurrent{på denna sida}%
-\def\reftextfaraway#1{{på sidan~\pageref{#1}}}%
-\def\reftextpagerange#1#2{{på sidorna~\pageref{#1}–\pageref{#2}}}%
-\def\reftextlabelrange#1#2{{\ref{#1} till~\ref{#2}}}%
-\DeclareRobustCommand\Vref{\@ifstar{\let\vref@space\relax\Vr@f}{\let\vref@space~\Vr@f}}
-\DeclareRobustCommand\vref{\@ifstar{\let\vref@space\relax\vr@f}{\let\vref@space~\vr@f}}
+\msg_new:nnn{latexbok}{bad-math}
+  {Bad~math~environment~delimiter}
+\DeclareDocumentCommand\({}{
+  \mode_if_math:T{\msg_error:nn{latexbok}{bad-math}}
+  \c_math_toggle_token
+  \hbox_set:Nw\l_tmpa_box
+}
+\DeclareDocumentCommand\){}{
+  \hbox_set_end:
+  \mode_if_math:F{\msg_error:nn{latexbok}{bad-math}}
+  \mode_if_inner:F{\msg_error:nn{latexbok}{bad-math}}
+  \cramped{\hbox_unpack_clear:N\l_tmpa_box}
+  \c_math_toggle_token
+}
 % Twoside
-\@twosidetrue
+\KOMAoptions{twoside}
 % Listings
-\newcommand{\kodname}{Exempel}
-\newcounter{kod}\renewcommand\thekod{\@arabic\c@kod}
-\def\fps@kod{tb}
-\def\ftype@kod{3}
-\def\ext@kod{lok}
-\def\fnum@kod{\kodname~\thekod}
-\newenvironment{kod}{\@float{kod}}{\end@float}
-\newenvironment{kod*}{\@dblfloat{kod}}{\end@dblfloat}
+\cs_gset:Npn\kodname{Exempel}
+\newcounter{kod}
+\cs_set:Npn\thekod{\arabic{kod}}
+\cs_new:Npn\fps@kod{tb}
+\cs_new:Npn\ftype@kod{3}
+\cs_new:Npn\ext@kod{lok}
+\cs_new:Npn\fnum@kod{\kodname\ \thekod}
+\NewDocumentEnvironment{kod}{o}{
+  \__skrapport_xfloat:nx{kod}
+    {\IfNoValueTF{#1}{\fps@kod}{#1}}
+  \centering
+}{
+  \end@float
+}
+\NewDocumentEnvironment{kod*}{o}{
+  \__skrapport_xfloat:nx{kod}
+    {\IfNoValueTF{#1}{tp}{#1}}
+  \centering
+}{
+  \end@float
+}
 \newsubfloat{kod}
 % Displaying one line of code
-\newcommand\kodrad[2]{\hspace{1ex}\inputminted[firstline=#1,lastline=#1]{latex}{#2.tex}}
+\NewDocumentCommand\kodrad{mm}{
+  \hspace{1ex}
+  \inputminted[firstline=#1,lastline=#1]{latex}{#2.tex}
+}
 % Redefining sections to break page
-\let\section@old=\section
-\renewcommand\section{\@ifstar\my@section@star\my@section}
-\newcommand\my@section[2][\@empty]{\cleardoublepage\vspace*{2\bigskipamount}\ifx\@empty#1\section@old{#2}\else\section@old[#1]{#2}\fi}
-\newcommand\my@section@star[2][\@empty]{\cleardoublepage\vspace*{2\bigskipamount}\ifx\@empty#1\section@old*{#2}\else\section@old*[#1]{#2}\fi}
+\RenewDocumentCommand\section{som}{
+  \cleardoublepage
+  \vspace*{2\bigskipamount}
+  \__skrapport_generic_section:nnnnn{section}{1}{#1}{#2}{#3}
+}
 % Front/main/backmatter
-\newcommand\frontmatter{%
+\NewDocumentCommand\frontmatter{}{
   \cleardoublepage
-  \pagenumbering{roman}}
-\newcommand\mainmatter{%
-  \cleardoublepage
-  \pagenumbering{arabic}}
-\newcommand\backmatter{%
-  \cleardoublepage
+  \pagenumbering{roman}
 }
-% Maketitle without newpage
-\newcommand\maketitlennp{\par%
-  \begingroup
-    \renewcommand\thefootnote{\@fnsymbol\c@footnote}%
-    \def\@makefnmark{\rlap{\@textsuperscript{\normalfont\@thefnmark}}}%
-    \long\def\@makefntext##1{\parindent 1em\noindent%
-      \hb@xt@1.8em{\hss\@textsuperscript{\normalfont\@thefnmark}}##1}%
-    \global\@topnum\z@
-    \@maketitlennp
-    \thispagestyle{empty}\@thanks
-  \endgroup
-  \setcounter{footnote}{0}
+\NewDocumentCommand\mainmatter{}{
+  \cleardoublepage
+  \pagenumbering{arabic}
 }
-\def\@maketitlennp{%
-  \null
-  \begin{flushleft}%
-\vspace{-\headsep}
-    {\small%
-      \if\@regarding\relax\else\@regarding{, }\fi%
-      \@date\par%
-    }%
-    \vspace{1.5cm}%
-    {\Huge\@titstyle\@title\par}%
-    \vspace{.125cm}%
-    {\Large\@titstyle\@author}%
-    \vspace{.75cm}%
-  \end{flushleft}%
-  \par%
+\NewDocumentCommand\backmatter{}{
+  \cleardoublepage
 }
 % Changes to titlepage environment (don't reset pagenumbering before)
-\renewenvironment{titlepage}{\cleardoublepage}{\thispagestyle{skrapport@titlepage}\cleardoublepage\setcounter{page}\@ne}
+  \iffalse %TODO
+  \renewenvironment{titlepage}{\cleardoublepage}{\thispagestyle{skrapport@titlepage}\cleardoublepage\setcounter{page}\@ne}
+  \fi
 % TexorPDF version of LaTeX and AmS logo
-\let\@oldLaTeX\LaTeX
-\def\LaTeX{\texorpdfstring{\@oldLaTeX}{LaTeX}}
-\let\@oldAmS\AmS
-\def\AmS{\texorpdfstring{\@oldAmS}{AMS}}
+\cs_generate_variant:Nn\cs_set_nopar:Npn{Npo}
+\cs_set_nopar:Npo\LaTeX
+  {\exp_args:Non\texorpdfstring{\LaTeX}{LaTeX}}
+\cs_set_nopar:Npo\AmS
+  {\exp_args:Non\texorpdfstring{\AmS}{AMS}}
 % File last modified
+%TODO
 \def\parsedate #1:2#2#3#4#5#6#7#8#9\empty{\ifx{#2}{9}19\else20\fi#3#4/#5#6/#7#8}
-\newcommand\moddate[1][\jobname.tex]{\expandafter\parsedate\pdffilemoddate{#1}\empty}
+\NewDocumentCommand\moddate{o}{
+  \exp_args:Nx\parsedate\pdffilemoddate{
+    \IfNoValueTF{#1}{\jobname.tex}{#1}
+  }\empty
+}
 % Minted background fix
-\renewenvironment{minted@colorbg}[1]{%
-	\par%
-	\def\minted@bgcol{#1}%
-	\noindent\begin{lrbox}{\minted@bgbox}%
-	\begin{minipage}{\linewidth-2\fboxsep}%
-}{%
-	\end{minipage}%
-	\end{lrbox}%
-	\colorbox{\minted@bgcol}{\usebox{\minted@bgbox}}%
-	\par%
+\makeatletter
+\RenewDocumentEnvironment{minted@colorbg}{m}{
+	\par
+	\def\minted@bgcol{#1}
+	\noindent\begin{lrbox}{\minted@bgbox}
+	\begin{minipage}{\linewidth-2\fboxsep}
+}{
+	\end{minipage}
+	\end{lrbox}
+	\colorbox{\minted@bgcol}{\usebox{\minted@bgbox}}
+	\par
 }
 \makeatother
+\ExplSyntaxOff

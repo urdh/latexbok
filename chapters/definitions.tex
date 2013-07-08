@@ -1,25 +1,70 @@
-\newcommand\PDF{\textsc{PDF}\xspace}					% PDF format
-\newcommand\PNG{\textsc{PNG}\xspace}					% PNG format
-\newcommand\DVI{\textsc{DVI}\xspace}					% DVI format
-\newcommand\EPS{\textsc{EPS}\xspace}					% EPS format
-\newcommand\JPEG{\textsc{JPEG}\xspace}                  % JPEG format
-\newcommand\UTF{\textsc{UTF-8}\xspace}					% UTF-8 standard
-\newcommand\cli[1]{\texttt{#1}}							% Command-line input
-\newcommand\opt[1]{\texttt{\emph{#1}}}					% CLI option
-\newcommand\pack[1]{\textsf{#1}}						% LaTeX package
-\newcommand\pdfLaTeX{\hologo{pdfLaTeX}\xspace}			% pdfLaTeX logotype
-\newcommand\BibTeX{\textsc{Bib}\TeX\xspace}				% BibTeX logotype
-\newcommand\TikZ{Ti\textit{k}Z\xspace}                  % TikZ logotype
-\newcommand\PGFTikZ{PGF/\TikZ}				            % PGF/TikZ logotype
-\newcommand\XeTeX{\hologo{XeTeX}\xspace}				% XeTeX logotype
-\newcommand\LyX{L\!\raisebox{-.5ex}{Y}\!X\xspace}		% LyX logotype
-\newcommand\MATLAB{\textsc{Matlab©}\xspace}             % MATLAB© logotype
-\newcommand\gnuplot{gnuplot\xspace}                     % Gnuplot logotype
-\newcommand\Rlogo{R\xspace}                             % R logotype
-\newcommand\Mathematica{Mathematica\xspace}             % Mathematica logotype
-\newcommand\eng[1]{(eng.~\textenglish{\emph{#1})}}		% english translation
-\newcommand\cmd[1]{\textenglish{\texttt{\textbackslash{}#1}}}% LaTeX command
-\newcommand\env[1]{\textenglish{\texttt{#1}}}			% LaTeX environment
+\ExplSyntaxOn
+% PDF format
+\NewDocumentCommand\PDF{}
+	{\textsc{PDF}\xspace}
+% PNG format
+\NewDocumentCommand\PNG{}
+	{\textsc{PNG}\xspace}
+% DVI format
+\NewDocumentCommand\DVI{}
+	{\textsc{DVI}\xspace}
+% EPS format
+\NewDocumentCommand\EPS{}
+	{\textsc{EPS}\xspace}
+% JPEG format
+\NewDocumentCommand\JPEG{}
+	{\textsc{JPEG}\xspace}
+% UTF-8 standard
+\NewDocumentCommand\UTF{}
+	{\textsc{UTF-8}\xspace}
+% Command-line input
+\NewDocumentCommand\cli{m}
+	{\texttt{#1}}
+% CLI option
+\NewDocumentCommand\opt{m}
+	{\texttt{\emph{#1}}}
+% LaTeX package
+\NewDocumentCommand\pack{m}
+	{\textsf{#1}}
+% pdfLaTeX logotype
+\NewDocumentCommand\pdfLaTeX{}
+	{\hologo{pdfLaTeX}\xspace}
+% BibTeX logotype
+\NewDocumentCommand\BibTeX{}
+	{\textsc{Bib}\TeX\xspace}
+% TikZ logotype
+\NewDocumentCommand\TikZ{}
+	{Ti\textit{k}Z\xspace}
+% PGF/TikZ logotype
+\NewDocumentCommand\PGFTikZ{}
+	{PGF/\TikZ}
+% XeTeX logotype
+\NewDocumentCommand\XeTeX{}
+	{\hologo{XeTeX}\xspace}
+% LyX logotype
+\NewDocumentCommand\LyX{}
+	{L\!\raisebox{-.5ex}{Y}\!X\xspace}
+% MATLAB logotype
+\NewDocumentCommand\MATLAB{}
+	{\textsc{Matlab©}\xspace}
+% GNUplot logotype
+\NewDocumentCommand\gnuplot{}
+	{gnuplot\xspace}
+% R logotype
+\NewDocumentCommand\Rlogo{}
+	{R\xspace}
+% Mathematica logotype
+\NewDocumentCommand\Mathematica{}
+	{Mathematica\xspace}
+% english translation
+\NewDocumentCommand\eng{m}
+	{(eng.~\textenglish{\emph{#1})}}
+% LaTeX command
+\NewDocumentCommand\cmd{m}
+	{\textenglish{\texttt{\textbackslash{}#1}}}
+% LaTeX environment
+\NewDocumentCommand\env{m}
+	{\textenglish{\texttt{#1}}}
 % minted style
 \usemintedstyle{solarized}
 \definecolor{mintedbg}{rgb}{0.9665,0.9550,0.9175}
@@ -30,11 +75,17 @@
 \sisetup{locale=DE}
 % Math redefinitions
 \DeclareMathOperator{\erfc}{erfc}
-\renewcommand{\frac}[2]{\genfrac{}{}{}{}{\displaystyle #1}{\displaystyle #2}}
-\makeatletter
-\renewcommand\d[1]{\ensuremath{\;\mathrm{d}#1\@ifnextchar\d{\!}{}}}
-\makeatother
+\RenewDocumentCommand\frac{mm}{
+	\genfrac{}{}{}{}{\displaystyle #1}{\displaystyle #2}
+}
+\RenewDocumentCommand\d{m}{
+	\ensuremath{
+		\;\mathrm{d}#1
+		\peek_meaning:NTF\d{\!}{}
+	}
+}
 % Useful colors
 \definecolor{required}{rgb}{0.384,0.576,0.000}
 \definecolor{optional}{rgb}{0.992,0.843,0.000}
 \definecolor{unavailable}{rgb}{0.863,0.196,0.184}
+\ExplSyntaxOff

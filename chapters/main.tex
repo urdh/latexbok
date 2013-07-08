@@ -1,7 +1,9 @@
+\RequirePackage[draft]{ifdraft}
 \RequirePackage{xstring,xparse}
 \NewDocumentCommand\paper{mm}{\IfStrEq{\papersize}{#1}{#2}{}}
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
-\documentclass[swe,10pt,nofont,nomath]{skrapport}
+\PassOptionsToPackage{quiet}{fontspec}
+\documentclass[lang=sv,ptsize=10,font=none,math=false,titles=bf]{skrapport}
 %% Packages
 \input{chapters/packages.tex}
 %% Draft fixes to minted, tikz

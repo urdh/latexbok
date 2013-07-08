@@ -21,8 +21,6 @@
 \usepackage{minted}
 % improvement packages
 \usepackage{multirow}
-\usepackage[swedish]{varioref}
-\usepackage[hyperfootnotes=false,colorlinks=false,linkcolor=Red,urlcolor=Magenta]{hyperref}
 \usepackage[para,perpage,ragged,bottom,stable]{footmisc}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
@@ -30,7 +28,6 @@
 % references
 \usepackage[swedish]{chscite}
 % other stuff
-\usepackage{ifdraft}
 \usepackage{siunitx}
 \usepackage{hologo}
 \let\sups\relax
@@ -44,12 +41,16 @@
 \usepackage{bookmark}
 \usepackage{xspace}
 \usepackage{mathtools}
+\PassOptionsToPackage{hyperfootnotes=false,colorlinks=false,linkcolor=Red,urlcolor=Magenta}{hyperref}
+\usepackage{varioref}
+\usepackage{hyperref}
+\usepackage[noabbrev]{cleveref}
 % Source code line numbers in margin
 %\usepackage{srcline}
 % Paket som demonstreras i del 6
 \usepackage{braket}
 \usepackage{amscd}
 \DeclareMathOperator\add{add}
-\DeclareMathOperator\cov{cov}
+%\DeclareMathOperator\cov{cov}
 \DeclareMathOperator\non{non}
 \DeclareMathOperator\cf{cf}
