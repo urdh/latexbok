@@ -1,0 +1,10 @@
+language: latex
+
+install:
+  - sudo pip install pygments
+  - sudo apt-get update
+  - sudo apt-get install texlive texlive-latex-extra texlive-xetex
+
+script:
+  - make a4
+  - make c5
