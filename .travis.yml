@@ -6,6 +6,9 @@ install:
   - sudo apt-add-repository -y ppa:texlive-backports/ppa
   - sudo apt-get update -qq
   - sudo apt-get install -qq texlive texlive-latex-extra texlive-xetex latexmk
+  - tlmgr update --self --all
+  - mkdir -p ~/.texmf && cd ~/.texmf && wget http://mirror.ctan.org/macros/latex/contrib/skrapport.tds.zip && unzip skrapport.tds.zip && cd -;
+  - sudo mktexlsr || sudo texhash
 
 script:
   - make a4
