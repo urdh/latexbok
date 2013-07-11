@@ -1,3 +1,5 @@
+LATEXCMD="xelatex --shell-escape --interacion=nonstopmode -halt-on-error %O %S"
+LATEXMKOPTS=-pdflatex=$(LATEXCMD) -pdf -dvi- -ps- -bibtex
 info:
 	@echo "Please make a specific target (a4 or c5), or explicitly run \"make all\"."
 
@@ -7,12 +9,10 @@ a4: latexbok-a4.pdf
 c5: latexbok-c5.pdf
 
 latexbok-a4.pdf:
-	latexmk -pdflatex="xelatex --shell-escape %O %S" -pdf -dvi- -ps- \
-        -bibtex -silent -jobname=latexbok-a4 -recorder a4.tex
+	latexmk $(LATEXMKOPTS) -jobname=latexbok-a4 -recorder a4.tex
 
 latexbok-c5.pdf:
-	latexmk -pdflatex="xelatex --shell-escape %O %S" -pdf -dvi- -ps- \
-        -bibtex -silent -jobname=latexbok-c5 -recorder c5.tex
+	latexmk $(LATEXMKOPTS) -jobname=latexbok-c5 -recorder c5.tex
 
 .PHONY: mostlyclean mclean-a4 mclean-c5
 mostlyclean: mclean-a4 mclean-c5
