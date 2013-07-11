@@ -66,12 +66,6 @@
   \iffalse %TODO
   \renewenvironment{titlepage}{\cleardoublepage}{\thispagestyle{skrapport@titlepage}\cleardoublepage\setcounter{page}\@ne}
   \fi
-% TexorPDF version of LaTeX and AmS logo
-\cs_generate_variant:Nn\cs_set_nopar:Npn{Npo}
-\cs_set_nopar:Npo\LaTeX
-  {\exp_args:Non\texorpdfstring{\LaTeX}{LaTeX}}
-\cs_set_nopar:Npo\AmS
-  {\exp_args:Non\texorpdfstring{\AmS}{AMS}}
 % File last modified
 %TODO
 \def\parsedate #1:2#2#3#4#5#6#7#8#9\empty{\ifx{#2}{9}19\else20\fi#3#4/#5#6/#7#8}
