@@ -17,6 +17,7 @@
 % Twoside
 \KOMAoptions{twoside}
 % Listings
+\makeatletter
 \cs_gset:Npn\kodname{Exempel}
 \newcounter{kod}
 \cs_set:Npn\thekod{\arabic{kod}}
@@ -39,6 +40,7 @@
   \end@float
 }
 \newsubfloat{kod}
+\makeatother
 % Displaying one line of code
 \NewDocumentCommand\kodrad{mm}{
   \hspace{1ex}
