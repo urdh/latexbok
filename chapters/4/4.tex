@@ -1,4 +1,5 @@
 \def\latexbokFontdir{../../fonts}
+\def\latexbokFiguredir{../../examples}
 \documentclass[../../a4.tex]{subfiles}
 \begin{document}
 \section{Grafik med \LaTeX}\label{sec:4}
@@ -96,7 +97,7 @@ Exempel~\vref{ex:tikzdevice} visar resultatet av detta.
 	\centering
 	\begin{minipage}{\textwidth}
 		\centering
-		\input{chapters/../examples/4/tikzdevice.tex}
+		\input{\latexbokFiguredir/4/tikzdevice.tex}
 	\end{minipage}
 	\\[1ex]
 	\begin{minipage}{\textwidth}
@@ -138,7 +139,7 @@ Exempel~\vref{ex:pdfdevice} visar hur det kan se ut.
 	\centering
 	\begin{minipage}{\textwidth}
 		\centering
-		\includegraphics{chapters/../examples/4/pdfdevice.pdf}
+		\includegraphics{\latexbokFiguredir/4/pdfdevice.pdf}
 	\end{minipage}
 	\\[1ex]
 	\begin{minipage}{\textwidth}
@@ -217,11 +218,11 @@ enligt figur~\vref{fig:graphicx}.% för att specificera detta.
 	\centering
 	\hspace{-0.025\textwidth}
 	\begin{minipage}{0.475\textwidth} % kod
-			%\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=10,lastline=17,gobble=2]{latex}{chapters/../examples/4/graphicx.tex}}\vfil
+			%\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{\latexbokFiguredir/4/graphicx.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=10,lastline=17,gobble=2]{latex}{\latexbokFiguredir/4/graphicx.tex}}\vfil
 	\end{minipage}
 	\hfil
 	\begin{minipage}{0.475\textwidth} % figur
-		\fbox{\includegraphics[width=\textwidth,clip=true,trim=80 0 80 0]{chapters/../examples/4/graphicx.pdf}}
+		\fbox{\includegraphics[width=\textwidth,clip=true,trim=80 0 80 0]{\latexbokFiguredir/4/graphicx.pdf}}
 	\end{minipage}
 	\caption{Koden till vänster inkluderar filen \cli{interpolation.png} i
 	\LaTeX-dokumentet och ger det resultat som ses till höger.}

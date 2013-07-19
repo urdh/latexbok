@@ -1,4 +1,5 @@
 \def\latexbokFontdir{../../fonts}
+\def\latexbokFiguredir{../../examples}
 \documentclass[../../a4.tex]{subfiles}
 \begin{document}
 \section{Typsättning med \LaTeX}\label{sec:2}
@@ -424,11 +425,11 @@ Figurer är den kanske vanligaste typen av flytande objekt, och dessa
 \begin{kod}
 	\centering\hspace{0.0075\textwidth}
 	\begin{minipage}{0.75\textwidth} % kod
-			\vfil\ifdraft{\inputminted[frame=single,firstline=10,lastline=16]{latex}{chapters/../examples/2/figure.tex}}{\inputminted[frame=single,firstline=10,lastline=16,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{ex/2/figure.tex}}\vfil
+			\vfil\ifdraft{\inputminted[frame=single,firstline=10,lastline=16]{latex}{\latexbokFiguredir/2/figure.tex}}{\inputminted[frame=single,firstline=10,lastline=16,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{\latexbokFiguredir/2/figure.tex}}\vfil
 	\end{minipage}
 	\\ \medskip
 	\begin{minipage}{0.725\textwidth} % figur
-		\fbox{\includegraphics[width=\textwidth,clip=true,trim=25 -2 25 -2]{chapters/../examples/2/figure.pdf}}
+		\fbox{\includegraphics[width=\textwidth,clip=true,trim=25 -2 25 -2]{\latexbokFiguredir/2/figure.pdf}}
 	\end{minipage}
 	\caption{Ett exempel på hur man skapar ett flytande objekt med
 	\texttt{figure}.}

@@ -1,4 +1,7 @@
 \ExplSyntaxOn
+%% Set the examples directory
+\cs_if_exist:NF\latexbokFiguredir
+	{\cs_gset:Npn\latexbokFiguredir{chapters/examples}}
 % PDF format
 \NewDocumentCommand\PDF{}
 	{\textsc{PDF}\xspace}
