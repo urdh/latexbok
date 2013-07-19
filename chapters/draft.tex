@@ -3,6 +3,7 @@
 	\RenewDocumentCommand\mint{omv}{%
 		\texttt{#3}
 	}
+	\csname define@key\endcsname{FV}{mathescape}{}
 	\RenewDocumentEnvironment{minted}{om}{%
 		\VerbatimEnvironment%
 		\fvset{#1}%
