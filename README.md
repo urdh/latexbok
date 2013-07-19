@@ -7,5 +7,6 @@ Den mer tekniskt kunnige kanske även vill kompilera boken själv. För detta kr
 
 [skrapport]: http://blog.sigurdhsson.org/projects/latexhax.html#an-improved-report-class-skrapport
 [pygments]: http://pygments.org/
+[tl]: http://www.tug.org/texlive/
 
 Boken är tillgänglig under en Creative Commons-licens ([BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)), vilket innebär att du som användare får kopiera, distribuera och sända verket utan restriktioner, under förutsättning att du anger vem som är upphovsmannen och att du delar eventuella vidareutvecklingar eller liknande under samma villkor.
