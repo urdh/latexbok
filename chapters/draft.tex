@@ -1,15 +1,7 @@
 \ifdraft{%
 	% Replace minted with regular environments
-	\RenewDocumentCommand\mint{omm}{%
-		\DefineShortVerb{#3}%
-		\fvset{#1}%
-		\SaveVerb[aftersave={%
-			\UndefineShortVerb{#3}%
-			\begin{flushleft}%
-				\UseVerb{minted@verb}%
-			\end{flushleft}%
-		}]{minted@verb}%
-		#3%
+	\RenewDocumentCommand\mint{omv}{%
+		\texttt{#3}
 	}
 	\RenewDocumentEnvironment{minted}{om}{%
 		\VerbatimEnvironment%

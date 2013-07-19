@@ -2,18 +2,24 @@
 % Force cramped style on inline math
 \msg_new:nnn{latexbok}{bad-math}
   {Bad~math~environment~delimiter}
-\DeclareDocumentCommand\({}{
+\DeclareDocumentCommand\({u{\)}}{
   \mode_if_math:T{\msg_error:nn{latexbok}{bad-math}}
   \c_math_toggle_token
-  \hbox_set:Nw\l_tmpa_box
-}
-\DeclareDocumentCommand\){}{
-  \hbox_set_end:
+  %\hbox_set:Nw\l_tmpa_box
+  \cramped{#1}
   \mode_if_math:F{\msg_error:nn{latexbok}{bad-math}}
   \mode_if_inner:F{\msg_error:nn{latexbok}{bad-math}}
-  \cramped{\hbox_unpack_clear:N\l_tmpa_box}
   \c_math_toggle_token
 }
+%\DeclareDocumentCommand\){}{
+  %\hbox_set_end:
+%  \mode_if_math:F{\msg_error:nn{latexbok}{bad-math}}
+%  \mode_if_inner:F{\msg_error:nn{latexbok}{bad-math}}
+  %\cramped{
+  %\hbox_unpack_clear:N\l_tmpa_box
+  %}
+%  \c_math_toggle_token
+%}
 % Twoside
 \KOMAoptions{twoside}
 % Listings
