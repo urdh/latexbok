@@ -15,16 +15,23 @@
 \dim_set:Nn\headheight{15pt}
 % Restyle the section command
 \RenewDocumentCommand\thesection{}{\Roman{section}}
-%  \iffalse%TODO why are we overriding our hack? WE SHOULD DO THIS
-%  \titleformat{\section}[block]{
-%    \centering\Huge\__skrapport_title_style:
-%  }{
-%    \makebox[\textwidth]{
-%      \fontsize{36pt}{36pt}\selectfont
-%      \centering\thesection
-%    }
-%  }{0pt}{\newline}[\bigskip]
-%  \fi
+\cs_generate_variant:Nn\__skrapport_generic_section:nnnnn{nnnon}
+\cs_set:Npn\__skrapport_section_style:
+  {\normalfont\__skrapport_title_style:}
+\dim_set:Nn \c__skrapport_section_indent_dim{.25\textwidth} % magic number
+\RenewDocumentCommand\section{som}{
+  \cleardoublepage
+  \group_begin:
+    \centering
+    \fontsize{36pt}{36pt}\selectfont
+    \__skrapport_generic_section:nnnon{section}{1}{#1}{
+      \IfNoValueTF{#2}{#3}{#2}
+    }{
+      \newline\nobreak{\LARGE #3}
+    }
+  \group_end:
+  \bigskip
+}
 % Holy shit, hacking my own class
 % Undefine paragraph counters
 \makeatletter
