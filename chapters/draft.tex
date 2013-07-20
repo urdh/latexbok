@@ -1,9 +1,10 @@
+\ExplSyntaxOn
 \ifdraft{%
+	\cs_if_exist_use:cT{define@key}{{FV}{mathescape}{}}
 	% Replace minted with regular environments
 	\RenewDocumentCommand\mint{omv}{%
 		\texttt{#3}
 	}
-	\csname define@key\endcsname{FV}{mathescape}{}
 	\RenewDocumentEnvironment{minted}{om}{%
 		\VerbatimEnvironment%
 		\fvset{#1}%
@@ -25,8 +26,6 @@
 	% Line numbers in margin
 	%\lnoson% % Disable when not spellchecking/proofreading
 }{%
-	% LaTeX source code
-	\ExplSyntaxOn
 	% Common options
 	\cs_set_nopar:Nn\l__tmpa_cs:{
 		frame=single,
@@ -42,5 +41,5 @@
 	\exp_args:Nnx\newmint{latex}{\l__tmpa_cs:}
 	% Undefine the temporary macro
 	\cs_undefine:N\l__tmpa_cs:
-	\ExplSyntaxOff
 }
+\ExplSyntaxOff
