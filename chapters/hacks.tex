@@ -71,11 +71,14 @@
   \cleardoublepage
 }
 % Changes to titlepage environment (don't reset pagenumbering before)
-  \iffalse %TODO
-  \renewenvironment{titlepage}{\cleardoublepage}{\thispagestyle{skrapport@titlepage}\cleardoublepage\setcounter{page}\@ne}
-  \fi
+\DeclareDocumentEnvironment{titlepage}{}{
+    \cleardoublepage
+}{
+    \bool_gset_false:N\g__skrapport_copyright_unprinted_bool
+    \thispagestyle{skrapport@titlepage}
+    \cleardoublepage\setcounter{page}{1}
+}
 % File last modified
-%TODO
 \def\parsedate #1:2#2#3#4#5#6#7#8#9\empty{\ifx{#2}{9}19\else20\fi#3#4/#5#6/#7#8}
 \NewDocumentCommand\moddate{o}{
   \exp_args:Nx\parsedate\pdffilemoddate{

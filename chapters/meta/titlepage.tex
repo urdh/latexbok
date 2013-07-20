@@ -9,7 +9,10 @@
 	\license{%Senast uppdaterad \moddate{}.\\
 	Licenserad under Creative Commons By-Sa 3.0.\\
 	\url{http://creativecommons.org/licenses/by-sa/3.0/}}
-	\maketitle
+	\ExplSyntaxOn
+	\tl_show:N\g__skrapport_regarding_tl
+	\ExplSyntaxOff
+	\maketitle[hide=date]
 	\begin{abstract}
 		En inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
 		till studenter på Chalmers Tekniska Högskola, specifikt programmen
