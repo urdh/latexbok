@@ -1,5 +1,6 @@
 \ExplSyntaxOn
 \ifdraft{%
+	% this probably broken.
 	\cs_if_exist_use:cT{define@key}{{FV}{mathescape}{}}
 	% Replace minted with regular environments
 	\RenewDocumentCommand\mint{omv}{%
@@ -33,12 +34,12 @@
 		rulecolor=\color{mintedbg}
 	}
 	% Define environments
-	\exp_args:Nnx\newminted{latex}{\l__tmpa_cs:}
-	\exp_args:Nnx\newminted{text}{\l__tmpa_cs:}
-	\exp_args:Nnx\newminted{r}{\l__tmpa_cs:}
-	\exp_args:Nnx\newminted{matlab}{\l__tmpa_cs:}
-	\exp_args:Nnx\newminted{gnuplot}{\l__tmpa_cs:}
-	\exp_args:Nnx\newmint{latex}{\l__tmpa_cs:}
+	\exp_args:Nno\newminted{latex}{\l__tmpa_cs:}
+	\exp_args:Nno\newminted{text}{\l__tmpa_cs:}
+	\exp_args:Nno\newminted{r}{\l__tmpa_cs:}
+	\exp_args:Nno\newminted{matlab}{\l__tmpa_cs:}
+	\exp_args:Nno\newminted{gnuplot}{\l__tmpa_cs:}
+	\exp_args:Nno\newmint{latex}{\l__tmpa_cs:}
 	% Undefine the temporary macro
 	\cs_undefine:N\l__tmpa_cs:
 }
