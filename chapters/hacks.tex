@@ -13,9 +13,21 @@
 %}
 % Twoside
 \KOMAoptions{twoside}
+% Delar
+\crefname{section}{del}{del}
+\Crefname{section}{Del}{Del}
+\crefname{appendix}{appendix}{appendix}
+\Crefname{appendix}{Appendix}{Appendix}
+\apptocmd{\appendix}{%
+  \crefalias{section}{appendix}%
+  \RenewDocumentCommand\thesection{}{Appendix~\Alph{section}}%
+}{}{}
+
 % Listings
 \makeatletter
 \cs_gset:Npn\kodname{Exempel}
+\crefname{kod}{exempel}{exempel}
+\Crefname{kod}{Exempel}{Exempel}
 \newcounter{kod}
 \cs_set:Npn\thekod{\arabic{kod}}
 \cs_new:Npn\fps@kod{tb}

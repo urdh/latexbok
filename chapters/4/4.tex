@@ -91,7 +91,7 @@ att i \Rlogo exportera figurer som \PGFTikZ-kod. Det kan som många andra
 sedan kommandot \texttt{tikz} för att berätta för \Rlogo att grafiken
 ska skrivas som \PGFTikZ-kod, och filen som skapas kan sedan inkluderas
 i \LaTeX-dokument med kommandot \cmd{input}.
-Exempel~\vref{ex:tikzdevice} visar resultatet av detta.
+\Cref{ex:tikzdevice} visar resultatet av detta.
 
 \begin{kod}[tbp]
 	\centering
@@ -105,7 +105,7 @@ Exempel~\vref{ex:tikzdevice} visar resultatet av detta.
 require(tikzDevice)
 # width och height specificeras i tum
 tikz('figur.tex', width=4, height=2.5)
-# exempel med ggplot2, som diskuteras$\text{\vpageref{sec:ggplot2}}$
+# exempel med ggplot2, som diskuteras på $\text{\cpageref{sec:ggplot2}}$
 require(ggplot2)
 ggplot(diamonds, aes(depth, fill = cut)) +
   + geom_density(alpha = 0.2) + xlim(55, 70)
@@ -133,7 +133,7 @@ intresserade av är den som producerar \PDF-filer. Denna används enkelt
 genom att köra kommandot \texttt{pdf}, som tar samma parametrar som
 \texttt{tikz}-kommandot som beskrevs tidigare. \PDF-filen som genereras
 kan sedan enkelt inkluderas i ett \LaTeX-dokument med \cmd{includegraphics}.
-Exempel~\vref{ex:pdfdevice} visar hur det kan se ut.
+\Cref{ex:pdfdevice} visar hur det kan se ut.
 
 \begin{kod}[tbp]
 	\centering
@@ -146,7 +146,7 @@ Exempel~\vref{ex:pdfdevice} visar hur det kan se ut.
 		\begin{rcode*}{mathescape=true}
 # width och height specificeras i tum
 pdf('figur.tex', width=4, height=2.5)
-# exempel med ggplot2, som diskuteras$\text{\vpageref{sec:ggplot2}}$
+# exempel med ggplot2, som diskuteras på $\text{\cpageref{sec:ggplot2}}$
 require(ggplot2)
 ggplot(diamonds, aes(depth, fill = cut)) +
   + geom_density(alpha = 0.2) + xlim(55, 70)
@@ -168,7 +168,7 @@ dev.off()
 \iffalse
 Många dokument kräver att man inkluderar figurer för att presentera
 resultat eller förtydliga resonemang. Dessa typsätts i \LaTeX{} med hjälp
-av flytande objekt, vilket diskuteras i del~\ref{sec:2}, men i dessa
+av flytande objekt, vilket diskuteras i \cref{sec:2}, men i dessa
 flytande objekt måste man även importera eller generera sin grafik.
 
 \LaTeX{} ger genom diverse paket många möjligheter att göra detta. Med den
@@ -212,7 +212,7 @@ Säg att man till exempel vill inkludera filen \cli{interpolation.png}
 i sitt dokument för att illustrera konceptet interpolation. Man bestämmer
 sig dock för att figuren bara ska ta upp 25\,\% av textbredden, eftersom
 figuren bli för stor annars. Man använder då parametern \cli{width}
-enligt figur~\vref{fig:graphicx}.% för att specificera detta.
+enligt \cref{fig:graphicx}.% för att specificera detta.
 
 \begin{figure}[tbp]
 	\centering
@@ -251,7 +251,7 @@ föredelaktigt, eftersom allt innehåll stannar i \TeX-filen) är att använda
 \PGFTikZ, ett paket skrivet för att användas med \pdfLaTeX{} för att rita
 figurer i \LaTeX{}. Med det kan man direkt i sitt \LaTeX-dokument skapa
 enklare figurer som flödesscheman, träd, grafer eller liknande; se exempel
-i figur~\vref{fig:tikz}. Även mer avancerade figurer är möjliga, men att
+i \cref{fig:tikz}. Även mer avancerade figurer är möjliga, men att
 förklara hela \PGFTikZ{} tar allt för lång tid för denna introduktion. Den
 intresserade läsaren hänvisas istället till \citeasnoun{Mertz07} som har
 en bra introduktion till ämnet, och \PGFTikZ-manualen \cite{Tantau10} som

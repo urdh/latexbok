@@ -64,7 +64,7 @@ begränsade av omgivande text. Integraler och summor kan göras så höga som
 det krävs, och paranteser kan växa nästan obegränsat. Det är dock viktigt
 att komma ihåg att en fristående ekvation \emph{oftast} inte ska vara ett 
 eget
-stycke. Exempel~\vref{ex:stycken} visade hur ett antal ekvationer och
+stycke. \Cref{ex:stycken} visade hur ett antal ekvationer och
 mellanrumet mellan dessa och den omgivande texten varierade beroende på
 	ekvationens plats i stycket. Trots att ekvationen är ”fristående” bör
 	man alltså behandla den precis som en
@@ -134,7 +134,7 @@ vanlig texttypsättning, som främst har att göra med mellanrum:
 Det finns ett antal enkla konstruktioner inom matematiken som var man
 (och kvinna) bör känna till och kunna typsätta. Dessa är konstruktioner
 som kvoter, binomialkoefficienter, rötter och så vidare. Dessa visas
-kollektivt i tabell~\vref{tab:math:enkla}.
+kollektivt i \cref{tab:math:enkla}.
 
 \begin{table}[p]
 	\centering
@@ -154,8 +154,7 @@ kollektivt i tabell~\vref{tab:math:enkla}.
 
 Ibland kan det även vara önskvärt att markera bitar av ekvationer med små
 kommentarer ovan och under matematiken. Detta kan göras med kommandona
-\cmd{overbrace} och \cmd{underbrace}, vilket visas i
-exempel~\vref{ex:overbrace}.
+\cmd{overbrace} och \cmd{underbrace}, vilket visas i \cref{ex:overbrace}.
 
 \begin{kod}[p]
 	\centering
@@ -199,7 +198,7 @@ Matematiken innehåller ett stort antal symboler, däribland det grekiska
 alfabetet, talmängder, oändligheter, tomma mängden och så vidare (och då
 inkluderar vi inte de pilar, operatorer, hattar och olikhetstecken som
 diskuteras senare). Några av dessa symboler listas i
-tabell~\vrefrange{tab:symbs}{tab:grekiska} — notera att några av de 
+\crefrange{tab:symbs}{tab:grekiska} — notera att några av de 
 grekiska bokstäverna inte har några kommandon för versaler, eftersom dessa
 är identiska med latinska bokstäver, samt att några har ”varianter” som
 ser något annorlunda ut (till exempel \cmd{varepsilon}, som är mer lik
@@ -287,16 +286,15 @@ frekvent) har logiska namn; nabla-operatorn (\(\nabla\)) heter till
 exempel
 \cmd{nabla}, och tillhörandeoperatorn (\(\in\)) heter \cmd{in}. Listor
 över de vanligaste pilarna, relationssymbolerna och operatorerna i 
-\LaTeX{} återfinns i tabell~\vrefrange{tab:pilar}{tab:operatorer}. 
+\LaTeX{} återfinns i \crefrange{tab:pilar}{tab:operatorer}. 
 
 \vspace{-.5em}
 \subsubsubsection*{Hattar, prickar, primtecken och liknande}
 Ibland vill man även modifiera variablers betydelse, kanske för att
 beteckna en transformerad variabel, en vektor 
 eller en derivata med avseende på tid.
-Detta kan göras med de \LaTeX-kommandon som listas i tabell~%
-\vref{tab:hattar}, tillsammans med en kort förklaring av notationens
-innebörd.
+Detta kan göras med de \LaTeX-kommandon som listas i \cref{tab:hattar},
+tillsammans med en kort förklaring av notationens innebörd.
 
 Just för vektorer existerar det dock flera olika notationer. En populär
 variant (som \LaTeX{} främjar) är att sätta dit en liten pil ovanför
@@ -401,12 +399,12 @@ grupper, och besitter dessutom egenskapen att de måste skalas med sin
 omgivning för att de ska se bra ut. I \LaTeX{} skapar man sådana
 grupper av paranteser med kommandona \cmd{left} och \cmd{right}, vilket
 gör att dessa paranteser automatiskt sträcks ut för att bli lika höga som
-innehållet i gruppen (vilket visas i exempel~\vref{ex:paranteser}). Man 
+innehållet i gruppen (vilket visas i \cref{ex:paranteser}). Man 
 använder \cmd{left} och \cmd{right} genom att
 sätta dit parantesen direkt efter kommandot:
 \latex|\left(\frac{1}{2}\right)|
 
-De paranteser som oftast används listas i tabell~\vref{tab:paranteser}.
+De paranteser som oftast används listas i \cref{tab:paranteser}.
 Värt att notera är att \cmd{left} och \cmd{right} måste användas i par,
 just eftersom de skapar en grupp. Vill man bara använda en av dem måste
 man ändå sätta dit den andra på en lämplig plats, men med en punkt efter
@@ -419,8 +417,8 @@ ofta är önskvärt:
 
 Att ha omatchade paranteser kan vara önskvärt inom till exempel
 kvantfysik, där man har bra-ket-notation (se dock notisen om \cmd{mid}
-\vpageref{sec:3:mid} och paketet \pack{braket} som förklaras~%
-\vpageref{pack:braket} ):
+på \cpageref{sec:3:mid} och paketet \pack{braket} som förklaras 
+på \cpageref{pack:braket}):
 \latex|\left\langle\psi\right\vert|
 
 \begin{table}[t]
@@ -500,10 +498,10 @@ fall man istället skriver \cmd{vert}:
 \subsubsection{Summor och integration}
 Integraler och summor (och upprepade produkter och så vidare) är mycket
 enkla att uttrycka med \LaTeX{}. Med hjälp av kommandot \cmd{sum} (eller
-\cmd{int}, se även tabell~\vref{tab:sums} ) kan man infoga en summa (eller
+\cmd{int}, se även \cref{tab:sums}) kan man infoga en summa (eller
 integral) utan gränser. Vill man ha en definit integral, eller en summa
 med gränser, så använder man sub- och superskriptskommandona \verb|_| och
-\verb|^| som tidigare diskuterats \vpageref{sec:3:subscript} :
+\verb|^| som tidigare diskuterats på \cpageref{sec:3:subscript}:
 \latex|\sum_{x\in A}\left(\ldots\right)|
 
 \begin{table}[tbp]
@@ -561,7 +559,7 @@ för grunden till detta kommando (\url{http://bit.ly/beaudrap-dx}).}:
 \label{sec:3:integ:kod}
 
 Med denna definition kan man mycket enklare typsätta snygga integraler med
-korrekta differentieringsoperatorer, vilket exempel~\vref{ex:integral}
+korrekta differentieringsoperatorer, vilket \cref{ex:integral}
 visar. Notera även att exemplet inte använder \cmd{iint} trots att det
 handlar om en dubbelintegral; detta eftersom varje ”underintegral” har
 egna gränser. Integraltecknet \cmd{iint} används istället med fördel när
@@ -597,12 +595,12 @@ man ska visa integrering över exempelvis ett område \(A\), då detta bara
 	\caption[Integral med korrekt och inkorrekt typsättning]{Integral med
 	korrekt (underst) och inkorrekt (överst) typsättning. Notera att 
 	\cmd{d} inte finns i \LaTeX{} från början utan måste definieras med 
-	den kod som presenteras \vpageref{sec:3:integ:kod}.}
+	den kod som presenteras på \cpageref{sec:3:integ:kod}.}
 	\label{ex:integral}
 \end{kod}
 
 \subsection{Ekvationsomgivningar}\label{sec:3:environments}
-Redan \vpageref{sec:3:ekvsomekv} diskuterades två av de 
+Redan på \cpageref{sec:3:ekvsomekv} diskuterades två av de 
 ekvationsomgivningar
 \AmS\LaTeX{} erbjuder (\env{equation} och \env{equation*}), och dessa två
 är fullt tillräckliga för väldigt många tillämpningar. Det finns dock
@@ -623,7 +621,7 @@ alldeles för långa för att få plats på en rad. Hamnar man i en sådan
 situation är det \env{multline} (notera avsaknandet av ett \texttt{i})
 man bör använda.\newpage  Omgivningen typsätter matematik på flera rader, där den
 första raden vänsterjusteras, sista raden högerjusteras och rader 
-däremellan centreras — ett exempel kan ses i \eqref{eq:multline}.
+däremellan centreras — ett exempel kan ses i \cref{eq:multline}.
 
 \begin{multline}\label{eq:multline}
 	\int_0^\infty\!R(t)\d{t} = -3\sqrt{2\pi 
@@ -686,14 +684,13 @@ ekvationsnummer; vill man ha ett per rad ska man istället använda
 Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
 i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
 \env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
-Figur~\vref{fig:aligngather} visar hur dessa omgivningar ser ut; den enda
+\Cref{fig:aligngather} visar hur dessa omgivningar ser ut; den enda
 skillnaden mellan de två är att man med \env{align} kan placera ekvationer
 mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
 
 Nya rader skapas i båda omgivningarna med nyradskommandot \verb|\\|, och
 i \env{align} använder man (på liknande sätt som i \env{tabular}) ett
-et-tecken (\verb|&|) för att skapa en ”kolumn”. Koden för Figur~%
-\vref{fig:aligngather:align} är således som följer:
+et-tecken (\verb|&|) för att skapa en ”kolumn”. Koden för \cref{fig:aligngather:align} är således som följer:
 \begin{latexcode}
 \begin{align}
 y_1 &= x^2 + 2x + 1 \\
@@ -769,8 +766,7 @@ sätt.
 
 \clearpage
 \subsubsubsection*{Underekvationer}
-Förutom \env{align} och \env{gather} visar även figur~%
-\vref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
+Förutom \env{align} och \env{gather} visar även \cref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
 omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
 och får bara innehålla en (och endast en) matematikomgivning, inget annat:
 \begin{latexcode}
@@ -785,7 +781,7 @@ y_3 &= x^2 - 1
 
 \subsubsection{Matriser}
 Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
-av de omgivningar som visas i figur~\vref{fig:matriser}. Dessa måste
+av de omgivningar som visas i \cref{fig:matriser}. Dessa måste
 användas i matematikläge, det vill säga i en annan omgivning som används
 för att typsätta matematik. Kolumner separeras med \verb|&| och
 radbrytningar görs med \verb|\\|.
@@ -813,7 +809,7 @@ funktioner eller vissa talföljder, till exempel den som behandlas i
 Collatz problem.
 Omgivningen liknar både \env{align} och \env{matrix}-omgivningarna, men
 har endast två kolumner (som dock separeras av mer mellanrum än i andra
-omgivningar). Exempel~\vref{ex:cases} visar hur \env{cases} används för
+omgivningar). \Cref{ex:cases} visar hur \env{cases} används för
 att definiera en styckvis funktion (i det här fallet rampfunktionen).
 
 \begin{kod}[tbp]
@@ -847,7 +843,7 @@ Mellanrum i matematikläge ignoreras som sagt av \LaTeX, som automatiskt
 sätter in korrekt mellanrum där det behövs. Normalt brukar detta bli
 mycket bra, men ibland (som i fallet med integraler) kan man behöva göra
 en del manuella justeringar. Detta kan man göra med de kommandon som ges
-i tabell~\vref{tab:spaces}.
+i \cref{tab:spaces}.
 
 \begin{table}[tbp]
 	\def\abox{\fbox{\phantom{z}}}
@@ -877,7 +873,7 @@ flyttar inte helt oväntat text ”bakåt”, och är användbara när man till
 exempel vill ångra de mellanrum \LaTeX{} lägger in.
 
 Vilket mellanrum \LaTeX{} lägger in beror på vilken typ tecknet är och
-hur omgivningen ser ut; tabell~\vref{tab:types} visar de teckentyper som
+hur omgivningen ser ut; \cref{tab:types} visar de teckentyper som
 används i matematikläge samt några exempel och mängden mellanrum som
 tillförs. Notera dock att tecken av typ 2 (binära operatorer) görs om till
 typ 0 om de inte har någon text (en operand) till vänster.
@@ -913,7 +909,7 @@ innehåll). Dessa kan vara användbara om man till exempel använder
 \env{multline} för att bryta en ekvation, samtidigt som man använder
 \cmd{left} och \cmd{right} (som inte fungerar ”runt” radbrytningar).
 
-Figur~\vref{fig:phantom} illustrerar problemet och lösningen. Här använder
+\Cref{fig:phantom} illustrerar problemet och lösningen. Här använder
 vi \cmd{vphantom}, eftersom vi vill lägga till höjd, och vi fyller den med
 \verb|\frac{1}{2}| eftersom det är den högsta delen av gruppen vi vill
 matcha.
@@ -967,7 +963,7 @@ att typsätta punkter så bör man undvika dessa eftersom de inte berättar
 vilket sammanhang punkterna används i. Det finns många olika konventioner,
 och för att enkelt kunna byta mellan dessa är det bättre att använda 
 \emph{semantiska} punktkommandon. \AmS\LaTeX{} definierar fem sådana
-(tabell~\ref{tab:pktr}) för olika tillfällen. Använd alltid dessa om det
+(\cref{tab:pktr}) för olika tillfällen. Använd alltid dessa om det
 är möjligt!
 
 \begin{table}[tbp]

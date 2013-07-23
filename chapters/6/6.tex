@@ -135,8 +135,7 @@ Den första tumregeln, som även bör tillämpas vid mindre projekt, är att
 man bör lägga varje \LaTeX-dokument (eller projekt) i en egen undermapp.
 Ännu bättre blir det om man även lägger alla externa filer (figurer,
 inkluderad programkod och så vidare) i ännu en undermapp. En bra
-mappstruktur skulle alltså kunna se ut ungefär som i exempel
-\vref{ex:mapp}.
+mappstruktur skulle alltså kunna se ut ungefär som i \cref{ex:mapp}.
 
 \begin{kod}
 	\begin{textcode}
@@ -217,8 +216,8 @@ Eftersom \TeX{} är Turingkomplett kan i princip allt göras med språket,
 även om det främst är tänkt för typsättning. Således kan det mesta i 
 typsättningsväg lösas relativt enkelt. Kan det inte det, och problemet
 man vill lösa är ett relativt vanligt problem, så finns det sannolikt ett
-paket som löser problemet. Dessa paket finns listade på CTAN (se sida
-\pageref{sec:ctan}) och kan, om man använder \TeX{} Live, installeras
+paket som löser problemet. Dessa paket finns listade på CTAN (se
+\cpageref{sec:ctan}) och kan, om man använder \TeX{} Live, installeras
 med verktyget \texttt{tlmgr}.
 
 Paket i kursiv stil finns inte på Chalmers-datorer utan måste installeras
@@ -247,7 +246,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	\texttt{OT1}, som inte innehåller icke-anglikanska tecken så som
 	\emph{å}, \emph{ä} och \emph{ö}. Detta medför problem när det gäller
 	bland annat avstavning, och man bör därför istället använda 
-	\texttt{T1}. Detta diskuteras närmre \vpageref{pack:fontenc}.
+	\texttt{T1}. Detta diskuteras närmre på \cpageref{pack:fontenc}.
 	
 	\item[\pack{hyperref}]
 	gör om innehållsförteckningar, referenser och URIer till riktiga
@@ -262,7 +261,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	teckenkodning indatan sparats med. De vanigaste inställningarna är
 	\texttt{utf8} och \texttt{latin1}, men många andra teckenkodningar
 	stöds också.
-	Detta paket introducerades lite kort \vpageref{pack:inputenc}.
+	Detta paket introducerades lite kort på \cpageref{pack:inputenc}.
 
 	\item[\pack{kpfonts}]
 	inkluderar typsnittsfamiljen \emph{Kepler} som är en gratis familj
@@ -275,8 +274,8 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	inkluderar typsnittet \emph{Latin Modern} för att ersätta
 	\emph{Computer Modern}, standardtypsnittet i \LaTeX. Latin Modern ser
 	i princip likadant ut som Computer Modern, men är skarpare och har
-	fler glyfer. Det här paketet motiveras lite närmre
-	\vpageref{sec:2:lmodern}. Välj antingen detta paket \emph{eller}
+	fler glyfer. Det här paketet motiveras lite närmre på 
+	\cpageref{sec:2:lmodern}. Välj antingen detta paket \emph{eller}
 	\pack{kpfonts}, inte båda.
 	
 	\item[\emph{\pack{nag}}]
@@ -295,7 +294,7 @@ till exempel tabeller, figurtexter, SI-enheter och matematik.
 \begin{description}
 	\item[\pack{booktabs}]
 	är ett paket som gör det möjligt att skapa mycket snygga tabeller.
-	Paketet diskuteras redan \vpageref{pack:booktabs}, och är i princip
+	Paketet diskuteras redan på \cpageref{pack:booktabs}, och är i princip
 	ett måste om man ska inkludera tabeller i sitt \LaTeX-dokument.
 
 	\item[\pack{caption}]
@@ -312,7 +311,7 @@ till exempel tabeller, figurtexter, SI-enheter och matematik.
 	gör det enklare att typsätta SI-enheter, decimaltal och vinklar på ett
 	korrekt sätt för icke engelskspråkiga rapporter. Mycket användbart
 	paket som tyvärr inte finns på Chalmers datorer. Förklaras lite kort
-	\vpageref{sec:3:siunitx}.
+	på \cpageref{sec:3:siunitx}.
 \end{description}
 
 \subsubsubsection*{Paket för matematiktypsättning}
@@ -335,7 +334,7 @@ matematikpaket.
 	\end{equation*}
 	
 	\item[\pack{amsmath}]
-	gås igenom i del~\ref{sec:3} och är i princip oumbärligt om man ska
+	gås igenom i \cref{sec:3} och är i princip oumbärligt om man ska
 	typsätta matematik med \LaTeX. Inkludera alltid detta paket om du
 	skriver något som kan tänkas innefatta ekvationer.
 
@@ -358,8 +357,8 @@ matematikpaket.
 	
 	\item[\pack{mathtools}]
 	lagar några småfel i \pack{amsmath} och definierar kommandon som till
-	exempel \cmd{DeclarePairedDelimiter}, som introducerades
-	\vpageref{cmd:declarepaireddelimiter}.
+	exempel \cmd{DeclarePairedDelimiter}, som introducerades på
+	\cpageref{cmd:declarepaireddelimiter}.
 \end{description}
 
 \subsubsection{Paket för grafik}
@@ -371,12 +370,12 @@ två som används för att rita direkt med \LaTeX-kommandon.
 
 \begin{description}
 	\item[\pack{graphicx}]
-	förklaras kort i del \vref{sec:4} och gör det möjligt att inkludera
+	förklaras kort i \cref{sec:4} och gör det möjligt att inkludera
 	figurer från externa filer i sitt \LaTeX-dokument. Mycket användbart
 	om man har data från till exempel MATLAB eller Mathematica.
 	
 	\item[\pack{tikz}]
-	nämns också i del \ref{sec:4} och gör det möjligt att rita
+	nämns också i \cref{sec:4} och gör det möjligt att rita
 	vektorbaserade figurer direkt i \LaTeX. Mycket användbart om man
 	vill rita exempelvis uppställningar, enklare illustrationer eller 
 	flödesscheman, men kan användas till otroligt mycket mer. Fungerar
@@ -404,8 +403,8 @@ ska vara på svenska. Sådana problem löses enkelt av diverse paket.
 	Chalmers Bibliotek publicerat \cite{ChsLib10} i \BibTeX.
 	Rekommenderas absolut för alla sorters rapporter, artiklar och
 	publikationer du kan tänkas producera under din studietid, så länge
-	det inte finns krav på stil från annat håll. Diskuteras även
-	\vpageref{sec:chscite}.
+	det inte finns krav på stil från annat håll. Diskuteras även på
+	\cpageref{sec:chscite}.
 \end{description}
 
 \subsubsection{Paket som löser problem}
@@ -415,6 +414,12 @@ många sådana problem är vanligt förekommande finns det ofta paket som
 löser dem.
 
 \begin{description}
+	\item[\pack{cleveref}]
+	definierar kommandot \cmd{cref} (och många liknande kommandon), ett
+	alternativ till \cmd{ref} som automatiskt skriver ut vilken typ av
+	referens det handlar om. Fullt kompatibelt med \pack{varioref}, och
+	tillsammans gör det korsreferenser mycket enklare.
+
 	\item[\pack{enumitem}]
 	gör det möjligt att definiera egna sorters listor, och modifierar 
 	\env{enumerate}	så att man även kan specificera en egen etikett, återuppta
@@ -422,7 +427,7 @@ löser dem.
 	
 	\item[\pack{float}]
 	definierar ett kommando \cmd{newfloat} som skapar nya sorters flytande
-	objekt (vilka diskuterats \vpageref{sec:floats}).
+	objekt (vilka diskuterats på \cpageref{sec:floats}).
 	
 	\item[\pack{geometry}]
 	kan användas för att ändra en del mått i \LaTeX{} (till exempel sidans

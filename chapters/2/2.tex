@@ -45,7 +45,7 @@ inte ens vad syftet med en styckesindelning är, eller (speciellt i
 \LaTeX{}) introducerar nya stycken utan att vara medvetna om det. Detta
 misstag är mycket lätt att göra om till exempel ekvationer används i 
 texten. Ta
-en snabb titt på exempel~\vref{ex:stycken} och försök lista ut varför
+en snabb titt på \cref{ex:stycken} och försök lista ut varför
 tomma rader (det vill säga ett nytt stycke) används i vissa tillfällen 
 men inte andra — det är en subtil men mycket viktig skillnad.
 
@@ -145,7 +145,7 @@ Med \LaTeX{} behöver man i princip aldrig bry sig om att rad- eller
 sidbryta eftersom detta görs automatiskt. Vid vissa tillfällen kan det
 dock vara önskvärt att göra det manuellt ändå; framför allt kan det vara
 intressant att lägga in manuella sidbrytningar för att undvika änkor, 
-horungar eller störande avbrott i textflödet. Tabell~\vref{tab:newpage}
+horungar eller störande avbrott i textflödet. \Cref{tab:newpage}
 listar några av de kommandon som kan användas för att åstadkomma
 sidbrytningar.
 
@@ -165,7 +165,7 @@ sidbryter en andra gång.
 		\midrule
 		\cmd{newpage} & Skapar en ny sida. \\
 		\cmd{clearpage} & Skapar en ny sida och tvingar alla \emph{floats}
-		(mer om dessa~\vpageref{sec:floats}) att läggas ut innan den nya 
+		(mer om dessa på \cpageref{sec:floats}) att läggas ut innan den nya 
 		sidan. 
 		Bättre än \cmd{newpage} om syftet är att bryta för ett nytt 
 		kapitel eller liknande. \\
@@ -190,7 +190,7 @@ Det innehåller avstavningsregler
 och översättningar till inbyggda kommandon (rubriker till
 innehållsförteckning, referenslista och så vidare) för ett stort antal
 språk, däribland svenska och engelska. Det är enkelt att använda
-\pack{babel} (paketet förklaras närmre i del~\ref{sec:6}), till och med
+\pack{babel} (paketet förklaras närmre i \cref{sec:6}), till och med
 för dokument flera olika språk, och oftast räcker det med att helt
 enkelt inkludera paketet med rätt inställning:
 \latex|\usepackage[swedish]{babel} % Dokumentet är på svenska|
@@ -215,7 +215,7 @@ sådana stycken kursivera för att betona text; i sådana fall använder
 \LaTeX{} därför helt vanlig, upprätt text (för nästan alla 
 dokumentklasser, i alla fall).
 
-Tabell~\vref{tab:betoning} visar utöver kommandot \cmd{emph} som används 
+\Cref{tab:betoning} visar utöver kommandot \cmd{emph} som används 
 för betoning ett antal andra textförändrande kommandon som kan vara bra 
 att
 känna till. Exempelvis så finns \cmd{textsc}, som typsätter texten med
@@ -307,7 +307,7 @@ nästla i varandra utan problem och som löser tre distinkta problem:
 numrerade listor (\texttt{enumerate}), onumrerade listor 
 (\texttt{itemize}) och beskrivningslistor (\texttt{description}). Dessa
 används tillsammans med kommandot \cmd{item} för att bygga enkla listor
-(se exempel~\vref{ex:listor}) och är relativt självförklarande.
+(se \cref{ex:listor}) och är relativt självförklarande.
 
 \begin{kod}[tp]
 	\centering
@@ -420,7 +420,7 @@ medan tabeller har figurtexten ovanför tabellen.
 \subsubsubsection*{Figurer}
 Figurer är den kanske vanligaste typen av flytande objekt, och dessa
 (grafer, illustrationer, diagram och så vidare) infogas i omgivningen
-\texttt{figure}, vilken visas i exempel~\vref{ex:figure}.
+\texttt{figure}, vilken visas i \cref{ex:figure}.
 
 \begin{kod}
 	\centering\hspace{0.0075\textwidth}
@@ -440,7 +440,7 @@ Att infoga själva figuren kan göras på några olika sätt; man kan skapa den
 med ett externt program (till exempel \cli{gnuplot} eller Inkscape), 
 exportera den direkt från MATLAB eller Mathematica, eller till och med
 rita den direkt i \LaTeX. Hur man gör detta diskuteras närmre i
-del~\ref{sec:4}~\vpagerefrange{sec:4}{sec:4:end} .
+\cref{sec:4}.
 
 För att centrera innehållet i figuren använder man kommandot 
 \cmd{centering}, som centrerar allt innehåll i resten av omgivningen. En
@@ -470,7 +470,7 @@ bör man ta paketet \pack{booktabs} till hjälp när man skapar tabeller i
 \LaTeX\footnote{Exakt varför detta är en bra idé förklaras mycket bra av
 \pack{booktabs}-manualen \cite{Fear05}.}.
 En enkel tabell skapad med hjälp av \pack{booktabs} kan se ut som
-tabellen i exempel~\vref{ex:tabular}.
+tabellen i \cref{ex:tabular}.
 
 \begin{kod}[tbp]
 	\centering 
@@ -518,7 +518,7 @@ egenskapen att \((e^x)' = e^x\). \\
 \end{kod}
 
 Som vi ser tar \texttt{tabular}-omgivningen ett obligatoriskt argument,
-som beskriver de kolumner tabellen innehåller. Tabell~\vref{tab:kolumner}
+som beskriver de kolumner tabellen innehåller. \Cref{tab:kolumner}
 listar de vanligaste kolumntyperna och deras användningsområden.
 Kolumntyperna anges direkt efter varandra, men kan om man vill separeras
 med exempelvis mellanslag. Den speciella separatorn \texttt{|} skapar en
@@ -529,7 +529,7 @@ Efter att omgivningen inletts med \cmd{begin} följer tabellens rader. Här
 måste varje rad markeras med explicita nyrader (\verb|\\|), och kolumnerna
 separeras med och-tecken (\verb|&|). Notera även de kommandon som skapar
 horisontella linjer; dessa är från \pack{booktabs} och används enligt
-exempel~\ref{ex:tabular}.
+\cref{ex:tabular}.
 
 \newpage
 Det är även viktigt att komma ihåg några typografiska regler när det
@@ -610,7 +610,13 @@ något bättre sätt, beroende på var figuren ligger. Ligger figuren på samma
 sida är \cmd{vref} i princip ekvivalent med \cmd{ref}, men om figuren är
 på en annan sida skriver \cmd{vref} även ut vilken sida detta är.
 
-Paketet \pack{hyperref} förbättrar både \cmd{ref} och \cmd{vref} genom att
+Ett annat paket, som kan ses som en förbättring av \pack{varioref}, är
+\pack{cleveref}. Detta paket räknar automatisk ut vilken typ av referens
+det är du refererar till, och skriver ut detta. Exemplet ovan kan då
+reduceras till detta:
+\latex|...som man ser i \cref{fig:betasonderfall}...|
+
+Paketet \pack{hyperref} förbättrar alla dessa kommandon genom att
 göra referenserna till länkar i den slutgiltiga \PDF-filen. Med dessa kan
 man alltså lättare navigera i dokumentet. Förutom detta så lägger
 \pack{hyperref} dessutom till en innehållsförteckning som \PDF-läsaren
@@ -630,7 +636,7 @@ Det mest grundläggande man bör uppmärksamma i \LaTeX{}, eftersom det är en
 grop man lätt faller i, är citattecken. Man kan inte i \LaTeX{} använda
 det vanliga citattecknet (\verb|"|) för att generera ett citattecken, utan
 man måste istället använda kombinationer av \emph{backticks} (\verb|`|)
-och apostrofer (\verb|'|). Tabell~\vref{tab:citat} visar hur dessa används
+och apostrofer (\verb|'|). \Cref{tab:citat} visar hur dessa används
 för att citera text.
 
 \begin{table}[tbp]
@@ -661,7 +667,7 @@ dessa och se till att använda rätt streck vid rätt tillfälle.
 Det första strecket, minustecknet, är relativt långt (\(-\)) och går i
 princip inte att missa eller missbruka. Det infogas av \LaTeX då man
 använder ett vanligt bindestreck (\verb|-|) i matematikläge\footnote{
-Mer om detta i del~\ref{sec:3}.}:
+Mer om detta i \cref{sec:3}.}:
 \latex|...och ett flyttal kan därför ha värdet \(-0\).|
 
 Nästa tecken, det vanliga bindestrecket (-), behöver man i princip aldrig
@@ -714,7 +720,7 @@ använder intervallstreck för att skilja delarna åt.
 	
 \item Enheter ska typsättas med ett (litet) mellanrum mellan tal och
 	enhet. Detta görs enklast med paketet \pack{siunitx}, som förklaras
-	närmre \vpageref{sec:3:siunitx} .
+	närmre på \cpageref{sec:3:siunitx} .
 \end{itemize}
 
 \subsubsection{Skarpare typsnitt: \pack{fontenc} och \pack{lmodern}}
@@ -828,7 +834,7 @@ Dessutom definieras omgivningen \env{displayquote}, som ersätter både
 är värd en genomläsning då paketet har många användbara kommandon.
 
 \subsubsection{Teckenkodning (\UTF)}
-Teckenkodning, som kort nämndes på sidan~\vpageref{sec:1:inputenc}, är
+Teckenkodning, som kort nämndes på \cpageref{sec:1:inputenc}, är
 viktigt att hålla koll på. Det finns två större teckenkodningar på Linux-%
 plattformar, \UTF{} och \textsc{iso-8859-1}, och en till på Windows-%
 system, \textsc{cp-1252}. Det är viktigt att man vet vilken teckenkodning
