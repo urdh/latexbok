@@ -11,15 +11,6 @@
 %  \mode_if_inner:F{\msg_error:nn{latexbok}{bad-math}}
 %  \c_math_toggle_token
 %}
-%\DeclareDocumentCommand\){}{
-  %\hbox_set_end:
-%  \mode_if_math:F{\msg_error:nn{latexbok}{bad-math}}
-%  \mode_if_inner:F{\msg_error:nn{latexbok}{bad-math}}
-  %\cramped{
-  %\hbox_unpack_clear:N\l_tmpa_box
-  %}
-%  \c_math_toggle_token
-%}
 % Twoside
 \KOMAoptions{twoside}
 % Listings
@@ -51,12 +42,6 @@
 \NewDocumentCommand\kodrad{mm}{
   \hspace{1ex}
   \inputminted[firstline=#1,lastline=#1]{latex}{#2.tex}
-}
-% Redefining sections to break page
-\RenewDocumentCommand\section{som}{
-  \cleardoublepage
-  \vspace*{2\bigskipamount}
-  \__skrapport_generic_section:nnnnn{section}{1}{#1}{#2}{#3}
 }
 % Front/main/backmatter
 \NewDocumentCommand\frontmatter{}{

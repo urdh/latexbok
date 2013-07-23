@@ -53,3 +53,7 @@
 \DeclareMathOperator\cov{cov}
 \DeclareMathOperator\non{non}
 \DeclareMathOperator\cf{cf}
+% CRITICAL BUGFIX FOR unicode-math (see https://github.com/wspr/unicode-math/issues/227)
+\makeatletter
+\def\@cdots{\mathinner{\unicodecdots}}
+\makeatother
