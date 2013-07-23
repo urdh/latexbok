@@ -12,12 +12,12 @@ refereras till som \AmS\LaTeX{} och som gör typsättning av matematik med
 \LaTeX{} mycket bättre.
 
 Dessa paket är dock enorma, och det finns hela böcker tillägnade endast
-typsättning av matematik i \LaTeX{} \citeaffixed[som för övrigt är en 
+typsättning av matematik i \LaTeX{} \parencite[till exempel][som för övrigt är en 
 mycket bra referens att ha till hands när man typsätter matematik i 
-\LaTeX]{Voss10}{till exempel}.
+\LaTeX]{Voss10}.
 Den här delen kommer att ge en kort introduktion till de allra enklaste
 och vanligaste konstruktionerna man stöter på när man typsätter matematik
-i \LaTeX, och tar mycket inspiration från \citeasnoun{Voss10}.
+i \LaTeX, och tar mycket inspiration från \textcite{Voss10}.
 
 För att typsätta matematik så som det beskrivs i den här delen måste du
 använda paketen \pack{amsmath} och \pack{amssymb}, som bör följa med din
@@ -210,7 +210,7 @@ som de variabler de faktiskt brukar vara.
 Det är givetvis svårt (en del
 skulle säga omöjligt) att hålla reda på motsvarande \LaTeX-kommandon för
 alla dessa olika symboler själv, och det kan därför vara bra att ha en
-bra referens \citeaffixed{Pakin09}{till exempel}. Man kan även använda det
+bra referens \parencite[till exempel][]{Pakin09}. Man kan även använda det
 utmärkta verktyget Detexify%
 \footnote{\url{http://detexify.kirelabs.org/classify.html}}, i vilket man
 kan rita sin symbol och få en lista över liknande \LaTeX-symboler och
@@ -612,8 +612,8 @@ som bör vara radbrutna, att man vill ha en matris eller något helt annat.
 
 Den här introduktionen kommer bara att presentera några av de viktigaste
 omgivningarna; en fullständig lista finns i användarguiden till
-\pack{amsmath} \cite{AMS99} och en ordentlig genomgång ges av
-\citeasnoun{Voss10}.
+\pack{amsmath} \parencite{AMS99} och en ordentlig genomgång ges av
+\textcite{Voss10}.
 
 \subsubsection{Långa ekvationer med \env{multline}}
 Ibland (oroväckande ofta, till och med) stöter man på ekvationer som är
@@ -1009,7 +1009,7 @@ Kommandona \cmd{num} och \cmd{ang}, som inte accepterar enheter, kräver
 endast ett argument medan \cmd{SI} kräver två; talet som ska typsättas
 och enheten som hör till. Enheterna ges av \LaTeX-kommandon så som
 \cmd{metre}, \cmd{per}, \cmd{milli} och så vidare
-\citeaffixed[ss. 9–12]{Wright11}{en full lista ges av}:
+\parencite[en full lista ges av][ss. 9–12]{Wright11}:
 \begin{latexcode}
 \num{12345,60} % Typsätter ett tal
 \num{.35e100} % Typsätter ett stort tal
@@ -1036,7 +1036,7 @@ tyska konventioner är mycket nära de svenska.}:
 
 Paketet kan göra väldigt mycket (man kan även definiera sina egna
 enheter), och det är omöjligt att gå igenom allt i en kort introduktion.
-Den intresserade hänvisas till \pack{siunitx}-manualen \cite{Wright11},
+Den intresserade hänvisas till \pack{siunitx}-manualen \parencite{Wright11},
 som utförligt förklarar hur paketet fungerar och vilka inställningar som
 kan göras.
 \end{document}

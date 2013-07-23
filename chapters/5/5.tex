@@ -13,10 +13,10 @@ sådana är \emph{JabRef}, \emph{BibDesk} och \emph{refbase}.\hfill} eller
 Systemet består av stilfiler (med filändelse \texttt{.bst}), databaser
 (\texttt{.bib}) och programmet \texttt{bibtex}. Denna introduktion kommer
 endast att gå igenom databasformatet och hur denna används från \LaTeX{}; 
-en ytterligare introduktion ges av \citeasnoun{Fenn06} och en komplett
-manual är även tillgänglig \cite{Patashnik88a}. Att skapa egna stilfiler
+en ytterligare introduktion ges av \textcite{Fenn06} och en komplett
+manual är även tillgänglig \parencite{Patashnik88a}. Att skapa egna stilfiler
 involverar en del programmering i ett stackorienterat postfix-språk som
-dokumenteras av \pack{btxhak} \cite{Patashnik88b}, men detta är inte att
+dokumenteras av \pack{btxhak} \parencite{Patashnik88b}, men detta är inte att
 rekommendera. Bättre är att använda några av de \BibTeX-stilar som finns
 på CTAN (till exempel \pack{chscite}, om man vill följa 
 Chalmers-bibliotekets rekommendationer).
@@ -202,7 +202,7 @@ generellt sett så brukar man i matematiska kretsar använda
 \texttt{alpha.bst}, i (elektro)ingenjörskretsar \texttt{ieeetr.bst} (som
 ej visas i figuren) och i humanistiska vetenskaper Harvard-stilen (eller
 någon närliggande stil). Chalmers avviker från detta och rekommenderar att
-man använder en Chicago-liknande stil~\cite{ChsLib10}.
+man använder en Chicago-liknande stil~\parencite{ChsLib10}.
 
 \begin{figure}[tp]
 	\centering
@@ -243,7 +243,7 @@ man använder en Chicago-liknande stil~\cite{ChsLib10}.
 
 \subsubsubsection*{Harvard- och Chicago-stilen: \pack{harvard} och \pack{chscite}}\label{sec:5:harvard}
 Harvard- och Chicago-stilarna, varav den senare beskrivs utförligt i
-\emph{The Chicago Manual of Style} \cite{Chicago10},
+\emph{The Chicago Manual of Style} \parencite{Chicago10},
 är sätt att referera till källor baserat
 på deras författare, och används ofta i de humanistiska vetenskaperna.
 Fördelen med dessa stilar är att referenserna smälter in bättre med den
@@ -252,7 +252,7 @@ omgivande texten och ger ett bättre sammanhang.
 Tyvärr så är \BibTeX{} från början inte gjort för att stödja de här
 referensstilarna, varför det har dykt upp ett antal olika paket som
 gör det möjligt. Ett av dessa paket är \pack{harvard}, som beskrivs
-utförligt av \citeasnoun{Williams08}. Paketet definierar förutom det
+utförligt av \textcite{Williams08}. Paketet definierar förutom det
 vanliga kommandot \cmd{cite} tre relativt självförklarande kommandon:
 \cmd{citeasnoun}, som refererar till en källa som ett substantiv,
 \cmd{possessivecite}, som refererar till en källa i genitivform,
@@ -266,7 +266,7 @@ Hur dessa bör användas i text illustreras av följande exempel:
 	
 \label{sec:chscite}
 Chalmers rekommenderar att man använder en stil baserad på Chicago-%
-stilen \cite{ChsLib10}, och dessa rekommendationer implementeras av 
+stilen \parencite{ChsLib10}, och dessa rekommendationer implementeras av 
 paketet \pack{chscite} som bygger på \pack{harvard} och därför fungerar
 på samma sätt. Även detta paket finns på CTAN.
 \end{document}

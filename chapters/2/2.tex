@@ -100,7 +100,7 @@ ersätta det mellanslag den förlänger med ett fast mellaslag (\verb|~|).
 \subsubsection{Rubriker}
 Det andra strukturelementet man måste tänka på\footnote{Undantaget
 strukturen i meningar, som är den del av svenska språket och som förklaras
-bättre av \citeasnoun{LIU98}.} är rubriker. Dessa skapar en logisk
+bättre av \textcite{LIU98}.} är rubriker. Dessa skapar en logisk
 struktur som delar upp innehållet, och den typografiska effekten av att
 införa en rubrik är så stark att det nästan är självklart hur man ska
 använda dessa för att strukturera sin text.
@@ -468,7 +468,7 @@ rita linjer både kors och tvärs, och definiera kolumner på ett antal olika
 sätt, men för att hålla sig till en enkel (om än bokinspirerad) devis så
 bör man ta paketet \pack{booktabs} till hjälp när man skapar tabeller i
 \LaTeX\footnote{Exakt varför detta är en bra idé förklaras mycket bra av
-\pack{booktabs}-manualen \cite{Fear05}.}.
+\pack{booktabs}-manualen \parencite{Fear05}.}.
 En enkel tabell skapad med hjälp av \pack{booktabs} kan se ut som
 tabellen i \cref{ex:tabular}.
 
@@ -523,7 +523,7 @@ listar de vanligaste kolumntyperna och deras användningsområden.
 Kolumntyperna anges direkt efter varandra, men kan om man vill separeras
 med exempelvis mellanslag. Den speciella separatorn \texttt{|} skapar en
 vertikal linje mellan två kolumner, men detta är inte att rekommendera
-\cite{Fear05}.
+\parencite{Fear05}.
 
 Efter att omgivningen inletts med \cmd{begin} följer tabellens rader. Här
 måste varje rad markeras med explicita nyrader (\verb|\\|), och kolumnerna
@@ -533,7 +533,7 @@ horisontella linjer; dessa är från \pack{booktabs} och används enligt
 
 \newpage
 Det är även viktigt att komma ihåg några typografiska regler när det
-gäller tabeller. Alla dessa ges av \citeasnoun[s.~3]{Fear05}. Fritt
+gäller tabeller. Alla dessa ges av \textcite[s.~3]{Fear05}. Fritt
 översatt:
 
 \begin{quotation}
@@ -554,7 +554,7 @@ manualen föreskriver, och punkt tre och fem är snarare arbetsbesparande än
 ansträngande att hålla sig till. Även punkt fyra är enkel att följa. 
 Följer man
 dessa fem punkter får man snygga tabeller varje gång\footnote{Läs gärna
-igenom \citeasnoun{Fear05} ordentligt de tre-fyra första gångerna du
+igenom \textcite{Fear05} ordentligt de tre-fyra första gångerna du
 sitter med tabeller i \LaTeX, så går användandet in i ryggmärgen.}.
 
 \begin{table}[tbp]
@@ -629,7 +629,7 @@ typografiska regler \LaTeX{} inte håller reda på; sådana som har med
 citattecken, tankstreck och annat att göra. Även datum, decimalavskiljare
 och liknande är viktigt att tänka på. Dessa typografiska regler kommer i
 korthet att förklaras på de närmsta sidorna, till vilka viss inspiration 
-tagits från \citeasnoun{Schultz05}.
+tagits från \textcite{Schultz05}.
 
 \subsubsection{Citattecken}
 Det mest grundläggande man bör uppmärksamma i \LaTeX{}, eftersom det är en
@@ -684,9 +684,9 @@ Det fjärde och sista strecket kallas långt tankstreck (—) och är det längs
 strecken. Det långa tankstrecket är relativt ovanligt inom svensk typografi, men det
 finns ingen anledning att undvika det\footnote{För tankar (\emph{no pun
 intended}) angående användningen av tankstreck, se 
-\citeasnoun[ss.~46–47]{LIU98} — observera dock att man \emph{inte} som 
-\citename{LIU98} föreslår ska använda tankstrecket i intervall eller
-punktlistor. Det \citeasnoun{Sprakradet08} och \citename{LIU98} betecknar som
+\textcite[ss.~46–47]{LIU98} — observera dock att man \emph{inte} som 
+\citeauthor*{LIU98} föreslår ska använda tankstrecket i intervall eller
+punktlistor. Det \textcite{Sprakradet08} och \citeauthor*{LIU98} betecknar som
 ”tankstreck” är i själva verket mycket närmre det som i \LaTeX{} anses vara ett
 intervallstreck, det vill säga ett lite kortare tecken. Personligen föredrar jag 
 att göra skillnad på de två, och gör man det bör intervallstrecket användas till
@@ -859,7 +859,7 @@ ha en figur som endast täcker \num{3/4} av bredden:
 \latex|0.75\textwidth|
 
 Det finns en stor mängd längder i \LaTeX, och många av dem relaterar till
-olika mått på sidan \cite[s.~132]{Oetiker11}, medan andra (till exempel
+olika mått på sidan \parencite[s.~132]{Oetiker11}, medan andra (till exempel
 \cmd{smallskipamount}) är mer obskyra och godtyckliga.
 
 \subsubsection{Ömtåliga kommandon}

@@ -46,7 +46,7 @@ p + geom_bar(position=dodge) +
 
 En mer utförlig referens över alla kommandon i \texttt{ggplot2} finns på internet%
 \footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig genomgång ges av
-\citeasnoun{Hadley09}.
+\textcite{Hadley09}.
 % Att tänka på: ggplot2 
 \subsubsubsection*{Bättre \MATLAB-figurer}
 % ???
@@ -84,7 +84,7 @@ som någon form av tillägg. Lyckligtvis brukar dessa vara öppna och fria
 att använda för vem som helst.
 
 \subsubsubsection*{Från \Rlogo med \texttt{tikzDevice}}
-\Rlogo-paketet \texttt{tikzDevice} \cite{Sharpsteen12} gör det möjligt
+\Rlogo-paketet \texttt{tikzDevice} \parencite{Sharpsteen12} gör det möjligt
 att i \Rlogo exportera figurer som \PGFTikZ-kod. Det kan som många andra
 \Rlogo-paket hittas på CRAN och installeras enklast genom att köra
 \Rlogo-kommandot \verb|install.packages("tikzDevice")|. Man använder
@@ -128,7 +128,7 @@ dev.off()
 \subsubsubsection*{Från \Rlogo till \PDF}
 \Rlogo har ett antal inbyggda så kallade enheter \eng{device} som kan
 användas för att rita diagram, grafer och liknande, bland annat för \EPS,
-\PNG och \textsc{SVG} \cite[s.~713]{RCoreTeam12}. Enheten vi är mest
+\PNG och \textsc{SVG} \parencite[s.~713]{RCoreTeam12}. Enheten vi är mest
 intresserade av är den som producerar \PDF-filer. Denna används enkelt
 genom att köra kommandot \texttt{pdf}, som tar samma parametrar som
 \texttt{tikz}-kommandot som beskrevs tidigare. \PDF-filen som genereras
@@ -253,8 +253,8 @@ figurer i \LaTeX{}. Med det kan man direkt i sitt \LaTeX-dokument skapa
 enklare figurer som flödesscheman, träd, grafer eller liknande; se exempel
 i \cref{fig:tikz}. Även mer avancerade figurer är möjliga, men att
 förklara hela \PGFTikZ{} tar allt för lång tid för denna introduktion. Den
-intresserade läsaren hänvisas istället till \citeasnoun{Mertz07} som har
-en bra introduktion till ämnet, och \PGFTikZ-manualen \cite{Tantau10} som
+intresserade läsaren hänvisas istället till \textcite{Mertz07} som har
+en bra introduktion till ämnet, och \PGFTikZ-manualen \parencite{Tantau10} som
 utförligt beskriver hur paketet fungerar.
 
 \begin{figure}[p]
@@ -314,7 +314,7 @@ utförligt beskriver hur paketet fungerar.
 		Koden ovan tolkas av \PGFTikZ{} och resulterar i den
 		itererade triangeln till vänster.
 		Fler exempel finns i
-		\citeasnoun{Mertz07} och \citeasnoun{Tantau10}. Tack till Alain 
+		\textcite{Mertz07} och \textcite{Tantau10}. Tack till Alain 
 		Matthes för originalkoden\footnote{\url{http://www.texample.net/tikz/examples/rotated-triangle/}}.}
 		\label{fig:tikz}
 		\end{minipage}
