@@ -20,7 +20,7 @@
 \Crefname{appendix}{Appendix}{Appendix}
 \apptocmd{\appendix}{%
   \crefalias{section}{appendix}%
-  \RenewDocumentCommand\thesection{}{Appendix~\Alph{section}}%
+  \renewcommand\thesection{\Alph{section}}%
 }{}{}
 
 % Listings

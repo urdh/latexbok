@@ -14,11 +14,13 @@
 }
 \dim_set:Nn\headheight{15pt}
 % Restyle the section command
-\RenewDocumentCommand\thesection{}{\Roman{section}}
+% Note: Don't use xparse for \the#1 (protection issues)
+\renewcommand\thesection{\Roman{section}} 
 \cs_generate_variant:Nn\__skrapport_generic_section:nnnnn{nnnon}
 \cs_set:Npn\__skrapport_section_style:
   {\normalfont\__skrapport_title_style:}
 \dim_set:Nn \c__skrapport_section_indent_dim{.25\textwidth} % magic number
+\makeatletter
 \RenewDocumentCommand\section{som}{
   \cleardoublepage
   \group_begin:
@@ -31,7 +33,17 @@
     }
   \group_end:
   \bigskip
+  % Oops? Is this my fault or something in skrapport?
+  % What it does is to do the cleveref refstepcounter stuff again
+  % since it doesn't seem to stick. Probably cus' the definitions
+  % aren't global and I have one or more groups in here and in skrapport.
+  \cref@constructprefix{section}{\cref@result}
+  \@ifundefined{cref@section@alias}
+    {\def\@tempa{section}}{\def\@tempa{\cref@section@alias}}
+  \protected@edef\cref@currentlabel
+    {[\@tempa][\arabic{section}][\cref@result]\p@section\thesection}
 }
+\makeatother
 % Holy shit, hacking my own class
 % Undefine paragraph counters
 \makeatletter
