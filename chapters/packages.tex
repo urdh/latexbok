@@ -45,11 +45,21 @@
 \usepackage{bookmark}
 \usepackage{xspace}
 \usepackage{mathtools}
-\PassOptionsToPackage{hyperfootnotes=false,colorlinks=false,%
-					  linkcolor=Red,urlcolor=Magenta}{hyperref}
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage[nameinlink,noabbrev]{cleveref}
+\AtBeginDocument{
+	\hypersetup{
+		hyperfootnotes=true,
+		linkcolor=red!75!black,
+		citecolor=.,
+		anchorcolor=.,
+		filecolor=.,
+		urlcolor=magenta
+	}
+}
+\paper{a4}{\hypersetup{colorlinks=true}}
+\paper{c5}{\hypersetup{colorlinks=false}}
 % Source code line numbers in margin
 %\usepackage{srcline}
 % Paket som demonstreras i del 6
