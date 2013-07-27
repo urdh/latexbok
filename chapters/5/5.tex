@@ -2,24 +2,37 @@
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
 \documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
 \begin{document}
-\section{Referenser med \hologo{BibTeX}}\label{sec:5}
+\section{Referenser med \pack{biblatex}}\label{sec:5}
 En stor fördel med \LaTeX{} är att man kan automatisera hanteringen av
-till exempel referenser. \BibTeX{} är ett verktyg som gör detta ännu
-enklare och som gör att man kan samla alla sina referenser i en extern
-databas, vilken kan hanteras av ett externt program\footnote{Exempel på
-sådana är \emph{JabRef}, \emph{BibDesk} och \emph{refbase}.\hfill} eller 
-(som sig bör när det gäller \LaTeX) med en enkel textredigerare.
+till exempel referenser. Paketet \pack{biblatex}, tillsammans med
+programmet \cli{biber}\footnote{Tekniskt sett kan även
+\BibTeX{} användas tillsammans med \pack{biblatex}, men det finns egentligen ingen anledning att göra det. Den som är intresserad av
+\BibTeX{}, det gamla systemet för att hantera referenser, hänvisas till introduktionen i \textcite{Fenn06} samt \BibTeX{}-manualen
+\parencite{Patashnik88a}.}, gör detta mycket enkelt genom att låta dig
+samla alla dina referenser i en extern databas, som man sedan läser in
+och hänvisar till. Denna databasen lagras i ett textbaserat format, så
+den går att hantera med samma program du skriver \LaTeX-kod i, eller i
+ett specialiserat program\footnote{Exempel på sådana är \emph{JabRef},
+\emph{BibDesk} och \emph{refbase}.}.
 
-Systemet består av stilfiler (med filändelse \texttt{.bst}), databaser
-(\texttt{.bib}) och programmet \texttt{bibtex}. Denna introduktion kommer
-endast att gå igenom databasformatet och hur denna används från \LaTeX{}; 
-en ytterligare introduktion ges av \textcite{Fenn06} och en komplett
-manual är även tillgänglig \parencite{Patashnik88a}. Att skapa egna stilfiler
-involverar en del programmering i ett stackorienterat postfix-språk som
-dokumenteras av \pack{btxhak} \parencite{Patashnik88b}, men detta är inte att
-rekommendera. Bättre är att använda några av de \BibTeX-stilar som finns
-på CTAN (till exempel \pack{chscite}, om man vill följa 
-Chalmers-bibliotekets rekommendationer).
+Användningen av \pack{biblatex}-\cli{biber} (där \pack{biblatex} är det
+\LaTeX-paket som hanterar typsättningen, och \cli{biber} är ett externt
+program som behandlar och sorterar referenserna) kan delas upp i några
+olika delar. Till att börja med kommer vi att diskutera formatet av
+själva referensdatabasen. Därefter diskuteras paketet \pack{biblatex},
+några av dess viktigaste inställningar och stilar, och till sist
+sammanfattas användningen av de två tillsammans, speciellt hur man
+refererar och genererar referenslistan.
+
+\cite{Lehman13} % biblatex-manual
+\cite{Kime13} % biber-manual
+
+\subsection{Referensdatabaser}
+\subsection{Stilar och inställningar i \pack{biblatex}}
+\subsection{Referenskommandon och referenslistor}
+
+\end{document}
+\endinput
 
 \subsection{\hologo{BibTeX}-databasen}
 Den databas \BibTeX{} använder är i all sin enkelhet en vanlig textfil.
