@@ -27,7 +27,10 @@
 \usepackage{booktabs}
 % references
 \usepackage{csquotes}
-\usepackage[style=authoryear]{biblatex}
+\usepackage[style=authoryear,sorting=nyt,sortcites=false,%
+			language=swedish,babel=other,urldate=iso8601,%
+			mergedate=basic,related=false,dashed=false,%
+			backref=true]{biblatex}
 % other stuff
 \usepackage{siunitx}
 \usepackage{hologo}
@@ -41,7 +44,8 @@
 \usepackage{bookmark}
 \usepackage{xspace}
 \usepackage{mathtools}
-\PassOptionsToPackage{hyperfootnotes=false,colorlinks=false,linkcolor=Red,urlcolor=Magenta}{hyperref}
+\PassOptionsToPackage{hyperfootnotes=false,colorlinks=false,%
+					  linkcolor=Red,urlcolor=Magenta}{hyperref}
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage[nameinlink,noabbrev]{cleveref}
