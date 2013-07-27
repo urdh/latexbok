@@ -1,0 +1,125 @@
+\ProvidesFile{chapters/custom-authoryear.bbx}%
+	[2013/07/27 v0 custom bibliography style for use in latexbok]
+
+% We're basing our stuff on the actual authoryear style, so include it
+\RequireBibliographyStyle{authoryear}
+
+% Renew the URL and ISBN fields
+\settoggle{bbx:doi}{false}
+\settoggle{bbx:isbn}{false}
+\newbibmacro*{doi+isbn}{%
+	\printfield{doi}%
+	\printfield{isbn}%
+}
+\DeclareFieldFormat*{isbn}{
+	\newunit\mkbibacro{ISBN}\addcolon\addnbspace%
+		\mbox{#1}%
+}
+\DeclareFieldFormat*{doi}{
+	\newunit\mkbibacro{DOI}\addcolon\addnbspace%
+		\href{http://dx.doi.org/#1}{#1}%
+}
+\DeclareFieldFormat*{url}{
+	\newunit\mkbibacro{URL}\addcolon\addnbspace%
+		\url{#1}%
+}
+% "Move" them to the end of the list as well
+\DeclareFieldFormat{urldate}{\bibstring{urlseen}\space#1}
+\renewbibmacro*{url+urldate}{\newunit\printurldate}
+\renewbibmacro*{doi+eprint+url}{%
+	\newunit\newblock%
+	\iftoggle{bbx:eprint}{\usebibmacro{eprint}}{}%
+	\usebibmacro{url+urldate}%
+}
+\renewcommand*{\bibpagerefpunct}{}
+\renewbibmacro*{pageref}{}
+\newbibmacro*{latexbok-pageref}{%
+	\iflistundef{pageref}{}{%
+		\ifnumgreater{\value{pageref}}{1}%
+		{\bibstring{backrefpages}\ppspace}%
+		{\bibstring{backrefpage}\ppspace}%
+		\printlist[pageref][-\value{listtotal}]{pageref}%
+	}%
+}
+\renewbibmacro*{finentry}{%
+	\newunit\newblock%
+	\usebibmacro{latexbok-pageref}%
+	\newunit\newblock\setunit{\newunitpunct\newline}%
+	\usebibmacro{doi+isbn}%
+	\newunit\newblock\setunit{\newunitpunct\newline}%
+	\printfield{url}%
+	\finentry%
+}
+
+% Just kill the language field
+\DeclareListFormat{language}{}
+
+% Modify the "in:" field to not occur that often
+\renewcommand*{\intitlepunct}{\addcolon\thinspace}
+\renewbibmacro*{in:}{}
+\newbibmacro*{latexbok-in:}{%
+  	\printtext{\bibstring{in}\intitlepunct}
+}
+\renewbibmacro*{journal}{%
+  	\iffieldundef{journaltitle}{}{%
+  		\usebibmacro{latexbok-in:}%
+		\printtext[journaltitle]{%
+			\printfield[titlecase]{journaltitle}%
+			\setunit{\subtitlepunct}%
+			\printfield[titlecase]{journalsubtitle}%
+		}%
+	}%
+}
+\newbibmacro*{maintitle+booktitle}{%
+	\iffieldundef{maintitle}{}{%
+  		\usebibmacro{latexbok-in:}%
+		\usebibmacro{maintitle}%
+		\newunit\newblock%
+		\iffieldundef{volume}{}{%
+			\printfield{volume}%
+			\printfield{part}%
+			\setunit{\addcolon\space}%
+		}%
+	}%
+	\usebibmacro{booktitle}%
+	\newunit%
+}
+\newbibmacro*{bybookauthor}{%
+	\ifnamesequal{author}{bookauthor}{}{%
+  		\usebibmacro{latexbok-in:}%
+		\printnames{bookauthor}%
+	}%
+}
+
+% Change style for article title if no journal
+\DeclareFieldFormat[article]{title}{%
+	\iffieldundef{journaltitle}{%
+		\mkbibemph{#1}%
+	}{%
+		\mkbibquote{#1}%
+	}%
+}
+
+% Translations of common terms which seem to be missing
+\DefineBibliographyStrings{swedish}{
+	translationof = {översättning av},
+	translationas = {översatt i},
+	backrefpage = {refererad på sida},
+	backrefpages = {refererad på sidorna}
+}
+\DefineBibliographyStrings{english}{
+	translationof = {translation of},
+	translationas = {translated as},
+	backrefpage = {cited on page},
+	backrefpages = {cited on pages}
+}
+
+% Redefine the related field
+\newbibmacro*{related:default}[1]{%
+	\entrydata{#1}{%
+		\expandafter\textcite{\strfield{entrykey}}%
+	}%
+}
+
+% Spacing
+\bibparsep\smallskipamount
