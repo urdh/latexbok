@@ -13,7 +13,7 @@
 }
 \DeclareFieldFormat*{isbn}{
 	\newunit\mkbibacro{ISBN}\addcolon\addnbspace%
-		\mbox{#1}%
+		\href{http://isbndb.com/search/all?query=#1}{#1}%
 }
 \DeclareFieldFormat*{doi}{
 	\newunit\mkbibacro{DOI}\addcolon\addnbspace%
@@ -117,7 +117,7 @@
 % Redefine the related field
 \newbibmacro*{related:default}[1]{%
 	\entrydata{#1}{%
-		\expandafter\textcite{\strfield{entrykey}}%
+		\expandafter\textcite{\strfield{clonesourcekey}}%
 	}%
 }
 
