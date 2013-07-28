@@ -28,113 +28,152 @@ refererar och genererar referenslistan.
 \cite{Kime13} % biber-manual
 
 \subsection{Referensdatabaser}
+Databaserna \pack{biblatex} använder är, som nämndes tidigare, helt
+vanliga textfiler. Dessa innehåller ett antal block, ett per referens
+i databasen, som i sin tur innehåller fält med information om varje
+referens. Ett typiskt block innehåller en nyckel (som används när man
+sedan i \LaTeX-dokumentet refererar till referensen), en titel, en
+författare och ett årtal. Beroende på vilken typ av referens (bok,
+artikel, och så vidare) det handlar om kan även andra fält finnas med.
+
+\begin{kod}[tbp]
+	\centering
+	\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single]{latex}{\latexbokFiguredir/5/bibdata.bib}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{\latexbokFiguredir/5/bibdata.bib}}\vfil
+	\caption{En enkel exempelreferens ur en referensdatabas.}
+	\label{ex:bibtex}
+\end{kod}
+
+\Cref{ex:bibtex} visar ett block ur en referensdatabas. Blocket inleds
+med en blocktyp (\texttt{@article}), som indikerar vilken typ referensen
+har, och den nyckel som används när man refererar till källan
+(\texttt{Hassanpour08}). Därefter följer ett antal självförklarande
+fält som lagrar information om referensen, som i det här fallet är en
+artikel ur en tidsskrift. En del av dessa fält är obligatoriska (bland
+annat titel och författare), medan andra är frivilliga (till exempel
+\texttt{month} och \texttt{doi}). \Cref{tab:blocktyper} listar de några
+blocktyper och en del av de obligatoriska/frivilliga fält som hör till.
+En fullständig förteckning finns i \textcite[7\psqq]{Lehman13}.
+
+\begin{table}[bp]
+	\begin{minipage}{0.98\textwidth}
+		\newlength{\oldfboxsep}\setlength{\oldfboxsep}{\fboxsep}
+		\setlength{\fboxsep}{0pt}
+		\renewcommand{\r}{% (fold)
+			\setlength{\fboxsep}{\oldfboxsep}%
+			\colorbox{required}{\color{required}o}%\checkmark}%
+		} % (end)
+		\renewcommand{\o}{% (fold)
+			\setlength{\fboxsep}{\oldfboxsep}%
+			\colorbox{optional}{\color{optional}v}%\Large$\circ$}%
+		} % (end)
+		\renewcommand{\u}{% (fold)
+			\setlength{\fboxsep}{\oldfboxsep}%
+			\colorbox{unavailable}{\color{unavailable}x}%$\times$}%
+		} % (end)
+		\centering
+		\caption{\setlength{\oldfboxsep}{0.5\oldfboxsep}%
+			Några av referenstyperna i \pack{biblatex} och en del av
+			deras tillhörande fält, enligt \textcite[7\psqq]{Lehman13}.
+			Både typnamn och fältnamn är relativt självförklarande.
+			\hfill\\
+			\emph{Nyckel:} \fbox{\r} obligatoriskt,
+			\fbox{\o} valfritt och
+			\fbox{\u} otillgängligt fält.
+		}
+		\label{tab:blocktyper}
+		\NewCoffin\TableCoffin
+		\SetHorizontalCoffin\TableCoffin{
+		\begin{tabular}{l*{29}{c@{}}}
+		\toprule 
+		Blocktyp & % (fold)
+			\rotatebox{90}{\texttt{author}} &
+			\rotatebox{90}{\texttt{chapter}} &
+			\rotatebox{90}{\texttt{date}\footnote{\label{fn:year-date}Antingen \texttt{month}/\texttt{year} (där \texttt{month} är valfri) \emph{eller} \texttt{date} ska specificeras, ej båda två.}} &
+			\rotatebox{90}{\texttt{doi}} &
+			\rotatebox{90}{\texttt{edition}} &
+			\rotatebox{90}{\texttt{editor}} &
+			\rotatebox{90}{\texttt{howpublished}} &
+			\rotatebox{90}{\texttt{institution}} &
+			\rotatebox{90}{\texttt{isbn}} &
+			\rotatebox{90}{\texttt{issue}} &
+			\rotatebox{90}{\texttt{journaltitle}} &
+			\rotatebox{90}{\texttt{location}} &
+			\rotatebox{90}{\texttt{month}$^\text{\ref{fn:year-date}}$} &
+			\rotatebox{90}{\texttt{number}} &
+			\rotatebox{90}{\texttt{organization}} &
+			\rotatebox{90}{\texttt{pages}} &
+			\rotatebox{90}{\texttt{publisher}} &
+			\rotatebox{90}{\texttt{school}} &
+			\rotatebox{90}{\texttt{series}} &
+			\rotatebox{90}{\texttt{subtitle}} &
+			\rotatebox{90}{\texttt{title}} &
+			\rotatebox{90}{\texttt{type}} &
+			\rotatebox{90}{\texttt{url}} &
+			\rotatebox{90}{\texttt{urldate}} &
+			\rotatebox{90}{\texttt{version}} &
+			\rotatebox{90}{\texttt{volume}} &
+			\rotatebox{90}{\texttt{volumes}} &
+			\rotatebox{90}{\texttt{year}$^\text{\ref{fn:year-date}}$} \\
+		% (end)
+		\midrule 
+%		\texttt{@article} \\
+%		\texttt{@mvbook} \\
+%		\texttt{@inbook} \\
+%		\texttt{@bookinbook} \\
+%		\texttt{@suppbook} \\
+%		\texttt{@booklet} \\
+%		\texttt{@collection} \\
+%		\texttt{@mvcollection} \\
+%		\texttt{@incollection} \\
+%		\texttt{@suppcollection} \\
+%		\texttt{@manual} \\
+%		\texttt{@misc} \\
+%		\texttt{@online} \\
+%		\texttt{@patent} \\
+%		\texttt{@periodical} \\
+%		\texttt{@suppperiodical} \\
+%		\texttt{@proceedings} \\
+%		\texttt{@mvproceedings} \\
+%		\texttt{@inproceedings} \\
+%		\texttt{@reference} \\
+%		\texttt{@mvreference} \\
+%		\texttt{@inreference} \\
+%		\texttt{@report} \\
+%		\texttt{@thesis} \\
+%		\texttt{@unpublished} \\
+		\bottomrule 
+		\end{tabular}
+		}
+		\newlength\tablecoffinwidth
+		\setlength\tablecoffinwidth%
+			{(\textwidth-\CoffinWidth\TableCoffin)/2}
+		\TypesetCoffin\TableCoffin[t, l](\tablecoffinwidth, 0pt)
+	\end{minipage}
+\end{table}
+
+Även om formatet på databaserna är enkelt att redigera för hand kan det
+vara skönt att använda något program som gör det enklare. Några sådana
+program, bland annat \emph{JabRef}%
+\footnote{\url{http://jabref.sourceforge.net/}} (open-source, finns 
+tillgängligt för alla vanliga plattformar) och \emph{BibDesk}%
+\footnote{\url{http://bibdesk.sourceforge.net/}} (för Mac OS~X), nämndes
+lite kort på~\cpageref{sec:5}. Det finns såklart många fler, både
+kommersiella (till exempel \emph{Mendeley}) och open-source-baserade, 
+men att lista alla är inte denna bokens syfte.
+
+Många webbaserade sökverktyg för akademiska publikationer, till exempel
+Scopus\footnote{\url{http://www.scopus.com/home.url}}, gör det möjligt att
+enkelt exportera information om de artiklar man refererar till i det
+format \BibTeX{} och \pack{biblatex} använder, och dessa kan sedan
+läggas till direkt i den egna referensdatabasen.
+Detta är mycket praktiskt i större projekt så som kandidatuppsatser.
+
 \subsection{Stilar och inställningar i \pack{biblatex}}
 \subsection{Referenskommandon och referenslistor}
 
 \end{document}
 \endinput
 
-\subsection{\hologo{BibTeX}-databasen}
-Den databas \BibTeX{} använder är i all sin enkelhet en vanlig textfil.
-Denna textfil innehåller ett antal block, ett per referens i databasen,
-som innehåller information om referensen (\emph{fält}). En typisk referens
-innehåller en nyckel (vilken man sedan använder när man refererar till
-referensen i \LaTeX-dokumentet), en titel, en författare och ett årtal.
-Dessutom innehåller varje block information om vilken typ av referens 
-(bok, artikel och så vidare) det handlar om. 
-
-\begin{kod}[tbp]
-	\centering
-	\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single]{latex}{\latexbokFiguredir/5/bibdata.bib}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{\latexbokFiguredir/5/bibdata.bib}}\vfil
-	\caption{En enkel exempelreferens ur en \BibTeX-databas.}
-	\label{ex:bibtex}
-\end{kod}
-
-\Cref{ex:bibtex} visar ett block ur en \BibTeX-databas; blocket
-inleds med en blocktyp (\texttt{@ARTICLE}) och den nyckel som används då
-man refererar till källan från \LaTeX{} (\texttt{Hassanpour08}) varefter
-ett antal självförklarande fält med information följer. Olika blocktyper
-kräver olika fält, både obligatoriska (till exempel titel och författare)
-och frivilliga (i det här fallet är bland annat \texttt{month} frivillig)
-— \cref{tab:blocktyper} listar de vanligaste blocktyperna och de
-obligatoriska/frivilliga fält som hör till.
-
-\begin{table}[bp]
-	\begin{minipage}{0.98\textwidth}
-		\newlength{\oldfboxsep}\setlength{\oldfboxsep}{\fboxsep}
-		\setlength{\fboxsep}{0pt}
-		\newcommand{\required}{% (fold)
-			\setlength{\fboxsep}{\oldfboxsep}%
-			\colorbox{required}{\color{required}o}%\checkmark}%
-		} % (end)
-		\newcommand{\optional}{% (fold)
-			\setlength{\fboxsep}{\oldfboxsep}%
-			\colorbox{optional}{\color{optional}v}%\Large$\circ$}%
-		} % (end)
-		\newcommand{\unavailable}{% (fold)
-			\setlength{\fboxsep}{\oldfboxsep}%
-			\colorbox{unavailable}{\color{unavailable}x}%$\times$}%
-		} % (end)
-		\centering
-		\caption{\setlength{\oldfboxsep}{0.5\oldfboxsep}%
-			Vanliga referenstyper i \BibTeX{} och deras tillhörande fält.
-			Både typnamn och fältnamn är relativt självförklarande.
-			\emph{Nyckel:} \fbox{\required} obligatoriskt,
-			\fbox{\optional} valfritt och
-			\fbox{\unavailable} otillgängligt fält.
-		}
-		\label{tab:blocktyper}
-		\begin{tabular}{lc@{}c@{}c@{}c@{}c@{}c@{}c@{}c@{}%
-						 c@{}c@{}c@{}c@{}c@{}c@{}c@{}c}
-		\toprule 
-		Blocktyp & % (fold)
-			\rotatebox{90}{\texttt{address}} &
-			\rotatebox{90}{\texttt{author}} &
-			\rotatebox{90}{\texttt{booktitle}} &
-			\rotatebox{90}{\texttt{chapter}} &
-			\rotatebox{90}{\texttt{edition}} &
-			\rotatebox{90}{\texttt{editor}} &
-			\rotatebox{90}{\texttt{journal}} &
-			\rotatebox{90}{\texttt{month}} &
-			\rotatebox{90}{\texttt{number}} &
-			\rotatebox{90}{\texttt{pages}} &
-			\rotatebox{90}{\texttt{publisher}} &
-			\rotatebox{90}{\texttt{school}} &
-			\rotatebox{90}{\texttt{series}} &
-			\rotatebox{90}{\texttt{title}} &
-			\rotatebox{90}{\texttt{volume}} &
-			\rotatebox{90}{\texttt{year}} \\
-		% (end)
-		\midrule 
-		\texttt{@article} & \unavailable & \required & \unavailable & \unavailable & \unavailable & \unavailable & \required & \optional & \optional & \optional & \unavailable & \unavailable & \unavailable & \required & \optional & \required \\
-		\texttt{@book}\footnote{\label{fn:auth-editor}Antingen \texttt{author} \emph{eller} \texttt{editor} ska specificeras, ej båda två.} & \optional & \required & \unavailable & \unavailable & \optional & \required & \unavailable & \optional & \unavailable & \unavailable & \required & \unavailable & \optional & \required & \optional & \required \\
-		\texttt{@booklet} & \optional & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \required & \unavailable & \optional \\
-		\texttt{@inbook}$^\text{\ref{fn:auth-editor}}$\footnote{\label{fn:chap-pages}Det räcker med att specificera ett av fälten \texttt{chapter} och \texttt{pages}.} & \optional & \required & \unavailable & \required & \optional & \required & \unavailable & \optional & \unavailable & \required & \required & \unavailable & \optional & \required & \optional & \required \\
-		\texttt{@incollection} & \optional & \required & \required & \unavailable & \unavailable & \optional & \unavailable & \optional & \unavailable & \optional & \optional & \unavailable & \unavailable & \required & \unavailable & \required \\
-		\texttt{@inproceedings} & \optional & \required & \required & \unavailable & \unavailable & \optional & \unavailable & \optional & \unavailable & \optional & \optional & \unavailable & \unavailable & \required & \unavailable & \required \\
-		\texttt{@manual} & \unavailable & \optional & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \required & \unavailable & \optional \\
-		\texttt{@mastersthesis} & \optional & \required & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \required & \unavailable & \required & \unavailable & \required \\
-		\texttt{@misc} & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \optional \\
-		\texttt{@phdthesis} & \optional & \required & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \required & \unavailable & \required & \unavailable & \required \\
-		\texttt{@proceedings} & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \optional & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \required & \unavailable & \required \\
-		\texttt{@unpublished} & \unavailable & \required & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \optional & \unavailable & \unavailable & \unavailable & \unavailable & \unavailable & \required & \unavailable & \optional \\
-		\bottomrule 
-		\end{tabular}
-	\end{minipage}
-\end{table}
-
-Oftast är det dock lättare att hantera sin referensdatabas med någon form
-av dedikerat verktyg istället för att redigera \texttt{.bib}-filerna
-för hand med en textredigerare. Programmet JabRef%
-\footnote{\url{http://jabref.sourceforge.net/}}
-fungerar mycket bra till detta och finns tillgängligt för alla
-plattformar.
-
-Många webbaserade sökverktyg för akademiska publikationer, till exempel
-Scopus\footnote{\url{http://www.scopus.com/home.url}}, gör det möjligt att
-enkelt exportera information om de artiklar man refererar till i \BibTeX-%
-format, som sedan kan läggas till direkt i den egna referensdatabasen.
-Detta är mycket praktiskt i större projekt så som kandidatuppsatser.
 
 \subsection{\BibTeX{} med \LaTeX{}}
 För att referera till de referenser man har i sin referensdatabas
