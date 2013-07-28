@@ -58,15 +58,15 @@ En fullständig förteckning finns i \textcite[7\psqq]{Lehman13}.
 	\begin{minipage}{0.98\textwidth}
 		\newlength{\oldfboxsep}\setlength{\oldfboxsep}{\fboxsep}
 		\setlength{\fboxsep}{0pt}
-		\renewcommand{\r}{% (fold)
+		\def\r{% (fold)
 			\setlength{\fboxsep}{\oldfboxsep}%
 			\colorbox{required}{\color{required}o}%\checkmark}%
 		} % (end)
-		\renewcommand{\o}{% (fold)
+		\def\o{% (fold)
 			\setlength{\fboxsep}{\oldfboxsep}%
 			\colorbox{optional}{\color{optional}v}%\Large$\circ$}%
 		} % (end)
-		\renewcommand{\u}{% (fold)
+		\def\u{% (fold)
 			\setlength{\fboxsep}{\oldfboxsep}%
 			\colorbox{unavailable}{\color{unavailable}x}%$\times$}%
 		} % (end)
@@ -83,66 +83,7 @@ En fullständig förteckning finns i \textcite[7\psqq]{Lehman13}.
 		\label{tab:blocktyper}
 		\NewCoffin\TableCoffin
 		\SetHorizontalCoffin\TableCoffin{
-		\begin{tabular}{l*{29}{c@{}}}
-		\toprule 
-		Blocktyp & % (fold)
-			\rotatebox{90}{\texttt{author}} &
-			\rotatebox{90}{\texttt{chapter}} &
-			\rotatebox{90}{\texttt{date}\footnote{\label{fn:year-date}Antingen \texttt{month}/\texttt{year} (där \texttt{month} är valfri) \emph{eller} \texttt{date} ska specificeras, ej båda två.}} &
-			\rotatebox{90}{\texttt{doi}} &
-			\rotatebox{90}{\texttt{edition}} &
-			\rotatebox{90}{\texttt{editor}} &
-			\rotatebox{90}{\texttt{howpublished}} &
-			\rotatebox{90}{\texttt{institution}} &
-			\rotatebox{90}{\texttt{isbn}} &
-			\rotatebox{90}{\texttt{issue}} &
-			\rotatebox{90}{\texttt{journaltitle}} &
-			\rotatebox{90}{\texttt{location}} &
-			\rotatebox{90}{\texttt{month}$^\text{\ref{fn:year-date}}$} &
-			\rotatebox{90}{\texttt{number}} &
-			\rotatebox{90}{\texttt{organization}} &
-			\rotatebox{90}{\texttt{pages}} &
-			\rotatebox{90}{\texttt{publisher}} &
-			\rotatebox{90}{\texttt{school}} &
-			\rotatebox{90}{\texttt{series}} &
-			\rotatebox{90}{\texttt{subtitle}} &
-			\rotatebox{90}{\texttt{title}} &
-			\rotatebox{90}{\texttt{type}} &
-			\rotatebox{90}{\texttt{url}} &
-			\rotatebox{90}{\texttt{urldate}} &
-			\rotatebox{90}{\texttt{version}} &
-			\rotatebox{90}{\texttt{volume}} &
-			\rotatebox{90}{\texttt{volumes}} &
-			\rotatebox{90}{\texttt{year}$^\text{\ref{fn:year-date}}$} \\
-		% (end)
-		\midrule 
-%		\texttt{@article} \\
-%		\texttt{@mvbook} \\
-%		\texttt{@inbook} \\
-%		\texttt{@bookinbook} \\
-%		\texttt{@suppbook} \\
-%		\texttt{@booklet} \\
-%		\texttt{@collection} \\
-%		\texttt{@mvcollection} \\
-%		\texttt{@incollection} \\
-%		\texttt{@suppcollection} \\
-%		\texttt{@manual} \\
-%		\texttt{@misc} \\
-%		\texttt{@online} \\
-%		\texttt{@patent} \\
-%		\texttt{@periodical} \\
-%		\texttt{@suppperiodical} \\
-%		\texttt{@proceedings} \\
-%		\texttt{@mvproceedings} \\
-%		\texttt{@inproceedings} \\
-%		\texttt{@reference} \\
-%		\texttt{@mvreference} \\
-%		\texttt{@inreference} \\
-%		\texttt{@report} \\
-%		\texttt{@thesis} \\
-%		\texttt{@unpublished} \\
-		\bottomrule 
-		\end{tabular}
+			\input{chapters/5/biblatex-blocks-table.tex}
 		}
 		\newlength\tablecoffinwidth
 		\setlength\tablecoffinwidth%
