@@ -611,6 +611,29 @@ matematik, och att man därför oftast bör hålla sig till \LaTeX. Är man
 trots detta intresserad av \hologo{ConTeXt} bör man referera till
 \hologo{ConTeXt}-manualen \parencite{Hagen01}.
 
-%\subsubsection{Framtiden: \LaTeX3}
-%\cite{Rowley99}
+\subsubsection{Framtiden: \LaTeX3}
+Den variant av \LaTeX{} som diskuterats i boken, \LaTeXe{}, härstammar
+från 1994 då den ersatte den tidigare versionen, \LaTeX~2.09. Denna
+variant uppdateras fortfarande regelbundet, men redan 1997 startade ett
+initiativ för att utveckla nästa version av \LaTeX, kallad \LaTeX3
+\parencite{Rowley99}, som fortgår än idag. Än så länge är \LaTeX3 inte
+något man som användare behöver ha stenkoll på, eftersom det främst
+består av en uppsättning paket som underlättar i skrivandet av paket.
+
+Hur \LaTeX3 kommer se ut är inte helt klart, men att det kommer kunna
+användas med samma kompilatorer som används idag är givet. Utöver detta
+listar \textcite[4\psq]{Rowley99} ett antal mål för projektet.
+
+I dagsläget består projektet som sagt av ett ramverk som underlättar
+skrivandet av nya paket. Detta består av en uppsättning konventioner
+\parencite{expl3}, som bland annat beskriver hur man ska namnge de
+interna kommandon man definierar i ett paket, och en samling paket
+\parencite{interface3} som enligt dessa konventioner definierar
+kommandon som abstraherar användbara programmeringskoncept (till
+exempel listor, Booleska variabler, heltal, flyttal m.fl.).
+Av den anledningen är \LaTeX3 något att hålla ögonen på om man är
+intresserad av att skriva egna paket eller dokumentklasser, men för
+den \enquote{vanliga} användaren ligger \LaTeX3 fortfarande bortom
+horisonten.
+
 \end{document}
