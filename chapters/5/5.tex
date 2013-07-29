@@ -2,6 +2,9 @@
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
 \documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
 \begin{document}
+	
+	\def\do#1{\typeout{\string\textfont#1 -> \the\textfont#1}}
+
 \section{Referenser med \pack{biblatex}}\label{sec:5}
 En stor fördel med \LaTeX{} är att man kan automatisera hanteringen av
 till exempel referenser. Paketet \pack{biblatex}, tillsammans med
@@ -15,6 +18,8 @@ den går att hantera med samma program du skriver \LaTeX-kod i, eller i
 ett specialiserat program\footnote{Exempel på sådana är \emph{JabRef},
 \emph{BibDesk} och \emph{refbase}.}.
 
+	\docsvlist{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+
 Användningen av \pack{biblatex}-\cli{biber} (där \pack{biblatex} är det
 \LaTeX-paket som hanterar typsättningen, och \cli{biber} är ett externt
 program som behandlar och sorterar referenserna) kan delas upp i några
@@ -26,6 +31,8 @@ refererar och genererar referenslistan.
 
 \cite{Lehman13} % biblatex-manual
 \cite{Kime13} % biber-manual
+
+	\docsvlist{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
 
 \subsection{Referensdatabaser}
 Databaserna \pack{biblatex} använder är, som nämndes tidigare, helt
@@ -43,6 +50,8 @@ artikel, och så vidare) det handlar om kan även andra fält finnas med.
 	\label{ex:bibtex}
 \end{kod}
 
+	\docsvlist{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+
 \Cref{ex:bibtex} visar ett block ur en referensdatabas. Blocket inleds
 med en blocktyp (\texttt{@article}), som indikerar vilken typ referensen
 har, och den nyckel som används när man refererar till källan
@@ -53,6 +62,8 @@ annat titel och författare), medan andra är frivilliga (till exempel
 \texttt{month} och \texttt{doi}). \Cref{tab:blocktyper} listar de några
 blocktyper och en del av de obligatoriska/frivilliga fält som hör till.
 En fullständig förteckning finns i \textcite[7\psqq]{Lehman13}.
+
+	\docsvlist{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
 
 \begin{table}[bp]
 	\begin{minipage}{0.98\textwidth}
@@ -92,6 +103,8 @@ En fullständig förteckning finns i \textcite[7\psqq]{Lehman13}.
 	\end{minipage}
 \end{table}
 
+	\docsvlist{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+
 Även om formatet på databaserna är enkelt att redigera för hand kan det
 vara skönt att använda något program som gör det enklare. Några sådana
 program, bland annat \emph{JabRef}%
@@ -108,6 +121,8 @@ enkelt exportera information om de artiklar man refererar till i det
 format \BibTeX{} och \pack{biblatex} använder, och dessa kan sedan
 läggas till direkt i den egna referensdatabasen.
 Detta är mycket praktiskt i större projekt så som kandidatuppsatser.
+
+	\docsvlist{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
 
 \subsection{Stilar och inställningar i \pack{biblatex}}
 \subsection{Referenskommandon och referenslistor}
