@@ -139,6 +139,8 @@ kollektivt i \cref{tab:math:enkla}.
 	\centering
 	\caption{Enkla matematiska konstruktioner i \LaTeX{}.}
 	\label{tab:math:enkla}
+	\begin{minipage}{0.66\textwidth}
+	\centering
 	\begin{tabular}{llc}
 		\toprule 
 		Konstruktion & \LaTeX-kod & Resultat  \\
@@ -147,8 +149,10 @@ kollektivt i \cref{tab:math:enkla}.
 		\(n\)-rot & \verb|\sqrt[n]{x}| & \(\sqrt[n]{x}\) \\
 		Binomialkoefficient & \verb|\binom{n}{k}| & \(\binom{n}{k}\) \\
 		Kvot & \verb|\frac{a}{b}| & \(\frac{a}{b}\) \\
+		Alternativ kvot\footnote{Med paketet \pack{xfrac}} & \verb|\sfrac{a}{b}| & \(\sfrac{a}{b}\) \\
 		\bottomrule 
 	\end{tabular}
+	\end{minipage}
 \end{table}
 
 Ibland kan det även vara önskvärt att markera bitar av ekvationer med små
