@@ -622,6 +622,32 @@ man alltså lättare navigera i dokumentet. Förutom detta så lägger
 kan visa i programmet, och annan \PDF-specifik funktionalitet. Paketet
 rekommenderas starkt om du använder \pdfLaTeX.
 
+\subsubsection{Ordlistor och förkortningar}\label{sec:2:glossaries}
+När man skriver tekniska eller vetenskapliga texter finns det ofta
+anledning att inkludera en ordlista, och ibland även en lista över
+förkortningar. Det väldigt omfattande paketet \pack{glossaries}
+löser precis denna uppgift.
+
+Paketet, som dokumenteras väldigt utförligt av \textcite{Talbot13a},
+är mycket omfattande och kan användas för att skapa många sorters
+ordlistor och förteckningar. Den kortare introduktionen för nybörjare
+\parencite{Talbot13b} går igenom hur man använder paketet för att skapa
+en enkel ordlista eller lista över förkortningar.
+
+Den som är intresserad av att använda \pack{glossaries} bör läsa 
+\textcite{Talbot13b}, men i princip går det ut på att man deklarerar en
+ordlista med kommandot \cmd{makeglossaries}, definierar termer till
+ordlistan med \cmd{newglossaryentry} och refererar till dessa med
+\cmd{gls}, \cmd{glspl}, \cmd{Gls} och \cmd{Glspl}. Därefter skriver man
+ut själva ordlistan med kommandot \cmd{printglossaries}.
+
+Paketet använder även programmet \cli{xindy} för att sortera ordlistan,
+och därför måste man (i likhet med \pack{biblatex} som förklaras i
+\cref{sec:5}) köra \cli{pdflatex}, \cli{xindy} och sedan \cli{pdflatex}
+igen (eller \cli{makeglossaries} istället för \cli{xindy}, om du har
+Perl installerat). Detta förklaras närmre av
+\textcite{Talbot13a,Talbot13b}.
+
 \subsection{Typografiska betänkligheter}
 När man skriver rapporter är det även viktigt att hålla sig till de
 typografiska regler \LaTeX{} inte håller reda på; sådana som har med
