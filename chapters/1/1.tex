@@ -162,9 +162,36 @@ kontakt med relativt ofta:
 	\item[beamer] är en klass för presentationer och overhead-bilder.
 \end{description}
 
-Utöver dessa finns det även mer esoteriska klasser så som \pack{memoir},
-\pack{koma-script}, \pack{octavo} och \pack{refman}. Den intresserade
-uppmanas att leta upp dokumentationen för dessa på CTAN.
+Utöver dessa finns det även mer specialiserade klasser, anpassade för
+olika publikationer\footnote{Till exempel \pack{elsarticle},
+\pack{ieeetran} eller \pack{revtex}}, tillämpningar
+\footnote{Exempelvis \pack{refman} eller \pack{sffms}} eller konventioner%
+\footnote{Bland annat \pack{eskdx}, som implementerar ryska konventioner}.
+
+De dokumentklasser (eller paket av dokumentklasser) som kan vara
+intressanta att titta på om man typsätter dokument efter europeiska
+konventioner, eller böcker i allmänhet, är ett fåtal:
+\begin{description}
+	\item[KOMA-Script] är en samling klasser som är tänkta att vara
+	moderna efterträdare till standardklasserna, baserade på europeiska
+	standarder. Samlingen innehåller bland annat klasserna \pack{scr­book},
+	\pack{scr­reprt} och \pack{scrartcl} som ersätter \pack{book},
+	\pack{report} och \pack{article}, respektive.
+
+	\item[\pack{memoir}] är en dokumentklass som skapats för att vara
+	väldigt flexibel och möjliggöra drastiska layoutändringar utan att
+	behöva skriva mycket \TeX-kod på en låg nivå. Den är främst tänkt
+	att ersätta \pack{book} och \pack{report}.
+
+	\item[\pack{octavo}] är tänkt att ersätta \pack{book}, med fokus på
+	klassiska design- och layoutprinciper.
+
+	\item[\pack{tufte-book}] är en del av samlingen Tufte-\LaTeX
+	och möjliggör typsättning av böcker liknande de som
+	statistikern och pionjären inom datavisualisering Edward Tufte
+	författade. Klassen är tänkt att användas istället för \pack{book}.
+\end{description}
+Den intresserade uppmanas att leta upp dokumentationen för dessa på CTAN.
 
 Standardklasserna har också ett antal inställningar som kan ges som en
 kommaseparerad lista i den frivilliga parametern till \cmd{documentclass}:
