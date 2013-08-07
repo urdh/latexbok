@@ -43,7 +43,7 @@ ger fullt så obskyra felmeddelanden när saker är fel, men även
 dollatecknen fungerar bra och det är ingen typografisk skillnad.
 
 Matematik som typsätts i löpande text kommer att anpassas i höjd för att
-inte störa texten omkring. Det innebär att till exempel kvoter kommer att
+inte störa texten omkring. Det innebär att till exempel bråk kommer att
 se tilltryckta ut. Oftast bör man dock inte använda matematik i löpande
 text vid de tillfällen då det kommer se ”fel” ut, eftersom ett block då
 är mer logiskt, textmässigt. Matematik i löpande text är istället oftast
@@ -132,7 +132,7 @@ vanlig texttypsättning, som främst har att göra med mellanrum:
 \subsubsection{Enkla konstruktioner} % \frac, \choose, etc.
 Det finns ett antal enkla konstruktioner inom matematiken som var man
 (och kvinna) bör känna till och kunna typsätta. Dessa är konstruktioner
-som kvoter, binomialkoefficienter, rötter och så vidare. Dessa visas
+som bråk, binomialkoefficienter, rötter och så vidare. Dessa visas
 kollektivt i \cref{tab:math:enkla}.
 
 \begin{table}[p]
@@ -148,8 +148,8 @@ kollektivt i \cref{tab:math:enkla}.
 		Kvadratrot & \verb|\sqrt{x}| & \(\sqrt{x}\) \\
 		\(n\)-rot & \verb|\sqrt[n]{x}| & \(\sqrt[n]{x}\) \\
 		Binomialkoefficient & \verb|\binom{n}{k}| & \(\binom{n}{k}\) \\
-		Kvot & \verb|\frac{a}{b}| & \(\frac{a}{b}\) \\
-		Alternativ kvot\footnote{Med paketet \pack{xfrac}} & \verb|\sfrac{a}{b}| & \(\sfrac{a}{b}\) \\
+		Bråk & \verb|\frac{a}{b}| & \(\frac{a}{b}\) \\
+		Alternativt bråk\footnote{Med paketet \pack{xfrac}} & \verb|\sfrac{a}{b}| & \(\sfrac{a}{b}\) \\
 		\bottomrule 
 	\end{tabular}
 	\end{minipage}
@@ -552,7 +552,10 @@ Det andra problemet kan också lösas genom att lägga till mellanrum (i
 kombination med att typsätta \(dx\) med \cmd{mathrm}), men eftersom
 det är så ofta man behöver differentieringsoperatorn är det bättre att
 definiera ett nytt kommando för detta\footnote{Tack till Niel de Beaudrap 
-för grunden till detta kommando (\url{http://bit.ly/beaudrap-dx}).}:
+för grunden till detta kommando (\url{http://bit.ly/beaudrap-dx}).;%
+Detta kommando, och en del andra användbara matematik-kommandon,
+definieras även av paketet \pack{skmath} som finns tillgängligt
+på CTAN.}:
 \begin{latexcode}
 \makeatletter
 \renewcommand\d[1]{\ensuremath{%
