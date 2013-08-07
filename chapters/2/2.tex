@@ -832,6 +832,19 @@ Dessutom definieras omgivningen \env{displayquote}, som ersätter både
 \env{quote} och \env{quotation}. Paketets dokumentation, som finns på CTAN,
 är värd en genomläsning då paketet har många användbara kommandon.
 
+\subsubsection{Fotnoter}\label{sec:2:footnote}
+Fotnoter är små noteringar eller parantetiska inlägg%
+\footnote{Ibland används även fotnoter för källhänvisning — mer om detta
+i \cref{sec:5}.} som inte är väsentliga men som författaren ändå
+vill inkludera utan att störa textrytmen. I \LaTeX{} kan man skapa 
+fotnoter med kommandot \cmd{footnote}:
+\latex|\ldots{}ibland vill\foonote{Eller måste, beroende på situation} man\ldots|
+
+Om man använder fotnoter bör man även använda paketet \pack{fnpct}, som
+förutom att fixa fotnoter nära skiljetecken även definierar ett kommando
+\cmd{multfootnote}, som gör det möjligt att typsätta flera fotnoter brevid
+varandra.
+
 \subsubsection{Teckenkodning (\UTF)}
 Teckenkodning, som kort nämndes på \cpageref{sec:1:inputenx}, är
 viktigt att hålla koll på. Det finns två större teckenkodningar på Linux-%
