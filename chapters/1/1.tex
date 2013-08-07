@@ -17,7 +17,7 @@ en textredigerare med syntaxfärgning (då det underlättar felsökande) och
 stavningskontroll. Oftast sparar man filen med teckenkodningen \UTF{} 
 (detta gör de flesta moderna textredigerare), men det finns en risk att
 filerna sparas med teckenkodningen \textsc{iso-8559-1}\footnote{Det finns 
-även andra teckenkodningar som kan dyka upp; Windows-1252 är en sådan.}, 
+även andra teckenkodningar som kan dyka upp{;} Windows-1252 är en sådan.}, 
 och då måste man ha koll på detta eftersom man måste berätta för \LaTeX{}
 hur filen ska läsas in.
 
@@ -214,7 +214,10 @@ installerat. I \TeX{} Live och Mac\TeX{} kan man installera nya paket med
 kommandot \cli{tlmgr install \opt{paketnamn}}.
 De flesta paketen kommer även med dokumentation, som kan nås med kommandot
 \cli{texdoc}, men ibland kan det vara lättare att leta upp motsvarande
-paket på CTAN och kolla på dokumentationen där istället.
+paket på CTAN och kolla på dokumentationen där istället, eller använda
+online-tjänsten \TeX{}doc.net\footnote{Man kan då helt enkelt gå till
+\href{http://texdoc.net}{\nolinkurl{http://texdoc.net/pkg/<paketnamn>}}
+för att visa dokumentationen för ett paket.}.
 
 Några paket finns alltid och är mycket viktiga eftersom de berättar för
 \LaTeX{} hur in- och utdata (ska) formateras:
