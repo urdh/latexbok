@@ -833,19 +833,21 @@ Dessutom definieras omgivningen \env{displayquote}, som ersätter både
 är värd en genomläsning då paketet har många användbara kommandon.
 
 \subsubsection{Teckenkodning (\UTF)}
-Teckenkodning, som kort nämndes på \cpageref{sec:1:inputenc}, är
+Teckenkodning, som kort nämndes på \cpageref{sec:1:inputenx}, är
 viktigt att hålla koll på. Det finns två större teckenkodningar på Linux-%
 plattformar, \UTF{} och \textsc{iso-8859-1}, och en till på Windows-%
 system, \textsc{cp-1252}. Det är viktigt att man vet vilken teckenkodning
 man skriver sina dokument i, då man måste berätta detta för \LaTeX. Gör
 man inte det förutsätter \LaTeX{} att dokumentet är skrivet i
 \textsc{iso-8859-1}, och är det då inte det så kommer hemska saker hända.
-Teckenkodningen specificeras med paketet \pack{inputenc}:
-\latex|\usepackage[<teckenkodning>]{inputenc}|
+Teckenkodningen specificeras med paketet \pack{inputenx}%
+\footnote{Tidigare användes \pack{inputenc}, men det har ersatts av det
+mer uppdaterade \pack{inputenx}.}:
+\latex|\usepackage[<teckenkodning>]{inputenx}|
 Här refererar man till \UTF{} som \texttt{utf8}, \textsc{iso-8859-1} som
-\texttt{latin1} och \textsc{CP-1252} som \texttt{ansinew}. Det finns även
+\texttt{latin1} och \textsc{CP-1252} som \texttt{cp1252}. Det finns även
 en del mer obskyra teckenkodningar\footnote{De som stöds av 
-\pack{inputenc} listas i paketets manual.}, men det är troligtvis de tre
+\pack{inputenx} listas i paketets manual.}, men det är troligtvis de tre
 nämnda du kommer att stöta på.
 
 \subsubsection{Längder}

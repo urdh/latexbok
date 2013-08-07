@@ -257,12 +257,12 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	och Acrobat Reader).
 	Ett oumbärligt paket som alltid bör inkluderas.
 	
-	\item[\pack{inputenc}] (ej med \XeTeX och \hologo{LuaTeX})
+	\item[\pack{inputenx}] (ej med \XeTeX och \hologo{LuaTeX})
 	är ett paket som låter användaren berätta för \LaTeX{} vilken
 	teckenkodning indatan sparats med. De vanigaste inställningarna är
 	\texttt{utf8} och \texttt{latin1}, men många andra teckenkodningar
 	stöds också.
-	Detta paket introducerades lite kort på \cpageref{pack:inputenc}.
+	Detta paket introducerades lite kort på \cpageref{pack:inputenx}.
 
 	\item[\pack{kpfonts}]
 	inkluderar typsnittsfamiljen \emph{Kepler} som är en gratis familj
@@ -565,7 +565,7 @@ Skillnaden mellan \pdfLaTeX{} och \XeTeX som gör att man kanske föredrar
 det senare är relativt stor, sett till de djupa delarna av \TeX: \XeTeX 
 förutsätter, till skillnad från \pdfLaTeX, att all indata är \UTF och kan
 därmed läsa \UTF-dokument på ett korrekt sätt. Detta innebär bland annat
-att saker som inte fungerar i \pdfLaTeX ens med \pack{inputenc}, till
+att saker som inte fungerar i \pdfLaTeX ens med \pack{inputenx}, till
 exempel svenska tecken i kodlistingar eller inkluderade filer, kommer att
 fungera utmärkt med \XeTeX.
 
@@ -579,7 +579,7 @@ En relativt övergripande bild av vad som är nytt i \XeTeX ges av
 kommer att fungera precis likadant i \XeTeX med några få undantag:
 \begin{itemize}
 	\item Paketet \pack{polyglossia} bör användas istället för \pack{babel}
-	\item Varken \pack{inputenc} eller \pack{fontenc} bör användas
+	\item Varken \pack{inputenx} eller \pack{fontenc} bör användas
 	\item Paketet \pack{fontspec} bör användas för att ladda typsnitt
 	\item Paketet \pack{unicode-math} kan användas för att ladda typsnitt
 		  för matematik och för att skriva matematik med Unicode-tecken.
@@ -587,7 +587,7 @@ kommer att fungera precis likadant i \XeTeX med några få undantag:
 
 \XeTeX är idag så stabilt att det kan användas istället för \pdfLaTeX.
 Den här boken är typsatt med \XeTeX, och eftersom skillnaderna främst
-ligger i att \pack{inputenc} och \pack{fontenc} inte bör användas (\XeTeX
+ligger i att \pack{inputenx} och \pack{fontenc} inte bör användas (\XeTeX
 klarar nämligen även gamla \pdfLaTeX-typsnitt) kan man i princip alltid
 använda \XeTeX istället för \pdfLaTeX.
 
