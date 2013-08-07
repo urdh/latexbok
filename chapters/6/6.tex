@@ -218,8 +218,7 @@ paket som löser problemet. Dessa paket finns listade på CTAN (se
 \cpageref{sec:ctan}) och kan, om man använder \TeX{} Live, installeras
 med verktyget \texttt{tlmgr}.
 
-Paket i kursiv stil finns inte på Chalmers-datorer utan måste installeras
-manuellt i hemmappen. Dokumentation för alla paket finns på CTAN och kan
+Dokumentation för alla paket finns på CTAN och kan
 även visas genom att skriva \texttt{texdoc \emph{paketnamn}} i terminalen.
 
 \subsubsection{Allmänt nyttiga paket}
@@ -228,7 +227,7 @@ funktionalitet att man alltid bör använda dem. Det handlar om allt från
 tecken- och typsnittskodning till avstavning och interna länkar.
 
 \begin{description}
-	\item[\pack{babel}]
+	\item[\pack{babel}] (ej med \XeTeX)
 	översätter interna strängar (till exempel ”Referenser” och 
 	”Sammanfattning”) till det språk som önskas och gör det möjligt för
 	dessa språk att avstavas ordentligt. Paketet är ett måste då man
@@ -238,12 +237,17 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	korrigerar en del buggar i \LaTeXe-kärnan och gör till 
 	exempel matematikkommandon robusta. Inkludera alltid.
 	
-	\item[\pack{fontenc}]
+	\item[\pack{fontenc}] (ej med \XeTeX och \hologo{LuaTeX})
 	låter användaren välja typsnittskodning. Från början använder \LaTeX{}
 	\texttt{OT1}, som inte innehåller icke-anglikanska tecken så som
 	\emph{å}, \emph{ä} och \emph{ö}. Detta medför problem när det gäller
 	bland annat avstavning, och man bör därför istället använda 
 	\texttt{T1}. Detta diskuteras närmre på \cpageref{pack:fontenc}.
+
+	\item[\pack{fontspec}] (endast med \XeTeX och \hologo{LuaTeX})
+	låter användaren välja \textsc{OTF}-typsnitt helt fritt, antingen
+	från typsnitt installerade på datorn eller från \textsc{TTF}- eller
+	\textsc{OTF}-filer.
 	
 	\item[\pack{hyperref}]
 	gör om innehållsförteckningar, referenser och URIer till riktiga
@@ -253,7 +257,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	och Acrobat Reader).
 	Ett oumbärligt paket som alltid bör inkluderas.
 	
-	\item[\pack{inputenc}]
+	\item[\pack{inputenc}] (ej med \XeTeX och \hologo{LuaTeX})
 	är ett paket som låter användaren berätta för \LaTeX{} vilken
 	teckenkodning indatan sparats med. De vanigaste inställningarna är
 	\texttt{utf8} och \texttt{latin1}, men många andra teckenkodningar
@@ -275,11 +279,14 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	\cpageref{sec:2:lmodern}. Välj antingen detta paket \emph{eller}
 	\pack{kpfonts}, inte båda.
 	
-	\item[\emph{\pack{nag}}]
+	\item[{\pack{nag}}]
 	försöker upptäcka saker som är \emph{bad practice}, saker som kanske
 	inte fungerar som man tänkt sig, och liknande. Bör inkluderas med
 	alternativen \texttt{l2tabu} och \texttt{orthodox}:
 	\latex|\usepackage[l2tabu,orthodox]{nag}|
+
+	\item[{\pack{polyglossia}}] (endast med \XeTeX)
+	ersätter \pack{babel} för \XeTeX och har bättre stöd för \UTF.
 \end{description}
 
 \subsubsection{Paket för snyggare typsättning}
@@ -304,7 +311,7 @@ till exempel tabeller, figurtexter, SI-enheter och matematik.
 	istället för de (inkorrekta) citattecknen \verb|``| och \verb|''|, 
 	och kommandot \cmd{blockquote} för längre block av citerad text.
 	
-	\item[\emph{\pack{siunitx}}]
+	\item[{\pack{siunitx}}]
 	gör det enklare att typsätta SI-enheter, decimaltal och vinklar på ett
 	korrekt sätt för icke engelskspråkiga rapporter. Mycket användbart
 	paket som tyvärr inte finns på Chalmers datorer. Förklaras lite kort
@@ -336,7 +343,7 @@ matematikpaket.
 	och dylikt. Användbart i vissa sammanhang, främst för att typsätta
 	föreläsningsanteckningar eller uppgifter. 
 	
-	\item[\pack{isomath}]
+	\item[{\pack{isomath}}]
 	korrigerar typsättningen av grekiska bokstäver, så att även dessa typsätts
 	kursivt (som variabler). Introducerar även semantiska kommandon som
 	\cmd{vectorsym} och \cmd{tensorsym} för typsättning av vektorer
@@ -347,7 +354,12 @@ matematikpaket.
 	exempel \cmd{DeclarePairedDelimiter}, som introducerades på
 	\cpageref{cmd:declarepaireddelimiter}.
 
-	\item[\pack{xfrac}]
+	\item[{\pack{unicode-math}}]
+		(endast med \XeTeX och \hologo{LuaTeX})
+	kan användas för att ladda \textsc{OTF}-typsnitt för matematik och
+	gör det även möjligt att skriva matematik med Unicode-tecken.
+
+	\item[{\pack{xfrac}}]
 	definierar ett kommando \cmd{sfrac}, som låter dig typsätta bråk
 	med ett snedstreck: \(\sfrac{2}{3}\).
 \end{description}
@@ -389,7 +401,7 @@ en bibliografistil som inte finns med i \BibTeX och som till råga på allt
 ska vara på svenska. Sådana problem löses enkelt av diverse paket.
 
 \begin{description}
-	\item[\emph{\pack{chscite}}]
+	\item[{\pack{chscite}}]
 	är ett paket som skapats för att implementera de rekommendationer
 	Chalmers Bibliotek publicerat \parencite{ChsLib10} i \BibTeX.
 	Rekommenderas absolut för alla sorters rapporter, artiklar och
@@ -500,7 +512,7 @@ någon inlämningsuppgift.
 	\item[\pack{algorithmic}]
 	är ett paket för typsättning av algoritmer och pseudokod.
 	
-	\item[\emph{\pack{braket}}]\label{pack:braket}
+	\item[{\pack{braket}}]\label{pack:braket}
 	definierar kommandon för att handskas med braket-notationen som
 	används inom kvantfysik. Kommandot \cmd{Braket} kan således resultera
 	i följande ekvation:
@@ -522,14 +534,14 @@ någon inlämningsuppgift.
 	om paketet \emph{\pack{listingsutf8}} försöker lösa detta. Använder 
 	man \XeTeX uppstår inte detta problem.
 	
-	\item[\emph{\pack{minted}}]
+	\item[{\pack{minted}}]
 	kan sägas vara en förbättring av \pack{listings} som använder Python-%
 	programmet \emph{Pygments} för att även sätta färg på koden. Ett bra
 	alternativ om man ska inkludera kod och vill ha fullständig
 	syntaxfärgning. Paketet lider dock av samma problem med svenska tecken
 	som \pack{listings}.
 	
-	\item[\emph{\pack{todonotes}}]
+	\item[{\pack{todonotes}}]
 	låter dig infoga (synliga) ”att göra”-anteckningar i ditt dokument, tillsammans
 	med en lista över dessa. Paketet innehåller även ett kommando \cmd{missingfigure},
 	som kan användas för att markera en saknad figur.
@@ -564,7 +576,20 @@ på datorn, inte bara de som finns i form av \LaTeX-paket.
 
 En relativt övergripande bild av vad som är nytt i \XeTeX ges av
 \textcite{Robertson11}; för det mesta kan man förutsätta att \LaTeX-kod
-kommer att fungera precis likadant i \XeTeX.
+kommer att fungera precis likadant i \XeTeX med några få undantag:
+\begin{itemize}
+	\item Paketet \pack{polyglossia} bör användas istället för \pack{babel}
+	\item Varken \pack{inputenc} eller \pack{fontenc} bör användas
+	\item Paketet \pack{fontspec} bör användas för att ladda typsnitt
+	\item Paketet \pack{unicode-math} kan användas för att ladda typsnitt
+		  för matematik och för att skriva matematik med Unicode-tecken.
+\end{itemize}
+
+\XeTeX är idag så stabilt att det kan användas istället för \pdfLaTeX.
+Den här boken är typsatt med \XeTeX, och eftersom skillnaderna främst
+ligger i att \pack{inputenc} och \pack{fontenc} inte bör användas (\XeTeX
+klarar nämligen även gamla \pdfLaTeX-typsnitt) kan man i princip alltid
+använda \XeTeX istället för \pdfLaTeX.
 
 \subsubsection{Skripta med \hologo{LuaTeX}}
 \Hologo{LuaTeX} är en kombination av programmeringsspråket Lua och
@@ -577,7 +602,8 @@ beskriver systemet som uppföljaren till \pdfLaTeX:
 		its core features: direct generation of \PDF files with support 
 		for advanced \PDF features and micro-typographic enhancements to 
 		\TeX{} typographic algorithms.
-		
+
+		\nopagebreak
 		\hfill\textcite{Gonnard10}\hspace{-1ex}%
 	\end{english}
 \end{quote}
@@ -588,7 +614,8 @@ och de hanterar båda \UTF
 mycket bättre än sina företrädare. Skillnaden är att \hologo{LuaTeX}
 även gör det möjligt att bädda in Lua-kod direkt i dokumentet, vilket gör
 en del saker mycket enklare eftersom man har tillgång till ett fullgott
-skriptspråk.
+skriptspråk. I likhet med \XeTeX är \hologo{LuaTeX} stabilt nog för att
+användas istället för \pdfLaTeX.
 
 \subsubsection{Ett alternativ: \hologo{ConTeXt}}
 \Hologo{ConTeXt} är ett alternativt makropaket för \TeX{} som utvecklats
