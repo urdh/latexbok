@@ -405,21 +405,48 @@ två som används för att rita direkt med \LaTeX-kommandon.
 \end{description}
 
 \subsubsection{Paket för bibliografier}
-Även om \BibTeX ofta är tillräckligt för att kunna typsätta dokument som
-ska skickas till journaler eller förläggare (eftersom verktyget
-inkluderar många vanliga engelskspråkiga bibliografistilar) så är det inte
-alltid tillräckligt. Till exempel så rekommenderar Chalmers bibliotek
-en bibliografistil som inte finns med i \BibTeX och som till råga på allt
-ska vara på svenska. Sådana problem löses enkelt av diverse paket.
+Eftersom \pack{biblatex} (som diskuteras i~\cref{sec:5}) har bra stöd
+för många olika språk, bibliografistilar och såväl numeriska system som
+Harvard-stilen behövs det sällan extra paket. Det kan däremot vara värt
+att nämna några av de bibliografistilar som finns. Dessa stilar används
+normalt genom att ange stilen när man laddar \pack{biblatex}, dvs.
+\verb|\usepackage[style=...]{biblatex}|,
+om inget annat anges.
+
+Utöver de stilar som listas här finns även ett stort antal stilar som
+riktar sig till specifika områden eller publikationer på CTAN%
+\footnote{\url{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex-contrib}}.
 
 \begin{description}
-	\item[{\pack{chscite}}]
-	är ett paket som skapats för att implementera de rekommendationer
-	Chalmers Bibliotek publicerat \parencite{ChsLib10} i \BibTeX.
-	Rekommenderas absolut för alla sorters rapporter, artiklar och
-	publikationer du kan tänkas producera under din studietid, så länge
-	det inte finns krav på stil från annat håll. Diskuteras även på
-	\cpageref{sec:chscite}.
+	\item[\pack{alphabetic}]
+	liknar \pack{numeric}, men använder en alfabetisk etikett skapad
+	utifrån författarn och årtal istället för en numerisk etikett.
+
+	\item[\pack{authoryear}]
+	motsvarar ungefär Harvard-stilen. Referenser i texten typsätts på
+	formen ”Författare (2001)” (eller liknande former, se~\cref{sec:5}
+	för en längre diskussion) och litteraturförteckningen på motsvarande
+	sätt.
+
+	\item[\pack{biblatex-chicago}]
+	implementerar Chicago-stilen enligt \textcite{Chicago10}. Den här
+	stilen ska inte laddas genom \pack{biblatex}, utan laddas istället
+	som ett eget paket trots att det är en \pack{biblatex}-stil i grunden:
+	\latex|\usepackage[authordate,backend=biber]{biblatex-chicago}|
+
+	\item[\pack{ieee}]
+	implementerar stilen som används av IEEE i deras officiella
+	dokumentklasser för \LaTeX.
+
+	\item[\pack{numeric}]
+	är en numerisk bibliografistil som liknar standarstilen i \BibTeX.
+	Referenser i texten visas på formen ”[1]”, och litteraturförteckningen
+	har motsvarande numeriska etiketter.
+
+	\item[\pack{phys}]
+	implementerar en stil som följer de riktlinjer som satts upp av
+	\emph{American Physical Society} och \emph{American Institute
+	of Physics}.
 \end{description}
 
 \subsubsection{Paket som löser problem}
