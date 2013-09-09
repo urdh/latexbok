@@ -622,11 +622,10 @@ man alltså lättare navigera i dokumentet. Förutom detta så lägger
 kan visa i programmet, och annan \PDF-specifik funktionalitet. Paketet
 rekommenderas starkt om du använder \pdfLaTeX.
 
-\subsubsection{Ordlistor och förkortningar}\label{sec:2:glossaries}
+\subsubsection{Ordlistor}\label{sec:2:glossaries}
 När man skriver tekniska eller vetenskapliga texter finns det ofta
-anledning att inkludera en ordlista, och ibland även en lista över
-förkortningar. Det väldigt omfattande paketet \pack{glossaries}
-löser precis denna uppgift.
+anledning att inkludera en ordlista. Det väldigt omfattande paketet
+\pack{glossaries} löser precis denna uppgift.
 
 Paketet, som dokumenteras väldigt utförligt av \textcite{Talbot13a},
 är mycket omfattande och kan användas för att skapa många sorters
@@ -648,11 +647,27 @@ igen (eller \cli{makeglossaries} istället för \cli{xindy}, om du har
 Perl installerat). Detta förklaras närmre av
 \textcite{Talbot13a,Talbot13b}.
 
-Det kan även vara värt att nämna paketet \pack{acro}\label{sec:2:acro}
-\parencite{Niederberger13}, som är ett lite lättare alternativ om man
-bara är ute efter förkortningar, och inte ordlistor. Till skillnad
+\subsubsection{Förkortningar}\label{sec:2:acro}
+I viss teknisk litteratur (avhandlingar, artiklar och liknande) kan det 
+även vara bra att inkludera en lista över förkortningar. Det problemet
+går att lösa med \pack{glossaries}, men det är ofta bättre att använda
+ett specialiserat paket, till exempel \pack{acro}
+\parencite{Niederberger13}. Till skillnad
 från \pack{glossaries} använder \pack{acro} inte några externa program,
 och är därför något enklare och mindre tidskrävande att använda.
+
+\subsubsection{Sakregister}\label{sec:2:imakeidx}
+En sista komponent i många större projekt, speciellt böcker eller
+liknande litteratur, är ett sakregister. Även dessa kan skapas på ett
+relativt automatisk sätt av \LaTeX, med hjälp av paketet \pack{imakeidx}.
+Paketet förklaras av \textcite{Beccari12}, men användningen liknar
+på många sätt \pack{glossaries}. I likhet med \pack{glossaries} måste man
+köra \cli{xindy} eller \cli{makeindex} mellan \LaTeX-körningarna, men 
+under vissa förhållanden\footnote{Om man kör \cli{pdflatex} med flaggan
+\cli{--shell-escape}, eller om \TeX-distributionen är konfigurerad med
+restriktiv \cmd{write18}-åtkomst som tillåter dessa program.} kan \LaTeX\ 
+göra detta automatiskt. Givetvis görs detta även av \cli{latexmk} om man
+använder det verktyget för att kompilera sina dokument.
 
 \subsection{Typografiska betänkligheter}
 När man skriver rapporter är det även viktigt att hålla sig till de
