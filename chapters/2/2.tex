@@ -756,17 +756,17 @@ paketet \pack{parskip}:
 
 \subsubsection{Andra saker att hålla reda på}
 \begin{itemize}
- \item Datum skrivs på bästa sätt i ISO-format (YYYY–MM–DD), där man
-använder intervallstreck för att skilja delarna åt.
+\item Datum skrivs på bästa sätt i ISO-format (YYYY–MM–DD), där man
+	använder intervallstreck för att skilja delarna åt.
 	
-\item Decimalavskiljare i svensk skrift är kommatecknet. För att
-	\LaTeX{} inte ska lägga in mellanrum efter kommatecken i matteläge
-	(\LaTeX{} tolkar det som en koordinat) bör man inkludera paketet
-	\pack{icomma}. I engelsk skrift används punkt som decimalavskiljare.
+\item Decimalavskiljare i svensk skrift är kommatecknet. I matteläge
+	tolkat \LaTeX{} ett komma som en koordinatavskiljare, och lägger
+	till ett litet mellanrum efter. För att skriva ut numeriska värden
+	med kommatecken som avskiljare kan man använda kommandot \cmd{num}
+	från \pack{siunitx}, som förklaras närmre på \cpageref{sec:3:siunitx}.
 	
 \item Enheter ska typsättas med ett (litet) mellanrum mellan tal och
-	enhet. Detta görs enklast med paketet \pack{siunitx}, som förklaras
-	närmre på \cpageref{sec:3:siunitx} .
+	enhet. Detta görs enklast med paketet \pack{siunitx}.
 \end{itemize}
 
 \subsubsection{Skarpare typsnitt: \pack{fontenc} och \pack{lmodern}}
