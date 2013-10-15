@@ -4,7 +4,7 @@ TARGETS=$(SOURCES:.tex=.pdf)
 all: $(TARGETS)
 %.pdf: %.tex
 	latexmk -pdflatex="xelatex --shell-escape %O %S" -pdf -dvi- -ps- \
-        -bibtex -jobname=latexbok-a4-chapter5 -recorder $<
+        -bibtex -jobname=latexbok-a4-chapter5 -recorder -f $<
 mostlyclean:
 	latexmk -c -bibtex -jobname=latexbok-a4-chapter5 -recorder 5.tex
 clean:
