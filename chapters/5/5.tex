@@ -31,9 +31,6 @@ några av dess viktigaste inställningar och stilar, och till sist
 sammanfattas användningen av de två tillsammans, speciellt hur man
 refererar och genererar referenslistan.
 
-\cite{Lehman13} % biblatex-manual
-\cite{Kime13} % biber-manual
-
 \subsection{Referensdatabaser}
 Databaserna \pack{biblatex} använder är, som nämndes tidigare, helt
 vanliga textfiler. Dessa innehåller ett antal block, ett per referens
@@ -117,156 +114,207 @@ läggas till direkt i den egna referensdatabasen.
 Detta är mycket praktiskt i större projekt så som kandidatuppsatser.
 
 \subsection{Stilar och inställningar i \pack{biblatex}}
-\subsection{Referenskommandon och referenslistor}
+Nästa steg efter att ha skapat en referensdatabas är att inkludera
+paketet \pack{biblatex}. Paketet är gjort för att kunna vara relativt
+generellt, och har därför en uppsjö olika inställningar och
+bibliografistilar att välja mellan, alla dokumenterade i manualen
+\parencite{Lehman13}.
 
-\end{document}
-\endinput
+\subsubsection{Vanliga inställningar}
+Eftersom \pack{biblatex} är så omfattande är det omöjligt att gå igenom
+alla de inställningar som behandlas av manualen \parencite{Lehman13}. Det
+finns dock ett par inställningar som är viktiga att hålla koll på eftersom
+de berör saker man ofta vill ändra på.
 
+Den första inställningen man alltid bör använda är \texttt{style}. Denna
+inställning berättar vilken bibliografistil \pack{biblatex} ska använda
+i dokumentet, där \texttt{numeric} är standardvärdet. Bibliografistilarna
+behandlas lite mer utförligt senare i denna del.
 
-\subsection{\BibTeX{} med \LaTeX{}}
-För att referera till de referenser man har i sin referensdatabas
-i sitt \LaTeX-dokument krävs ett par olika saker. Först och främst så
-måste man specificera en bibliografistil och inkludera sin
-databas i dokumentet där man vill ha sin bibliografi:
-\begin{latexcode}
-\bibliographystyle{plain}
-\bibliography{databas}
-\end{latexcode}
-Notera här att bibliografistilen (mer om dessa på \cpageref{sec:5:stilar})
-måste specificeras
-innan databasen inkluderas, och att databasen inkluderas med sitt namn
-\emph{utan filändelsen}; koden ovan inkluderar alltså referenser från
-filen \texttt{databas.bib}. Man kan specificera flera olika databaser
-genom att separera dem med kommatecken.
+Nästa viktiga inställning är \texttt{backend}, som kontrollerar vilket
+program \pack{biblatex} ska använda för att processera referenserna
+(\eg vilket program som måste köras efter första \pdfLaTeX-rundan).
+Standardvärdet är \texttt{biber}, och det finns nästan aldrig någon
+anledning att ändra på detta. Det kan dock vara värt att komma ihåg
+att just \pack{biber} används. Den intresserade kan även läsa
+\pack{biber}-manualen \parencite[\ppno~3\psqq]{Kime13} för lite kort
+historik kring \pack{biber} och anledningen till att just \pack{biber}
+bör användas.
 
-När man sedan kompilerar sitt dokument måste man även köra \BibTeX{} på
-sitt dokument; detta görs genom att köra kommandot \texttt{bibtex 
-dokument} (om \TeX-dokumentet heter \texttt{dokument.tex}) — notera
-avsaknaden av filändelse även här. Därefter måste man köra \LaTeX{} ännu
-en gång för att referenserna ska dyka upp. En normal kompileringsrunda
-med \BibTeX{} är alltså \LaTeX$\to$\BibTeX$\to$\LaTeX$\to$\LaTeX. Med
-extra verktyg så som \texttt{latexmk} görs detta automatiskt.
+Utöver dessa finns inställningar för hur referenser sorteras, hur många
+namn som visas, vilket datumformat som ska användas och liknande, men
+dessa sätts ofta av bibliografistilen.
+Det finns även stilspecifika inställningar (\texttt{isbn}, \texttt{url},
+\texttt{doi} och \texttt{eprint}) som kontrollerar om några av de
+tillhörande fälten ska döljas från referenslistan.
 
-\BibTeX{} inkluderar dock endast de referenser som används i dokumentet
-(det vill säga sådana som refereras till direkt i texten), så om din
-referenslista inte dyker upp ska du inte vara orolig. Det finns ett antal
-olika sätt att referera till källor med \BibTeX{}; två stycken inbyggda
-(\cmd{cite} och \cmd{nocite}) samt de som definieras av olika paket (till
-exempel \pack{harvard}, vilket diskuteras på \cpageref{sec:5:harvard}).
+\subsubsection{Bibliografistilar}
+Bibliografistilarna kontrollerar dels utseendet på själva referenslistan
+men även hur de kommandon som används för att referera (\cmd{textcite},
+\cmd{parencite} och \cmd{footcite}) beter sig.
+\Crefrange{fig:bibstyle:1}{fig:bibstyle:2} visar ett antal olika
+bibliografistilar, några som följer med \pack{biblatex} och några som
+följer med andra paket eller samlingar.
 
-Kommandot \cmd{cite} refererar till en källa i databasen och skriver ut
-en hänvisning till bibliografin. För de ursprungliga stilarna i \BibTeX{}
-är denna hänvisning en siffra eller nyckel inom hakparanteser (alltså
-något i stil med ”[1]”), men detta kan modifieras av diverse paket och
-bibliografistilar. Kommandot tar ett obligatoriskt argument, nyckeln till
-källan i databasen, och ett frivilligt som lägger till text efter
-hänvisningen. Det frivilliga argumentet kan alltså användas för att 
-hänvisa till specifika sidor eller delar av en källa:
-\begin{latexcode}
-\cite{Hassanpour08}       % Skriver ut ”[1]”
-\cite[s.~5]{Hassanpour08} % Skriver ut ”[1, s. 5]”
-\end{latexcode}
+En bibliografistil laddas i \pack{biblatex} genom inställningen
+\texttt{style}, och man kan till exempel ladda den alfabetiska stilen
+som visas i \cref{fig:bibstyle:alphabetic} på följande sätt:
+\latex|\usepackage[style=alphabetic]{biblatex}|
 
-Notera här att det obligatoriska argumentet ska motsvara den nyckel som
-anges i databasen; här refererar vi till den källa som visas i
-\cref{ex:bibtex}.
-Man kan även referera till flera källor samtidigt genom att separera
-dessa med kommatecken:
-\latex|\cite{Hassanpour08,Khan10} % Skriver ut ”[1,2]”|
+\Cref{fig:bibstyle:1} visar som sagt de bibliografistilar som inkluderas
+med \pack{biblatex}. Vanligt inom matematik och fysik är att man använder
+något liknande \texttt{numeric} (\cref{fig:bibstyle:numeric}), men på
+Chalmers använder man istället författare-årtal
+(\cref{fig:bibstyle:authoryear}), eller om möjligt Chicago-stilen
+(som visas i \cref{fig:bibstyle:chicago} och implementeras av ett eget
+paket, \pack{biblatex-chicago}, som diskuteras senare i detta kapitel).
+Många fält och publikationer har egna specifika stilar, varav de flesta
+stora publikationer har \pack{biblatex}-stilar — ett urval av sådana
+stilar visas i \Cref{fig:bibstyle:2}, men den intresserade hänvisas till
+CTAN-katalogen\footnote{\url{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex-contrib}}, där fler stilar listas.
 
-Kommandot \cmd{nocite} gör samma sak som \cmd{cite} men skriver inte ut
-någon hänvisning. Detta kommando kan därför användas om man vill
-inkludera en källa i bibliografin utan att faktiskt referera till den i
-text. Här finns endast det obligatoriska argumentet. Vill man inkludera
-alla källor i databasen i sitt dokument kan man istället för en nyckel
-ange ”\texttt{*}”:
-\latex|\nocite{*}|
+\subsubsubsection[]{Chicago-stilen med \pack{biblatex-chicago}}
+Chicago-stilen \parencite{Chicago10} är väldigt omfattande (även om man
+bortser från de delar som inte relaterar till referenslistor), och av
+tekniska skäl finns den därför inte implementerad som en enkel
+\pack{biblatex}-stil. Istället implementeras stilen som ett paket,
+\pack{biblatex-chicago}, som laddar \pack{biblatex} automatiskt.
 
-\subsubsection{Bibliografistilar}\label{sec:5:stilar}
-Det finns en uppsjö olika sätt att referera till källor när man skriver
-vetenskapliga rapporter, och dessa kan variera kraftigt i stil. Några
-använder siffror (IEEE, Vancouver) eller nycklar (\AmS) för att hänvisa 
-till källor i text medan andra (Harvard, Chicago, APA) använder sig av
-författarnamnen.
-\BibTeX, i sitt grundutförande, kan endast skapa bibliografier och
-referenser med nycklar eller siffror. Vissa paket så som \pack{harvard}
-och \pack{chscite} implementerar dock Harvard- och Chicago-stilen.
+Paketets manual \parencite{Fussner13} förklarar i stora drag hur det
+är tänkt att användas, men i princip gäller samma inställningar som
+för \pack{biblatex} bortsett från bibliografistilar. Istället för alla
+de stilar som finns tillgängliga för \pack{biblatex} använder sig
+\pack{biblatex-chicago} endast av två: fotnoter (\texttt{notes})
+och författare-årtal (\texttt{authordate}, den stil som rekommenderas
+av Chalmers och som syns i \cref{fig:bibstyle:chicago}).
+För att använda paketet istället för någon annan \pack{biblatex}-stil
+räcker det oftast med att istället ladda \pack{biblatex-chicago}:
+\latex|\usepackage[authordate,backend=biber]{biblatex-chicago}|
 
-Även själva bibliografin, alltså listan över källor, kan utformas på
-många sätt. \Cref{fig:bibstyle} visar några av de stilar
-som finns tillgängliga med \BibTeX{} och på CTAN. Vilken stil man vill
-använda är upp till författaren (eller kanske oftare förläggaren), men
-generellt sett så brukar man i matematiska kretsar använda 
-\texttt{alpha.bst}, i (elektro)ingenjörskretsar \texttt{ieeetr.bst} (som
-ej visas i figuren) och i humanistiska vetenskaper Harvard-stilen (eller
-någon närliggande stil). Chalmers avviker från detta och rekommenderar att
-man använder en Chicago-liknande stil~\parencite{ChsLib10}.
-
-\begin{figure}[tp]
+\clearpage
+% NOTE: make sure first figure is on even page, second on odd
+\begin{figure}[p]
 	\centering
-	\subfloat[\texttt{abbrv.bst}]{\label{fig:bibstyle:abbrv}% (fold)
-		\fbox{\includegraphics[width=0.45\textwidth,%
-							   trim=0 -14 0 0]{\latexbokFiguredir/5/abbrv.pdf}}
-	} \hfil % (end)
-	\subfloat[\texttt{alpha.bst}]{% (fold)
-		\fbox{\includegraphics[width=0.45\textwidth]{\latexbokFiguredir/5/alpha.pdf}}
-	} \\ % (end)
-	\subfloat[\texttt{apalike.bst}]{\label{fig:bibstyle:apalike}% (fold)
-		\fbox{\includegraphics[width=0.45\textwidth]{\latexbokFiguredir/5/apalike.pdf}}
-	} \hfil % (end)
-	\subfloat[\texttt{chscite.bst} från \pack{chscite}]{% (fold)
-		\label{fig:bibstyle:chscite}%
-		\fbox{\includegraphics[width=0.45\textwidth,%
-							   trim=0 -22 0 0]{\latexbokFiguredir/5/chscite.pdf}}
-	} \\ % (end)
-	\subfloat[\texttt{dcu.bst} från \pack{harvard}]{% (fold)
-		\fbox{\includegraphics[width=0.45\textwidth,%
-							   trim=0 -11.5 0 0]{\latexbokFiguredir/5/harvard-dcu.pdf}}
-	} \hfil % (end)
-	\subfloat[\texttt{jurabib.bst} från \pack{jurabib}]{% (fold)
-		\label{fig:bibstyle:jurabib}%
-		\fbox{\includegraphics[width=0.45\textwidth,%
-							   trim=0 0 0 5,clip=true]{\latexbokFiguredir
-							   /5/jurabib.pdf}}
-	} \\ % (end)
-	\caption[Några av de bibliografistilar som kan åstadkommas med
-	hjälp av \BibTeX.]{Några av de bibliografistilar som kan åstadkommas
-	med hjälp av \BibTeX.
-	Figurerna~\subref{fig:bibstyle:abbrv}–\subref{fig:bibstyle:apalike} 
-	visar standardstilar, medan  
-	figurerna~\subref{fig:bibstyle:chscite}–\subref{fig:bibstyle:jurabib} 
-	visar stilar som definieras av olika paket.}
-	\label{fig:bibstyle}
+	\subfloat[Alfabetisk stil (\texttt{alphabetic})]{
+		\label{fig:bibstyle:alphabetic}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/alphabetic.pdf}%
+		}
+	} \\
+	\subfloat[Författare-titel-stil (\texttt{authortitle})]{
+		\label{fig:bibstyle:authortitle}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/authortitle.pdf}%
+		}
+	} \\
+	\subfloat[Författare-årtal-stil (\texttt{authoryear})]{
+		\label{fig:bibstyle:authoryear}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/authoryear.pdf}%
+		}
+	} \\
+	\subfloat[Numerisk stil (\texttt{numeric})]{
+		\label{fig:bibstyle:numeric}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/numeric.pdf}%
+		}
+	}
+	\caption{Fyra av de standardstilar som följer med \pack{biblatex}.}
+	\label{fig:bibstyle:1}
+\end{figure}
+\begin{figure}[p]
+	\centering
+	\subfloat[American Psychological Association-stil (\texttt{apa})]{
+		\label{fig:bibstyle:apa}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/biblatex-apa.pdf}%
+		}
+	} \\
+	\subfloat[American Chemical Society-stil (\texttt{chem-acs})]{
+		\label{fig:bibstyle:chem-acs}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/biblatex-chem-acs.pdf}%
+		}
+	} \\
+	\subfloat[Chicago-stil (\pack{biblatex-chicago})]{
+		\label{fig:bibstyle:chicago}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/biblatex-chicago.pdf}%
+		}
+	} \\
+	\subfloat[Institute of Electrical and Electronics Engineers-stil (\texttt{ieee})]{
+		\label{fig:bibstyle:ieee}% (fold)
+		\fbox{%
+			\includegraphics[width=0.9\textwidth,trim=0 0 0 0]%
+				{\latexbokFiguredir/5/biblatex-ieee.pdf}%
+		}
+	}
+	\caption{Några av de bibliografistilar som definieras av olika paket och inte följer med \pack{biblatex}.}
+	\label{fig:bibstyle:2}
 \end{figure}
 
-\subsubsubsection*{Harvard- och Chicago-stilen: \pack{harvard} och \pack{chscite}}\label{sec:5:harvard}
-Harvard- och Chicago-stilarna, varav den senare beskrivs utförligt i
-\emph{The Chicago Manual of Style} \parencite{Chicago10},
-är sätt att referera till källor baserat
-på deras författare, och används ofta i de humanistiska vetenskaperna.
-Fördelen med dessa stilar är att referenserna smälter in bättre med den
-omgivande texten och ger ett bättre sammanhang.
+\clearpage
+\subsection{Referenskommandon och referenslistor}
+När man så skapat sin referensdatabas (som givetvis uppdateras i takt med
+att rapporten blir större), valt bibliografistil och laddat
+\pack{biblatex} är det dags att börja referera till artiklar.
 
-Tyvärr så är \BibTeX{} från början inte gjort för att stödja de här
-referensstilarna, varför det har dykt upp ett antal olika paket som
-gör det möjligt. Ett av dessa paket är \pack{harvard}, som beskrivs
-utförligt av \textcite{Williams08}. Paketet definierar förutom det
-vanliga kommandot \cmd{cite} tre relativt självförklarande kommandon:
-\cmd{citeasnoun}, som refererar till en källa som ett substantiv,
-\cmd{possessivecite}, som refererar till en källa i genitivform,
-och \cmd{citeaffixed}, som refererar som \cmd{cite} men med ett tillägg.
-Hur dessa bör användas i text illustreras av följande exempel:
-\begin{latexcode}
-...vilket visades av \citeasnoun{Hassanpour08}.
-\possessivecite{Hassanpour08} undersökning visade att...
-...flera rapporter \citeaffixed{Hassanpour08}{t.ex.}...
-\end{latexcode}
-	
-\label{sec:chscite}
-Chalmers rekommenderar att man använder en stil baserad på Chicago-%
-stilen \parencite{ChsLib10}, och dessa rekommendationer implementeras av 
-paketet \pack{chscite} som bygger på \pack{harvard} och därför fungerar
-på samma sätt. Även detta paket finns på CTAN.
+\Textcite[\ppno~79\psqq]{Lehman13} listar en uppsjö med kommandon för att
+åstadkomma detta, men det är egentligen bara fyra eller fem som är viktiga
+att ha koll på. Fyra av dessa har dessutom varianter som kan vara bra att
+känna till, och alla fem tar i sitt huvudargument en kommaseparerad lista
+av referensnycklar från referensdatabasen.
+
+Alla referenskommandon (utom \cmd{nocite}) tar två frivilliga argument
+utöver den obligatoriska listan av referensnycklar. Det första frivilliga
+argumentet används för att sätta in text före referensen (vilket är
+praktiskt speciellt när man använder \cmd{parencite}), och burkar oftast
+inte användas alls. Det andra (eller det enda, om bara ett anges) används
+för att lägga till text \emph{efter} referensen, vilket ofta används för
+att ange sidnummer. Då finns även kommandon \cmd{pno}, \cmd{ppno},
+\cmd{psq} och \cmd{psqq} som formaterar sidhänvisningar snyggt, men oftast
+ska \pack{biblatex} kunna göra detta automatiskt om argumentet bara består
+av siffror:
+\latex|\parencite[12-14]{Lehman13}|
+
+\begin{description}
+	\item[\cmd{nocite}] används då man vill ha med en referens i 
+		referenslistan utan att behöva referera till den i text. Kommandot
+		tar även ett specialargument, \texttt{*}, som indikerar att alla
+		referenser i databasen ska inkluderas i listan.
+	\item[\cmd{textcite}] används då man refererar i löpande text, \eg
+		där man använder referensen som ett substantiv
+		(\enquote{\ldots{}NN har visat att\ldots}).
+	\item[\cmd{parencite}] används i de fall då man vill
+		\enquote{indirekt} referera till en källa, exempelvis genom
+		att referera till tidigare resultat (\enquote{\ldots{}tidigare
+		resultat (NN) har varit positiva\ldots}).
+	\item[\cmd{footcite}] används när man vill referera genom en fotnot.
+	\item[\cmd{autocite}] försöker vara intelligent och använda det
+		kommando som passar bäst i situationen med hänsyn till den
+		bibliografistil som används, men bör bara användas i situationer
+		där man normalt skulle använda \cmd{parencite} eller
+		\cmd{footcite}. Kommandot förklaras tydligare i manualen
+		\parencite[\pno~82]{Lehman13}.
+\end{description}
+
+De fyra sista har varianter för multipla referenser med olika 
+sidhänvisningar, definierade på formen
+\latex|\textcites[<sidor>]{<referens 1>}[<sidor>]{<referens 2>}...|
+med analoga ekvivalenter för \cmd{parencite} och \cmd{footcite}.
+Trion \cmd{textcite}, \cmd{parencite} och \cmd{autocite} (och deras
+multipelvarianter) har dessutom varianter à la \cmd{Textcite}, som är
+gjorda för att användas i början på en mening eller i andra situationer
+där texten bör inledas med en versal.
+
+\end{document}
 %
 %% NOTE: Reset interaction mode (see top of this file)
 \interactionmode=\previousmode
