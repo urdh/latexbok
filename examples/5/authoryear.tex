@@ -1,17 +1,23 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[english,swedish]{babel}
+\usepackage{csquotes}
 \usepackage[backend=biber,style=authoryear]{biblatex}
 \usepackage{lmodern}
 
 \usepackage[active,tightpage]{preview}
 \addbibresource{bibdata.bib}
+\defbibheading{bibliography}{\par\bigskip\textbf{Referenser}}
+\let\normalsize\footnotesize
+\let\footnotesize\scriptsize
 
 \begin{document}
-  \makeatletter\renewcommand\section[2][]{\@gobble}\makeatother
   \thispagestyle{empty}
-  \nocite{*}
   \begin{preview}\begin{minipage}{0.9\textwidth}
+  	Referera direkt till \textcite{Hassanpour08}
+  	eller indirekt till en rapport \parencite{Hassanpour08}.
+  	Man kan även referera med fotnoter\footcite{Hassanpour08}.
   	\printbibliography
   \end{minipage}\end{preview}
 \end{document}
