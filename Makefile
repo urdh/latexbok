@@ -1,4 +1,4 @@
-LATEXCMD="xelatex --shell-escape --interacion=nonstopmode -halt-on-error %O %S"
+LATEXCMD="xelatex --shell-escape --interaction=scrollmode %O %S"
 LATEXMKOPTS=-pdflatex=$(LATEXCMD) -pdf -dvi- -ps- -bibtex
 info:
 	@echo "Please make a specific target (a4 or c5), or explicitly run \"make all\"."
