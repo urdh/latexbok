@@ -3,19 +3,20 @@
 \NewDocumentCommand\paper{mm}{\IfStrEq{\papersize}{#1}{#2}{}}
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \PassOptionsToPackage{quiet}{fontspec}
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf]{skrapport}
+\documentclass[10pt]{scrbook}
+\usepackage[parts]{classicthesis}
 %% Packages
 \input{chapters/packages.tex}
 %% Draft fixes to minted, tikz
-\input{chapters/draft.tex}
+%\input{chapters/draft.tex}
 %% FONT SELECTION
-\input{chapters/fonts.tex}
+%\input{chapters/fonts.tex}
 %% Hacks
-\input{chapters/hacks.tex}
+%\input{chapters/hacks.tex}
 %% Convenient definitions
 \input{chapters/definitions.tex}
 %% Redefinitions of style
-\input{chapters/style.tex}
+%\input{chapters/style.tex}
 
 %% Load the bibliography data
 \addbibresource{referenser.bib}
@@ -23,7 +24,7 @@
 %% METADATA
 \title{Att \hologo{TeX}a: en praktisk guide}
 \author{Simon Sigurdhsson}
-\regarding{Nybörjarguide i \hologo{LaTeX}, andra upplagan.}
+%\regarding{Nybörjarguide i \hologo{LaTeX}, andra upplagan.}
 \date{}
 
 %% Actual document

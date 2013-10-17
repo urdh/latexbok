@@ -10,12 +10,12 @@
 \usetikzlibrary{shadows}
 % page size
 \paper{a4}{%
-	\usepackage[a4paper,xetex]{geometry}%
+	\KOMAoptions{a4paper,DIV=calc}%
 	% a4 is not intended for printing, so we disable crop marks
 %	\usepackage[cam,axes,info,b4,center]{crop}%
 }
 \paper{c5}{%
-	\usepackage[c5paper,xetex]{geometry}%
+	\KOMAoptions{c5paper,DIV=calc}%
 	\usepackage[cam,axes,info,b5,center]{crop}%
 }
 % code
