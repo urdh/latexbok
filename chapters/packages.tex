@@ -10,12 +10,12 @@
 \usetikzlibrary{shadows}
 % page size
 \paper{a4}{%
-	\KOMAoptions{a4paper,DIV=calc}%
+	\KOMAoptions{paper=a4,DIV=calc}%
 	% a4 is not intended for printing, so we disable crop marks
 %	\usepackage[cam,axes,info,b4,center]{crop}%
 }
 \paper{c5}{%
-	\KOMAoptions{c5paper,DIV=calc}%
+	\KOMAoptions{paper=c5,DIV=calc}%
 	\usepackage[cam,axes,info,b5,center]{crop}%
 }
 % code
@@ -34,10 +34,13 @@
 }
 \makeatother
 \usepackage{enumitem}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage{booktabs}
 \usepackage[multiple]{fnpct}
 % references
+\usepackage{polyglossia}
+\setmainlanguage{swedish}
+\setotherlanguage{english}
 \usepackage{csquotes}
 \usepackage[style=authoryear,sorting=nyt,sortcites=false,%
 			language=swedish,babel=other,urldate=iso8601,%
