@@ -1,9 +1,9 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-\part{Grundläggande begrepp}\label{sec:1}
-\chapter{\LaTeX-dokument}
+\chapter{Grundläggande begrepp}\label{sec:1}
+\section{Snabbkurs i \LaTeX-kod}
 Introduktionen har förklarat lite kort vad \TeX/\LaTeX{} är och varför du
 bör använda systemet för att typsätta dina rapporter, artiklar och böcker.
 Denna del kommer att inleda din \TeX-bana genom att lite kort förklara hur
@@ -21,7 +21,7 @@ filerna sparas med teckenkodningen \textsc{iso-8559-1}\footnote{Det finns
 och då måste man ha koll på detta eftersom man måste berätta för \LaTeX{}
 hur filen ska läsas in.
 
-\section{Tomrum}
+\subsection{Tomrum}
 Tomrumstecken, det vill säga mellanslag, tabbar och liknande behandlas
 alla som ”tomrum” av \LaTeX{}. Flera sådana tecken i rad tolkas som ett
 enda tomrum, vilket gör att man kan ex. indentera textstycken i sin
@@ -34,7 +34,7 @@ styckesindelning, och flera tomma rader efter varandra tolkas som en enda
 tom rad. Detta gör att \LaTeX{}-filerna blir mycket enkla att både skriva
 och läsa, även om man inte är en särskilt bevandrad \TeX{}niker.
 
-\section{Specialtecken}
+\subsection{Specialtecken}
 Vissa tecken är speciella för \LaTeX{}. Dessa används internt av \LaTeX{} 
 för att representera speciella konstruktioner, och kan inte användas hur som helst i ett \LaTeX-dokument. Gör man det ändå
 slutar det vanligtvis bara med att tecknet inte syns, men det kan
@@ -53,7 +53,7 @@ dessutom lägga till måsvingar efteråt, eftersom dessa tecken normalt används
 modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
 \latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
 
-\section{\LaTeX-kommandon}
+\subsection{\LaTeX-kommandon}
 För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
 kommandon följer några enkla regler:
 \begin{itemize}
@@ -90,7 +90,7 @@ information, till exempel olika flaggor till paket. Dessa brukar då
 separeras med ett kommatecken.
 
 
-\section{Kommentarer}
+\subsection{Kommentarer}
 Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
 ignorera) vissa bitar av dokumentet. Det kan vara för att förklara
 olika kommandon eller definitioner, eller för att ta bort ett stycke man
@@ -99,7 +99,7 @@ på ett sådant (såvida det inte sitter ett \cmd{} före) så ignorerar den
 hela resten av den raden i \TeX{}-filen:
 \latex|Lite text\ldots{} % ...och en kommentar|
 
-\section{Grundläggande struktur}
+\subsection{Grundläggande struktur}
 När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
 kommenterar delar av dina filer är det dags att förklara lite närmre hur
 en typisk \LaTeX{}-fil ser ut. Kompilatorn förväntar sig en viss struktur;
@@ -130,14 +130,14 @@ man egentligen gör här är att skapa en omgivning med namnet
 dokumentets innehåll. Omgivningar förklaras utförligt på \cpageref{sec:omg}.
 
 \phantomsection
-\chapter{Dokumentets layout}\label{sec:1:layout}
+\section{Dokumentets layout}\label{sec:1:layout}
 \LaTeX{} är inte helt oflexibelt, och man kan med hjälp av olika kommandon
 i inledningen till dokumentet ändra både utseendet och beteendet hos
 detsamma. Utseendet ändrar man med så kallade dokumentklasser (varje
 dokument måste specificera exakt en sådan), medan extra funktionalitet
 läggs till i form av så kallade paket.
 
-\section{Dokumentklasser}
+\subsection{Dokumentklasser}
 Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
 är vilken typ av dokument författaren vill skapa. Detta specificeras med
 hjälp av kommandot \cmd{documentclass}:
@@ -223,7 +223,7 @@ ingen lång rapport, kanske till och med en inlämningsuppgift, och du
 bestämmer dig därför för att använda \pack{article}-klassen:
 \latex|\documentclass[12pt,a4paper]{article}|
 
-\section{Paket}
+\subsection{Paket}
 När du skriver ett dokument kommer du troligtvis att märka att vissa saker
 är svåra eller ointuitiva (kanske rent av omöjliga\footnote{Tekniskt sett
 är de inte omöjliga, eftersom \TeX{} är Turingkomplett. Nästan alla paket
@@ -266,7 +266,7 @@ Några paket finns alltid och är mycket viktiga eftersom de berättar för
 \end{description}
 
 \phantomsection
-\chapter{Från \TeX{} till \PDF}
+\section{Från \TeX{} till \PDF}
 För att skapa ett typsatt \PDF-dokument utifrån en \LaTeX-fil måste man
 köra den genom den så kallade kompilatorn. \LaTeX{} kommer inte med något
 fint GUI med behändiga knappar att trycka på\footnote{Även om det finns
@@ -285,7 +285,7 @@ be om ännu en körning. Använder man vissa externa verktyg som \BibTeX{}
 måste man även köra detta program; arbetsflödet blir då 
 \LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\BibTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX.
 
-\section{Kompilatorn: \pdfLaTeX}
+\subsection{Kompilatorn: \pdfLaTeX}
 Det finns ett antal olika kompilatorer att tillgå (den vanligaste heter
 bara \cli{latex} och genererar \DVI-filer), men den som är att föredra är
 \pdfLaTeX{}. Fördelen med denna kompilator är att den har utökat stöd för
@@ -321,7 +321,7 @@ dokument, kan du tänka dig?)
 	\label{ex:initio}
 \end{kod}
 
-\section{Automatisera med \cli{latexmk}}
+\subsection{Automatisera med \cli{latexmk}}
 Det kan vara tröttsamt att konstant kompilera sina filer och hålla koll på
 hur många gånger man ska köra \LaTeX{} och andra verktyg. Lyckligtvis 
 finns det sätt att automatisera processen, och ett av det enklaste är
@@ -335,7 +335,7 @@ kompilera om hela dokumentet när dessa ändras.
 Att köra \cli{latexmk} är lika lätt som att köra \cli{pdflatex}:
 \mint{sh}|latexmk -pdf filnamn.tex|
 
-\chapter{Filer du kanske stöter på}
+\section{Filer du kanske stöter på}
 När man arbetar med \LaTeX{} finner man ganska snabbt att det dyker upp en
 stor mängd olika filer (därför bör man också ha varje dokument i en egen
 mapp) med mer eller mindre uppenbara filändelser. Vissa behövs för att

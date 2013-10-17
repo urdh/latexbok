@@ -1,8 +1,8 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-\section{Matematik med \hologo{LaTeX} och \texorpdfstring{\AmS}{AMS}}\label{sec:3}
+\chapter{Matematik med \hologo{LaTeX} och \texorpdfstring{\AmS}{AMS}}\label{sec:3}
 \LaTeX{} är ett mycket bra system för typsättning, och ett av de områden
 \LaTeX{} är starkast inom är typsättning av matematik. För att utöka och
 förenkla de grundläggande mekanismer \LaTeX{} har för typsättning av 
@@ -27,14 +27,14 @@ använda paketen \pack{amsmath} och \pack{amssymb}, som bör följa med din
 \usepackage{amssymb}
 \end{latexcode}
 
-\subsection{Att visa ekvationer}
+\section{Att visa ekvationer}
 Ekvationer är mångfacetterade och man kan vilja inkludera ekvationer av
 olika anledningar och på olika sätt. I \LaTeX{} kan figurer infogas
 \emph{inline} (det vill säga i löpande text) eller i omgivningar (vilket
 frilägger ekvationen, något som är lämpligt för längre ekvationer eller
 ekvationer av större vikt).
 
-\subsubsection{Ekvationer i löpande text}
+\subsection{Ekvationer i löpande text}
 Ekvationer i löpande text kan infogas på två olika sätt; dels genom att
 placera matematiken mellan dollartecken (\verb|$\sin(x)$|) och dels genom
 att använda de \LaTeX-specifika alternativen till dollartecken, \cmd{(}
@@ -49,7 +49,7 @@ text vid de tillfällen då det kommer se ”fel” ut, eftersom ett block då
 är mer logiskt, textmässigt. Matematik i löpande text är istället oftast
 konstanter, enstaka värden och kanske någon olikhet.
 
-\subsubsection{Ekvationer som ekvationer}\label{sec:3:ekvsomekv}
+\subsection{Ekvationer som ekvationer}\label{sec:3:ekvsomekv}
 Längre och viktigare ekvationer bör inte typsättas i löpande text —
 man bör istället använda en av de många omgivningar (\AmS)\LaTeX{} ger
 tillgång till. Den allra enklaste omgivningen (som fungerar i de flesta
@@ -70,7 +70,7 @@ mellanrumet mellan dessa och den omgivande texten varierade beroende på
 	man alltså behandla den precis som en
 ekvation i löpande text. Skillnaden är främst typografisk.
 
-\subsubsection{Referera till ekvationer}
+\subsection{Referera till ekvationer}
 Likt figurer och tabeller finns det även ett behov av att kunna referera
 till sina ekvationer. På samma sätt som för figurer markerar man den
 ekvation man vill referera till med hjälp av \cmd{label}, men istället
@@ -80,7 +80,7 @@ lite annorlunda, och bör inte heller föregås av någon text som indikerar
 att det är en referens.
 
 \phantomsection
-\subsection{En snabbkurs i \LaTeX-matematik}
+\section{En snabbkurs i \LaTeX-matematik}
 Nu när du vet hur man skapar förutsättningarna för att typsätta matematik
 är det dags att gå in på detaljerna. Det finns många konventioner
 och betänkligheter när det gäller typsättning av matematik, så det är
@@ -129,7 +129,7 @@ vanlig texttypsättning, som främst har att göra med mellanrum:
 	bör skrivas in med kommandot \cmd{text}.
 \end{itemize}
 
-\subsubsection{Enkla konstruktioner} % \frac, \choose, etc.
+\subsection{Enkla konstruktioner} % \frac, \choose, etc.
 Det finns ett antal enkla konstruktioner inom matematiken som var man
 (och kvinna) bör känna till och kunna typsätta. Dessa är konstruktioner
 som bråk, binomialkoefficienter, rötter och så vidare. Dessa visas
@@ -180,7 +180,7 @@ kommentarer ovan och under matematiken. Detta kan göras med kommandona
 	\label{ex:overbrace}
 \end{kod}
 
-\subsubsection{Funktioner etc.} % sin, lim, sup, etc.
+\subsection{Funktioner etc.} % sin, lim, sup, etc.
 Många välanvända eller kända funktioner och operatorer (trigonometriska 
 funktioner och liknande) har
 långa namn som bör skrivas i upprätt text (det vill säga med
@@ -196,7 +196,7 @@ oftast satsa på att den finns. Finns den inte så kan man skapa den med
 hjälp av kommandot \cmd{DeclareMathOperator}:
 \latex|\DeclareMathOperator{gcd} % Största gemensamma nämnare|
 
-\subsubsection{Symboler}\label{sec:3:symbs}
+\subsection{Symboler}\label{sec:3:symbs}
 Matematiken innehåller ett stort antal symboler, däribland det grekiska
 alfabetet, talmängder, oändligheter, tomma mängden och så vidare (och då
 inkluderar vi inte de pilar, operatorer, hattar och olikhetstecken som
@@ -281,7 +281,7 @@ deras motsvarande kommandon.
 \end{table}
 
 \vspace{-.5em}
-\subsubsubsection*{Operatorer}\label{sec:3:operatorer}%
+\subsubsection*{Operatorer}\label{sec:3:operatorer}%
 Förutom symbolerna som nyss diskuterades finns även en
 mycket stor mängd operatorer inom matematiken. Även dessa kan man leta
 fram med hjälp av Detexify, men de flesta (åtminstone de som används
@@ -292,7 +292,7 @@ exempel
 \LaTeX{} återfinns i \crefrange{tab:pilar}{tab:operatorer}. 
 
 \vspace{-.5em}
-\subsubsubsection*{Hattar, prickar, primtecken och liknande}
+\subsubsection*{Hattar, prickar, primtecken och liknande}
 Ibland vill man även modifiera variablers betydelse, kanske för att
 beteckna en transformerad variabel, en vektor 
 eller en derivata med avseende på tid.
@@ -396,7 +396,7 @@ för att göra så att \cmd{vec} istället visar variabeln fetstilt:
 %% (end)
 
 \vspace{-.5em}
-\subsubsection{Paranteser och dylikt}
+\subsection{Paranteser och dylikt}
 Paranteser är mycket viktiga inom matematiken för att visa olika typer av
 grupper, och besitter dessutom egenskapen att de måste skalas med sin
 omgivning för att de ska se bra ut. I \LaTeX{} skapar man sådana
@@ -466,7 +466,7 @@ x^2\right)\d{x} = \left[\dfrac{x^4}{12} +
 	\label{ex:paranteser}
 \end{kod}
 
-\subsubsubsection*{Vertikala streck}
+\subsubsection*{Vertikala streck}
 Vertikala streck är mycket lika paranteser; man kan även använda dessa
 genom att skriva exempelvis \cmd{left|} och \cmd{right|} (eller
 \cmd{left\textbackslash vert} och \cmd{right\textbackslash vert}), om man
@@ -497,7 +497,7 @@ integrering (\(\int_1^e\! x^{-1}\d{x}=\ln x\vert_{x=1}^e=1 \)) i vilket
 fall man istället skriver \cmd{vert}:
 \latex|\ldots=\ln x\vert_{x=1}^e=\ldots|
 
-\subsubsection{Summor och integration}
+\subsection{Summor och integration}
 Integraler och summor (och upprepade produkter och så vidare) är mycket
 enkla att uttrycka med \LaTeX{}. Med hjälp av kommandot \cmd{sum} (eller
 \cmd{int}, se även \cref{tab:sums}) kan man infoga en summa (eller
@@ -536,7 +536,7 @@ Kommandot \cmd{limits} kan även användas med andra operatorer, till
 exempel \(\max\), \(\inf\) och \(\lim\):
 \latex|\lim\limits_{x\to\infty} \frac{1}{x}| 
 
-\subsubsubsection*{Snyggare (och mer korrekta) integraler}
+\subsubsection*{Snyggare (och mer korrekta) integraler}
 Integraler, så som \LaTeX{} typsätter dem från början, blir ofta felaktiga
 i det avseendet att avståndet mellan integraltecken och innehåll
 blir stort, samtidigt som avståndet till differentieringsoperatorn
@@ -604,7 +604,7 @@ man ska visa integrering över exempelvis ett område \(A\), då detta bara
 	\label{ex:integral}
 \end{kod}
 
-\subsection{Ekvationsomgivningar}\label{sec:3:environments}
+\section{Ekvationsomgivningar}\label{sec:3:environments}
 Redan på \cpageref{sec:3:ekvsomekv} diskuterades två av de 
 ekvationsomgivningar
 \AmS\LaTeX{} erbjuder (\env{equation} och \env{equation*}), och dessa två
@@ -620,7 +620,7 @@ omgivningarna; en fullständig lista finns i användarguiden till
 \pack{amsmath} \parencite{AMS99} och en ordentlig genomgång ges av
 \textcite{Voss10}.
 
-\subsubsection{Långa ekvationer med \env{multline}}
+\subsection{Långa ekvationer med \env{multline}}
 Ibland (oroväckande ofta, till och med) stöter man på ekvationer som är
 alldeles för långa för att få plats på en rad. Hamnar man i en sådan
 situation är det \env{multline} (notera avsaknandet av ett \texttt{i})
@@ -685,7 +685,7 @@ ekvationsnummer; vill man ha ett per rad ska man istället använda
 \end{figure}
 \clearpage
 
-\subsubsection{Relaterade ekvationer: \env{align} och \env{gather}}
+\subsection{Relaterade ekvationer: \env{align} och \env{gather}}
 Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
 i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
 \env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
@@ -770,7 +770,7 @@ sätt.
 \end{figure}
 
 \clearpage
-\subsubsubsection*{Underekvationer}
+\subsubsection*{Underekvationer}
 Förutom \env{align} och \env{gather} visar även \cref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
 omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
 och får bara innehålla en (och endast en) matematikomgivning, inget annat:
@@ -784,7 +784,7 @@ y_3 &= x^2 - 1
 \end{subequations}
 \end{latexcode}
 
-\subsubsection{Matriser}
+\subsection{Matriser}
 Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
 av de omgivningar som visas i \cref{fig:matriser}. Dessa måste
 användas i matematikläge, det vill säga i en annan omgivning som används
@@ -808,7 +808,7 @@ i kolumnerna i en matris:\label{sec:3:matrispktr}
 \end{equation*}
 \end{latexcode}
 
-\subsubsection{Olika fall med \env{cases}}
+\subsection{Olika fall med \env{cases}}
 Omgivningen \env{cases} är mycket användbar då man definierar styckvisa
 funktioner eller vissa talföljder, till exempel den som behandlas i 
 Collatz problem.
@@ -843,7 +843,7 @@ x, & x \geq 0; \\
 \end{kod}
 
 
-\subsection{Mellanrum} % \quad et al
+\section{Mellanrum} % \quad et al
 Mellanrum i matematikläge ignoreras som sagt av \LaTeX, som automatiskt
 sätter in korrekt mellanrum där det behövs. Normalt brukar detta bli
 mycket bra, men ibland (som i fallet med integraler) kan man behöva göra
@@ -905,7 +905,7 @@ typ 0 om de inte har någon text (en operand) till vänster.
 	\end{tabular}
 \end{table}
 
-\subsubsection{Fantomer}
+\subsection{Fantomer}
 Ibland finns det även tillfällen då man vill ha mellanrum som är
 \emph{exakt} lika stora som en viss bit typsatt text. Man använder då
 fantomer. De viktigaste fantomerna är \cmd{hphantom} (ingen höjd, bredd
@@ -962,7 +962,7 @@ p(x) = \left(\frac{1}{2}x^3 +
 	\label{fig:phantom}
 \end{figure}
 
-\subsection{Punkter}
+\section{Punkter}
 Även om \LaTeX{} definierar kommandon som \cmd{ldots} och \cmd{cdots} för
 att typsätta punkter så bör man undvika dessa eftersom de inte berättar
 vilket sammanhang punkterna används i. Det finns många olika konventioner,
@@ -997,7 +997,7 @@ och för att enkelt kunna byta mellan dessa är det bättre att använda
 	\end{tabular}
 \end{table}
 
-\subsection{Enheter med \pack{siunitx}}\label{sec:3:siunitx}
+\section{Enheter med \pack{siunitx}}\label{sec:3:siunitx}
 Fysiker och matematiker (främst fysiker) behöver ofta typsätta enheter i
 anslutning till sin text, något som inte alltid är helt enkelt eftersom
 en del konventioner existerar gällande avstånd och så vidare. Paketet

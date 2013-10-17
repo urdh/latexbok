@@ -1,6 +1,6 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
 %% NOTE: run in nonstopmode to ignore XeTeX bug
 %% See http://tex.stackexchange.com/questions/122923/xelatex-problem-missing-chars-in-texlive-2013-textfont-xxx-is-undefined-erro
@@ -9,7 +9,7 @@
 \nonstopmode
 %% END NOTE
 %
-\section{Referenser med \pack{biblatex}}\label{sec:5}
+\chapter{Referenser med \pack{biblatex}}\label{sec:5}
 En stor fördel med \LaTeX{} är att man kan automatisera hanteringen av
 till exempel referenser. Paketet \pack{biblatex}, tillsammans med
 programmet \cli{biber}\footnote{Tekniskt sett kan även
@@ -31,7 +31,7 @@ några av dess viktigaste inställningar och stilar, och till sist
 sammanfattas användningen av de två tillsammans, speciellt hur man
 refererar och genererar referenslistan.
 
-\subsection{Referensdatabaser}
+\section{Referensdatabaser}
 Databaserna \pack{biblatex} använder är, som nämndes tidigare, helt
 vanliga textfiler. Dessa innehåller ett antal block, ett per referens
 i databasen, som i sin tur innehåller fält med information om varje
@@ -113,14 +113,14 @@ format \BibTeX{} och \pack{biblatex} använder, och dessa kan sedan
 läggas till direkt i den egna referensdatabasen.
 Detta är mycket praktiskt i större projekt så som kandidatuppsatser.
 
-\subsection{Stilar och inställningar i \pack{biblatex}}
+\section{Stilar och inställningar i \pack{biblatex}}
 Nästa steg efter att ha skapat en referensdatabas är att inkludera
 paketet \pack{biblatex}. Paketet är gjort för att kunna vara relativt
 generellt, och har därför en uppsjö olika inställningar och
 bibliografistilar att välja mellan, alla dokumenterade i manualen
 \parencite{Lehman13}.
 
-\subsubsection{Vanliga inställningar}
+\subsection{Vanliga inställningar}
 Eftersom \pack{biblatex} är så omfattande är det omöjligt att gå igenom
 alla de inställningar som behandlas av manualen \parencite{Lehman13}. Det
 finns dock ett par inställningar som är viktiga att hålla koll på eftersom
@@ -148,7 +148,7 @@ Det finns även stilspecifika inställningar (\texttt{isbn}, \texttt{url},
 \texttt{doi} och \texttt{eprint}) som kontrollerar om några av de
 tillhörande fälten ska döljas från referenslistan.
 
-\subsubsection{Bibliografistilar}
+\subsection{Bibliografistilar}
 Bibliografistilarna kontrollerar dels utseendet på själva referenslistan
 men även hur de kommandon som används för att referera (\cmd{textcite},
 \cmd{parencite} och \cmd{footcite}) beter sig.
@@ -173,7 +173,7 @@ stora publikationer har \pack{biblatex}-stilar — ett urval av sådana
 stilar visas i \Cref{fig:bibstyle:2}, men den intresserade hänvisas till
 CTAN-katalogen\footnote{\url{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex-contrib}}, där fler stilar listas.
 
-\subsubsubsection[]{Chicago-stilen med \pack{biblatex-chicago}}
+\subsubsection{Chicago-stilen med \pack{biblatex-chicago}}
 Chicago-stilen \parencite{Chicago10} är väldigt omfattande (även om man
 bortser från de delar som inte relaterar till referenslistor), och av
 tekniska skäl finns den därför inte implementerad som en enkel
@@ -261,7 +261,7 @@ räcker det oftast med att istället ladda \pack{biblatex-chicago}:
 \end{figure}
 
 \clearpage
-\subsection{Referenskommandon och referenslistor}
+\section{Referenskommandon och referenslistor}
 När man så skapat sin referensdatabas (som givetvis uppdateras i takt med
 att rapporten blir större), valt bibliografistil och laddat
 \pack{biblatex} är det dags att börja referera till artiklar.

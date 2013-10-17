@@ -1,46 +1,27 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
 \pagestyle{empty}
 \pagenumbering{Alph}
 
-\begin{titlepage} % INTERNAL TITLE PAGE (fold)
-	\license{%Senast uppdaterad \moddate{}.\\
-	Licenserad under Creative Commons By-Sa 3.0.\\
-	\url{http://creativecommons.org/licenses/by-sa/3.0/}}
-	\maketitle[hide={date,email}]
-	\begin{abstract}
-		En inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
-		till studenter på Chalmers Tekniska Högskola, specifikt programmen
-		Teknisk Matematik och Teknisk Fysik.
-		Inspiration har tagits från bland annat
-		\textcites{Schultz05}{Voss10},
-		men främst från \textcite{Oetiker11}.
-	\end{abstract}
-\end{titlepage} % (end)
-\cleardoublepage
+%\begin{titlepage} % INTERNAL TITLE PAGE (fold)
+\publishers{
+	%Senast uppdaterad \moddate{}.\\
+	Licenserad under Creative Commons By-Sa 3.0.\\[1ex]
+	\large\url{http://creativecommons.org/licenses/by-sa/3.0/}
+}
+\uppertitleback{
+	Den här boken är
+	en inkomplett guide till att skriva och typsätta \LaTeX-dokument riktad
+	till studenter på Chalmers Tekniska Högskola, specifikt programmen
+	Teknisk Matematik och Teknisk Fysik.
+	Inspiration har tagits från bland annat \textcites{Schultz05}{Voss10},
+	men främst från \textcite{Oetiker11}.
+}
 
-\begin{center} % DEDICATION, THANKS AND PUBLISHER
-	\large\vspace*{36pt}
-%		{\csname__skrapport_title_style:\endcsname\huge Tillägnad}\\[1ex]
-%		någon?
-%		\bigskip\bigskip\bigskip
-
-	{\csname__skrapport_title_style:\endcsname\Large Tack till}\\[1ex]
-	\emph{Phaddergrupp 255},\\
-	som korrekturläst och\\
-	hjälpt till att förbättra boken\\[1ex]
-	{\csname__skrapport_title_style:\endcsname\Large och}\\[1ex]
-	\emph{Christian von Schultz},\\
-	\emph{Tobias Oetiker} och \emph{Herbert Voß}\\
-	för inspirerande texter på samma tema.
-	\vfill 
-	
-	% Colophon
-	\small
-	\begin{minipage}{\textwidth}
-	\footnotesize
+% DEDICATION, THANKS AND PUBLISHER
+\lowertitleback{
 	Boken är typsatt med \hologo{XeLaTeX}, och designen är baserad på 
 	dokumentklassen \textsf{skrapport}, som finns tillgänglig på
 	CTAN. Typsnitten som används är \emph{EB Garamond}, designat av
@@ -48,13 +29,28 @@
 	Inc. Dessa typsnitt finns tillgängliga på
 	\url{http://www.georgduffner.at/ebgaramond/} och
 	\url{http://sourceforge.net/projects/sourcesans.adobe/},
-	respektive. \\
+	respektive.
+	\\[\bigskipamount]
 	Källkoden till boken finns tillgänglig på
 	\url{http://github.com/urdh/latexbok/}.
-	\end{minipage}
-
-	\medskip
+	\\[\bigskipamount]
 	%Tryck: XXX\\
 	Göteborg, 2013
-\end{center}
+}
+\dedication{
+%		{\csname__skrapport_title_style:\endcsname\huge Tillägnad}\\[1ex]
+%		någon?
+%		\bigskip\bigskip\bigskip
+	{\usekomafont{disposition}\Large Tack till}\\[1.5ex]
+	\emph{Phaddergrupp 255},\\
+	som korrekturläst och\\
+	hjälpt till att förbättra boken\\[1.5ex]
+	{\usekomafont{disposition}\Large och}\\[1.5ex]
+	\emph{Christian von Schultz},\\
+	\emph{Tobias Oetiker} och \emph{Herbert Voß}\\
+	för inspirerande texter på samma tema.
+}
+
+\maketitle
+
 \end{document}

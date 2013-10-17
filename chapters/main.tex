@@ -4,20 +4,18 @@
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \PassOptionsToPackage{quiet}{fontspec}
 \documentclass[10pt]{scrbook}
-\usepackage[parts]{classicthesis}
 %% Packages
 \input{chapters/packages.tex}
 %% Draft fixes to minted, tikz
 \input{chapters/draft.tex}
 %% FONT SELECTION
-%\input{chapters/fonts.tex}
-\let\tipafont\textsf
+\input{chapters/fonts.tex}
 %% Hacks
-%\input{chapters/hacks.tex}
+\input{chapters/hacks.tex}
 %% Convenient definitions
 \input{chapters/definitions.tex}
 %% Redefinitions of style
-%\input{chapters/style.tex}
+\input{chapters/style.tex}
 
 %% Load the bibliography data
 \addbibresource{referenser.bib}
@@ -25,7 +23,7 @@
 %% METADATA
 \title{Att \hologo{TeX}a: en praktisk guide}
 \author{Simon Sigurdhsson}
-%\regarding{Nybörjarguide i \hologo{LaTeX}, andra upplagan.}
+\subject{Nybörjarguide i \hologo{LaTeX}, andra upplagan.}
 \date{}
 
 %% Actual document
@@ -42,16 +40,21 @@
 	%% INLEDNING
 	\subfile{chapters/0/0.tex}
 	%% GRUNDLÄGGANDE BEGREPP
+	\part{Grunderna}
 	\subfile{chapters/1/1.tex}
 	%% TYPSÄTTNING MED LATEX
 	\subfile{chapters/2/2.tex}
 	%% MATEMATIK MED LATEX OCH AMS
+	\part{Matematiken}
 	\subfile{chapters/3/3.tex}
 	%% GRAFIK MED LATEX
+	\part{Figurerna}
 	\subfile{chapters/4/4.tex}
 	%% REFERENSER MED BIBTEX
+	\part{Referenserna}
 	\subfile{chapters/5/5.tex}
 	%% VIDARE LÄSNING
+	\part{Fortsättningen}
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
 	\let\oldurl=\url
@@ -62,6 +65,7 @@
 	\let\url\oldurl
 	%% EN ENKEL MALL
 	\appendix
+	\part{Appendix}
 	\subfile{chapters/meta/appendix.tex}
 	\backmatter
 \end{document}
