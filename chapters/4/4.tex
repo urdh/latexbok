@@ -90,7 +90,22 @@ berättar var bilden finns:
 \latex|\includegraphics[width=\textwidth]{filnamn}|
 Fler sådana nycklar listas av \textcite[8\psq]{Carlisle05}.
 
-% Fördelar/nackdelar!!!
+Fördelen med denna metod är att den i princip \emph{alltid} fungerar,
+eftersom nästan alla verktyg kan exportera \PNG- eller \PDF-filer (och
+i de fall detta inte går kan man oftast konvertera till \PNG eller i
+västa fall använda skärmdumpar). Metoden är såklart också bra för att
+inkludera fotografier i \JPEG-format, till exempel bilder på
+experimentuppställningar.
+
+Nackdelen är att dessa format inte är vektorbaserade. Detta innebär att
+om du behöver skala om bilden i efterhand, så kan grafiken bli suddig
+eller otydlig. För till exempel linjediagram och liknande kan dessutom
+texten på axlarna bli för liten eller otydlig, vilket såklart gör att
+informationen inte kommuniceras lika effektivt. 
+
+Sammanfattat kan man säga att \pack{graphicx} är utmärkt för att
+inkludera \JPEG-bilder (dvs. fotografier), medans diagram, grafer och
+liknande oftast blir bättre med \PGFTikZ eller \pack{pgfplots}.
 
 \subsubsection{Rita med \PGFTikZ}
 En metod som ofta ger bättre resultat, men som är lite mer avancerad att
@@ -118,7 +133,16 @@ finns dessutom det lite enklare paketet \pack{pgfplots}, som använder
 \silentfootnote{\url{http://www.texample.net}\label{fn:4:texample}}%
 \silentfootnote{\url{http://tex.stackexchange.com/questions/tagged/tikz-pgf}\label{fn:4:tex-se-tikz-pgf}}
 
-% Fördelar/nackdelar!!!
+Fördelen med \PGFTikZ ligger främst i det faktum att grafiken är
+vektorbaserad, och därför ser lika bra ut oavsett hur mycket den skalas
+om, samt att text i figuren behandlas av \LaTeX\ och därför kommer visas
+i rätt typsnitt och vettiga storlekar vilket ökar läsbarheten i figuren.
+
+Den främsta nackdelen är att \PGFTikZ-figurer ofta tar en stund att
+kompilera, och att det inte alltid är möjligt att exportera figurer
+i det formatet. \PGFTikZ-figurer är alltså att föredra för diagram,
+grafer och liknande, men går inte att använda för till exempel
+fotografier.
 
 \subsubsubsection*{Plotta med \pack{pgfplots}}
 Paketet \pack{pgfplots} kan sägas vara ett tillägg till \PGFTikZ som gör
@@ -126,9 +150,15 @@ det lättare att rita vanliga diagram (stapel- eller linjediagram, till
 exempel) med hjälp av \PGFTikZ. Bland annat kan \pack{pgfplots} läsa in
 data från externa filer och automatiskt omvandla den till figurer.
 
-Paketet har en omfattande manual \parencite{Feuersanger10}, som detaljerat
-beskriver hur man använder paketet för att rita olika sorters diagram.
-% MORE! fördel/nackdel mot PGF/TikZ-export
+Paketet har en omfattande manual \parencite{Feuersanger13a}, som
+detaljerat beskriver hur man använder paketet för att rita olika
+sorters diagram.
+Bland annat använder \texttt{matlab2tikz} — som diskuteras på
+\cpageref{matlab2tikz} — funktionalitet från \pack{pgfplots}.
+Det finns även ett påbyggnadspaket, \pack{pgfplotstable}
+\parencite{Feuersanger13b}, som kan läsa
+CSV-liknande filer och använda \pack{pgfplots} för att rita diagram
+(och tabeller med \pack{booktabs}) utifrån dessa data.
 
 \subsubsection{Varför hamnar figuren fel?}
 % Hör inte detta hemma med floats i kapitel 2?
@@ -156,12 +186,6 @@ inkludera instruktioner till alla i detta kapitel. Jag har därför valt
 att beskriva hur man enklast exporterar figurer som \PGFTikZ-kod eller
 i \PDF-format (i nödfall \PNG) från fyra vanliga programvaror:
 \Rlogo, \MATLAB, \Mathematica och \gnuplot.
-
-\subsubsection{Exportera i \pack{pgfplots}-format}
-\subsubsubsection*{Från \Rlogo med ???}
-\subsubsubsection*{Från \MATLAB med ???}
-\subsubsubsection*{Från \Mathematica med ???}
-\subsubsubsection*{Från \gnuplot med ???}
 
 \subsubsection{Exportera i \PGFTikZ-format}
 \PGFTikZ brukar inte vara ett format som normalt stöds av kommersiella
@@ -205,6 +229,9 @@ dev.off()
 \end{kod}
 
 \subsubsubsection*{Från \MATLAB med \texttt{matlab2tikz}}
+\label{matlab2tikz}
+
+
 \subsubsubsection{Från \Mathematica med ???}
 \subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
 
