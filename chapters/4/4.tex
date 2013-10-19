@@ -231,8 +231,32 @@ dev.off()
 \subsubsubsection*{Från \MATLAB med \texttt{matlab2tikz}}
 \label{matlab2tikz}
 
+% OBS FINSLIPA FIGUREN LITE
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+		\input{\latexbokFiguredir/4/matlab2tikz.tex}
+	\end{minipage}
+	\\[1ex]
+	\begin{minipage}{\textwidth}
+		\begin{matlabcode}
+% skapa lite exempeldata
+[x, y] = meshgrid(-2:0.2:2,-2:0.2:2);
+R = (1./((x+y).^2+(y-x).^2+1).^(1/2));
+% plotta figuren
+ribbon(R);
+xlabel('x'); ylabel('y'); zlabel('z');
+% spara figuren i tikz-format
+matlab2tikz('figur.tex', 'width', '\textwidth', 'height', '.75\textwidth');
+		\end{matlabcode}
+	\end{minipage}
+	\caption{\MATLAB-koden nederst genererar den \PGFTikZ-bild som
+	syns överst.}
+	\label{ex:tikzdevice}
+\end{kod}
 
-\subsubsubsection{Från \Mathematica med ???}
+\subsubsubsection*{Från \Mathematica med ???}
 \subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
 
 \subsubsection{Exportera i \PDF eller \PNG-fomat}
