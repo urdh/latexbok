@@ -154,7 +154,7 @@ Paketet har en omfattande manual \parencite{Feuersanger13a}, som
 detaljerat beskriver hur man använder paketet för att rita olika
 sorters diagram.
 Bland annat använder \texttt{matlab2tikz} — som diskuteras på
-\cpageref{matlab2tikz} — funktionalitet från \pack{pgfplots}.
+\cpageref{sec:matlab2tikz} — funktionalitet från \pack{pgfplots}.
 Det finns även ett påbyggnadspaket, \pack{pgfplotstable}
 \parencite{Feuersanger13b}, som kan läsa
 CSV-liknande filer och använda \pack{pgfplots} för att rita diagram
@@ -229,16 +229,27 @@ dev.off()
 \end{kod}
 
 \subsubsubsection*{Från \MATLAB med \texttt{matlab2tikz}}
-\label{matlab2tikz}
+\label{sec:matlab2tikz}
+Då \MATLAB, i likhet med \Rlogo, inte har något inbyggt verktyg för att
+exportera figurer i \PGFTikZ-format får man även i det fallet förlita sig
+på öppen programvara från tredje part. I fallet \MATLAB finns det utmärkta
+\texttt{matlab2tikz}\footnote{\url{https://github.com/nschloe/matlab2tikz}},
+som implementerats som en enkel funktion som anropas direkt efter det
+att man skapat en figur — användningen framgår tydligt av \cref{ex:matlab2tikz}.
 
-% OBS FINSLIPA FIGUREN LITE
+Eftersom \texttt{matlab2tikz} är skriven i \MATLAB-kod räcker det i
+teorin med att kopiera dess \texttt{.m}-filer till katalogen
+\MATLAB-skripten man skriver ligger i, men det kan vara fördelaktigt att
+placera filerna i en av de kataloger \MATLAB alltid läser in
+\parencite{MATLAB13:path}.
+
 \begin{kod}[tbp]
 	\centering
 	\begin{minipage}{\textwidth}
 		\centering
 		\input{\latexbokFiguredir/4/matlab2tikz.tex}
 	\end{minipage}
-	\\[1ex]
+	\\[2ex]
 	\begin{minipage}{\textwidth}
 		\begin{matlabcode}
 % skapa lite exempeldata
@@ -246,14 +257,14 @@ dev.off()
 R = (1./((x+y).^2+(y-x).^2+1).^(1/2));
 % plotta figuren
 ribbon(R);
-xlabel('x'); ylabel('y'); zlabel('z');
+xlabel('$x$'); ylabel('$y$'); zlabel('$z$');
 % spara figuren i tikz-format
-matlab2tikz('figur.tex', 'width', '\textwidth', 'height', '.75\textwidth');
+matlab2tikz('figur.tex', 'width', '.8\textwidth', 'height', '.6\textwidth');
 		\end{matlabcode}
 	\end{minipage}
 	\caption{\MATLAB-koden nederst genererar den \PGFTikZ-bild som
 	syns överst.}
-	\label{ex:tikzdevice}
+	\label{ex:matlab2tikz}
 \end{kod}
 
 \subsubsubsection*{Från \Mathematica med ???}
