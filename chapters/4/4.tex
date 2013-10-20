@@ -54,9 +54,6 @@ En mer utförlig referens över alla kommandon i \texttt{ggplot2} finns
 på internet\footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig
 genomgång ges av \textcite{Hadley09}.
 
-\subsubsubsection*{Bättre \MATLAB-figurer}
-% ???
-
 \subsection{Inkludera grafik}
 Att kunna inkludera grafik av olika slag i sitt dokument kan verka så
 vitalt och grundläggande att det rimligtvis inte bör finnas många olika
@@ -185,7 +182,9 @@ Det finns många (matematiska) programvaror, och det är orimligt att
 inkludera instruktioner till alla i detta kapitel. Jag har därför valt
 att beskriva hur man enklast exporterar figurer som \PGFTikZ-kod eller
 i \PDF-format (i nödfall \PNG) från fyra vanliga programvaror:
-\Rlogo, \MATLAB, \Mathematica och \gnuplot.
+\Rlogo, \MATLAB, \Mathematica\footnote{Tyvärr finns det i dagsläget inget
+bra sätt att exportera \PGFTikZ-figurer från \Mathematica, varför just
+detta tema utelämnats.} och \gnuplot.
 
 \subsubsection{Exportera i \PGFTikZ-format}
 \PGFTikZ brukar inte vara ett format som normalt stöds av kommersiella
@@ -259,7 +258,7 @@ R = (1./((x+y).^2+(y-x).^2+1).^(1/2));
 ribbon(R);
 xlabel('$x$'); ylabel('$y$'); zlabel('$z$');
 % spara figuren i tikz-format
-matlab2tikz('figur.tex', 'width', '.8\textwidth', 'height', '.6\textwidth');
+matlab2tikz('figur.tex', 'width', '8cm', 'height', '6cm');
 		\end{matlabcode}
 	\end{minipage}
 	\caption{\MATLAB-koden nederst genererar den \PGFTikZ-bild som
@@ -267,7 +266,7 @@ matlab2tikz('figur.tex', 'width', '.8\textwidth', 'height', '.6\textwidth');
 	\label{ex:matlab2tikz}
 \end{kod}
 
-\subsubsubsection*{Från \Mathematica med ???}
+%\subsubsubsection*{Från \Mathematica med ???}
 \subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
 
 \subsubsection{Exportera i \PDF eller \PNG-fomat}
@@ -308,9 +307,68 @@ dev.off()
 \end{kod}
 
 \subsubsubsection*{Från \MATLAB till \PNG}
-% Att tänka på: http://tex.stackexchange.com/questions/5559/how-to-avoid-large-margins-around-matlab-plot-in-pdf
+I \MATLAB finns ett par olika sätt att exportera figurer, men det
+enklaste sättet att spara figurer programmatiskt är med hjälp av 
+funktionen \texttt{print} \parencite{MATLAB13:print}. Funktionen kan,
+trots sitt namn, spara figurer till ett antal olika format (tyvärr inga
+vektorbaserade), där det som oftast fungerar bäst är \PNG.
+\Cref{ex:matlab:png} visar hur detta kan se ut i praktiken.
+
+I sitt grundutförande lägger \MATLAB till ganska stora marginaler till
+sina figurer. Det är praktiskt när de visas på skärmen, eftersom det ger
+lite luft mellan innehållet och fönstrets kant, men det är mest till
+besvär när man ska inkludera figuren i \LaTeX. Lyckligtvis är detta
+problemet lätt att lösa \parencite{Robertson10} och man kan till exempel
+använda funktionen \texttt{figuresize.m}\footnote{\url{https://github.com/wspr/matlabpkg/blob/master/figuresize.m}}, som är fritt tillgänglig under BSD-licensen.
+
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+		\includegraphics{\latexbokFiguredir/4/matlab.png}
+	\end{minipage}
+	\\[2ex]
+	\begin{minipage}{\textwidth}
+		\begin{matlabcode}
+% skapa lite exempeldata
+[x, y] = meshgrid(-2:0.2:2,-2:0.2:2);
+R = (1./((x+y).^2+(y-x).^2+1).^(1/2));
+% plotta figuren
+ribbon(R);
+xlabel('x'); ylabel('y'); zlabel('z');
+% skala om och spara figuren i PNG-format
+figuresize(8, 6, 'centimeters');
+print('-dpng', 'figur.png');
+		\end{matlabcode}
+	\end{minipage}
+	\caption{\MATLAB-koden nederst genererar den \PNG-bild som
+	syns överst.}
+	\label{ex:matlab:png}
+\end{kod}
+
 \subsubsubsection*{Från \Mathematica till \PDF}
-% http://mathematica.stackexchange.com/a/750/1519
+
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+		\includegraphics[width=.9\textwidth]{\latexbokFiguredir/4/mathematica.pdf}
+	\end{minipage}
+	\\[2ex]
+	\begin{minipage}{\textwidth}
+		\begin{matlabcode}
+(* Plotta lite exempeldata *)
+TradingChart[{"GOOG", {"Jan 1, 2012", 
+   "Dec 31, 2012"}}, {"Performance"}]
+(* Spara figuren *)
+Export["figur.pdf", %]
+		\end{matlabcode}
+	\end{minipage}
+	\caption{\Mathematica-koden nederst genererar den \PDF-bild som
+	syns överst.}
+	\label{ex:mathematica:pdf}
+\end{kod}
+
 \subsubsubsection*{Från \gnuplot till \PDF}
 
 \label{sec:4:end}
