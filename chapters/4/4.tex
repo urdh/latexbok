@@ -267,10 +267,34 @@ matlab2tikz('figur.tex', 'width', '8cm', 'height', '6cm');
 \end{kod}
 
 %\subsubsubsection*{Från \Mathematica med ???}
+
 \subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
+NOTE: \latex|\usepackage{gnuplot-lua-tikz}|. But how?
+
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+%		\input{\latexbokFiguredir/4/gnuplot-tikz.tex}
+	\end{minipage}
+	\\[2ex]
+	\begin{minipage}{\textwidth}
+		\begin{matlabcode}
+# Ställ in formatet
+set terminal tikz size 8cm,6cm
+set output 'figur.tex'
+# Plotta en exempelfigur
+set samples 200
+plot [-20:20] besj0(x)*0.12e1 with impulses
+		\end{matlabcode}
+	\end{minipage}
+	\caption{\gnuplot-koden nederst genererar den \PGFTikZ-bild som
+	syns överst.}
+	\label{ex:gnuplot:tikz}
+\end{kod}
 
 \subsubsection{Exportera i \PDF eller \PNG-fomat}
-% Förklara; PDF>PNG eftersom vektorgrafik
+% Förklara; PDF>PNG eftersom vektorgrafik (oftast, ibland JPEG-in-PDF)
 
 \subsubsubsection*{Från \Rlogo till \PDF}
 \Rlogo har ett antal inbyggda så kallade enheter \eng{device} som kan
@@ -385,6 +409,29 @@ Export["figur.pdf", %, ImageSize->226]
 \end{kod}
 
 \subsubsubsection*{Från \gnuplot till \PDF}
+Kräver att \gnuplot kompileras med \PDF-stöd!
+
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+		\includegraphics{\latexbokFiguredir/4/gnuplot-pdf.pdf}
+	\end{minipage}
+	\\[2ex]
+	\begin{minipage}{\textwidth}
+		\begin{matlabcode}
+# Ställ in formatet
+set terminal pdf size 8cm,6cm
+set output 'figur.pdf'
+# Plotta en exempelfigur
+set samples 200
+plot [-20:20] besj0(x)*0.12e1 with impulses
+		\end{matlabcode}
+	\end{minipage}
+	\caption{\gnuplot-koden nederst genererar den \PDF-bild som
+	syns överst.}
+	\label{ex:gnuplot:pdf}
+\end{kod}
 
 \label{sec:4:end}
 \end{document}
