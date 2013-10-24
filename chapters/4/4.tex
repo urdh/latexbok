@@ -347,12 +347,27 @@ print('-dpng', 'figur.png');
 \end{kod}
 
 \subsubsubsection*{Från \Mathematica till \PDF}
+Det enklaste sättet att \emph{programmatiskt} exportera sina figurer
+från \Mathematica är med hjälp av funktionen \texttt{Export}
+\parencite{Wolfram13a}. \Cref{ex:mathematica:pdf} visar hur man på ett
+enkelt sätt kan exportera den senaste figuren, men man kan såklart
+ersätta \texttt{\%} (markören som indikerar senaste utdatan) med
+en mer precis notation
+\parencite[se dokumentationen för \texttt{Out}][]{Wolfram13b}
+eller med själva \texttt{Plot}-kommandot.
+
+\texttt{Export}-funktionen skapar som standard bilder som är fyra
+tum breda; detta kan ändras genom att specificera \texttt{ImageSize}
+som \cref{ex:mathematica:pdf} visar. Argumentet till \texttt{ImageSize}
+har enheten skrivarpunkter \eng{printer's points}, där en centimeter
+är cirka 28 skrivarpunkter\footnote{Det exakta förhållandet är att en
+tum (\SI{2.54}{\centi\metre}) motsvarar 72 skrivarpunkter}.
 
 \begin{kod}[tbp]
 	\centering
 	\begin{minipage}{\textwidth}
 		\centering
-		\includegraphics[width=.9\textwidth]{\latexbokFiguredir/4/mathematica.pdf}
+		\includegraphics{\latexbokFiguredir/4/mathematica.pdf}
 	\end{minipage}
 	\\[2ex]
 	\begin{minipage}{\textwidth}
@@ -361,7 +376,7 @@ print('-dpng', 'figur.png');
 TradingChart[{"GOOG", {"Jan 1, 2012", 
    "Dec 31, 2012"}}, {"Performance"}]
 (* Spara figuren *)
-Export["figur.pdf", %]
+Export["figur.pdf", %, ImageSize->226]
 		\end{matlabcode}
 	\end{minipage}
 	\caption{\Mathematica-koden nederst genererar den \PDF-bild som
