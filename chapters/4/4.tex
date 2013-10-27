@@ -127,10 +127,10 @@ som gör det lättare att rita flödesscheman, \pack{pgfgantt}
 \parencite{Scharrer11} som ritar timing-diagram.
 
 Utöver de exempel som finns i manualen går det även att hitta mycket
-material på internet\footnote{Bland annat så finns galleriet
-\TeX{}ample.net\footref{fn:4:texample}, som innehåller 
-många exempel på \PGFTikZ-kod, och taggen \emph{tikz-pgf} på
-\TeX.SE\footref{fn:4:tex-se-tikz-pgf}, 
+material på internet\footnote{Bland annat finns galleriet
+\TeX{}ample.net\footref{fn:4:texample} som innehåller 
+många exempel på \PGFTikZ-kod, och taggen \emph{\mbox{tikz-pgf}} på
+\TeX.SE\footref{fn:4:tex-se-tikz-pgf}
 där man kan få svar på många frågor}. Ska man bara rita enkla grafer
 finns dessutom det lite enklare paketet \pack{pgfplots}, som använder
 \PGFTikZ\ internt (och som diskuteras nedan).%
@@ -188,10 +188,8 @@ paketet för att rita figurerna.
 Det finns många (matematiska) programvaror, och det är orimligt att
 inkludera instruktioner till alla i detta kapitel. Jag har därför valt
 att beskriva hur man enklast exporterar figurer som \PGFTikZ-kod eller
-i \PDF-format (i nödfall \PNG) från fyra vanliga programvaror:
-\Rlogo, \MATLAB, \Mathematica\footnote{Tyvärr finns det i dagsläget inget
-bra sätt att exportera \PGFTikZ-figurer från \Mathematica, varför just
-detta tema utelämnats.} och \gnuplot.
+i \PDF-format (i nödfall \PNG) från två vanliga programvaror:
+\Rlogo och \MATLAB.
 
 \subsubsection{Exportera i \PGFTikZ-format}
 \PGFTikZ brukar inte vara ett format som normalt stöds av kommersiella
@@ -273,33 +271,6 @@ matlab2tikz('figur.tex', 'width', '8cm', 'height', '6cm');
 	\label{ex:matlab2tikz}
 \end{kod}
 
-%\subsubsubsection*{Från \Mathematica med ???}
-
-\subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
-NOTE: \latex|\usepackage{gnuplot-lua-tikz}|. But how?
-
-\begin{kod}[tbp]
-	\centering
-	\begin{minipage}{\textwidth}
-		\centering
-%		\input{\latexbokFiguredir/4/gnuplot-tikz.tex}
-	\end{minipage}
-	\\[2ex]
-	\begin{minipage}{\textwidth}
-		\begin{matlabcode}
-# Ställ in formatet
-set terminal tikz size 8cm,6cm
-set output 'figur.tex'
-# Plotta en exempelfigur
-set samples 200
-plot [-20:20] besj0(x)*0.12e1 with impulses
-		\end{matlabcode}
-	\end{minipage}
-	\caption{\gnuplot-koden nederst genererar den \PGFTikZ-bild som
-	syns överst.}
-	\label{ex:gnuplot:tikz}
-\end{kod}
-
 \subsubsection{Exportera i \PDF eller \PNG-fomat}
 % Förklara; PDF>PNG eftersom vektorgrafik (oftast, ibland JPEG-in-PDF)
 
@@ -375,69 +346,6 @@ print('-dpng', 'figur.png');
 	\caption{\MATLAB-koden nederst genererar den \PNG-bild som
 	syns överst.}
 	\label{ex:matlab:png}
-\end{kod}
-
-\subsubsubsection*{Från \Mathematica till \PDF}
-Det enklaste sättet att \emph{programmatiskt} exportera sina figurer
-från \Mathematica är med hjälp av funktionen \texttt{Export}
-\parencite{Wolfram13a}. \Cref{ex:mathematica:pdf} visar hur man på ett
-enkelt sätt kan exportera den senaste figuren, men man kan såklart
-ersätta \texttt{\%} (markören som indikerar senaste utdatan) med
-en mer precis notation
-\parencite[se dokumentationen för \texttt{Out}][]{Wolfram13b}
-eller med själva \texttt{Plot}-kommandot.
-
-\texttt{Export}-funktionen skapar som standard bilder som är fyra
-tum breda; detta kan ändras genom att specificera \texttt{ImageSize}
-som \cref{ex:mathematica:pdf} visar. Argumentet till \texttt{ImageSize}
-har enheten skrivarpunkter \eng{printer's points}, där en centimeter
-är cirka 28 skrivarpunkter\footnote{Det exakta förhållandet är att en
-tum (\SI{2.54}{\centi\metre}) motsvarar 72 skrivarpunkter}.
-
-\begin{kod}[tbp]
-	\centering
-	\begin{minipage}{\textwidth}
-		\centering
-		\includegraphics{\latexbokFiguredir/4/mathematica.pdf}
-	\end{minipage}
-	\\[2ex]
-	\begin{minipage}{\textwidth}
-		\begin{matlabcode}
-(* Plotta lite exempeldata *)
-TradingChart[{"GOOG", {"Jan 1, 2012", 
-   "Dec 31, 2012"}}, {"Performance"}]
-(* Spara figuren *)
-Export["figur.pdf", %, ImageSize->226]
-		\end{matlabcode}
-	\end{minipage}
-	\caption{\Mathematica-koden nederst genererar den \PDF-bild som
-	syns överst.}
-	\label{ex:mathematica:pdf}
-\end{kod}
-
-\subsubsubsection*{Från \gnuplot till \PDF}
-Kräver att \gnuplot kompileras med \PDF-stöd!
-
-\begin{kod}[tbp]
-	\centering
-	\begin{minipage}{\textwidth}
-		\centering
-		\includegraphics{\latexbokFiguredir/4/gnuplot-pdf.pdf}
-	\end{minipage}
-	\\[2ex]
-	\begin{minipage}{\textwidth}
-		\begin{matlabcode}
-# Ställ in formatet
-set terminal pdf size 8cm,6cm
-set output 'figur.pdf'
-# Plotta en exempelfigur
-set samples 200
-plot [-20:20] besj0(x)*0.12e1 with impulses
-		\end{matlabcode}
-	\end{minipage}
-	\caption{\gnuplot-koden nederst genererar den \PDF-bild som
-	syns överst.}
-	\label{ex:gnuplot:pdf}
 \end{kod}
 
 \label{sec:4:end}
