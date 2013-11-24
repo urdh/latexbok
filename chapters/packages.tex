@@ -6,7 +6,7 @@
 % graphics
 %\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{graphicx}
-\usepackage{tikz}
+\usepackage{tikz,pgfplots}
 \usetikzlibrary{shadows}
 % page size
 \paper{a4}{%
@@ -23,6 +23,16 @@
 % improvement packages
 \usepackage{multirow}
 \usepackage[para,perpage,ragged,bottom,stable]{footmisc}
+\makeatletter
+\def\silentfootnote{%
+	\@ifnextchar[\@xfootnote{%
+		\stepcounter\@mpfn%
+		\protected@xdef\@thefnmark{\thempfn}%
+%		\@footnotemark%
+		\@footnotetext%
+	}%
+}
+\makeatother
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage{booktabs}

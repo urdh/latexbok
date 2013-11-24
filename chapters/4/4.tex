@@ -3,28 +3,126 @@
 \documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
 \begin{document}
 \section{Grafik med \LaTeX}\label{sec:4}
+Grafik, i form av figurer och diagram, kan vara ett mycket bra sätt
+att illustrera eller beskriva samband, algoritmer och data. Nedan följer
+ett antal olika tips, inte bara om hur man inkluderar (eller till och 
+med skapar) grafik i \LaTeX, utan även en inledning som diskuterar vad
+\emph{bra} grafik är, och hur man på bästa sätt använder grafik.
+
+Den här delen av boken handla således inte uteslutande om \LaTeX\ och
+dess ekosystem, utan även om datavisualisering. Den som främst är
+intresserad av de \LaTeX-relaterade bitarna kan därför hoppa över
+det inledande stycket (även om det är både kort och informativt) och
+gå direkt på \pack{graphicx} och \PGFTikZ\ på
+\cpageref{sec:includegraphics}.
 
 \subsection{Vad är bra grafik?}
-% Se #26 på bitbucket
-\subsubsection{Almänna tips}
-\subsubsection{Programspecifika tips}
-\subsubsubsection*{Bra \Rlogo-figurer med \texttt{ggplot2}}
+Att skapa bra grafik, grafik som på ett effektivt och tydligt sätt
+kommunicerar den information din data innehåller, är inte så självklart
+som man kan tro. Det finns oerhöt många variabler, från vilken typ av
+grafik du ska välja \parencite{Henry12} till hur du ska sortera din
+data \parencites{Camoes10}[\pno~178]{Tufte01} för att förmedla innehållet
+på absolut bästa sätt. Ibland kan man till och med ifågasätta om grafik
+verkligen behövs, eller om en tabell presenterar datan bättre.
+\Citeauthor{Tufte01}, som skrivit många böcker inom ämnet%
+\footnote{Tuftes trilogi \emph{\citetitle{Tufte01}} \parencite{Tufte01},
+	\emph{\citetitle{Tufte90}} \parencite{Tufte90} och
+	\emph{\citetitle{Tufte97}} \parencite{Tufte97} är väl värd att läsa
+	för den som är intresserad av grafik och hur man presenterar data.},
+sammanfattar bra grafik på ett mycket exakt och kortfattat sätt
+\textcite[\pno~51]{Tufte01}:
+\begin{quotation}
+	Fulländad grafik består av komplicerade idéer kommunicerade med
+	klarhet, precision och effektivitet.
+\end{quotation}
+
+Precisionen bör vara det enklaste att uppnå. 
+Bland annat handlar det om att inte (medvetet eller omedvetet, till
+exempel genom inkorrekta relativa skalor eller 3D-effekter)
+ljuga om sin data \parencite[\ppno~57\psqq]{Tufte01},
+vilket man undviker genom att förse sina figurer med rättvisande,
+relevanta axlar och att inte ta data ur sitt sammanhang
+\parencite[\ppno~75\psq]{Tufte01}, vilket bör vara enkelt att undvika
+genom att inte klippa bort för mycket data.
+Även korrekta och relevanta figurtexter hjälper precisionen.
+
+Klarheten är något mer komplicerad att uppnå. Här handlar det bland annat
+om att undvika överflödig information \eng{chart junk}, men även om att
+använda rätt typ av diagram, bra färgscheman
+\parencite[\ppno~75–77]{Tufte97} och rimliga längdskalor
+\parencite[\ppno~20–23]{Tufte97}. Även proportioner kan spela roll;
+det är till exempel lättare att se föränringar i ett \enquote{långt},
+horisontellt linjediagram än i ett \enquote{högt}, vertikalt dito
+\parencite[\ppno~186\psq]{Tufte01}.
+
+Effektiviteten är svårast att uppnå. Med hög datatäthet
+\parencite[\pno~162]{Tufte01}, det vill säga många datapunkter per
+areaenhet (till en rimligt gräns, så att klarheten inte försummas), är
+ett sätt att uppnå effektivitet. Att dessutom se till att så mycket av figuren som möjlig förmedlar faktisk data, genom att till exempel göra
+figuraxlar mer spartanska eller utelämna rutsystem, kan också öka
+grafikens effektivitet \parencite[\ppno~123\psqq]{Tufte01}. 
+Effektiviteten är förmodligen den del av \enquote{fulländad} grafik
+som är svårast att uppnå i matematisk programvara.
+
+\subsubsection{Allmänna tips}
+Även om datavisualisering är ett stort och inte helt trivialt område, 
+och därmed kanske överkurs för de som inte skriver böcker eller långa
+rapporter, så bör man hålla någon form av miniminivå för att åtminstone
+få fram sitt budskap. Man skulle kunna sammanfatta en sådan lägstanivå
+i ett par enkla punkter:
+\begin{itemize}
+	\item \emph{Se till att axlar i figurerna är korrekta och
+		informativa.} Detta innebär att axlarna bör vara tydligt
+		numrerade, att det framgår om en annolunda skala (till exempel en
+		logaritmisk sådan) används, och att axlarna har beskrivande
+		etiketter (med enheter).
+	\item \emph{Se till att välja lämpliga färgscheman.} Ta till exempel
+		färgblindhet eller kontrast i svartvita utskrifter i beaktande.
+		För enkla linjediagram och dylikt är det ganska enkelt, men i
+		andra fall kan det vara svårt att välja ett färgschema%
+		\footnote{I sådana fall är Colorbrewer, tillgängligt på 
+		\url{http://colorbrewer2.org}, ett mycket bra verktyg.} som på
+		ett bra sätt förmedlar informationen
+		\parencite{Borland07,Moreland09a}.
+	\item \emph{Undvik otydliga eller missvisande diagram.}
+		Tredimensionella linjediagram kan vara oerhört svåra att läsa,
+		och cirkeldiagram lider av liknande problem, till exempel. Om
+		du illustrerar skillnader med hjälp av figurer av olika storlek,
+		kom då ihåg att \emph{arean} är det som läses av, inte höjden.
+	\item \emph{Undvik onödiga extradetaljer.} Mönster, fyllda områden,
+		skuggor, 3D-effekter och liknande tillför sannolikt ingen
+		information, och syftar mest till att förvirra läsaren.
+\end{itemize}
+
+\subsubsection{Programspecifika tips: %
+			   Bra \Rlogo-figurer med \texttt{ggplot2}}
 \label{sec:ggplot2}
+Riktlinjerna och tipsen som introducerats ovan kan vara mer eller mindre
+komplicerade att implementera när man ritar figurer i programvara. Vissa
+program skapar redan bra och informativ grafik utan extra arbete, men
+annan programvara kan kräva mer arbete. Ett program av den senare typen
+är \Rlogo.
+
 Standardgrafiken i \Rlogo är överlag ganska bra när det gäller statistisk
-analys, men bristande på andra områden. På många sätt är det dessutom svårt
-att göra lite mer involverade saker som att ändra färger, sätta ordentliga
-axlar, enheter och så vidare. \Rlogo-paketet \texttt{ggplot2}
-skapades för att åtgärda detta, och skapar snyggare grafer på enklare sätt.
+analys, men bristande på andra områden. På många sätt är det dessutom 
+svårt att göra lite mer involverade saker som att ändra färger, sätta
+ordentliga axlar, enheter och så vidare. \Rlogo-paketet \texttt{ggplot2}
+skapades för att åtgärda detta, och skapar snyggare grafer på enklare
+sätt.
 
-% Fler anledningar:
-% * Makes doing the right thing easy, while keeping harder things possible.
-% * ggplot2 is an intuitive library that is founded on a logical mapping between data and graphical elements, building plots up not by thinking in terms of dots on paper, but in terms of what the data means. Think about your data and what you want to communicate, not the mechanics of drawing.
+Paketet är intuitivt och baserat på logiska kopplingar mellan data och
+grafiska element, vilket gör att man kan bygga grafik genom att tänka
+på datans innebörd och vad man vill kommunicera, istället för själva 
+grafiken. En bra sammanfattning av paketet, som gör sig bäst på
+originalspråket, är \foreignquote{british}{makes doing the right thing
+easy, while keeping harder things possible}.
 
-Att installera och använda \texttt{ggplot2} är enkelt. Efter att ha installerat
-paketet genom att köra kommandot \verb|install.packages("ggplot2")| i \Rlogo
-använder man det genom att inkludera paketet och använda funktionen
-\texttt{ggplot} i kombination med någon av paketets många plot-funktioner.
-Man kan även kombinera olika grafer:
+Att installera och använda \texttt{ggplot2} är enkelt. Efter att ha 
+installerat paketet genom att köra kommandot
+\verb|install.packages("ggplot2")|
+i \Rlogo använder man det genom att inkludera paketet och använda
+funktionen \texttt{ggplot} i kombination med någon av paketets många
+plot-funktioner. Man kan även kombinera olika grafer:
 \begin{rcode}
 require(ggplot2)
 # Exempeldata
@@ -44,19 +142,121 @@ p + geom_bar(position=dodge) +
   + geom_errorbar(limits, position=dodge, width=0.25)
 \end{rcode}
 
-En mer utförlig referens över alla kommandon i \texttt{ggplot2} finns på internet%
-\footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig genomgång ges av
-\textcite{Hadley09}.
-% Att tänka på: ggplot2 
-\subsubsubsection*{Bättre \MATLAB-figurer}
-% ???
+En mer utförlig referens över alla kommandon i \texttt{ggplot2} finns
+på internet\footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig
+genomgång ges av \textcite{Hadley09}.
 
-\subsection{Inkludera grafik}
+\subsection{Inkludera grafik}\label{sec:includegraphics}
+Att kunna inkludera grafik av olika slag i sitt dokument kan verka så
+vitalt och grundläggande att det rimligtvis inte bör finnas många olika
+möjligheter. Så är dock inte fallet. Under den långa tid som \LaTeX{} har
+existerat (och utvecklats) har en rad olika metoder för att inkludera
+grafik, alla med specifika för- och nackdelar, utvecklats för systemet.
+
+I grunden kan man dock dela upp dessa metoder i två undergrupper: de
+paket som inkluderar grafik som skapats av externa program (till
+exempel bilder i \PDF-, \PNG- eller \JPEG-format) och de som använder
+funktionalitet i den underliggande \TeX-kompilatorn för att skapa grafik.
+
+I den första kategorin finns i princip bara ett alternativ
+— \pack{graphicx}. Den senare kategorin har ett antal kandidater,
+men för \pdfLaTeX\ och \XeTeX\ finns det en mycket stark kandidat:
+\PGFTikZ. Båda dessa, samt deras för- och nackdelar, diskuteras nedan.
+
 \subsubsection{Paketet \pack{graphicx}}
-\subsubsection{Rita med \PGFTikZ}
-\subsubsection{Varför hamnar figuren fel?}
+Den metod som oftast används, eftersom den kräver kortare
+kompileringstider och mindre direkt ansträngning, är att inkludera
+redan existerande bilder i \PDF- eller \PNG-format med hjälp av
+paketet \pack{graphicx}. Paketet har ett mycket enkelt gränssnitt, och
+har egentligen bara ett kommando av intresse: \cmd{includegraphics}.
 
-\subsection{Exportera grafik}
+Med hjälp av detta kommando kan man inkludera grafik av format som är
+kompatibla med den \TeX-kompilator som används. I fallet \pdfLaTeX\ är
+dessa format \PNG, \PDF\ och \JPEG. Kommandot tar ett valfritt
+argument, en lista av nycklar, som används för att på olika sätt
+skala om bilden som inkluderas, och ett obligatoriskt argument som
+berättar var bilden finns:
+\latex|\includegraphics[width=\textwidth]{filnamn}|
+Fler sådana nycklar listas av \textcite[8\psq]{Carlisle05}.
+
+Fördelen med denna metod är att den i princip \emph{alltid} fungerar,
+eftersom nästan alla verktyg kan exportera \PNG- eller \PDF-filer (och
+i de fall detta inte går kan man oftast konvertera till \PNG eller i
+västa fall använda skärmdumpar). Metoden är såklart också bra för att
+inkludera fotografier i \JPEG-format, till exempel bilder på
+experimentuppställningar.
+
+Nackdelen är att dessa format inte är vektorbaserade. Detta innebär att
+om du behöver skala om bilden i efterhand, så kan grafiken bli suddig
+eller otydlig. För till exempel linjediagram och liknande kan dessutom
+texten på axlarna bli för liten eller otydlig, vilket såklart gör att
+informationen inte kommuniceras lika effektivt. 
+
+Sammanfattat kan man säga att \pack{graphicx} är utmärkt för att
+inkludera \JPEG-bilder (dvs. fotografier), medans diagram, grafer och
+liknande oftast blir bättre med \PGFTikZ eller \pack{pgfplots}.
+
+\subsubsection{Rita med \PGFTikZ}
+En metod som ofta ger bättre resultat, men som är lite mer avancerad att
+använda (både eftersom den ger längre kompileringstider och eftersom den
+kräver mer arbete av användaren) är att använda \PGFTikZ\ för att rita
+den grafik som behövs.
+
+\PGFTikZ\ är ett (mycket stort) paket som används för att rita
+vektorgrafik direkt i \LaTeX. Paketet har en omfattande manual
+\parencite{Tantau10} som innehåller många väldokumenterade exempel.
+Dessutom ges en bra, kortfattad introduktion av \textcite{Mertz07}.
+Använder man ett program som kan exportera \PGFTikZ-kod finns det oftast
+ingen anledning att inte göra det, och i vissa fall (så som för enkla
+figurer över uppställningar eller mekaniska figurer) kan det vara 
+lättare att skriva \PGFTikZ-kod än att rita figuren i ett externt program.
+CTAN-katalogen innehåller ett stort antal tilläggspaket till \PGFTikZ%
+\footnote{\url{http://www.ctan.org/tex-archive/graphics/pgf/contrib}},
+bland annat \pack{circuitikz} \parencite{Redaelli12} som används
+för att rita kopplingsscheman, \pack{flowchart} \parencite{Robson13}
+som gör det lättare att rita flödesscheman, \pack{pgfgantt}
+\parencite{Skala13} för Ganttscheman och \pack{tikz-timing}
+\parencite{Scharrer11} som ritar timing-diagram.
+
+Utöver de exempel som finns i manualen går det även att hitta mycket
+material på internet\footnote{Bland annat finns galleriet
+\TeX{}ample.net\footref{fn:4:texample} som innehåller 
+många exempel på \PGFTikZ-kod, och taggen \emph{\mbox{tikz-pgf}} på
+\TeX.SE\footref{fn:4:tex-se-tikz-pgf}
+där man kan få svar på många frågor}. Ska man bara rita enkla grafer
+finns dessutom det lite enklare paketet \pack{pgfplots}, som använder
+\PGFTikZ\ internt (och som diskuteras nedan).%
+\silentfootnote{\url{http://www.texample.net}\label{fn:4:texample}}%
+\silentfootnote{\url{http://tex.stackexchange.com/questions/tagged/tikz-pgf}\label{fn:4:tex-se-tikz-pgf}}
+
+Fördelen med \PGFTikZ ligger främst i det faktum att grafiken är
+vektorbaserad, och därför ser lika bra ut oavsett hur mycket den skalas
+om, samt att text i figuren behandlas av \LaTeX\ och därför kommer visas
+i rätt typsnitt och vettiga storlekar vilket ökar läsbarheten i figuren.
+
+Den främsta nackdelen är att \PGFTikZ-figurer ofta tar en stund att
+kompilera, och att det inte alltid är möjligt att exportera figurer
+i det formatet. \PGFTikZ-figurer är alltså att föredra för diagram,
+grafer och liknande, men går inte att använda för till exempel
+fotografier.
+
+\subsubsubsection*{Plotta med \pack{pgfplots}}
+Paketet \pack{pgfplots} kan sägas vara ett tillägg till \PGFTikZ som gör
+det lättare att rita vanliga diagram (stapel- eller linjediagram, till
+exempel) med hjälp av \PGFTikZ. Bland annat kan \pack{pgfplots} läsa in
+data från externa filer och automatiskt omvandla den till figurer.
+
+Paketet har en omfattande manual \parencite{Feuersanger13a}, som
+detaljerat beskriver hur man använder paketet för att rita olika
+sorters diagram.
+Bland annat använder \texttt{matlab2tikz} — som diskuteras på
+\cpageref{sec:matlab2tikz} — funktionalitet från \pack{pgfplots}.
+Det finns även ett påbyggnadspaket, \pack{pgfplotstable}
+\parencite{Feuersanger13b}, som kan läsa
+CSV-liknande filer och använda \pack{pgfplots} för att rita diagram
+(och tabeller med \pack{booktabs}) utifrån dessa data.
+
+\subsection{Exportera grafik eller data}
 När man väl skapat sin grafik i det program man arbetar med och är nöjd
 med denna måste man exportera den till ett format som kan användas med
 \LaTeX. Använder man \pdfLaTeX (vilket man bör) så stöds formaten \JPEG,
@@ -69,13 +269,16 @@ Om möjligheten finns är det bästa dock att exportera sina figurer som
 \PGFTikZ-kod, vilket innebär att \LaTeX{} kommer att rendera dem och att
 man därför har något större frihet när det gäller finjustering av figuren
 i efterhand, och även att axlar och dylikt typsätts på samma sätt som
-dokumentets brödtext vilket ger ett enhetligt intryck.
+dokumentets brödtext vilket ger ett enhetligt intryck. Ett alternativ
+till att exportera hela figurer som \PGFTikZ-kod är att exportera datan
+i ett format som kan läsas av \pack{pgfplots}, och sedan använda det
+paketet för att rita figurerna.
 
 Det finns många (matematiska) programvaror, och det är orimligt att
 inkludera instruktioner till alla i detta kapitel. Jag har därför valt
 att beskriva hur man enklast exporterar figurer som \PGFTikZ-kod eller
-i \PDF-format (i nödfall \PNG) från fyra vanliga programvaror:
-\Rlogo, \MATLAB, \Mathematica och \gnuplot.
+i \PDF-format (i nödfall \PNG) från två vanliga programvaror:
+\Rlogo och \MATLAB.
 
 \subsubsection{Exportera i \PGFTikZ-format}
 \PGFTikZ brukar inte vara ett format som normalt stöds av kommersiella
@@ -119,11 +322,51 @@ dev.off()
 \end{kod}
 
 \subsubsubsection*{Från \MATLAB med \texttt{matlab2tikz}}
-%\subsubsubsection{Från \Mathematica med ???}
-\subsubsubsection*{Från \gnuplot med \TikZ-terminalen}
+\label{sec:matlab2tikz}
+Då \MATLAB, i likhet med \Rlogo, inte har något inbyggt verktyg för att
+exportera figurer i \PGFTikZ-format får man även i det fallet förlita sig
+på öppen programvara från tredje part. I fallet \MATLAB finns det utmärkta
+\texttt{matlab2tikz}\footnote{\url{https://github.com/nschloe/matlab2tikz}},
+som implementerats som en enkel funktion som anropas direkt efter det
+att man skapat en figur — användningen framgår tydligt av \cref{ex:matlab2tikz}.
+
+Eftersom \texttt{matlab2tikz} är skriven i \MATLAB-kod räcker det i
+teorin med att kopiera dess \texttt{.m}-filer till katalogen
+\MATLAB-skripten man skriver ligger i, men det kan vara fördelaktigt att
+placera filerna i en av de kataloger \MATLAB alltid läser in
+\parencite{MATLAB13:path}.
+
+\begin{kod}[tbp]
+	\centering
+	\begin{minipage}{\textwidth}
+		\centering
+		\input{\latexbokFiguredir/4/matlab2tikz.tex}
+	\end{minipage}
+	\\[2ex]
+	\begin{minipage}{\textwidth}
+		\begin{matlabcode}
+% skapa lite exempeldata
+[x, y] = meshgrid(-2:0.2:2,-2:0.2:2);
+R = (1./((x+y).^2+(y-x).^2+1).^(1/2));
+% plotta figuren
+ribbon(R);
+xlabel('$x$'); ylabel('$y$'); zlabel('$z$');
+% spara figuren i tikz-format
+matlab2tikz('figur.tex', 'width', '8cm', 'height', '6cm');
+		\end{matlabcode}
+	\end{minipage}
+	\caption{\MATLAB-koden nederst genererar den \PGFTikZ-bild som
+	syns överst.}
+	\label{ex:matlab2tikz}
+\end{kod}
 
 \subsubsection{Exportera i \PDF eller \PNG-fomat}
-% Förklara; PDF>PNG eftersom vektorgrafik
+I de fall då det inte finns något enkelt sätt att exportera figurer som
+\PGFTikZ-kod, eller i de fall då det är olämpligt (ger orimligt långa
+kompileringstider, till exempel) är \PDF och \PNG relativt bra alternativ.
+Båda dessa format är oftast rasterbaserade, men med \PDF finns i alla 
+fall möjligheten (och den utnyttjas ibland) att figurerna exporteras
+som vektorgrafik.
 
 \subsubsubsection*{Från \Rlogo till \PDF}
 \Rlogo har ett antal inbyggda så kallade enheter \eng{device} som kan
@@ -160,166 +403,44 @@ dev.off()
 \end{kod}
 
 \subsubsubsection*{Från \MATLAB till \PNG}
-% Att tänka på: http://tex.stackexchange.com/questions/5559/how-to-avoid-large-margins-around-matlab-plot-in-pdf
-\subsubsubsection*{Från \Mathematica till \PDF}
-% http://mathematica.stackexchange.com/a/750/1519
-\subsubsubsection*{Från \gnuplot till \PDF}
+I \MATLAB finns ett par olika sätt att exportera figurer, men det
+enklaste sättet att spara figurer programmatiskt är med hjälp av 
+funktionen \texttt{print} \parencite{MATLAB13:print}. Funktionen kan,
+trots sitt namn, spara figurer till ett antal olika format (tyvärr inga
+vektorbaserade), där det som oftast fungerar bäst är \PNG.
+\Cref{ex:matlab:png} visar hur detta kan se ut i praktiken.
 
-\iffalse
-Många dokument kräver att man inkluderar figurer för att presentera
-resultat eller förtydliga resonemang. Dessa typsätts i \LaTeX{} med hjälp
-av flytande objekt, vilket diskuteras i \cref{sec:2}, men i dessa
-flytande objekt måste man även importera eller generera sin grafik.
+I sitt grundutförande lägger \MATLAB till ganska stora marginaler till
+sina figurer. Det är praktiskt när de visas på skärmen, eftersom det ger
+lite luft mellan innehållet och fönstrets kant, men det är mest till
+besvär när man ska inkludera figuren i \LaTeX. Lyckligtvis är detta
+problemet lätt att lösa \parencite{Robertson10} och man kan till exempel
+använda funktionen \texttt{figuresize.m}\footnote{\url{https://github.com/wspr/matlabpkg/blob/master/figuresize.m}}, som är fritt tillgänglig under BSD-licensen.
 
-\LaTeX{} ger genom diverse paket många möjligheter att göra detta. Med den
-klassiska \LaTeX{}-motorn, som genererar \DVI-filer, kunde man importera
-\EPS-filer eller rita direkt med \textsc{PostScript}-kommandon, men
-eftersom man i dagsläget oftast använder (och bör använda) \pdfLaTeX{}
-måste man använda något annorlunda metoder. Denna del förklarar två av
-dessa: \pack{graphicx} och \PGFTikZ.
-
-\subsection{Inkludera grafik med \pack{graphicx}}
-Det enklaste sättet att inkludera grafik är att skapa sina figurer i ett
-externt program (det kan till exempel vara fördelaktigt att exportera sina
-figurer direkt från den programvara man använder) och sedan importera
-dessa till \LaTeX{}-dokumentet. Detta gör man med paketet \pack{graphicx}.
-
-Proceduren är enkel:
-\begin{enumerate}
-	\item Skapa figuren i ett externt program och spara i rätt format
-	
-	\item Inkludera \pack{graphicx}-paketet genom att skriva
-	\cmd{usepackage\{graphicx\}} i inledningen till dokumentet.
-	
-	\item Inkludera grafiken i en \env{figure}-omgivning med hjälp av
-	kommandot \cmd{includegraphics}:
-	\latex|\includegraphics[parametrar]{filnamn}|
-	
-	Parametrarna här kan vara många. Oftast vill man ställa in bredden på
-	sin bild så att den passar sidan, och detta kan man göra genom att
-	specificera parametern \cli{width} och sätta den till
-	\cmd{textwidth}:
-	\latex|\includegraphics[width=\textwidth]{filnamn}|
-	
-	Andra parametrar som kan användas är \cli{height}, \cli{angle}
-	och \cli{trim}\footnote{Man bör då inte heller glömma att sätta
-	\cli{clip=true}.\hfil}. En komplett beskrivning av paketet och de 
-	parametrar som finns att tillgå finns i dokumentationen på
-	CTAN\footnote{\url{http://www.ctan.org/archive/macros/latex/required/graphics/grfguide.pdf}}.
-\end{enumerate}
-
-Säg att man till exempel vill inkludera filen \cli{interpolation.png}
-i sitt dokument för att illustrera konceptet interpolation. Man bestämmer
-sig dock för att figuren bara ska ta upp 25\,\% av textbredden, eftersom
-figuren bli för stor annars. Man använder då parametern \cli{width}
-enligt \cref{fig:graphicx}.% för att specificera detta.
-
-\begin{figure}[tbp]
+\begin{kod}[tbp]
 	\centering
-	\hspace{-0.025\textwidth}
-	\begin{minipage}{0.475\textwidth} % kod
-			%\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single,firstline=10,lastline=17,gobble=2]{latex}{\latexbokFiguredir/4/graphicx.tex}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg},firstline=10,lastline=17,gobble=2]{latex}{\latexbokFiguredir/4/graphicx.tex}}\vfil
-	\end{minipage}
-	\hfil
-	\begin{minipage}{0.475\textwidth} % figur
-		\fbox{\includegraphics[width=\textwidth,clip=true,trim=80 0 80 0]{\latexbokFiguredir/4/graphicx.pdf}}
-	\end{minipage}
-	\caption{Koden till vänster inkluderar filen \cli{interpolation.png} i
-	\LaTeX-dokumentet och ger det resultat som ses till höger.}
-	\label{fig:graphicx}
-\end{figure}
-
-\subsubsection{Rätt format?}
-En nackdel med \pdfLaTeX{} när det gäller \pack{graphicx} är att det inte
-finns särskilt många bildformat som fungerar (dock fler än för gamla
-\LaTeX{}, som bara accepterade \EPS). De format som kan inkluderas
-med \pack{graphicx} när man använder \pdfLaTeX{} är \textsc{PNG},
-\textsc{JPEG} och \PDF, och oftast vill man använda \PDF{} för figurer
-eftersom
-det är det enda vektorbaserade formatet som fungerar, medan man för
-fotografier och dylikt använder \textsc{JPEG}. \textsc{PNG} kan man
-använda då man egentligen bör använda \PDF{} men detta inte är möjligt.
-
-Eftersom många verktyg och programvaror fortfarande sparar filer i
-\EPS-format kan det vara praktiskt att kunna konvertera dessa till ett
-format som fungerar. Detta kan göras med verktyget \cli{epstopdf}, som
-finns tillgängligt på CTAN.
-
-\subsection{Rita med \PGFTikZ}
-Ett lite mer komplicerat sätt att inkludera grafik (men ofta 
-föredelaktigt, eftersom allt innehåll stannar i \TeX-filen) är att använda
-\PGFTikZ, ett paket skrivet för att användas med \pdfLaTeX{} för att rita
-figurer i \LaTeX{}. Med det kan man direkt i sitt \LaTeX-dokument skapa
-enklare figurer som flödesscheman, träd, grafer eller liknande; se exempel
-i \cref{fig:tikz}. Även mer avancerade figurer är möjliga, men att
-förklara hela \PGFTikZ{} tar allt för lång tid för denna introduktion. Den
-intresserade läsaren hänvisas istället till \textcite{Mertz07} som har
-en bra introduktion till ämnet, och \PGFTikZ-manualen \parencite{Tantau10} som
-utförligt beskriver hur paketet fungerar.
-
-\begin{figure}[p]
-	\centering
-	\begin{minipage}{0.95\textwidth} % kod
-		\vfil
-		\begin{latexcode}
-\newcounter{d}\setcounter{d}{0}
-\def\mcolor{SpringGreen}
-\begin{tikzpicture}
-\path[coordinate] (0,0)
-     coordinate(A) ++( 60:6cm)
-     coordinate(B) ++(-60:6cm) coordinate(C);
-\draw[fill=Black!\thed!\mcolor]
-     (A) -- (B) -- (C) -- cycle;
-\foreach \x in {1,...,15}{%
-    \pgfmathsetcounter{d}{\thed+10}
-    \setcounter{d}{\thed}
-    \path[coordinate] coordinate(X) at (A){};
-    \path[coordinate] (A)
-         -- (B) coordinate[pos=.15](A)
-         -- (C) coordinate[pos=.15](B)
-         -- (X) coordinate[pos=.15](C);
-    \draw[fill=Black!\thed!\mcolor]
-         (A)--(B)--(C)--cycle;
-}
-\end{tikzpicture}
-		\end{latexcode}
-		\vfil
-	\end{minipage}
-	\\[1ex]
-	\begin{minipage}{0.95\textwidth} % figur
+	\begin{minipage}{\textwidth}
 		\centering
-		\newcounter{density}\setcounter{density}{0}
-		\begin{minipage}{0.475\textwidth}
-		\fbox{\begin{tikzpicture}
-		    \path[coordinate] (0,0)  coordinate(A)
-		                ++( 60:0.95\textwidth) coordinate(B)
-		                ++(-60:0.95\textwidth) coordinate(C);
-		    \draw[fill=Black!\thedensity!SpringGreen]
-						(A) -- (B) -- (C) -- cycle;
-		    \foreach \x in {1,...,15}{%
-		        \pgfmathsetcounter{density}{\thedensity+10}
-		        \setcounter{density}{\thedensity}
-		        \path[coordinate] coordinate(X) at (A){};
-		        \path[coordinate] (A) -- (B) coordinate[pos=.15](A)
-		                            -- (C) coordinate[pos=.15](B)
-		                            -- (X) coordinate[pos=.15](C);
-		        \draw[fill=Black!\thedensity!SpringGreen]
-						(A)--(B)--(C)--cycle;
-		    }
-		\end{tikzpicture}}
-		\end{minipage}\hfil
-		\begin{minipage}{0.475\textwidth}
-		\caption[Koden ovan tolkas av \PGFTikZ{} och resulterar i den
-		itererade triangeln till vänster]{
-		Koden ovan tolkas av \PGFTikZ{} och resulterar i den
-		itererade triangeln till vänster.
-		Fler exempel finns i
-		\textcite{Mertz07} och \textcite{Tantau10}. Tack till Alain 
-		Matthes för originalkoden\footnote{\url{http://www.texample.net/tikz/examples/rotated-triangle/}}.}
-		\label{fig:tikz}
-		\end{minipage}
+		\includegraphics{\latexbokFiguredir/4/matlab.png}
 	\end{minipage}
-\end{figure}
-\fi
+	\\[2ex]
+	\begin{minipage}{\textwidth}
+		\begin{matlabcode}
+% skapa lite exempeldata
+[x, y] = meshgrid(-2:0.2:2,-2:0.2:2);
+R = (1./((x+y).^2+(y-x).^2+1).^(1/2));
+% plotta figuren
+ribbon(R);
+xlabel('x'); ylabel('y'); zlabel('z');
+% skala om och spara figuren i PNG-format
+figuresize(8, 6, 'centimeters');
+print('-dpng', 'figur.png');
+		\end{matlabcode}
+	\end{minipage}
+	\caption{\MATLAB-koden nederst genererar den \PNG-bild som
+	syns överst.}
+	\label{ex:matlab:png}
+\end{kod}
+
 \label{sec:4:end}
 \end{document}
