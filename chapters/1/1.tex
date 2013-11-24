@@ -43,10 +43,10 @@ potentiellt göra att ditt dokument inte ens kompilerar. Specialtecknen
 \latex|# ^ & _ { } ~ \ % $|
 
 För att använda dem måste man lägga till ett (bakvänt) snedstreck,
-\cmd{}, innan tecknet man vill använda (dock ej innan
-\cmd{} självt, eftersom \LaTeX{} tolkar
+\cmd*{}, innan tecknet man vill använda (dock ej innan
+\cmd*{} självt, eftersom \LaTeX{} tolkar
 \cmd{\textbackslash} som att man vill tvinga fram en
-radbrytning — vill man ha ett \cmd{} använder man istället
+radbrytning — vill man ha ett \cmd*{} använder man istället
 \cmd{textbackslash}).
 När det gäller \verb|^| och \verb|~| måste man
 dessutom lägga till måsvingar efteråt, eftersom dessa tecken normalt används för att
@@ -57,15 +57,15 @@ modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
 För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
 kommandon följer några enkla regler:
 \begin{itemize}
-	\item De börjar med ett bakvänd snedstreck (\cmd{}) och följs av sitt
+	\item De börjar med ett bakvänd snedstreck (\cmd*{}) och följs av sitt
 	namn, som bara får innehålla bokstäver%
-	\footnote{Det finns även ett antal kommandon som består av \cmd{} och
+	\footnote{Det finns även ett antal kommandon som består av \cmd*{} och
 	exakt en icke-bokstav, till exempel \cmd{\&}.}.
 	Kommandon avslutas av ett
 	mellanslag, en siffra eller annan godtycklig ”icke-bokstav”.
 	
-	\item De är skriftlägeskänsliga (\cmd{Kommando} är inte samma sak som
-	\cmd{kommando}).
+	\item De är skriftlägeskänsliga (\cmd*{Kommando} är inte samma sak som
+	\cmd*{kommando}).
 	
 	\item Vissa kommandon har även en ”stjärnvariant”, då en stjärna
 	(\texttt{*}) läggs till på slutet av kommandonamnet.
@@ -95,7 +95,7 @@ Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
 ignorera) vissa bitar av dokumentet. Det kan vara för att förklara
 olika kommandon eller definitioner, eller för att ta bort ett stycke man
 inte är helt säker på. Detta görs med procenttecknet; när \LaTeX{} stöter
-på ett sådant (såvida det inte sitter ett \cmd{} före) så ignorerar den
+på ett sådant (såvida det inte sitter ett \cmd*{} före) så ignorerar den
 hela resten av den raden i \TeX{}-filen:
 \latex|Lite text\ldots{} % ...och en kommentar|
 

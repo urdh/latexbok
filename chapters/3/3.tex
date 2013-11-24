@@ -468,8 +468,8 @@ x^2\right)\d{x} = \left[\dfrac{x^4}{12} +
 
 \subsubsubsection*{Vertikala streck}
 Vertikala streck är mycket lika paranteser; man kan även använda dessa
-genom att skriva exempelvis \cmd{left|} och \cmd{right|} (eller
-\cmd{left\textbackslash vert} och \cmd{right\textbackslash vert}), om man
+genom att skriva exempelvis \cmd*{left|} och \cmd*{right|} (eller
+\cmd*{left\textbackslash vert} och \cmd*{right\textbackslash vert}), om man
 vill. Det
 finns dock även kommandon \cmd{lvert} och \cmd{rvert} som motsvarar dessa
 (och som beter sig något bättre typsättningsmässigt),
@@ -543,7 +543,7 @@ blir stort, samtidigt som avståndet till differentieringsoperatorn
 (som dessutom
 inte typsätts korrekt utan visst krångel) blir för litet. Det första
 problemet (som i viss mån även finns för summor) kan åtgärdas genom att
-lägga in ett negativt mellanrum (\cmd{!}) mellan integraltecken och
+lägga in ett negativt mellanrum (\cmd["!]{!}) mellan integraltecken och
 innehåll:
 \latex|\int_0^1\! x^2 dx|
 
@@ -862,7 +862,7 @@ i \cref{tab:spaces}.
 		\midrule 
 		\cmd{negthickspace} & \(-5\) & \(\abox\negthickspace\abox\)  \\
 		\cmd{negmedspace} & \(-4\) & \(\abox\negmedspace\abox\)  \\
-		\cmd{!}, \cmd{negthinspace} & \(-3\) & \(\abox\!\abox\)  \\ 
+		\cmd["!]{!}, \cmd{negthinspace} & \(-3\) & \(\abox\!\abox\)  \\ 
 		& \(0\) & \(\abox\abox\)  \\
 		\cmd{,}, \cmd{thinspace} & \(3\) & \(\abox\,\abox\)  \\
 		\cmd{:}, \cmd{medspace} & \(4\) & \(\abox\:\abox\)  \\
