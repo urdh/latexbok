@@ -229,33 +229,33 @@ sans-serif-typsnitt istället för det vanliga serif-typsnittet.
 		\toprule 
 		\LaTeX-kommando & Resultat & Kommentar \\
 		\midrule 
-		\cmd{textnormal\{\ldots\}}	&
+		\cmd[textnormal]{textnormal\{\ldots\}}	&
 			\textnormal{Dokumentets standardtypsnitt} &
 			{Det typsnitt som används för ”vanlig” text
 			 i dokumentet.} \\
-		\cmd{emph\{\ldots\}}		&
+		\cmd[emph]{emph\{\ldots\}}		&
 			\emph{Betonad text} &
 			{Ska alltid användas för betoning då kommandot 
 			 automatiskt hanterar nästlade betoningar på ett bra sätt.} \\
-		\cmd{textrm\{\ldots\}}		&
+		\cmd[textrm]{textrm\{\ldots\}}		&
 			\textrm{Serif-typsnitt} &
 			\\
-		\cmd{textsf\{\ldots\}}		&
+		\cmd[textsf]{textsf\{\ldots\}}		&
 			\textsf{Sans serif-typsnitt} &
 			\\
-		\cmd{texttt\{\ldots\}}		&
+		\cmd[texttt]{texttt\{\ldots\}}		&
 			\texttt{Teletype-typsnitt} &
 			{Detta typsnitt har fast bredd och kan användas
 			 för att typsätta till exempel kodstycken.} \\
-		\cmd{textit\{\ldots\}}		&
+		\cmd[textit]{textit\{\ldots\}}		&
 			\textit{Kursiv text} &
 			{Använd \cmd{emph} istället för detta 
 			 kommando för att betona text.} \\
-		\cmd{textbf\{\ldots\}}		&
+		\cmd[textbf]{textbf\{\ldots\}}		&
 			\textbf{Fetstilt text} &
 		 	{Använd \cmd{emph} istället för detta 
 			 kommando för att betona text.} \\
-		\cmd{textsc\{\ldots\}}		&
+		\cmd[textsc]{textsc\{\ldots\}}		&
 			\textsc{Kapitäler} &
 			\\
 		\bottomrule 
@@ -266,7 +266,7 @@ Man bör dock inte använda dessa kommandon direkt, utan istället med hjälp
 av \cmd{newcommand} definiera kommandon som beskriver \emph{vad} som
 typsätts, inte \emph{hur} det ska typsättas. Säg till exempel att du vill
 typsätta namn på \LaTeX-paket med sans-serif-typsnitt. Vi kan då definiera
-ett kommando \cmd{package} som i sin tur tillämpar \cmd{textsf}:
+ett kommando \cmd*{package} som i sin tur tillämpar \cmd{textsf}:
 \latex|\newcommand\package[1]{\textsf{#1}}|
 När detta sedan används i dokumentet ser man direkt att det är ett paket
 som beskrivs; att det sedan typsätts med sans-serif-typsnitt är inte så
