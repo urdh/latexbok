@@ -3,8 +3,18 @@
 \documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
 \begin{document}
 \section{Grafik med \LaTeX}\label{sec:4}
-% Om att man behöver inkludera grafik, att man bör göra det i floats(?),
-% etc.
+Grafik, i form av figurer och diagram, kan vara ett mycket bra sätt
+att illustrera eller beskriva samband, algoritmer och data. Nedan följer
+ett antal olika tips, inte bara om hur man inkluderar (eller till och 
+med skapar) grafik i \LaTeX, utan även en inledning som diskuterar vad
+\emph{bra} grafik är, och hur man på bästa sätt använder grafik.
+
+Den här delen av boken handla således inte uteslutande om \LaTeX\ och
+dess ekosystem, utan även om datavisualisering. Den som främst är
+intresserad av de \LaTeX-relaterade bitarna kan därför hoppa över
+det inledande stycket (även om det är både kort och informativt) och
+gå direkt på \pack{graphicx} och \PGFTikZ\ på
+\cpageref{sec:includegraphics}.
 
 \subsection{Vad är bra grafik?}
 Att skapa bra grafik, grafik som på ett effektivt och tydligt sätt
@@ -55,7 +65,34 @@ Effektiviteten är förmodligen den del av \enquote{fulländad} grafik
 som är svårast att uppnå i matematisk programvara.
 
 \subsubsection{Allmänna tips}
-% ???
+Även om datavisualisering är ett stort och inte helt trivialt område, 
+och därmed kanske överkurs för de som inte skriver böcker eller långa
+rapporter, så bör man hålla någon form av miniminivå för att åtminstone
+få fram sitt budskap. Man skulle kunna sammanfatta en sådan lägstanivå
+i ett par enkla punkter:
+\begin{itemize}
+	\item \emph{Se till att axlar i figurerna är korrekta och
+		informativa.} Detta innebär att axlarna bör vara tydligt
+		numrerade, att det framgår om en annolunda skala (till exempel en
+		logaritmisk sådan) används, och att axlarna har beskrivande
+		etiketter (med enheter).
+	\item \emph{Se till att välja lämpliga färgscheman.} Ta till exempel
+		färgblindhet eller kontrast i svartvita utskrifter i beaktande.
+		För enkla linjediagram och dylikt är det ganska enkelt, men i
+		andra fall kan det vara svårt att välja ett färgschema%
+		\footnote{I sådana fall är Colorbrewer, tillgängligt på 
+		\url{http://colorbrewer2.org}, ett mycket bra verktyg.} som på
+		ett bra sätt förmedlar informationen
+		\parencite{Borland07,Moreland09a}.
+	\item \emph{Undvik otydliga eller missvisande diagram.}
+		Tredimensionella linjediagram kan vara oerhört svåra att läsa,
+		och cirkeldiagram lider av liknande problem, till exempel. Om
+		du illustrerar skillnader med hjälp av figurer av olika storlek,
+		kom då ihåg att \emph{arean} är det som läses av, inte höjden.
+	\item \emph{Undvik onödiga extradetaljer.} Mönster, fyllda områden,
+		skuggor, 3D-effekter och liknande tillför sannolikt ingen
+		information, och syftar mest till att förvirra läsaren.
+\end{itemize}
 
 \subsubsection{Programspecifika tips: %
 			   Bra \Rlogo-figurer med \texttt{ggplot2}}
@@ -109,7 +146,7 @@ En mer utförlig referens över alla kommandon i \texttt{ggplot2} finns
 på internet\footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig
 genomgång ges av \textcite{Hadley09}.
 
-\subsection{Inkludera grafik}
+\subsection{Inkludera grafik}\label{sec:includegraphics}
 Att kunna inkludera grafik av olika slag i sitt dokument kan verka så
 vitalt och grundläggande att det rimligtvis inte bör finnas många olika
 möjligheter. Så är dock inte fallet. Under den långa tid som \LaTeX{} har
@@ -122,7 +159,7 @@ exempel bilder i \PDF-, \PNG- eller \JPEG-format) och de som använder
 funktionalitet i den underliggande \TeX-kompilatorn för att skapa grafik.
 
 I den första kategorin finns i princip bara ett alternativ
---- \pack{graphicx}. Den senare kategorin har ett antal kandidater,
+— \pack{graphicx}. Den senare kategorin har ett antal kandidater,
 men för \pdfLaTeX\ och \XeTeX\ finns det en mycket stark kandidat:
 \PGFTikZ. Båda dessa, samt deras för- och nackdelar, diskuteras nedan.
 
@@ -218,9 +255,6 @@ Det finns även ett påbyggnadspaket, \pack{pgfplotstable}
 \parencite{Feuersanger13b}, som kan läsa
 CSV-liknande filer och använda \pack{pgfplots} för att rita diagram
 (och tabeller med \pack{booktabs}) utifrån dessa data.
-
-\subsubsection{Varför hamnar figuren fel?}
-% Hör inte detta hemma med floats i kapitel 2?
 
 \subsection{Exportera grafik eller data}
 När man väl skapat sin grafik i det program man arbetar med och är nöjd
