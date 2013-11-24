@@ -67,10 +67,11 @@
 	%% VIDARE LÄSNING
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
+	\cleardoublepage
 	\let\oldurl=\url
 	\paper{a4}{\renewcommand\url[1]{\mbox{\small\oldurl{#1}}}}
 	\paper{c5}{\renewcommand\url[1]{\mbox{\footnotesize\texttt{\oldurl{#1}}}}}
-	\cleardoublepage
+	\defbibheading{bibliography}[\bibname]{\nntocsection{#1}}
 	\printbibliography
 	\let\url\oldurl
 	%% INDEX
