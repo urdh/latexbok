@@ -238,6 +238,7 @@ funktionalitet att man alltid bör använda dem. Det handlar om allt från
 tecken- och typsnittskodning till avstavning och interna länkar.
 
 \begin{description}
+	\index{avstavning}
 	\item[\pack{babel}] (ej med \XeTeX)
 	översätter interna strängar (till exempel ”Referenser” och 
 	”Sammanfattning”) till det språk som önskas och gör det möjligt för
@@ -255,11 +256,13 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	bland annat avstavning, och man bör därför istället använda 
 	\texttt{T1}. Detta diskuteras närmre på \cpageref{pack:fontenc}.
 
+	\index{typsnitt!OTF- och TTF@\OTF- och \TTF-}
 	\item[\pack{fontspec}] (endast med \XeTeX och \hologo{LuaTeX})
 	låter användaren välja \textsc{OTF}-typsnitt helt fritt, antingen
 	från typsnitt installerade på datorn eller från \textsc{TTF}- eller
 	\textsc{OTF}-filer.
 	
+	\index{hyperlänk}
 	\item[\pack{hyperref}]
 	gör om innehållsförteckningar, referenser och URIer till riktiga
 	länkar i de fall detta stöds (det vill säga om slutformatet är \PDF).
@@ -268,6 +271,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	och Acrobat Reader).
 	Ett oumbärligt paket som alltid bör inkluderas.
 	
+	\index{teckenkodning}
 	\item[\pack{inputenx}] (ej med \XeTeX och \hologo{LuaTeX})
 	är ett paket som låter användaren berätta för \LaTeX{} vilken
 	teckenkodning indatan sparats med. De vanigaste inställningarna är
@@ -275,6 +279,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	stöds också.
 	Detta paket introducerades lite kort på \cpageref{pack:inputenx}.
 
+	\index{typsnitt!paket}
 	\item[\pack{kpfonts}]
 	inkluderar typsnittsfamiljen \emph{Kepler} som är en gratis familj
 	baserad på Adobe Palatino. Personligen tycker jag att \emph{Kepler}
@@ -282,6 +287,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	innehåller dessutom en enorm mängd typsnitt som täcker allasituationer.
 	Välj antingen detta paket \emph{eller} \pack{lmodern}, inte båda.
 	
+	\index{typsnitt!paket}
 	\item[\pack{lmodern}]
 	inkluderar typsnittet \emph{Latin Modern} för att ersätta
 	\emph{Computer Modern}, standardtypsnittet i \LaTeX. Latin Modern ser
@@ -296,6 +302,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	alternativen \texttt{l2tabu} och \texttt{orthodox}:
 	\latex|\usepackage[l2tabu,orthodox]{nag}|
 
+	\index{avstavning}
 	\item[{\pack{polyglossia}}] (endast med \XeTeX)
 	ersätter \pack{babel} för \XeTeX och har bättre stöd för \UTF.
 \end{description}
@@ -307,26 +314,32 @@ applicera diverse olika paket för att få hjälp med detta. Det gäller
 till exempel tabeller, figurtexter, SI-enheter och matematik.
 
 \begin{description}
+	\index{tabell}
 	\item[\pack{booktabs}]
 	är ett paket som gör det möjligt att skapa mycket snygga tabeller.
 	Paketet diskuteras redan på \cpageref{pack:booktabs}, och är i princip
 	ett måste om man ska inkludera tabeller i sitt \LaTeX-dokument.
 
+	\index{figur}
+	\index{tabell}
 	\item[\pack{caption}]
 	gör det möjligt att ändra stilen på figur- och tabelltexter så att de
 	syns tydligare och inte smälter in i texten.
 
+	\index{citattecken}
 	\item[\pack{csquotes}]
 	gör det lättare att typsätta citat på ett snyggt och korrekt sätt.
 	Bland annat definieras kommandot \cmd{enquote}, som kan användas
 	istället för de (inkorrekta) citattecknen \verb|``| och \verb|''|, 
 	och kommandot \cmd{blockquote} för längre block av citerad text.
 
+	\index{fotnot}
 	\item[\pack{fnpct}]
 	ser till att fotnoter nära skiljetecken typsätts på ett snyggt sätt,
 	och gör det lättare att typsätta flera fotnoter brevid varandra.
 	Introducerades kort på \cpageref{sec:2:footnote}.
 	
+	\index{SI-enhet}
 	\item[{\pack{siunitx}}]
 	gör det enklare att typsätta SI-enheter, decimaltal och vinklar på ett
 	korrekt sätt för icke engelskspråkiga rapporter. Mycket användbart
@@ -376,6 +389,7 @@ matematikpaket.
 	(till exempel \cmd*{d} som presenterades på \cpageref{sec:3:integ:kod})
 	och omdefinierar andra för att förbättra utseendet.
 
+	\index{teckenkodning!UTF@\UTF}
 	\item[{\pack{unicode-math}}]
 		(endast med \XeTeX och \hologo{LuaTeX})
 	kan användas för att ladda \textsc{OTF}-typsnitt för matematik och
@@ -468,12 +482,14 @@ många sådana problem är vanligt förekommande finns det ofta paket som
 löser dem.
 
 \begin{description}
+	\index{förkortning}
 	\item[\pack{acro}]
 	låter dig skapa listor över förkortningar på ett enkelt sätt, men är
 	lite enklare än \pack{glossaries} som egentligen är gjort för hela
 	ordlistor. Till skillnad från \pack{glossaries} kräver \pack{acro}
 	inget externt program. Diskuteras kort på \cpageref{sec:2:acro}.
 
+	\index{korsreferens}
 	\item[\pack{cleveref}]
 	definierar kommandot \cmd{cref} (och många liknande kommandon), ett
 	alternativ till \cmd{ref} som automatiskt skriver ut vilken typ av
@@ -485,6 +501,7 @@ löser dem.
 	\env{enumerate}	så att man även kan specificera en egen etikett, återuppta
 	numreringen från förra listan, och mycket mer.
 	
+	\index{flytande objekt}
 	\item[\pack{float}]
 	definierar ett kommando \cmd{newfloat} som skapar nya sorters flytande
 	objekt (vilka diskuterats på \cpageref{sec:floats}).
@@ -496,12 +513,14 @@ löser dem.
 	anledning. Kan vara värdefullt om man vill skapa dokument för A5-%
 	eller A6-papper (eller andra ovanliga storlekar).
 
+	\index{ordlista}
 	\item[\pack{glossaries}]
 	diskuterades tidigare på \cpageref{sec:2:glossaries}, och låter
 	dig skapa ordlistor och listor över förkortningar på ett enkelt
 	och relativt automatiserat sätt. Paketet är mycket användbart i
 	tekniska dokument där en ordlista är viktig för förståelsen.
 
+	\index{register}
 	\item[\pack{imakeidx}]
 	nämndes på \cpageref{sec:2:imakeidx} och låter dig skapa sakregister
 	på ett automatiserat sätt. Paketet kan vara användbart i större
