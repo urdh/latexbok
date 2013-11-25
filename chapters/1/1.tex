@@ -10,7 +10,7 @@ ett \LaTeX-dokument är uppbyggt, några viktiga begrepp samt hur
 \LaTeX-kompilatorn (i det här fallet \cli{pdflatex}) fungerar.
 
 \subsection{\LaTeX-dokument}
-\index{filtyp!tex@filtyp!\texttt{.tex}}
+\index{filtyp!tex@\texttt{.tex}}
 \index{teckenkodning}
 De dokument \LaTeX{} läser in är enkla textfiler, oftast med filändelsen
 \cli{.tex}. Dessa kan skapas med vilken textredigerare som helst,
@@ -25,7 +25,7 @@ hur filen ska läsas in.
 
 \subsubsection{Tomrum}
 \index{syntax}
-\index{tomrum!i LaTeX-koden@tomrum!i \LaTeX-kod}
+\index{tomrum!i LaTeX-kod@i \LaTeX-kod}
 Tomrumstecken, det vill säga mellanslag, tabbar och liknande behandlas
 alla som ”tomrum” av \LaTeX{}. Flera sådana tecken i rad tolkas som ett
 enda tomrum, vilket gör att man kan ex. indentera textstycken i sin
@@ -293,7 +293,7 @@ Några paket finns alltid och är mycket viktiga eftersom de berättar för
 \phantomsection
 \subsection{Från \TeX{} till \PDF}
 \index{kompilator}
-\index{PDF!kompilera till@\PDF!kompilera till}
+\index{PDF@\PDF!kompilera till}
 För att skapa ett typsatt \PDF-dokument utifrån en \LaTeX-fil måste man
 köra den genom den så kallade kompilatorn. \LaTeX{} kommer inte med något
 fint GUI med behändiga knappar att trycka på\footnote{Även om det finns
@@ -313,7 +313,7 @@ måste man även köra detta program; arbetsflödet blir då
 \LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\BibTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX.
 
 \subsubsection{Kompilatorn: \pdfLaTeX}
-\index{kompilator!pdfLaTeX@kompilator!\pdfLaTeX{}}
+\index{kompilator!pdfLaTeX@\pdfLaTeX{}}
 Det finns ett antal olika kompilatorer att tillgå (den vanligaste heter
 bara \cli{latex} och genererar \DVI-filer), men den som är att föredra är
 \pdfLaTeX{}. Fördelen med denna kompilator är att den har utökat stöd för
@@ -377,7 +377,7 @@ man oftast stöter på i sitt arbete med \LaTeX{}.
 
 \subsubsubsection*{Filer som används av \LaTeX{}}
 \index{filtyp!övriga}
-\index{filtyp!tex@filtyp!\texttt{.tex}}
+\index{filtyp!tex@\texttt{.tex}}
 \begin{description}[font=\ttfamily]
 	\item[.tex] Ett \TeX- eller \LaTeX-dokument. Kompileras med
 	\cli{pdflatex} (eller \cli{latex}, om man vill ha \DVI-filer).
@@ -400,9 +400,9 @@ man oftast stöter på i sitt arbete med \LaTeX{}.
 
 \subsubsubsection*{Filer som genereras av \LaTeX{}}
 \index{filtyp!övriga}
-\index{filtyp!aux@filtyp!\texttt{.aux}}
-\index{filtyp!log@filtyp!\texttt{.log}}
-\index{filtyp!toc@filtyp!\texttt{.toc}}
+\index{filtyp!aux@\texttt{.aux}}
+\index{filtyp!log@\texttt{.log}}
+\index{filtyp!toc@\texttt{.toc}}
 \begin{description}[font=\ttfamily]
 	\item[.pdf] \PDF-dokument \eng{Portable Document File}. Det här är
 	sannolikt den fil \LaTeX{} genererat från din \texttt{.tex}-fil,
