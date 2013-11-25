@@ -24,7 +24,7 @@ och då måste man ha koll på detta eftersom man måste berätta för \LaTeX{}
 hur filen ska läsas in.
 
 \subsubsection{Tomrum}
-\index{syntax}
+\index{syntax!LaTeX@\hologo{(La)TeX}|(}
 \index{tomrum!i LaTeX-kod@i \LaTeX-kod}
 Tomrumstecken, det vill säga mellanslag, tabbar och liknande behandlas
 alla som ”tomrum” av \LaTeX{}. Flera sådana tecken i rad tolkas som ett
@@ -40,7 +40,6 @@ tom rad. Detta gör att \LaTeX{}-filerna blir mycket enkla att både skriva
 och läsa, även om man inte är en särskilt bevandrad \TeX{}niker.
 
 \subsubsection{Specialtecken}
-\index{syntax}
 \index{specialtecken}
 Vissa tecken är speciella för \LaTeX{}. Dessa används internt av \LaTeX{} 
 för att representera speciella konstruktioner, och kan inte användas hur som helst i ett \LaTeX-dokument. Gör man det ändå
@@ -61,7 +60,6 @@ modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
 \latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
 
 \subsubsection{\LaTeX-kommandon}
-\index{syntax}
 \index{kommando}
 För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
 kommandon följer några enkla regler:
@@ -87,7 +85,6 @@ mellanslagskommando (till exempel \texttt{\~{}}) mellan
 kommandot och nästa ord. Detta stoppar \LaTeX{} från att äta upp allt
 tomrum efter kommandot.
 
-\index{syntax}
 \index{parameter}
 Vissa kommandon kräver en obligatorisk och/eller frivillig parameter som
 på ett eller annat sätt bestämmer hur kommandot beter sig. Den generella
@@ -102,7 +99,6 @@ separeras med ett kommatecken.
 
 
 \subsubsection{Kommentarer}
-\index{syntax}
 \index{kommentar}
 Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
 ignorera) vissa bitar av dokumentet. Det kan vara för att förklara
@@ -111,9 +107,11 @@ inte är helt säker på. Detta görs med procenttecknet; när \LaTeX{} stöter
 på ett sådant (såvida det inte sitter ett \cmd*{} före) så ignorerar den
 hela resten av den raden i \TeX{}-filen:
 \latex|Lite text\ldots{} % ...och en kommentar|
+\index{syntax!LaTeX@\hologo{(La)TeX}|)}
 
 \subsubsection{Grundläggande struktur}
 \index{dokumentklass}
+\index{struktur!dokument-}
 När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
 kommenterar delar av dina filer är det dags att förklara lite närmre hur
 en typisk \LaTeX{}-fil ser ut. Kompilatorn förväntar sig en viss struktur;
@@ -161,6 +159,7 @@ Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
 hjälp av kommandot \cmd{documentclass}:
 \latex|\documentclass[inställningar]{klass}|
 
+\index{dokumentklass!standardklass|seealso{inställningar, standardklass}}
 Här berättar \opt{klass} vilken sort dokument som ska skapas, eller vilken
 stil som ska användas. Med de flesta \LaTeX{}-distributioner följer ett 
 antal standardklasser, och av dessa är det fyra man kan tänkas komma i
@@ -211,7 +210,7 @@ konventioner, eller böcker i allmänhet, är ett fåtal:
 \end{description}
 Den intresserade uppmanas att leta upp dokumentationen för dessa på CTAN.
 
-\index{inställning!standardklass}
+\index{inställningar!standardklass}
 Standardklasserna har också ett antal inställningar som kan ges som en
 kommaseparerad lista i den frivilliga parametern till \cmd{documentclass}:
 \begin{description}[font=\ttfamily]
@@ -376,12 +375,13 @@ nedan inte vara fullständig, men förhoppningsvis innehåller den de filer
 man oftast stöter på i sitt arbete med \LaTeX{}.
 
 \subsubsubsection*{Filer som används av \LaTeX{}}
-\index{filtyp!övriga}
-\index{filtyp!tex@\texttt{.tex}}
+\index{filtyp!övriga|(}
 \begin{description}[font=\ttfamily]
+	\index{filtyp!tex@\texttt{.tex}}
 	\item[.tex] Ett \TeX- eller \LaTeX-dokument. Kompileras med
 	\cli{pdflatex} (eller \cli{latex}, om man vill ha \DVI-filer).
 	
+	\index{filtyp!sty@\texttt{.sty}|seealso{paket}}
 	\item[.sty] Ett \LaTeX-paket, som kan inkluderas med \cli{usepackage}.
 	
 	\item[.dtx] Dokumenterad \TeX-kod. Hittar du en sån här fil så är det
@@ -394,24 +394,24 @@ man oftast stöter på i sitt arbete med \LaTeX{}.
 	\texttt{.sty}- eller \texttt{.cls}-fil (detta beror så klart på vad
 	paketet i fråga innehåller).
 	
+	\index{filtyp!cls@\texttt{.cls}|seealso{dokumentklass}}
 	\item[.cls] En dokumentklass. Denna kan väljas med 
 	\cli{documentclass}.
 \end{description}
 
 \subsubsubsection*{Filer som genereras av \LaTeX{}}
-\index{filtyp!övriga}
-\index{filtyp!aux@\texttt{.aux}}
-\index{filtyp!log@\texttt{.log}}
-\index{filtyp!toc@\texttt{.toc}}
 \begin{description}[font=\ttfamily]
+	\index{filtyp!pdf@\texttt{.pdf}|seealso{\PDF}}
 	\item[.pdf] \PDF-dokument \eng{Portable Document File}. Det här är
 	sannolikt den fil \LaTeX{} genererat från din \texttt{.tex}-fil,
 	förutsatt att du inte lagrar andra \PDF-dokument i samma mapp (vilket
 	du inte bör göra).
 	
+	\index{filtyp!log@\texttt{.log}}
 	\item[.log] En detaljerad logg som berättar vad som hände under den
 	senaste körningen av \cli{pdflatex}.
 	
+	\index{filtyp!toc@\texttt{.toc}}
 	\item[.toc] Lagrar alla rubriker, och läses in av \LaTeX{} under nästa
 	körning då den genererar en innehållsförteckning (om en sådan ska 
 	finnas med i dokumentet).
@@ -421,7 +421,9 @@ man oftast stöter på i sitt arbete med \LaTeX{}.
 	\item[.lot] Som \texttt{.toc} och \texttt{.lof}, fast med en lista 
 	över tabeller.
 	
+	\index{filtyp!aux@\texttt{.aux}}
 	\item[.aux] En fil som innehåller information om korsreferenser,
 	etiketter och annat. Läses in vid nästa körning av \cli{pdflatex}.
 \end{description}
 \end{document}
+\index{filtyp!övriga|)}
