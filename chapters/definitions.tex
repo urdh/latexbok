@@ -87,6 +87,13 @@
 		\peek_meaning:NTF\d{\!}{}
 	}
 }
+% Dash
+\DeclareDocumentCommand\dash{}{
+    \cs_if_exist_use:NT\texorpdfstring{{ - }}
+    {\unskip\nobreak\thinspace\textemdash\thinspace\ignorespaces}
+}
+\cs_if_exist_use:NT\DeclareUnicodeCharacter{{2014}{\dash}}
+\ExplSyntaxOff
 % Useful colors
 \definecolor{required}{rgb}{0.384,0.576,0.000}
 \definecolor{optional}{rgb}{0.992,0.843,0.000}
