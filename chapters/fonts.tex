@@ -30,8 +30,8 @@
 %\cs_set_eq:NN\titleformat\scshape
 
 %% Improvements
+\usepackage{\latexbokFontdir/libertinehologopatch/libertinehologopatch}
 \usepackage[supstfm=libertinesups]{superiors}
-\makeatletter
 \DeclareMicrotypeSet{romansans}{
 	encoding = {*},
 	family = {rm*,sf*}
@@ -43,7 +43,6 @@
 \microtypesetup{
 	protrusion = romansans,
 }
-\makeatother
 
 %% UTF and TIPA fonts
 \cs_set_eq:NN\utffont\rmfamily
