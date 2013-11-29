@@ -27,7 +27,7 @@
     \centering
     \fontsize{36pt}{36pt}\selectfont
     \__skrapport_generic_section:nnnon{section}{1}{#1}{
-      \scshape\IfNoValueTF{#2}{#3}{#2}
+      \IfNoValueTF{#2}{#3}{#2}
     }{
       \scshape\newline\nobreak{\huge #3}
     }
