@@ -1,0 +1,57 @@
+% arara: lualatex
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage[a4paper,margin=1cm]{geometry}
+\setlength\parindent{0pt}
+\usepackage{libertinehologopatch}
+
+
+\newcommand\testlogos[1]{%
+  \begingroup
+    #1%
+    \TeX{}
+    \LaTeX{}
+    \LaTeXe{}
+    \LaTeXTeX{}
+    \pdfLaTeX{}
+    \XeTeX{}
+    \XeLaTeX{}
+    \LuaTeX{}
+    \LuaLaTeX
+  \endgroup
+}
+\newcommand\test[1]{%
+  \begingroup
+    #1%
+    \begin{tabular}{ll}
+           & \testlogos{} \\
+    it:    & \testlogos{\itshape}\\
+    sc:    & \testlogos{\scshape}\\
+    it+sc: & \testlogos{\sishape}\\
+    bf:    & \testlogos{\bfseries}\\
+    bf+it: & \testlogos{\bfseries\itshape}\\
+    bf+sc: & \testlogos{\bfseries\scshape}
+    \end{tabular}
+  \endgroup
+}
+
+\usepackage{hyperref}
+
+\begin{document}
+\Large
+
+\section{Unpatched}
+\subsection{Linux Libertine}
+{\restorelogos\test{}}
+
+\subsection{Linux Biolinum}
+{\restorelogos\test{\sffamily}}
+
+\section{Patched}
+\subsection{Linux Libertine}
+\test{}
+
+\subsection{Linux Biolinum}
+\test{\sffamily}
+
+\end{document}
