@@ -15,40 +15,43 @@
 		Weight=0.8
 	},
 }
-%% Main font: Alegreya
-\setmainfont[Scale=1.05,
-		Path=\latexbokFontdir/alegreya/,
-		ItalicFont=Alegreya-Italic.ttf,
-		BoldFont=Alegreya-Bold.ttf,
-		BoldItalicFont=Alegreya-BoldItalic.ttf
-	]{Alegreya-Regular.ttf}
-%% Sans serif font: Open Sans
-\setsansfont[Scale=0.9,
-		Path=\latexbokFontdir/open-sans/,
-		ItalicFont=OpenSans-Italic.ttf,
-		BoldFont=OpenSans-Bold.ttf,
-		BoldItalicFont=OpenSans-BoldItalic.ttf
-	]{OpenSans-Regular.ttf}
-%% Monospace font: Consola mono
+%% Main font: Libertine
+%% Sans serif font: Biolinum
+\usepackage[osf,p,tt=false]{libertine}
+%% Monospace font: Bitstream Vera Sans
 \setmonofont[Scale=0.9,
-		Path=\latexbokFontdir/consola-mono/,
-		BoldFont=ConsolaMono-Bold.ttf,
-	]{ConsolaMono-Regular.ttf}
-%% Title font: Avería Serif
-\newfontfamily\titlefont[Scale=1.05,
-		Path=\latexbokFontdir/averia-serif/,
-		ItalicFont=AveriaSerif-Italic.ttf,
-		BoldFont=AveriaSerif-Bold.ttf,
-		BoldItalicFont=AveriaSerif-BoldItalic.ttf
-	]{AveriaSerif-Regular.ttf}
+		Path=\latexbokFontdir/bitstream-vera/,
+		ItalicFont=VeraMoIt.ttf,
+		BoldItalicFont=VeraMoBI.ttf,
+		BoldFont=VeraMoBd.ttf,
+		Scale=MatchLowercase,
+	]{VeraMono.ttf}
+%% Title font: small-caps
+%\cs_set_eq:NN\titleformat\scshape
+
+%% Improvements
+\usepackage[supstfm=libertinesups]{superiors}
+\makeatletter
+\DeclareMicrotypeSet{romansans}{
+	encoding = {*},
+	family = {rm*,sf*}
+}
+\DeclareMicrotypeSet[tracking]{scshape}{
+	encoding = {*},
+	shape = {sc,scit,si}
+}
+\microtypesetup{
+	protrusion = romansans,
+}
+\makeatother
 
 %% UTF and TIPA fonts
 \cs_set_eq:NN\utffont\rmfamily
 \cs_set_eq:NN\tipafont\sffamily
 
 %% Patch the title style to include the new font
-\cs_generate_variant:Nn\cs_set_protected:Nn{No}
-\cs_set_protected:No\__skrapport_title_style:
-	{\__skrapport_title_style:\exp_not:N\titlefont}
+%\cs_generate_variant:Nn\cs_set_protected:Nn{No}
+%\cs_set_protected:No\__skrapport_title_style:
+%	{\__skrapport_title_style:\exp_not:N\titlefont}
 
 \ExplSyntaxOff
