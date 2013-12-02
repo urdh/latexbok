@@ -10,6 +10,8 @@ Denna del kommer att inleda din \TeX-bana genom att lite kort förklara hur
 ett \LaTeX-dokument är uppbyggt, några viktiga begrepp samt hur
 \LaTeX-kompilatorn (i det här fallet \cli{pdflatex}) fungerar.
 
+\index{filtyp!tex@\texttt{.tex}}
+\index{teckenkodning}
 De dokument \LaTeX{} läser in är enkla textfiler, oftast med filändelsen
 \cli{.tex}. Dessa kan skapas med vilken textredigerare som helst,
 men det rekommenderas att man använder
@@ -22,6 +24,8 @@ och då måste man ha koll på detta eftersom man måste berätta för \LaTeX{}
 hur filen ska läsas in.
 
 \subsection{Tomrum}
+\index{syntax!LaTeX@\hologo{(La)TeX}|(}
+\index{tomrum!i LaTeX-kod@i \LaTeX-kod}
 Tomrumstecken, det vill säga mellanslag, tabbar och liknande behandlas
 alla som ”tomrum” av \LaTeX{}. Flera sådana tecken i rad tolkas som ett
 enda tomrum, vilket gör att man kan ex. indentera textstycken i sin
@@ -29,12 +33,14 @@ enda tomrum, vilket gör att man kan ex. indentera textstycken i sin
 ignoreras generellt sett, och ett enkelt nyradstecken tolkas också som
 tomrum.
 
+\index{tomrum!nyradstecken}
 Två nyradstecken på rad (det vill säga en tom rad mellan två textrader) tolkas som
 styckesindelning, och flera tomma rader efter varandra tolkas som en enda
 tom rad. Detta gör att \LaTeX{}-filerna blir mycket enkla att både skriva
 och läsa, även om man inte är en särskilt bevandrad \TeX{}niker.
 
 \subsection{Specialtecken}
+\index{specialtecken}
 Vissa tecken är speciella för \LaTeX{}. Dessa används internt av \LaTeX{} 
 för att representera speciella konstruktioner, och kan inte användas hur som helst i ett \LaTeX-dokument. Gör man det ändå
 slutar det vanligtvis bara med att tecknet inte syns, men det kan
@@ -43,10 +49,10 @@ potentiellt göra att ditt dokument inte ens kompilerar. Specialtecknen
 \latex|# ^ & _ { } ~ \ % $|
 
 För att använda dem måste man lägga till ett (bakvänt) snedstreck,
-\cmd{}, innan tecknet man vill använda (dock ej innan
-\cmd{} självt, eftersom \LaTeX{} tolkar
+\cmd*{}, innan tecknet man vill använda (dock ej innan
+\cmd*{} självt, eftersom \LaTeX{} tolkar
 \cmd{\textbackslash} som att man vill tvinga fram en
-radbrytning — vill man ha ett \cmd{} använder man istället
+radbrytning — vill man ha ett \cmd*{} använder man istället
 \cmd{textbackslash}).
 När det gäller \verb|^| och \verb|~| måste man
 dessutom lägga till måsvingar efteråt, eftersom dessa tecken normalt används för att
@@ -54,18 +60,19 @@ modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
 \latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
 
 \subsection{\LaTeX-kommandon}
+\index{kommando}
 För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
 kommandon följer några enkla regler:
 \begin{itemize}
-	\item De börjar med ett bakvänd snedstreck (\cmd{}) och följs av sitt
+	\item De börjar med ett bakvänd snedstreck (\cmd*{}) och följs av sitt
 	namn, som bara får innehålla bokstäver%
-	\footnote{Det finns även ett antal kommandon som består av \cmd{} och
+	\footnote{Det finns även ett antal kommandon som består av \cmd*{} och
 	exakt en icke-bokstav, till exempel \cmd{\&}.}.
 	Kommandon avslutas av ett
 	mellanslag, en siffra eller annan godtycklig ”icke-bokstav”.
 	
-	\item De är skriftlägeskänsliga (\cmd{Kommando} är inte samma sak som
-	\cmd{kommando}).
+	\item De är skriftlägeskänsliga (\cmd*{Kommando} är inte samma sak som
+	\cmd*{kommando}).
 	
 	\item Vissa kommandon har även en ”stjärnvariant”, då en stjärna
 	(\texttt{*}) läggs till på slutet av kommandonamnet.
@@ -78,6 +85,7 @@ mellanslagskommando (till exempel \texttt{\~{}}) mellan
 kommandot och nästa ord. Detta stoppar \LaTeX{} från att äta upp allt
 tomrum efter kommandot.
 
+\index{parameter}
 Vissa kommandon kräver en obligatorisk och/eller frivillig parameter som
 på ett eller annat sätt bestämmer hur kommandot beter sig. Den generella
 strukturen hos ett kommando med sådana parametrar är relativt enkel:
@@ -91,15 +99,19 @@ separeras med ett kommatecken.
 
 
 \subsection{Kommentarer}
+\index{kommentar}
 Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
 ignorera) vissa bitar av dokumentet. Det kan vara för att förklara
 olika kommandon eller definitioner, eller för att ta bort ett stycke man
 inte är helt säker på. Detta görs med procenttecknet; när \LaTeX{} stöter
-på ett sådant (såvida det inte sitter ett \cmd{} före) så ignorerar den
+på ett sådant (såvida det inte sitter ett \cmd*{} före) så ignorerar den
 hela resten av den raden i \TeX{}-filen:
 \latex|Lite text\ldots{} % ...och en kommentar|
+\index{syntax!LaTeX@\hologo{(La)TeX}|)}
 
 \subsection{Grundläggande struktur}
+\index{dokumentklass}
+\index{struktur!dokument-}
 När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
 kommenterar delar av dina filer är det dags att förklara lite närmre hur
 en typisk \LaTeX{}-fil ser ut. Kompilatorn förväntar sig en viss struktur;
@@ -108,16 +120,19 @@ till exempel så måste varje dokument inledas med kommandot
 som berättar för \LaTeX{} vilken dokumentstil du vill använda (det finns
 ett antal olika, för till exempel rapporter, böcker eller brev).
 
+\index{paket}
 Därefter bör man köra kommandon som påverkar hela dokumentet, till
 exempel genom att ladda in extra paket eller definiera nya kommandon.
 Paket laddar man in med kommandot \cmd{usepackage}:
 \latex|\usepackage{...}|
 
+\index{parameter}
 Både \cmd{documentclass} och \cmd{usepackage} tar en obligatorisk parameter (namnet på 
 stilen/paketet) och en frivillig parameter som används för att skicka
 inställningar till stilen eller paketet som laddas in — en närmare
 förklaring av båda dessa kommandon kommer senare.
 
+\index{dokumentmiljö}
 När allt förarbete är gjort kan man inleda dokumentet. Först berättar man
 för \LaTeX{} att innehållet börjar med hjälp av kommandot
 \latex|\begin{document}|
@@ -126,7 +141,7 @@ avslutar man dokumentet med det snarlika kommandot
 \latex|\end{document}|
 som säger åt \LaTeX{} att det inte finns något mer som ska typsättas. Vad
 man egentligen gör här är att skapa en omgivning med namnet 
-\texttt{document}, som betecknar att detta är
+\env{document}, som betecknar att detta är
 dokumentets innehåll. Omgivningar förklaras utförligt på \cpageref{sec:omg}.
 
 \phantomsection
@@ -138,11 +153,14 @@ dokument måste specificera exakt en sådan), medan extra funktionalitet
 läggs till i form av så kallade paket.
 
 \subsection{Dokumentklasser}
+\index{dokumentklass}
 Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
 är vilken typ av dokument författaren vill skapa. Detta specificeras med
 hjälp av kommandot \cmd{documentclass}:
 \latex|\documentclass[inställningar]{klass}|
 
+\index{dokumentklass!standardklass}
+\index{inställningar!standardklass}
 Här berättar \opt{klass} vilken sort dokument som ska skapas, eller vilken
 stil som ska användas. Med de flesta \LaTeX{}-distributioner följer ett 
 antal standardklasser, och av dessa är det fyra man kan tänkas komma i
@@ -193,6 +211,7 @@ konventioner, eller böcker i allmänhet, är ett fåtal:
 \end{description}
 Den intresserade uppmanas att leta upp dokumentationen för dessa på CTAN.
 
+\index{inställningar!standardklass}
 Standardklasserna har också ett antal inställningar som kan ges som en
 kommaseparerad lista i den frivilliga parametern till \cmd{documentclass}:
 \begin{description}[font=\ttfamily]
@@ -224,6 +243,8 @@ bestämmer dig därför för att använda \pack{article}-klassen:
 \latex|\documentclass[12pt,a4paper]{article}|
 
 \subsection{Paket}
+\index{paket}
+\index{CTAN}
 När du skriver ett dokument kommer du troligtvis att märka att vissa saker
 är svåra eller ointuitiva (kanske rent av omöjliga\footnote{Tekniskt sett
 är de inte omöjliga, eftersom \TeX{} är Turingkomplett. Nästan alla paket
@@ -233,6 +254,8 @@ det du vill göra. Installerade paket kan inkluderas med kommandot
 \cmd{usepackage}:
 \latex|\usepackage[inställningar]{paketnamn}|
 
+\index{paket!installera}
+\index{paket!dokumentation}
 Notera dock att du måste installera dessa paket innan du kan inkludera dem
 i ditt \LaTeX-dokument. Din \LaTeX-distribution kommer förmodligen med de
 flesta paket förinstallerade, men om du får ett felmeddelande när du
@@ -246,6 +269,7 @@ online-tjänsten \TeX{}doc.net\footnote{Man kan då helt enkelt gå till
 \href{http://texdoc.net}{\nolinkurl{http://texdoc.net/pkg/<paketnamn>}}
 för att visa dokumentationen för ett paket.}.
 
+\index{paket!viktiga}
 Några paket finns alltid och är mycket viktiga eftersom de berättar för
 \LaTeX{} hur in- och utdata (ska) formateras:
 \begin{description}[font=\sffamily]
@@ -255,6 +279,7 @@ Några paket finns alltid och är mycket viktiga eftersom de berättar för
 	\texttt{T1} — oftast vill man ha \texttt{T1}, som är vektorbaserad:
 	\latex|\usepackage[T1]{fontenc}|
 	
+	\index{teckenkodning}
 	\label{pack:inputenx}
 	\item[inputenx] berättar för \LaTeX{} vilken teckenkodning indatan har
 	skrivits i. \LaTeX{} (som
@@ -267,6 +292,8 @@ Några paket finns alltid och är mycket viktiga eftersom de berättar för
 
 \phantomsection
 \section{Från \TeX{} till \PDF}
+\index{kompilator}
+\index{PDF@\PDF!kompilera till}
 För att skapa ett typsatt \PDF-dokument utifrån en \LaTeX-fil måste man
 köra den genom den så kallade kompilatorn. \LaTeX{} kommer inte med något
 fint GUI med behändiga knappar att trycka på\footnote{Även om det finns
@@ -286,6 +313,7 @@ måste man även köra detta program; arbetsflödet blir då
 \LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\BibTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX.
 
 \subsection{Kompilatorn: \pdfLaTeX}
+\index{kompilator!pdfLaTeX@\pdfLaTeX{}}
 Det finns ett antal olika kompilatorer att tillgå (den vanligaste heter
 bara \cli{latex} och genererar \DVI-filer), men den som är att föredra är
 \pdfLaTeX{}. Fördelen med denna kompilator är att den har utökat stöd för
@@ -322,6 +350,7 @@ dokument, kan du tänka dig?)
 \end{kod}
 
 \subsection{Automatisera med \cli{latexmk}}
+\index{latexmk@\cli{latexmk}}
 Det kan vara tröttsamt att konstant kompilera sina filer och hålla koll på
 hur många gånger man ska köra \LaTeX{} och andra verktyg. Lyckligtvis 
 finns det sätt att automatisera processen, och ett av det enklaste är
@@ -347,10 +376,13 @@ nedan inte vara fullständig, men förhoppningsvis innehåller den de filer
 man oftast stöter på i sitt arbete med \LaTeX{}.
 
 \subsection*{Filer som används av \LaTeX{}}
+\index{filtyp!övriga|(}
 \begin{description}[font=\ttfamily]
+	\index{filtyp!tex@\texttt{.tex}}
 	\item[.tex] Ett \TeX- eller \LaTeX-dokument. Kompileras med
 	\cli{pdflatex} (eller \cli{latex}, om man vill ha \DVI-filer).
 	
+	\index{filtyp!sty@\texttt{.sty}|see{paket}}
 	\item[.sty] Ett \LaTeX-paket, som kan inkluderas med \cli{usepackage}.
 	
 	\item[.dtx] Dokumenterad \TeX-kod. Hittar du en sån här fil så är det
@@ -363,20 +395,24 @@ man oftast stöter på i sitt arbete med \LaTeX{}.
 	\texttt{.sty}- eller \texttt{.cls}-fil (detta beror så klart på vad
 	paketet i fråga innehåller).
 	
+	\index{filtyp!cls@\texttt{.cls}|see{dokumentklass}}
 	\item[.cls] En dokumentklass. Denna kan väljas med 
 	\cli{documentclass}.
 \end{description}
 
 \subsection*{Filer som genereras av \LaTeX{}}
 \begin{description}[font=\ttfamily]
+	\index{filtyp!pdf@\texttt{.pdf}|see{\PDF}}
 	\item[.pdf] \PDF-dokument \eng{Portable Document File}. Det här är
 	sannolikt den fil \LaTeX{} genererat från din \texttt{.tex}-fil,
 	förutsatt att du inte lagrar andra \PDF-dokument i samma mapp (vilket
 	du inte bör göra).
 	
+	\index{filtyp!log@\texttt{.log}}
 	\item[.log] En detaljerad logg som berättar vad som hände under den
 	senaste körningen av \cli{pdflatex}.
 	
+	\index{filtyp!toc@\texttt{.toc}}
 	\item[.toc] Lagrar alla rubriker, och läses in av \LaTeX{} under nästa
 	körning då den genererar en innehållsförteckning (om en sådan ska 
 	finnas med i dokumentet).
@@ -386,7 +422,9 @@ man oftast stöter på i sitt arbete med \LaTeX{}.
 	\item[.lot] Som \texttt{.toc} och \texttt{.lof}, fast med en lista 
 	över tabeller.
 	
+	\index{filtyp!aux@\texttt{.aux}}
 	\item[.aux] En fil som innehåller information om korsreferenser,
 	etiketter och annat. Läses in vid nästa körning av \cli{pdflatex}.
 \end{description}
 \end{document}
+\index{filtyp!övriga|)}

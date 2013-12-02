@@ -17,6 +17,8 @@ gå direkt på \pack{graphicx} och \PGFTikZ\ på
 \cpageref{sec:includegraphics}.
 
 \section{Vad är bra grafik?}
+\index{figur}
+\index{grafik}
 Att skapa bra grafik, grafik som på ett effektivt och tydligt sätt
 kommunicerar den information din data innehåller, är inte så självklart
 som man kan tro. Det finns oerhöt många variabler, från vilken typ av
@@ -71,11 +73,13 @@ rapporter, så bör man hålla någon form av miniminivå för att åtminstone
 få fram sitt budskap. Man skulle kunna sammanfatta en sådan lägstanivå
 i ett par enkla punkter:
 \begin{itemize}
+	\index{figur}
 	\item \emph{Se till att axlar i figurerna är korrekta och
 		informativa.} Detta innebär att axlarna bör vara tydligt
 		numrerade, att det framgår om en annolunda skala (till exempel en
 		logaritmisk sådan) används, och att axlarna har beskrivande
 		etiketter (med enheter).
+	\index{färgschema}
 	\item \emph{Se till att välja lämpliga färgscheman.} Ta till exempel
 		färgblindhet eller kontrast i svartvita utskrifter i beaktande.
 		För enkla linjediagram och dylikt är det ganska enkelt, men i
@@ -147,6 +151,7 @@ på internet\footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig
 genomgång ges av \textcite{Hadley09}.
 
 \section{Inkludera grafik}\label{sec:includegraphics}
+\index{grafik!inkludera}
 Att kunna inkludera grafik av olika slag i sitt dokument kan verka så
 vitalt och grundläggande att det rimligtvis inte bör finnas många olika
 möjligheter. Så är dock inte fallet. Under den långa tid som \LaTeX{} har
@@ -197,6 +202,7 @@ inkludera \JPEG-bilder (dvs. fotografier), medans diagram, grafer och
 liknande oftast blir bättre med \PGFTikZ eller \pack{pgfplots}.
 
 \subsection{Rita med \PGFTikZ}
+\index{grafik!generera}
 En metod som ofta ger bättre resultat, men som är lite mer avancerad att
 använda (både eftersom den ger längre kompileringstider och eftersom den
 kräver mer arbete av användaren) är att använda \PGFTikZ\ för att rita
@@ -257,6 +263,7 @@ CSV-liknande filer och använda \pack{pgfplots} för att rita diagram
 (och tabeller med \pack{booktabs}) utifrån dessa data.
 
 \section{Exportera grafik eller data}
+\index{figur!exportera|(}
 När man väl skapat sin grafik i det program man arbetar med och är nöjd
 med denna måste man exportera den till ett format som kan användas med
 \LaTeX. Använder man \pdfLaTeX (vilket man bör) så stöds formaten \JPEG,
@@ -441,6 +448,7 @@ print('-dpng', 'figur.png');
 	syns överst.}
 	\label{ex:matlab:png}
 \end{kod}
+\index{figur!exportera|)}
 
 \label{sec:4:end}
 \end{document}

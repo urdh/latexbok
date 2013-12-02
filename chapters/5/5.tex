@@ -10,6 +10,7 @@
 %% END NOTE
 %
 \chapter{Referenser med \pack{biblatex}}\label{sec:5}
+\index{bibliografi}
 En stor fördel med \LaTeX{} är att man kan automatisera hanteringen av
 till exempel referenser. Paketet \pack{biblatex}, tillsammans med
 programmet \cli{biber}\footnote{Tekniskt sett kan även
@@ -32,6 +33,7 @@ sammanfattas användningen av de två tillsammans, speciellt hur man
 refererar och genererar referenslistan.
 
 \section{Referensdatabaser}
+\index{syntax!BibTeX@\hologo{BibTeX}|(}
 Databaserna \pack{biblatex} använder är, som nämndes tidigare, helt
 vanliga textfiler. Dessa innehåller ett antal block, ett per referens
 i databasen, som i sin tur innehåller fält med information om varje
@@ -47,6 +49,7 @@ artikel, och så vidare) det handlar om kan även andra fält finnas med.
 	\label{ex:bibtex}
 \end{kod}
 
+\index{referens!-databas}
 \Cref{ex:bibtex} visar ett block ur en referensdatabas. Blocket inleds
 med en blocktyp (\texttt{@article}), som indikerar vilken typ referensen
 har, och den nyckel som används när man refererar till källan
@@ -57,6 +60,7 @@ annat titel och författare), medan andra är frivilliga (till exempel
 \texttt{month} och \texttt{doi}). \Cref{tab:blocktyper} listar de några
 blocktyper och en del av de obligatoriska/frivilliga fält som hör till.
 En fullständig förteckning finns i \textcite[7\psqq]{Lehman13}.
+\index{syntax!BibTeX@\hologo{BibTeX}|)}
 
 \begin{table}[p]
 	\begin{minipage}[][0.98\textheight][t]{0.98\textwidth}
@@ -121,6 +125,7 @@ bibliografistilar att välja mellan, alla dokumenterade i manualen
 \parencite{Lehman13}.
 
 \subsection{Vanliga inställningar}
+\index{inställningar!biblatex@\pack*{biblatex}}
 Eftersom \pack{biblatex} är så omfattande är det omöjligt att gå igenom
 alla de inställningar som behandlas av manualen \parencite{Lehman13}. Det
 finns dock ett par inställningar som är viktiga att hålla koll på eftersom
@@ -149,6 +154,7 @@ Det finns även stilspecifika inställningar (\texttt{isbn}, \texttt{url},
 tillhörande fälten ska döljas från referenslistan.
 
 \subsection{Bibliografistilar}
+\index{bibliografi!-stil|(}
 Bibliografistilarna kontrollerar dels utseendet på själva referenslistan
 men även hur de kommandon som används för att referera (\cmd{textcite},
 \cmd{parencite} och \cmd{footcite}) beter sig.
@@ -190,6 +196,7 @@ av Chalmers och som syns i \cref{fig:bibstyle:chicago}).
 För att använda paketet istället för någon annan \pack{biblatex}-stil
 räcker det oftast med att istället ladda \pack{biblatex-chicago}:
 \latex|\usepackage[authordate,backend=biber]{biblatex-chicago}|
+\index{bibliografi!-stil|)}
 
 \clearpage
 % NOTE: make sure first figure is on even page, second on odd
@@ -262,6 +269,7 @@ räcker det oftast med att istället ladda \pack{biblatex-chicago}:
 
 \clearpage
 \section{Referenskommandon och referenslistor}
+\index{bibliografi}
 När man så skapat sin referensdatabas (som givetvis uppdateras i takt med
 att rapporten blir större), valt bibliografistil och laddat
 \pack{biblatex} är det dags att börja referera till artiklar.
