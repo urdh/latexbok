@@ -1,15 +1,15 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-\section{Grundläggande begrepp}\label{sec:1}
+\chapter{Grundläggande begrepp}\label{sec:1}
+\section{Snabbkurs i \LaTeX-kod}
 Introduktionen har förklarat lite kort vad \TeX/\LaTeX{} är och varför du
 bör använda systemet för att typsätta dina rapporter, artiklar och böcker.
 Denna del kommer att inleda din \TeX-bana genom att lite kort förklara hur
 ett \LaTeX-dokument är uppbyggt, några viktiga begrepp samt hur
 \LaTeX-kompilatorn (i det här fallet \cli{pdflatex}) fungerar.
 
-\subsection{\LaTeX-dokument}
 \index{filtyp!tex@\texttt{.tex}}
 \index{teckenkodning}
 De dokument \LaTeX{} läser in är enkla textfiler, oftast med filändelsen
@@ -23,7 +23,7 @@ filerna sparas med teckenkodningen \textsc{iso-8559-1}\footnote{Det finns
 och då måste man ha koll på detta eftersom man måste berätta för \LaTeX{}
 hur filen ska läsas in.
 
-\subsubsection{Tomrum}
+\subsection{Tomrum}
 \index{syntax!LaTeX@\hologo{(La)TeX}|(}
 \index{tomrum!i LaTeX-kod@i \LaTeX-kod}
 Tomrumstecken, det vill säga mellanslag, tabbar och liknande behandlas
@@ -39,7 +39,7 @@ styckesindelning, och flera tomma rader efter varandra tolkas som en enda
 tom rad. Detta gör att \LaTeX{}-filerna blir mycket enkla att både skriva
 och läsa, även om man inte är en särskilt bevandrad \TeX{}niker.
 
-\subsubsection{Specialtecken}
+\subsection{Specialtecken}
 \index{specialtecken}
 Vissa tecken är speciella för \LaTeX{}. Dessa används internt av \LaTeX{} 
 för att representera speciella konstruktioner, och kan inte användas hur som helst i ett \LaTeX-dokument. Gör man det ändå
@@ -59,7 +59,7 @@ dessutom lägga till måsvingar efteråt, eftersom dessa tecken normalt används
 modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
 \latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
 
-\subsubsection{\LaTeX-kommandon}
+\subsection{\LaTeX-kommandon}
 \index{kommando}
 För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
 kommandon följer några enkla regler:
@@ -98,7 +98,7 @@ information, till exempel olika flaggor till paket. Dessa brukar då
 separeras med ett kommatecken.
 
 
-\subsubsection{Kommentarer}
+\subsection{Kommentarer}
 \index{kommentar}
 Ibland kan det vara bra att kommentera bort (alltså~säga åt \LaTeX{} att
 ignorera) vissa bitar av dokumentet. Det kan vara för att förklara
@@ -109,7 +109,7 @@ hela resten av den raden i \TeX{}-filen:
 \latex|Lite text\ldots{} % ...och en kommentar|
 \index{syntax!LaTeX@\hologo{(La)TeX}|)}
 
-\subsubsection{Grundläggande struktur}
+\subsection{Grundläggande struktur}
 \index{dokumentklass}
 \index{struktur!dokument-}
 När du nu vet hur \LaTeX{} tolkar tomrum, vad ett kommando är och hur du
@@ -145,14 +145,14 @@ man egentligen gör här är att skapa en omgivning med namnet
 dokumentets innehåll. Omgivningar förklaras utförligt på \cpageref{sec:omg}.
 
 \phantomsection
-\subsection{Dokumentets layout}\label{sec:1:layout}
+\section{Dokumentets layout}\label{sec:1:layout}
 \LaTeX{} är inte helt oflexibelt, och man kan med hjälp av olika kommandon
 i inledningen till dokumentet ändra både utseendet och beteendet hos
 detsamma. Utseendet ändrar man med så kallade dokumentklasser (varje
 dokument måste specificera exakt en sådan), medan extra funktionalitet
 läggs till i form av så kallade paket.
 
-\subsubsection{Dokumentklasser}
+\subsection{Dokumentklasser}
 \index{dokumentklass}
 Den första informationen \LaTeX{} behöver när den kompilerar ett dokument
 är vilken typ av dokument författaren vill skapa. Detta specificeras med
@@ -182,7 +182,7 @@ kontakt med relativt ofta:
 
 Utöver dessa finns det även mer specialiserade klasser, anpassade för
 olika publikationer\footnote{Till exempel \pack{elsarticle},
-\pack{ieeetran} eller \pack{revtex}}, tillämpningar
+\pack{ieeetran} eller \pack{revtex}}, tillämpningar%
 \footnote{Exempelvis \pack{refman} eller \pack{sffms}} eller konventioner%
 \footnote{Bland annat \pack{eskdx}, som implementerar ryska konventioner}.
 
@@ -242,7 +242,7 @@ ingen lång rapport, kanske till och med en inlämningsuppgift, och du
 bestämmer dig därför för att använda \pack{article}-klassen:
 \latex|\documentclass[12pt,a4paper]{article}|
 
-\subsubsection{Paket}
+\subsection{Paket}
 \index{paket}
 \index{CTAN}
 När du skriver ett dokument kommer du troligtvis att märka att vissa saker
@@ -291,7 +291,7 @@ Några paket finns alltid och är mycket viktiga eftersom de berättar för
 \end{description}
 
 \phantomsection
-\subsection{Från \TeX{} till \PDF}
+\section{Från \TeX{} till \PDF}
 \index{kompilator}
 \index{PDF@\PDF!kompilera till}
 För att skapa ett typsatt \PDF-dokument utifrån en \LaTeX-fil måste man
@@ -312,7 +312,7 @@ be om ännu en körning. Använder man vissa externa verktyg som \BibTeX{}
 måste man även köra detta program; arbetsflödet blir då 
 \LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\BibTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX\hspace{0pt}{\utffont →}\hspace{0pt}\LaTeX.
 
-\subsubsection{Kompilatorn: \pdfLaTeX}
+\subsection{Kompilatorn: \pdfLaTeX}
 \index{kompilator!pdfLaTeX@\pdfLaTeX{}}
 Det finns ett antal olika kompilatorer att tillgå (den vanligaste heter
 bara \cli{latex} och genererar \DVI-filer), men den som är att föredra är
@@ -349,7 +349,7 @@ dokument, kan du tänka dig?)
 	\label{ex:initio}
 \end{kod}
 
-\subsubsection{Automatisera med \cli{latexmk}}
+\subsection{Automatisera med \cli{latexmk}}
 \index{latexmk@\cli{latexmk}}
 Det kan vara tröttsamt att konstant kompilera sina filer och hålla koll på
 hur många gånger man ska köra \LaTeX{} och andra verktyg. Lyckligtvis 
@@ -364,7 +364,7 @@ kompilera om hela dokumentet när dessa ändras.
 Att köra \cli{latexmk} är lika lätt som att köra \cli{pdflatex}:
 \mint{sh}|latexmk -pdf filnamn.tex|
 
-\subsection{Filer du kanske stöter på}
+\section{Filer du kanske stöter på}
 När man arbetar med \LaTeX{} finner man ganska snabbt att det dyker upp en
 stor mängd olika filer (därför bör man också ha varje dokument i en egen
 mapp) med mer eller mindre uppenbara filändelser. Vissa behövs för att
@@ -375,7 +375,7 @@ Eftersom olika paket också kan skapa filer av godtycklig typ kommer listan
 nedan inte vara fullständig, men förhoppningsvis innehåller den de filer
 man oftast stöter på i sitt arbete med \LaTeX{}.
 
-\subsubsubsection*{Filer som används av \LaTeX{}}
+\subsection*{Filer som används av \LaTeX{}}
 \index{filtyp!övriga|(}
 \begin{description}[font=\ttfamily]
 	\index{filtyp!tex@\texttt{.tex}}
@@ -400,7 +400,7 @@ man oftast stöter på i sitt arbete med \LaTeX{}.
 	\cli{documentclass}.
 \end{description}
 
-\subsubsubsection*{Filer som genereras av \LaTeX{}}
+\subsection*{Filer som genereras av \LaTeX{}}
 \begin{description}[font=\ttfamily]
 	\index{filtyp!pdf@\texttt{.pdf}|see{\PDF}}
 	\item[.pdf] \PDF-dokument \eng{Portable Document File}. Det här är

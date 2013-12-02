@@ -2,6 +2,12 @@
 %% Set the examples directory
 \cs_if_exist:NF\latexbokFiguredir
 	{\cs_gset:Npn\latexbokFiguredir{examples}}
+% TeX replacement
+\RenewDocumentCommand\TeX{}
+	{\hologo{TeX}\xspace}
+% LaTeX replacement
+\RenewDocumentCommand\LaTeX{}
+	{\hologo{LaTeX}\xspace}
 % PDF format
 \NewDocumentCommand\PDF{}
 	{\textsc{PDF}\xspace}
