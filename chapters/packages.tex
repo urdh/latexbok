@@ -1,4 +1,5 @@
 % Packages included by <skrapport>:
+\usepackage{microtype,amsmath}
 % polyglossia, microtype, icomma, amsmath,
 % unicode-math, xunicode, fontspec
 % subfiles
@@ -10,12 +11,12 @@
 \usetikzlibrary{shadows}
 % page size
 \paper{a4}{%
-	\usepackage[a4paper,xetex]{geometry}%
+	\KOMAoptions{paper=a4,DIV=calc}%
 	% a4 is not intended for printing, so we disable crop marks
 %	\usepackage[cam,axes,info,b4,center]{crop}%
 }
 \paper{c5}{%
-	\usepackage[c5paper,xetex]{geometry}%
+	\KOMAoptions{paper=c5,DIV=calc}%
 	\usepackage[cam,axes,info,b5,center]{crop}%
 }
 % code
@@ -34,10 +35,13 @@
 }
 \makeatother
 \usepackage{enumitem}
-\usepackage{fancyhdr}
+%\usepackage{fancyhdr}
 \usepackage{booktabs}
 \usepackage[multiple]{fnpct}
 % references
+\usepackage{polyglossia}
+\setmainlanguage{swedish}
+\setotherlanguage{english}
 \usepackage{csquotes}
 \usepackage[style=authoryear,sorting=nyt,sortcites=false,%
 			language=swedish,babel=other,urldate=iso8601,%
@@ -51,11 +55,13 @@
 \usepackage[safe,noenc]{tipa}
 \usepackage[titles]{tocloft}
 \usepackage[font=small,format=plain,labelfont=bf,textfont=it]{caption}
+\usepackage{newfloat}
 \usepackage{subfig}
 \usepackage{cprotect}
 \usepackage{xspace}
 \usepackage{xcoffins}
 \usepackage{mathtools}
+\usepackage[xindy]{imakeidx}
 \usepackage{varioref}
 \usepackage{hyperref}
 \usepackage{sidecap}
@@ -78,7 +84,3 @@
 % Paket som demonstreras i del 6
 \usepackage{braket}
 \usepackage{xfrac}
-% CRITICAL BUGFIX FOR unicode-math (see https://github.com/wspr/unicode-math/issues/227)
-\makeatletter
-\def\@cdots{\mathinner{\unicodecdots}}
-\makeatother

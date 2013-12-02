@@ -1,8 +1,8 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-\section{Grafik med \LaTeX}\label{sec:4}
+\chapter{Grafik med \LaTeX}\label{sec:4}
 Grafik, i form av figurer och diagram, kan vara ett mycket bra sätt
 att illustrera eller beskriva samband, algoritmer och data. Nedan följer
 ett antal olika tips, inte bara om hur man inkluderar (eller till och 
@@ -16,7 +16,9 @@ det inledande stycket (även om det är både kort och informativt) och
 gå direkt på \pack{graphicx} och \PGFTikZ\ på
 \cpageref{sec:includegraphics}.
 
-\subsection{Vad är bra grafik?}
+\section{Vad är bra grafik?}
+\index{figur}
+\index{grafik}
 Att skapa bra grafik, grafik som på ett effektivt och tydligt sätt
 kommunicerar den information din data innehåller, är inte så självklart
 som man kan tro. Det finns oerhöt många variabler, från vilken typ av
@@ -64,18 +66,20 @@ grafikens effektivitet \parencite[\ppno~123\psqq]{Tufte01}.
 Effektiviteten är förmodligen den del av \enquote{fulländad} grafik
 som är svårast att uppnå i matematisk programvara.
 
-\subsubsection{Allmänna tips}
+\subsection{Allmänna tips}
 Även om datavisualisering är ett stort och inte helt trivialt område, 
 och därmed kanske överkurs för de som inte skriver böcker eller långa
 rapporter, så bör man hålla någon form av miniminivå för att åtminstone
 få fram sitt budskap. Man skulle kunna sammanfatta en sådan lägstanivå
 i ett par enkla punkter:
 \begin{itemize}
+	\index{figur}
 	\item \emph{Se till att axlar i figurerna är korrekta och
 		informativa.} Detta innebär att axlarna bör vara tydligt
 		numrerade, att det framgår om en annolunda skala (till exempel en
 		logaritmisk sådan) används, och att axlarna har beskrivande
 		etiketter (med enheter).
+	\index{färgschema}
 	\item \emph{Se till att välja lämpliga färgscheman.} Ta till exempel
 		färgblindhet eller kontrast i svartvita utskrifter i beaktande.
 		För enkla linjediagram och dylikt är det ganska enkelt, men i
@@ -94,7 +98,7 @@ i ett par enkla punkter:
 		information, och syftar mest till att förvirra läsaren.
 \end{itemize}
 
-\subsubsection{Programspecifika tips: %
+\subsection{Programspecifika tips: %
 			   Bra \Rlogo-figurer med \texttt{ggplot2}}
 \label{sec:ggplot2}
 Riktlinjerna och tipsen som introducerats ovan kan vara mer eller mindre
@@ -146,7 +150,8 @@ En mer utförlig referens över alla kommandon i \texttt{ggplot2} finns
 på internet\footnote{\url{http://had.co.nz/ggplot2/}}, och en grundlig
 genomgång ges av \textcite{Hadley09}.
 
-\subsection{Inkludera grafik}\label{sec:includegraphics}
+\section{Inkludera grafik}\label{sec:includegraphics}
+\index{grafik!inkludera}
 Att kunna inkludera grafik av olika slag i sitt dokument kan verka så
 vitalt och grundläggande att det rimligtvis inte bör finnas många olika
 möjligheter. Så är dock inte fallet. Under den långa tid som \LaTeX{} har
@@ -163,7 +168,7 @@ I den första kategorin finns i princip bara ett alternativ
 men för \pdfLaTeX\ och \XeTeX\ finns det en mycket stark kandidat:
 \PGFTikZ. Båda dessa, samt deras för- och nackdelar, diskuteras nedan.
 
-\subsubsection{Paketet \pack{graphicx}}
+\subsection{Paketet \pack{graphicx}}
 Den metod som oftast används, eftersom den kräver kortare
 kompileringstider och mindre direkt ansträngning, är att inkludera
 redan existerande bilder i \PDF- eller \PNG-format med hjälp av
@@ -196,7 +201,8 @@ Sammanfattat kan man säga att \pack{graphicx} är utmärkt för att
 inkludera \JPEG-bilder (dvs. fotografier), medans diagram, grafer och
 liknande oftast blir bättre med \PGFTikZ eller \pack{pgfplots}.
 
-\subsubsection{Rita med \PGFTikZ}
+\subsection{Rita med \PGFTikZ}
+\index{grafik!generera}
 En metod som ofta ger bättre resultat, men som är lite mer avancerad att
 använda (både eftersom den ger längre kompileringstider och eftersom den
 kräver mer arbete av användaren) är att använda \PGFTikZ\ för att rita
@@ -240,7 +246,7 @@ i det formatet. \PGFTikZ-figurer är alltså att föredra för diagram,
 grafer och liknande, men går inte att använda för till exempel
 fotografier.
 
-\subsubsubsection*{Plotta med \pack{pgfplots}}
+\subsubsection{Plotta med \pack{pgfplots}}
 Paketet \pack{pgfplots} kan sägas vara ett tillägg till \PGFTikZ som gör
 det lättare att rita vanliga diagram (stapel- eller linjediagram, till
 exempel) med hjälp av \PGFTikZ. Bland annat kan \pack{pgfplots} läsa in
@@ -256,7 +262,8 @@ Det finns även ett påbyggnadspaket, \pack{pgfplotstable}
 CSV-liknande filer och använda \pack{pgfplots} för att rita diagram
 (och tabeller med \pack{booktabs}) utifrån dessa data.
 
-\subsection{Exportera grafik eller data}
+\section{Exportera grafik eller data}
+\index{figur!exportera|(}
 När man väl skapat sin grafik i det program man arbetar med och är nöjd
 med denna måste man exportera den till ett format som kan användas med
 \LaTeX. Använder man \pdfLaTeX (vilket man bör) så stöds formaten \JPEG,
@@ -280,13 +287,13 @@ att beskriva hur man enklast exporterar figurer som \PGFTikZ-kod eller
 i \PDF-format (i nödfall \PNG) från två vanliga programvaror:
 \Rlogo och \MATLAB.
 
-\subsubsection{Exportera i \PGFTikZ-format}
+\section{Exportera i \PGFTikZ-format}
 \PGFTikZ brukar inte vara ett format som normalt stöds av kommersiella
 (eller fria) programvaror, och därför är funktionen ofta implementerad
 som någon form av tillägg. Lyckligtvis brukar dessa vara öppna och fria
 att använda för vem som helst.
 
-\subsubsubsection*{Från \Rlogo med \texttt{tikzDevice}}
+\subsection*{Från \Rlogo med \texttt{tikzDevice}}
 \Rlogo-paketet \texttt{tikzDevice} \parencite{Sharpsteen12} gör det möjligt
 att i \Rlogo exportera figurer som \PGFTikZ-kod. Det kan som många andra
 \Rlogo-paket hittas på CRAN och installeras enklast genom att köra
@@ -321,7 +328,7 @@ dev.off()
 	\label{ex:tikzdevice}
 \end{kod}
 
-\subsubsubsection*{Från \MATLAB med \texttt{matlab2tikz}}
+\subsubsection{Från \MATLAB med \texttt{matlab2tikz}}
 \label{sec:matlab2tikz}
 Då \MATLAB, i likhet med \Rlogo, inte har något inbyggt verktyg för att
 exportera figurer i \PGFTikZ-format får man även i det fallet förlita sig
@@ -360,7 +367,7 @@ matlab2tikz('figur.tex', 'width', '8cm', 'height', '6cm');
 	\label{ex:matlab2tikz}
 \end{kod}
 
-\subsubsection{Exportera i \PDF eller \PNG-fomat}
+\subsection{Exportera i \PDF eller \PNG-fomat}
 I de fall då det inte finns något enkelt sätt att exportera figurer som
 \PGFTikZ-kod, eller i de fall då det är olämpligt (ger orimligt långa
 kompileringstider, till exempel) är \PDF och \PNG relativt bra alternativ.
@@ -368,7 +375,7 @@ Båda dessa format är oftast rasterbaserade, men med \PDF finns i alla
 fall möjligheten (och den utnyttjas ibland) att figurerna exporteras
 som vektorgrafik.
 
-\subsubsubsection*{Från \Rlogo till \PDF}
+\subsection*{Från \Rlogo till \PDF}
 \Rlogo har ett antal inbyggda så kallade enheter \eng{device} som kan
 användas för att rita diagram, grafer och liknande, bland annat för \EPS,
 \PNG och \textsc{SVG} \parencite[\ppno~675–676]{RCoreTeam12}. Enheten vi är mest
@@ -402,7 +409,7 @@ dev.off()
 	\label{ex:pdfdevice}
 \end{kod}
 
-\subsubsubsection*{Från \MATLAB till \PNG}
+\subsubsection{Från \MATLAB till \PNG}
 I \MATLAB finns ett par olika sätt att exportera figurer, men det
 enklaste sättet att spara figurer programmatiskt är med hjälp av 
 funktionen \texttt{print} \parencite{MATLAB13:print}. Funktionen kan,
@@ -441,6 +448,7 @@ print('-dpng', 'figur.png');
 	syns överst.}
 	\label{ex:matlab:png}
 \end{kod}
+\index{figur!exportera|)}
 
 \label{sec:4:end}
 \end{document}

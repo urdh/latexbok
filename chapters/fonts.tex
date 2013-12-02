@@ -1,5 +1,12 @@
 \ExplSyntaxOn
 
+%% Load fontspec
+\usepackage{fontspec,unicode-math}
+% CRITICAL BUGFIX FOR unicode-math (see https://github.com/wspr/unicode-math/issues/227)
+\makeatletter
+\def\@cdots{\mathinner{\unicodecdots}}
+\makeatother
+
 %% Set the font directory
 \cs_if_exist:NF\latexbokFontdir
 	{\cs_gset:Npn\latexbokFontdir{fonts}}
@@ -47,10 +54,5 @@
 %% UTF and TIPA fonts
 \cs_set_eq:NN\utffont\rmfamily
 \cs_set_eq:NN\tipafont\sffamily
-
-%% Patch the title style to include the new font
-%\cs_generate_variant:Nn\cs_set_protected:Nn{No}
-%\cs_set_protected:No\__skrapport_title_style:
-%	{\__skrapport_title_style:\exp_not:N\titlefont}
 
 \ExplSyntaxOff

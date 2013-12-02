@@ -1,8 +1,8 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-\section{Typsättning med \LaTeX}\label{sec:2}
+\chapter{Typsättning med \LaTeX}\label{sec:2}
 När du nu vet hur den grundläggande strukturen i ett \LaTeX-dokument ser
 ut är det dags att börja typsätta riktiga dokument. Att typsätta dokument
 är dock något som
@@ -12,7 +12,8 @@ kort diskussion gällande struktur och språk. Efter den här delen bör du
 med andra ord inte ha några problem med att producera riktiga dokument,
 varken \LaTeX- eller strukturmässigt.
 
-\subsection{Text- och språkstruktur}
+\section{Text- och språkstruktur}
+\index{struktur!text-|(}
 Struktur är mycket viktigt för att läsaren ska kunna ta del av de idéer
 och den information texten förmedlar. Strukturen ska givetvis framgå
 direkt ur texten, men med väl genomtänkt typografi förstärks denna
@@ -27,7 +28,8 @@ förbestämda regler (givna av dokumentklassen och de paket som används) och
 skapar den typografiska strukturen utifrån dessa. Du får alltså vara
 författaren, och \LaTeX{} tar rollen som typsättare.
 
-\subsubsection{Textstycket}
+\subsection{Textstycket}
+\index{styckesindelning}
 Den mest grundläggande byggstenen i \LaTeX{} (och både typografi och 
 författande) är stycket. Vi kallar det ”byggsten” eftersom ett stycke är
 en typografisk enhet som ska förmedla en tanke eller en idé. Om en ny
@@ -97,7 +99,8 @@ man alltså utelämna detta kommando, och \LaTeX{} kommer att efter bästa
 förmåga gissa var dina meningar tar slut. Gör kompilatorn fel får man 
 ersätta det mellanslag den förlänger med ett fast mellaslag (\verb|~|).
 
-\subsubsection{Rubriker}
+\subsection{Rubriker}
+\index{rubrik}
 Det andra strukturelementet man måste tänka på\footnote{Undantaget
 strukturen i meningar, som är den del av svenska språket och som förklaras
 bättre av \textcite{LIU98}.} är rubriker. Dessa skapar en logisk
@@ -130,6 +133,8 @@ den inbyggda räknaren \texttt{secnumdepth}:
 Dessutom kan man införa onumrerade rubriker genom att lägga till en
 stjärna efter rubrikkommandot:
 \latex|\section*{Inledning} % Onumrerad rubrik|
+Notera även att man inte bör lämna någon tom rad mellan sin rubrik och
+det efterföljande textstycket.
 
 Dessa rubriker kan sedan om så önskas listas i en innehållsförteckning med
 hjälp av kommandot \cmd{tableofcontents}, där endast de numrerade
@@ -140,7 +145,9 @@ rubriken.}.
 Djupet på innehållsförteckningen styrs med räknaren \texttt{tocdepth}:
 \latex|\setcounter{tocdepth}{2}|
 
-\subsubsection{Rad- och sidbrytningar}
+\subsection{Rad- och sidbrytningar}
+\index{sidbrytning}
+\index{radbrytning!manuell|see{styckesindelning}}
 Med \LaTeX{} behöver man i princip aldrig bry sig om att rad- eller
 sidbryta eftersom detta görs automatiskt. Vid vissa tillfällen kan det
 dock vara önskvärt att göra det manuellt ändå; framför allt kan det vara
@@ -180,7 +187,8 @@ sidbryter en andra gång.
 Radbrytningar kan enkelt göras med hjälp av \verb|\\| eller \cmd{newline}
 i de fall då de behövs; oftast är styckesindelning fullt tillräckligt.
 
-\subsubsection{Avstavning}
+\subsection{Avstavning}
+\index{avstavning}
 Avstavning sköts automatiskt av \LaTeX{}, förutsatt att det finns
 avstavningsdata för det språk man använder. Denna kan man ladda in med
 hjälp av paketet \pack{babel}.
@@ -206,7 +214,9 @@ användas för att berätta för \LaTeX{} att ordet ”\textsc{FORTRAN}” inte
 får brytas, medan ordet ”spankulera” får brytas på de angivna 
 positionerna.
 
-\subsubsection{Betoning, med mera}
+\subsection{Betoning, med mera}
+\index{betoning}
+\index{textstil!kursiv}
 För att betona text i exempelvis böcker använder man \emph{kursiv} text. I
 \LaTeX{} kan man betona text med hjälp av kommandot \cmd{emph}, som i de
 flesta fall gör just detta; kursiverar texten. Det finns dock andra
@@ -215,6 +225,11 @@ sådana stycken kursivera för att betona text; i sådana fall använder
 \LaTeX{} därför helt vanlig, upprätt text (för nästan alla 
 dokumentklasser, i alla fall).
 
+\index{textstil!fetstil}
+\index{textstil!kapitäler}
+\index{typsnitt!serif}
+\index{typsnitt!sans-serif}
+\index{typsnitt!icke-proportionellt}
 \Cref{tab:betoning} visar utöver kommandot \cmd{emph} som används 
 för betoning ett antal andra textförändrande kommandon som kan vara bra 
 att
@@ -229,33 +244,33 @@ sans-serif-typsnitt istället för det vanliga serif-typsnittet.
 		\toprule 
 		\LaTeX-kommando & Resultat & Kommentar \\
 		\midrule 
-		\cmd{textnormal\{\ldots\}}	&
+		\cmd[textnormal]{textnormal\{\ldots\}}	&
 			\textnormal{Dokumentets standardtypsnitt} &
 			{Det typsnitt som används för ”vanlig” text
 			 i dokumentet.} \\
-		\cmd{emph\{\ldots\}}		&
+		\cmd[emph]{emph\{\ldots\}}		&
 			\emph{Betonad text} &
 			{Ska alltid användas för betoning då kommandot 
 			 automatiskt hanterar nästlade betoningar på ett bra sätt.} \\
-		\cmd{textrm\{\ldots\}}		&
+		\cmd[textrm]{textrm\{\ldots\}}		&
 			\textrm{Serif-typsnitt} &
 			\\
-		\cmd{textsf\{\ldots\}}		&
+		\cmd[textsf]{textsf\{\ldots\}}		&
 			\textsf{Sans serif-typsnitt} &
 			\\
-		\cmd{texttt\{\ldots\}}		&
+		\cmd[texttt]{texttt\{\ldots\}}		&
 			\texttt{Teletype-typsnitt} &
 			{Detta typsnitt har fast bredd och kan användas
 			 för att typsätta till exempel kodstycken.} \\
-		\cmd{textit\{\ldots\}}		&
+		\cmd[textit]{textit\{\ldots\}}		&
 			\textit{Kursiv text} &
 			{Använd \cmd{emph} istället för detta 
 			 kommando för att betona text.} \\
-		\cmd{textbf\{\ldots\}}		&
+		\cmd[textbf]{textbf\{\ldots\}}		&
 			\textbf{Fetstilt text} &
 		 	{Använd \cmd{emph} istället för detta 
 			 kommando för att betona text.} \\
-		\cmd{textsc\{\ldots\}}		&
+		\cmd[textsc]{textsc\{\ldots\}}		&
 			\textsc{Kapitäler} &
 			\\
 		\bottomrule 
@@ -266,13 +281,14 @@ Man bör dock inte använda dessa kommandon direkt, utan istället med hjälp
 av \cmd{newcommand} definiera kommandon som beskriver \emph{vad} som
 typsätts, inte \emph{hur} det ska typsättas. Säg till exempel att du vill
 typsätta namn på \LaTeX-paket med sans-serif-typsnitt. Vi kan då definiera
-ett kommando \cmd{package} som i sin tur tillämpar \cmd{textsf}:
+ett kommando \cmd*{package} som i sin tur tillämpar \cmd{textsf}:
 \latex|\newcommand\package[1]{\textsf{#1}}|
 När detta sedan används i dokumentet ser man direkt att det är ett paket
 som beskrivs; att det sedan typsätts med sans-serif-typsnitt är inte så
 intressant just när man skriver dokumentet.
+\index{struktur!text-|)}
 
-\subsection{Figurer, tabeller, listor}
+\section{Figurer, tabeller, listor}
 Figurer, tabeller och listor\footnote{Men även ekvationer, programkod,
 vissa kemiska formler, citat och algoritmer, för att nämna några
 ytterligare exempel.} har i sin \LaTeX-representation en sak gemensamt;
@@ -282,7 +298,8 @@ grupperar sådana företeelser och gör det tydligt hur textens struktur
 verkligen ser ut — denna konstruktion kan på svenska kallas för en 
 omgivning.
 
-\subsubsection{Omgivningar \eng{environments}}\label{sec:omg}
+\subsection{Omgivningar \eng{environments}}\label{sec:omg}
+\index{miljö}
 Omgivningar i \LaTeX{} definieras utifrån två kommandon; \cmd{begin} och
 \cmd{end}. De kan nästlas (på det sättet att en omgivning kan innehålla
 en annan) men kan inte överlappa — varje omgivning måste avslutas innan
@@ -300,7 +317,8 @@ Det finns många omgivningar, och de fyller alla olika syften. De
 viktigaste bildar listor, figurer, tabeller och ekvationer, men en
 omgivning kan i princip göra vad som helst.
 
-\subsubsection{Tre sorters listor}
+\subsection{Tre sorters listor}
+\index{lista}
 De första omgivningarna vi ska bekanta oss med är de som skapar listor.
 I \LaTeX{} finns det tre användbara sorters listor, som alla går att
 nästla i varandra utan problem och som löser tre distinkta problem:
@@ -381,7 +399,8 @@ används tillsammans med kommandot \cmd{item} för att bygga enkla listor
 	\label{ex:listor}
 \end{kod}
 
-\subsubsection{Flytande objekt \eng{floats}}\label{sec:floats}
+\subsection{Flytande objekt \eng{floats}}\label{sec:floats}
+\index{flytande objekt}
 Tabeller och figurer är viktiga verktyg för att förmedla resultat på
 ett effektiv sätt. De är också mycket speciella objekt rent typografiskt,
 eftersom de till skillnad från vanliga textstycken inte kan brytas över
@@ -417,7 +436,8 @@ visas, inte varför det visas. Slutsatser och liknande dras istället i
 brödtexten som refererar till figuren. Figurer har sin figurtext undertill
 medan tabeller har figurtexten ovanför tabellen.
 
-\subsubsubsection*{Figurer}
+\subsubsection*{Figurer}
+\index{figur}
 Figurer är den kanske vanligaste typen av flytande objekt, och dessa
 (grafer, illustrationer, diagram och så vidare) infogas i omgivningen
 \texttt{figure}, vilken visas i \cref{ex:figure}.
@@ -448,7 +468,8 @@ del får för sig att istället använda omgivningen \texttt{center}, men
 eftersom den omgivningen lägger till extra tomrum både före och efter är
 det lämpligare att bara använda \cmd{centering}.
 
-\subsubsubsection*{Tabeller}\label{pack:booktabs}
+\subsubsection*{Tabeller}\label{pack:booktabs}
+\index{tabell}
 Tabeller är ett annat vanligt flytande objekt, och är ett alldeles
 förträffligt verktyg när det gäller presentation av data som till exempel
 mätserier eller liknande. \LaTeX{} definierar två tabellrelaterade
@@ -577,7 +598,9 @@ sitter med tabeller i \LaTeX, så går användandet in i ryggmärgen.}.
 	\end{tabular}
 \end{table}
 
-\subsubsection{Etiketter och korsreferenser}\label{sec:labels}
+\subsection{Etiketter och korsreferenser}\label{sec:labels}
+\index{etikett}
+\index{korsreferens}
 Eftersom figurer får (och bör få) flyta en bit bort, i vissa fall till 
 andra sidor, måste man kunna referera till dem i texten. Detta görs med så
 kallade korsreferenser till etiketter. En etikett kan man definiera med
@@ -615,6 +638,7 @@ det är du refererar till, och skriver ut detta. Exemplet ovan kan då
 reduceras till detta:
 \latex|...som man ser i \cref{fig:betasonderfall}...|
 
+\index{hyperlänk}
 Paketet \pack{hyperref} förbättrar alla dessa kommandon genom att
 göra referenserna till länkar i den slutgiltiga \PDF-filen. Med dessa kan
 man alltså lättare navigera i dokumentet. Förutom detta så lägger
@@ -622,7 +646,8 @@ man alltså lättare navigera i dokumentet. Förutom detta så lägger
 kan visa i programmet, och annan \PDF-specifik funktionalitet. Paketet
 rekommenderas starkt om du använder \pdfLaTeX.
 
-\subsubsection{Ordlistor}\label{sec:2:glossaries}
+\subsection{Ordlistor}\label{sec:2:glossaries}
+\index{ordlista}
 När man skriver tekniska eller vetenskapliga texter finns det ofta
 anledning att inkludera en ordlista. Det väldigt omfattande paketet
 \pack{glossaries} löser precis denna uppgift.
@@ -647,7 +672,8 @@ igen (eller \cli{makeglossaries} istället för \cli{xindy}, om du har
 Perl installerat). Detta förklaras närmre av
 \textcite{Talbot13a,Talbot13b}.
 
-\subsubsection{Förkortningar}\label{sec:2:acro}
+\subsection{Förkortningar}\label{sec:2:acro}
+\index{förkortning}
 I viss teknisk litteratur (avhandlingar, artiklar och liknande) kan det 
 även vara bra att inkludera en lista över förkortningar. Det problemet
 går att lösa med \pack{glossaries}, men det är ofta bättre att använda
@@ -656,7 +682,8 @@ ett specialiserat paket, till exempel \pack{acro}
 från \pack{glossaries} använder \pack{acro} inte några externa program,
 och är därför något enklare och mindre tidskrävande att använda.
 
-\subsubsection{Sakregister}\label{sec:2:imakeidx}
+\subsection{Sakregister}\label{sec:2:imakeidx}
+\index{register}
 En sista komponent i många större projekt, speciellt böcker eller
 liknande litteratur, är ett sakregister. Även dessa kan skapas på ett
 relativt automatisk sätt av \LaTeX, med hjälp av paketet \pack{imakeidx}.
@@ -669,7 +696,7 @@ restriktiv \cmd{write18}-åtkomst som tillåter dessa program.} kan \LaTeX\
 göra detta automatiskt. Givetvis görs detta även av \cli{latexmk} om man
 använder det verktyget för att kompilera sina dokument.
 
-\subsection{Typografiska betänkligheter}
+\section{Typografiska betänkligheter}
 När man skriver rapporter är det även viktigt att hålla sig till de
 typografiska regler \LaTeX{} inte håller reda på; sådana som har med
 citattecken, tankstreck och annat att göra. Även datum, decimalavskiljare
@@ -677,7 +704,8 @@ och liknande är viktigt att tänka på. Dessa typografiska regler kommer i
 korthet att förklaras på de närmsta sidorna, till vilka viss inspiration 
 tagits från \textcite{Schultz05}.
 
-\subsubsection{Citattecken}
+\subsection{Citattecken}
+\index{citattecken}
 Det mest grundläggande man bör uppmärksamma i \LaTeX{}, eftersom det är en
 grop man lätt faller i, är citattecken. Man kan inte i \LaTeX{} använda
 det vanliga citattecknet (\verb|"|) för att generera ett citattecken, utan
@@ -704,7 +732,10 @@ för att citera text.
 	\end{tabular}
 \end{table}
 
-\subsubsection{Streck av olika längd}
+\subsection{Streck av olika längd}
+\index{bindestreck}
+\index{tankstreck}
+\index{intervallstreck}
 Det kan tyckas vara ett rent typografinörderi man inte behöver bry sig om,
 men faktum är att det finns olika sorters streck (lite på samma sätt som
 att det finns olika skiljetecken). Det är relativt viktigt att skilja på
@@ -741,7 +772,8 @@ Ett långt tankstreck skriver man med tre bindestreck i följd
 (\verb|---|), och man bör omge det med mellanslag:
 \latex|...det är --- för tillfället åtminstone --- omöjligt att...|
 
-\subsubsection{Avstånd mellan stycken}
+\subsection{Avstånd mellan stycken}
+\index{styckesindelning}
 Det finns två vedertagna sätt att separera stycken; indrag och
 mellanrum. Man tillämpar endast \emph{ett} av dessa åt gången, och
 traditionellt sett så brukar man i svensk typografi använda mellanrum,
@@ -754,7 +786,7 @@ stort jobb kan man istället ”\eng{patcha}” \LaTeX{}. Detta görs av
 paketet \pack{parskip}:
 \latex|\usepackage{parskip}|
 
-\subsubsection{Andra saker att hålla reda på}
+\subsection{Andra saker att hålla reda på}
 \begin{itemize}
 \item Datum skrivs på bästa sätt i ISO-format (YYYY–MM–DD), där man
 	använder intervallstreck för att skilja delarna åt.
@@ -769,7 +801,9 @@ paketet \pack{parskip}:
 	enhet. Detta görs enklast med paketet \pack{siunitx}.
 \end{itemize}
 
-\subsubsection{Skarpare typsnitt: \pack{fontenc} och \pack{lmodern}}
+\subsection{Skarpare typsnitt: \pack{fontenc} och \pack{lmodern}}
+\index{typsnitt}
+\index{typsnitt!skärpa}
 \label{sec:2:lmodern}
 Eftersom \LaTeX{} och dess tillhörande typsnitt (Computer Modern) är
 relativt gamla, och eftersom de designats för att fungera väl med det
@@ -797,7 +831,7 @@ för att typsätta svensk (och annan icke-anglikansk) text. För att använda
 Latin Modern inkluderar man paketet \pack{lmodern}:
 \latex|\usepackage{lmodern}|
 
-\subsection{Andra viktiga delar}
+\section{Andra viktiga delar}
 Även om innehållet är det viktigaste så finns det andra delar av en
 rapport eller artikel som också måste ges lite uppmärksamhet.
 Titelsidor bör man till exempel alltid ha, och det är även viktigt att ha 
@@ -808,7 +842,8 @@ som \LaTeX{} anser vara ”ömtåliga” i situationer de inte är tänkta att
 användas. Avslutningen på detta kapitel kommer därför att gå igenom dessa
 småsaker.
 
-\subsubsection{Titelsidan}% +abstracts, sammanfattning och båda samtidigt
+\subsection{Titelsidan}% +abstracts, sammanfattning och båda samtidigt
+\index{titelsida}
 Det kan vara trevligt att i sitt arbete ha en fin titelsida. Även denna
 kan \LaTeX{} (åtminstone standardklasserna) typsätta åt dig. Detta är
 enkelt att göra, och fungerar i princip så att man definierar sin
@@ -852,7 +887,8 @@ dokumentets start):
 \end{abstract}
 \end{latexcode}
 
-\subsubsection{Citat}
+\subsection{Citat}
+\index{citattecken}
 % FIXME: Korrekturläs och förbättra
 I \LaTeX{} används ofta \verb|``| och \verb|''| för att typsätta citattecken,
 och dessa teckenkombinationer resulterar då i det öppnande och stängande
@@ -879,7 +915,8 @@ Dessutom definieras omgivningen \env{displayquote}, som ersätter både
 \env{quote} och \env{quotation}. Paketets dokumentation, som finns på CTAN,
 är värd en genomläsning då paketet har många användbara kommandon.
 
-\subsubsection{Fotnoter}\label{sec:2:footnote}
+\subsection{Fotnoter}\label{sec:2:footnote}
+\index{fotnot}
 Fotnoter är små noteringar eller parantetiska inlägg%
 \footnote{Ibland används även fotnoter för källhänvisning — mer om detta
 i \cref{sec:5}.} som inte är väsentliga men som författaren ändå
@@ -892,7 +929,8 @@ förutom att fixa fotnoter nära skiljetecken även definierar ett kommando
 \cmd{multfootnote}, som gör det möjligt att typsätta flera fotnoter brevid
 varandra.
 
-\subsubsection{Teckenkodning (\UTF)}
+\subsection{Teckenkodning (\UTF)}
+\index{teckenkodning}
 Teckenkodning, som kort nämndes på \cpageref{sec:1:inputenx}, är
 viktigt att hålla koll på. Det finns två större teckenkodningar på Linux-%
 plattformar, \UTF{} och \textsc{iso-8859-1}, och en till på Windows-%
@@ -910,7 +948,8 @@ en del mer obskyra teckenkodningar\footnote{De som stöds av
 \pack{inputenx} listas i paketets manual.}, men det är troligtvis de tre
 nämnda du kommer att stöta på.
 
-\subsubsection{Längder}
+\subsection{Längder}
+\index{längd}
 Titt som tätt behöver man i \LaTeX{} använda längder för att till exempel
 kontrollera bredden på figurer och liknande. Den viktigaste fördefinierade
 längden är \cmd{textwidth}, som representerar bredden av det område på
@@ -923,7 +962,7 @@ Det finns en stor mängd längder i \LaTeX, och många av dem relaterar till
 olika mått på sidan \parencite[132]{Oetiker11}, medan andra (till exempel
 \cmd{smallskipamount}) är mer obskyra och godtyckliga.
 
-\subsubsection{Ömtåliga kommandon}
+\subsection{Ömtåliga kommandon}
 En del text, så som rubriker, figurtexter med mera, kan dyka upp mer än en
 gång i ett dokument (till exempel i innehållsförteckningen). Argument till
 sådana kommandon kallas för rörliga \eng{moving arguments} och kan ställa

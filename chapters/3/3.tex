@@ -1,8 +1,8 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-\section{Matematik med \hologo{LaTeX} och \texorpdfstring{\AmS}{AMS}}\label{sec:3}
+\chapter{Matematik med \hologo{LaTeX} och \texorpdfstring{\AmS}{AMS}}\label{sec:3}
 \LaTeX{} är ett mycket bra system för typsättning, och ett av de områden
 \LaTeX{} är starkast inom är typsättning av matematik. För att utöka och
 förenkla de grundläggande mekanismer \LaTeX{} har för typsättning av 
@@ -27,14 +27,15 @@ använda paketen \pack{amsmath} och \pack{amssymb}, som bör följa med din
 \usepackage{amssymb}
 \end{latexcode}
 
-\subsection{Att visa ekvationer}
+\section{Att visa ekvationer}
 Ekvationer är mångfacetterade och man kan vilja inkludera ekvationer av
 olika anledningar och på olika sätt. I \LaTeX{} kan figurer infogas
 \emph{inline} (det vill säga i löpande text) eller i omgivningar (vilket
 frilägger ekvationen, något som är lämpligt för längre ekvationer eller
 ekvationer av större vikt).
 
-\subsubsection{Ekvationer i löpande text}
+\subsection{Ekvationer i löpande text}
+\index{matematikläge!i löpande text}
 Ekvationer i löpande text kan infogas på två olika sätt; dels genom att
 placera matematiken mellan dollartecken (\verb|$\sin(x)$|) och dels genom
 att använda de \LaTeX-specifika alternativen till dollartecken, \cmd{(}
@@ -49,7 +50,8 @@ text vid de tillfällen då det kommer se ”fel” ut, eftersom ett block då
 är mer logiskt, textmässigt. Matematik i löpande text är istället oftast
 konstanter, enstaka värden och kanske någon olikhet.
 
-\subsubsection{Ekvationer som ekvationer}\label{sec:3:ekvsomekv}
+\subsection{Ekvationer som ekvationer}\label{sec:3:ekvsomekv}
+\index{matematikläge!fristående ekvation}
 Längre och viktigare ekvationer bör inte typsättas i löpande text —
 man bör istället använda en av de många omgivningar (\AmS)\LaTeX{} ger
 tillgång till. Den allra enklaste omgivningen (som fungerar i de flesta
@@ -70,17 +72,20 @@ mellanrumet mellan dessa och den omgivande texten varierade beroende på
 	man alltså behandla den precis som en
 ekvation i löpande text. Skillnaden är främst typografisk.
 
-\subsubsection{Referera till ekvationer}
+\subsection{Referera till ekvationer}
+\index{korsreferens!till ekvation}
 Likt figurer och tabeller finns det även ett behov av att kunna referera
 till sina ekvationer. På samma sätt som för figurer markerar man den
 ekvation man vill referera till med hjälp av \cmd{label}, men istället
 för att referera med hjälp av \cmd{ref} eller \cmd{vref} bör man använda
-\cmd{eqref} för att referera till ekvationer. Sådana referenser typsätts
+\cmd{eqref} för att referera till ekvationer\footnote{Använder man
+\pack{cleveref} kan man hålla sig till \cmd{cref}, som sköter det
+snyggt ändå.}. Sådana referenser typsätts
 lite annorlunda, och bör inte heller föregås av någon text som indikerar
 att det är en referens.
 
 \phantomsection
-\subsection{En snabbkurs i \LaTeX-matematik}
+\section{En snabbkurs i \LaTeX-matematik}
 Nu när du vet hur man skapar förutsättningarna för att typsätta matematik
 är det dags att gå in på detaljerna. Det finns många konventioner
 och betänkligheter när det gäller typsättning av matematik, så det är
@@ -90,6 +95,8 @@ det mesta du stöter på under en typisk kandidatutbildning i Teknisk Fysik
 eller Teknisk Matematik.
 
 \label{sec:3:subscript}
+\index{superskript}
+\index{subskript}
 Till att börja med måste två elementära operationer förklaras;
 \emph{superskript} (för potenser och dylikt) och \emph{subskript} (för 
 index och liknande). Ett superskript inför man i \LaTeX{} med hjälp av
@@ -110,6 +117,7 @@ framför en tom grupp, vilket är användbart om man vill beteckna exempelvis
 isotoper: \verb|{}_{92}^{235}|\\\verb|\textrm{U}| kan till exempel beteckna en uranatom
 och typsätts \({}_{92}^{235}\textrm{U}\).
 
+\index{tomrum!i matematikläge}
 Det finns även några viktiga skillnader mellan matematiktypsättning och
 vanlig texttypsättning, som främst har att göra med mellanrum:
 \begin{itemize}
@@ -121,19 +129,24 @@ vanlig texttypsättning, som främst har att göra med mellanrum:
 	\item Tomma rader tillåts inte i matematiktypsättning. Endast ett
 	”stycke” per ekvationsomgivning får förekomma.
 	
+	\index{matematik!variabel}
+	\index{matematik!icke-kursiv text}
 	\item Alla bokstäver anses vara variabler och typsätts därför med
 	kursiv text. De bokstäver som inte är variabler (till exempel
 	differentieringsoperatorn \(\mathrm{d}\)) måste skrivas in med 
-	kommandot \cmd{mathrm\{...\}}. Längre bitar text (eller snarare text
+	kommandot \cmd[mathrm]{mathrm\{...\}}. Längre bitar text (eller snarare text
 	som egentligen skulle kunna vara brödtext)
 	bör skrivas in med kommandot \cmd{text}.
 \end{itemize}
 
-\subsubsection{Enkla konstruktioner} % \frac, \choose, etc.
+\subsection{Enkla konstruktioner} % \frac, \choose, etc.
 Det finns ett antal enkla konstruktioner inom matematiken som var man
 (och kvinna) bör känna till och kunna typsätta. Dessa är konstruktioner
 som bråk, binomialkoefficienter, rötter och så vidare. Dessa visas
 kollektivt i \cref{tab:math:enkla}.
+\index{matematik!kvadratrot}
+\index{matematik!binomialkoefficient}
+\index{matematik!bråk}
 
 \begin{table}[p]
 	\centering
@@ -180,7 +193,9 @@ kommentarer ovan och under matematiken. Detta kan göras med kommandona
 	\label{ex:overbrace}
 \end{kod}
 
-\subsubsection{Funktioner etc.} % sin, lim, sup, etc.
+\subsection{Funktioner etc.} % sin, lim, sup, etc.
+\index{matematik!trigonometri}
+\index{matematik!gränsvärde}
 Många välanvända eller kända funktioner och operatorer (trigonometriska 
 funktioner och liknande) har
 långa namn som bör skrivas i upprätt text (det vill säga med
@@ -189,6 +204,7 @@ semantisk synpunkt definierar (\AmS)\LaTeX{} några
 av dessa som kommandon istället — sinus blir \cmd{sin}, cosinus \cmd{cos}
 och så vidare.
 
+\index{matematik!operator}
 De vanligaste trigonometriska funktionerna, logaritmer samt vanliga
 operationer så som \(\max\), \(\min\), \(\sup\), \(\inf\) och \(\lim\)
 finns som kommandon, och om man behöver typsätta en sådan funktion kan man
@@ -196,7 +212,8 @@ oftast satsa på att den finns. Finns den inte så kan man skapa den med
 hjälp av kommandot \cmd{DeclareMathOperator}:
 \latex|\DeclareMathOperator{gcd} % Största gemensamma nämnare|
 
-\subsubsection{Symboler}\label{sec:3:symbs}
+\subsection{Symboler}\label{sec:3:symbs}
+\index{matematik!symbol}
 Matematiken innehåller ett stort antal symboler, däribland det grekiska
 alfabetet, talmängder, oändligheter, tomma mängden och så vidare (och då
 inkluderar vi inte de pilar, operatorer, hattar och olikhetstecken som
@@ -235,9 +252,8 @@ deras motsvarande kommandon.
 		\cmd{exists} & \(\exists\) & \\
 		\cmd{nexists} & \(\nexists\) & \\
 		\cmd{complement} & \(\complement\) & \\
-		\cmd{emptyset} & \(\emptyset\) & Tomma mängden; även \cmd{varnothing} (\(\varnothing\)) eller \cmd{mathcal\{O\}} (\(\mathcal{O}\))\\
+		\cmd{emptyset} & \(\emptyset\) & Tomma mängden; även \cmd{varnothing} (\(\varnothing\)) eller \cmd[mathcal]{mathcal\{O\}} (\(\mathcal{O}\))\\
 		\cmd{infty} & \(\infty\) & Oändlighet \\
-		
 		\bottomrule 
 	\end{tabular}
 \end{table}
@@ -252,36 +268,36 @@ deras motsvarande kommandon.
 		%\cmidrule{1-2}
 		Gemen & & Versal & & Variant & \\
 		\midrule 
-		\cmd{alpha} & \(\alpha\) & \cmd{mathrm\{A\}} & \(\mathrm{A}\) & & \\
-		\cmd{beta} & \(\beta\) & \cmd{mathrm\{B\}} & \(\mathrm{B}\) & & \\
+		\cmd{alpha} & \(\alpha\) & \cmd[mathrm]{mathrm\{A\}} & \(\mathrm{A}\) & & \\
+		\cmd{beta} & \(\beta\) & \cmd[mathrm]{mathrm\{B\}} & \(\mathrm{B}\) & & \\
 		\cmd{gamma} & \(\gamma\) & \cmd{Gamma} & \(\Gamma\) & & \\
 		\cmd{delta} & \(\delta\) & \cmd{Delta} & \(\Delta\) & &  \\
-		\cmd{epsilon} & \(\epsilon\) & \cmd{mathrm\{E\}} & \(\mathrm{E}\) & \cmd{varepsilon} & \(\varepsilon\) \\
-		\cmd{zeta} & \(\zeta\) & \cmd{mathrm\{Z\}} & \(\mathrm{Z}\) & & \\
-		\cmd{eta} & \(\eta\) & \cmd{mathrm\{H\}} & \(\mathrm{H}\) & & \\
+		\cmd{epsilon} & \(\epsilon\) & \cmd[mathrm]{mathrm\{E\}} & \(\mathrm{E}\) & \cmd{varepsilon} & \(\varepsilon\) \\
+		\cmd{zeta} & \(\zeta\) & \cmd[mathrm]{mathrm\{Z\}} & \(\mathrm{Z}\) & & \\
+		\cmd{eta} & \(\eta\) & \cmd[mathrm]{mathrm\{H\}} & \(\mathrm{H}\) & & \\
 		\cmd{theta} & \(\theta\) & \cmd{Theta} & \(\Theta\) & \cmd{vartheta} & \(\vartheta\) \\
-		\cmd{iota} & \(\iota\) & \cmd{mathrm\{I\}} & \(\mathrm{I}\) & & \\
-		\cmd{kappa} & \(\kappa\) & \cmd{mathrm\{K\}} & \(\mathrm{K}\) & & \\
+		\cmd{iota} & \(\iota\) & \cmd[mathrm]{mathrm\{I\}} & \(\mathrm{I}\) & & \\
+		\cmd{kappa} & \(\kappa\) & \cmd[mathrm]{mathrm\{K\}} & \(\mathrm{K}\) & & \\
 		\cmd{lambda} & \(\lambda\) & \cmd{Lambda} & \(\Lambda\) & & \\
-		\cmd{mu} & \(\mu\) & \cmd{mathrm\{M\}} & \(\mathrm{M}\) & & \\
-		\cmd{nu} & \(\nu\) & \cmd{mathrm\{N\}} & \(\mathrm{N}\) & & \\
+		\cmd{mu} & \(\mu\) & \cmd[mathrm]{mathrm\{M\}} & \(\mathrm{M}\) & & \\
+		\cmd{nu} & \(\nu\) & \cmd[mathrm]{mathrm\{N\}} & \(\mathrm{N}\) & & \\
 		\cmd{xi} & \(\xi\) & \cmd{Xi} & \(\Xi\) & & \\
-		\texttt{o} & \(o\) & \cmd{mathrm\{O\}} & \(\mathrm{O}\) & & \\
+		\texttt{o} & \(o\) & \cmd[mathrm]{mathrm\{O\}} & \(\mathrm{O}\) & & \\
 		\cmd{pi} & \(\pi\) & \cmd{Pi} & \(\Pi\) & \cmd{varpi} & \(\varpi\) \\
-		\cmd{rho} & \(\rho\) & \cmd{mathrm\{P\}} & \(\mathrm{P}\) & \cmd{varrho} & \(\varrho\) \\
+		\cmd{rho} & \(\rho\) & \cmd[mathrm]{mathrm\{P\}} & \(\mathrm{P}\) & \cmd{varrho} & \(\varrho\) \\
 		\cmd{sigma} & \(\sigma\) & \cmd{Sigma} & \(\Sigma\) & \cmd{varsigma} & \(\varsigma\) \\
-		\cmd{tau} & \(\tau\) & \cmd{mathrm\{T\}} & \(\mathrm{T}\) & & \\
+		\cmd{tau} & \(\tau\) & \cmd[mathrm]{mathrm\{T\}} & \(\mathrm{T}\) & & \\
 		\cmd{upsilon} & \(\upsilon\) & \cmd{Upsilon} & \(\Upsilon\) & & \\
 		\cmd{phi} & \(\phi\) & \cmd{Phi} & \(\Phi\) & \cmd{varphi} & \(\varphi\) \\
-		\cmd{chi} & \(\chi\) & \cmd{mathrm\{X\}} & \(\mathrm{X}\) & & \\
+		\cmd{chi} & \(\chi\) & \cmd[mathrm]{mathrm\{X\}} & \(\mathrm{X}\) & & \\
 		\cmd{psi} & \(\psi\) & \cmd{Psi} & \(\Psi\) & & \\
 		\cmd{omega} & \(\omega\) & \cmd{Omega} & \(\Omega\) & & \\
 		\bottomrule 
 	\end{tabular}
 \end{table}
 
-\vspace{-.5em}
-\subsubsubsection*{Operatorer}\label{sec:3:operatorer}%
+\subsubsection*{Operatorer}\label{sec:3:operatorer}%
+\index{matematik!operator}
 Förutom symbolerna som nyss diskuterades finns även en
 mycket stor mängd operatorer inom matematiken. Även dessa kan man leta
 fram med hjälp av Detexify, men de flesta (åtminstone de som används
@@ -290,15 +306,19 @@ exempel
 \cmd{nabla}, och tillhörandeoperatorn (\(\in\)) heter \cmd{in}. Listor
 över de vanligaste pilarna, relationssymbolerna och operatorerna i 
 \LaTeX{} återfinns i \crefrange{tab:pilar}{tab:operatorer}. 
+\index{matematik!relationssymbol}
+\index{matematik!pil}
 
-\vspace{-.5em}
-\subsubsubsection*{Hattar, prickar, primtecken och liknande}
+\subsubsection*{Hattar, prickar, primtecken och liknande}
+\index{matematik!hatt}
+\index{matematik!derivata}
 Ibland vill man även modifiera variablers betydelse, kanske för att
 beteckna en transformerad variabel, en vektor 
 eller en derivata med avseende på tid.
 Detta kan göras med de \LaTeX-kommandon som listas i \cref{tab:hattar},
 tillsammans med en kort förklaring av notationens innebörd.
 
+\index{matematik!vektor}
 Just för vektorer existerar det dock flera olika notationer. En populär
 variant (som \LaTeX{} främjar) är att sätta dit en liten pil ovanför
 variabeln (\(\vec{a}\)), vilket görs med \cmd{vec}. Andra föredrar att
@@ -308,7 +328,8 @@ vilket görs med \cmd{boldmath} och \cmd{mathbb}, respektive.
 Min rekommendation är att använda \cmd{vec} (eftersom det i
 koden indikerar att vi pratar om en vektor), och omdefiniera den om man
 föredrar en annan notation. Man kan till exempel använda följande kommando
-för att göra så att \cmd{vec} istället visar variabeln fetstilt:
+för att göra så att \cmd{vec} istället visar variabeln
+fetstilt\footnote{Med paketet \pack{isomath} — som kan rekommenderas — kan koden reduceras till \cmd*{let}\cmd*{vec}\cmd*{vectorsym}}:
 \latex|\renewcommand\vec[1]{\boldmath{#1}}|
 
 \begin{table}[p]
@@ -319,15 +340,15 @@ för att göra så att \cmd{vec} istället visar variabeln fetstilt:
 		\toprule 
 		Notation & & Kommentar \\
 		\midrule 
-		\cmd{hat\{a\}} & \(\hat{a}\) & Transformerade variabler \\
-		\cmd{vec\{a\}} & \(\vec{a}\) & Vektorer (alternativ notation existerar) \\
-		\cmd{dot\{a\}} & \(\dot{a}\)& Förstaderviata med avseende på tid\\
-		\cmd{ddot\{a\}} &\(\ddot{a}\)& Andraderivata med avseende på tid\\
-		\cmd{a'} & \(a'\)& Generell förstaderivata\\
-		\cmd{a''} & \(a''\)& Generell andraderivata\\
-		\cmd{bar\{a\}} & \(\bar{a}\) & Statistiskt medelvärde \\
-		\cmd{tilde\{a\}} & \(\tilde{a}\) & Statistisk median \\
-		\cmd{widehat\{abc\}} & \(\widehat{abc}\) & Variant av \cmd{hat} för flera tecken \\
+		\cmd[hat]{hat\{a\}} & \(\hat{a}\) & Transformerade variabler \\
+		\cmd[vec]{vec\{a\}} & \(\vec{a}\) & Vektorer (alternativ notation existerar) \\
+		\cmd[dot]{dot\{a\}} & \(\dot{a}\)& Förstaderviata med avseende på tid\\
+		\cmd[ddot]{ddot\{a\}} &\(\ddot{a}\)& Andraderivata med avseende på tid\\
+		\texttt{a'} & \(a'\)& Generell förstaderivata\\
+		\texttt{a''} & \(a''\)& Generell andraderivata\\
+		\cmd[bar]{bar\{a\}} & \(\bar{a}\) & Statistiskt medelvärde \\
+		\cmd[tilde]{tilde\{a\}} & \(\tilde{a}\) & Statistisk median \\
+		\cmd[widehat]{widehat\{abc\}} & \(\widehat{abc}\) & Variant av \cmd{hat} för flera tecken \\
 		\bottomrule 
 	\end{tabular}
 \end{table}
@@ -395,8 +416,8 @@ för att göra så att \cmd{vec} istället visar variabeln fetstilt:
 \end{table}
 %% (end)
 
-\vspace{-.5em}
-\subsubsection{Paranteser och dylikt}
+\subsection{Paranteser och dylikt}
+\index{matematik!parantes|(}
 Paranteser är mycket viktiga inom matematiken för att visa olika typer av
 grupper, och besitter dessutom egenskapen att de måste skalas med sin
 omgivning för att de ska se bra ut. I \LaTeX{} skapar man sådana
@@ -418,6 +439,7 @@ Paranteserna måste alltså inte heller matcha typmässigt, även om detta
 ofta är önskvärt:
 \latex|\left(\frac{1}{2}\right]|
 
+\index{bra-ket}
 Att ha omatchade paranteser kan vara önskvärt inom till exempel
 kvantfysik, där man har bra-ket-notation (se dock notisen om \cmd{mid}
 på \cpageref{sec:3:mid} och paketet \pack{braket} som förklaras 
@@ -465,11 +487,13 @@ x^2\right)\d{x} = \left[\dfrac{x^4}{12} +
 	\caption{Skalbara paranteser med \cmd{left} och \cmd{right}.}
 	\label{ex:paranteser}
 \end{kod}
+\index{matematik!parantes|)}
 
-\subsubsubsection*{Vertikala streck}
+\subsubsection*{Vertikala streck}
+\index{matematik!absolutbelopp}
 Vertikala streck är mycket lika paranteser; man kan även använda dessa
-genom att skriva exempelvis \cmd{left|} och \cmd{right|} (eller
-\cmd{left\textbackslash vert} och \cmd{right\textbackslash vert}), om man
+genom att skriva exempelvis \cmd*{left|} och \cmd*{right|} (eller
+\cmd*{left\textbackslash vert} och \cmd*{right\textbackslash vert}), om man
 vill. Det
 finns dock även kommandon \cmd{lvert} och \cmd{rvert} som motsvarar dessa
 (och som beter sig något bättre typsättningsmässigt),
@@ -497,7 +521,9 @@ integrering (\(\int_1^e\! x^{-1}\d{x}=\ln x\vert_{x=1}^e=1 \)) i vilket
 fall man istället skriver \cmd{vert}:
 \latex|\ldots=\ln x\vert_{x=1}^e=\ldots|
 
-\subsubsection{Summor och integration}
+\subsection{Summor och integration}
+\index{matematik!summa}
+\index{matematik!integral}
 Integraler och summor (och upprepade produkter och så vidare) är mycket
 enkla att uttrycka med \LaTeX{}. Med hjälp av kommandot \cmd{sum} (eller
 \cmd{int}, se även \cref{tab:sums}) kan man infoga en summa (eller
@@ -536,14 +562,15 @@ Kommandot \cmd{limits} kan även användas med andra operatorer, till
 exempel \(\max\), \(\inf\) och \(\lim\):
 \latex|\lim\limits_{x\to\infty} \frac{1}{x}| 
 
-\subsubsubsection*{Snyggare (och mer korrekta) integraler}
+\subsubsection*{Snyggare (och mer korrekta) integraler}
+\index{matematik!integral}
 Integraler, så som \LaTeX{} typsätter dem från början, blir ofta felaktiga
 i det avseendet att avståndet mellan integraltecken och innehåll
 blir stort, samtidigt som avståndet till differentieringsoperatorn
 (som dessutom
 inte typsätts korrekt utan visst krångel) blir för litet. Det första
 problemet (som i viss mån även finns för summor) kan åtgärdas genom att
-lägga in ett negativt mellanrum (\cmd{!}) mellan integraltecken och
+lägga in ett negativt mellanrum (\cmd["!]{!}) mellan integraltecken och
 innehåll:
 \latex|\int_0^1\! x^2 dx|
 
@@ -599,15 +626,15 @@ man ska visa integrering över exempelvis ett område \(A\), då detta bara
 			\end{minipage}
 	\caption[Integral med korrekt och inkorrekt typsättning]{Integral med
 	korrekt (underst) och inkorrekt (överst) typsättning. Notera att 
-	\cmd{d} inte finns i \LaTeX{} från början utan måste definieras med 
+	\cmd*{d} inte finns i \LaTeX{} från början utan måste definieras med 
 	den kod som presenteras på \cpageref{sec:3:integ:kod}.}
 	\label{ex:integral}
 \end{kod}
 
-\subsection{Ekvationsomgivningar}\label{sec:3:environments}
+\section{Ekvationsomgivningar}\label{sec:3:environments}
 Redan på \cpageref{sec:3:ekvsomekv} diskuterades två av de 
 ekvationsomgivningar
-\AmS\LaTeX{} erbjuder (\env{equation} och \env{equation*}), och dessa två
+\AmS\LaTeX{} erbjuder (\env{equation} och \env[equation]{equation*}), och dessa två
 är fullt tillräckliga för väldigt många tillämpningar. Det finns dock
 tillfällen då dessa inte räcker till, och därför definierar \AmS\LaTeX{}
 även en stor mängd andra omgivningar för att lösa de problem som kan 
@@ -620,7 +647,8 @@ omgivningarna; en fullständig lista finns i användarguiden till
 \pack{amsmath} \parencite{AMS99} och en ordentlig genomgång ges av
 \textcite{Voss10}.
 
-\subsubsection{Långa ekvationer med \env{multline}}
+\subsection{Långa ekvationer med \env{multline}}
+\index{matematikläge!radbruten ekvation}
 Ibland (oroväckande ofta, till och med) stöter man på ekvationer som är
 alldeles för långa för att få plats på en rad. Hamnar man i en sådan
 situation är det \env{multline} (notera avsaknandet av ett \texttt{i})
@@ -685,7 +713,8 @@ ekvationsnummer; vill man ha ett per rad ska man istället använda
 \end{figure}
 \clearpage
 
-\subsubsection{Relaterade ekvationer: \env{align} och \env{gather}}
+\subsection{Relaterade ekvationer: \env{align} och \env{gather}}
+\index{matematikläge!samlade ekvationer}
 Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
 i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
 \env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
@@ -770,7 +799,7 @@ sätt.
 \end{figure}
 
 \clearpage
-\subsubsubsection*{Underekvationer}
+\subsubsection*{Underekvationer}
 Förutom \env{align} och \env{gather} visar även \cref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
 omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
 och får bara innehålla en (och endast en) matematikomgivning, inget annat:
@@ -784,7 +813,8 @@ y_3 &= x^2 - 1
 \end{subequations}
 \end{latexcode}
 
-\subsubsection{Matriser}
+\subsection{Matriser}
+\index{matematik!matris}
 Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
 av de omgivningar som visas i \cref{fig:matriser}. Dessa måste
 användas i matematikläge, det vill säga i en annan omgivning som används
@@ -808,7 +838,8 @@ i kolumnerna i en matris:\label{sec:3:matrispktr}
 \end{equation*}
 \end{latexcode}
 
-\subsubsection{Olika fall med \env{cases}}
+\subsection{Olika fall med \env{cases}}
+\index{matematikläge!styckvis funktion}
 Omgivningen \env{cases} är mycket användbar då man definierar styckvisa
 funktioner eller vissa talföljder, till exempel den som behandlas i 
 Collatz problem.
@@ -843,7 +874,8 @@ x, & x \geq 0; \\
 \end{kod}
 
 
-\subsection{Mellanrum} % \quad et al
+\section{Mellanrum} % \quad et al
+\index{tomrum!matematikläge}
 Mellanrum i matematikläge ignoreras som sagt av \LaTeX, som automatiskt
 sätter in korrekt mellanrum där det behövs. Normalt brukar detta bli
 mycket bra, men ibland (som i fallet med integraler) kan man behöva göra
@@ -862,7 +894,7 @@ i \cref{tab:spaces}.
 		\midrule 
 		\cmd{negthickspace} & \(-5\) & \(\abox\negthickspace\abox\)  \\
 		\cmd{negmedspace} & \(-4\) & \(\abox\negmedspace\abox\)  \\
-		\cmd{!}, \cmd{negthinspace} & \(-3\) & \(\abox\!\abox\)  \\ 
+		\cmd["!]{!}, \cmd{negthinspace} & \(-3\) & \(\abox\!\abox\)  \\ 
 		& \(0\) & \(\abox\abox\)  \\
 		\cmd{,}, \cmd{thinspace} & \(3\) & \(\abox\,\abox\)  \\
 		\cmd{:}, \cmd{medspace} & \(4\) & \(\abox\:\abox\)  \\
@@ -905,7 +937,8 @@ typ 0 om de inte har någon text (en operand) till vänster.
 	\end{tabular}
 \end{table}
 
-\subsubsection{Fantomer}
+\subsection{Fantomer}
+\index{tomrum!matematikläge}
 Ibland finns det även tillfällen då man vill ha mellanrum som är
 \emph{exakt} lika stora som en viss bit typsatt text. Man använder då
 fantomer. De viktigaste fantomerna är \cmd{hphantom} (ingen höjd, bredd
@@ -962,7 +995,8 @@ p(x) = \left(\frac{1}{2}x^3 +
 	\label{fig:phantom}
 \end{figure}
 
-\subsection{Punkter}
+\section{Punkter}
+\index{matematik!punkter}
 Även om \LaTeX{} definierar kommandon som \cmd{ldots} och \cmd{cdots} för
 att typsätta punkter så bör man undvika dessa eftersom de inte berättar
 vilket sammanhang punkterna används i. Det finns många olika konventioner,
@@ -997,7 +1031,8 @@ och för att enkelt kunna byta mellan dessa är det bättre att använda
 	\end{tabular}
 \end{table}
 
-\subsection{Enheter med \pack{siunitx}}\label{sec:3:siunitx}
+\section{Enheter med \pack{siunitx}}\label{sec:3:siunitx}
+\index{SI-enhet}
 Fysiker och matematiker (främst fysiker) behöver ofta typsätta enheter i
 anslutning till sin text, något som inte alltid är helt enkelt eftersom
 en del konventioner existerar gällande avstånd och så vidare. Paketet

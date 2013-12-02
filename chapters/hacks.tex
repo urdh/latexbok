@@ -1,79 +1,19 @@
 \ExplSyntaxOn
-% Force cramped style on inline math
-\msg_new:nnn{latexbok}{bad-math}
-  {Bad~math~environment~delimiter}
-%\DeclareDocumentCommand\({u{\)}}{
-%  \mode_if_math:T{\msg_error:nn{latexbok}{bad-math}}
-%  \c_math_toggle_token
-%  %\hbox_set:Nw\l_tmpa_box
-%  \cramped{#1}
-%  \mode_if_math:F{\msg_error:nn{latexbok}{bad-math}}
-%  \mode_if_inner:F{\msg_error:nn{latexbok}{bad-math}}
-%  \c_math_toggle_token
-%}
-% Twoside
-\KOMAoptions{twoside}
-% Delar
-\crefname{section}{del}{del}
-\Crefname{section}{Del}{Del}
+% Appendix
 \crefname{appendix}{appendix}{appendix}
 \Crefname{appendix}{Appendix}{Appendix}
 \apptocmd{\appendix}{%
-  \crefalias{section}{appendix}%
-  \renewcommand\thesection{\Alph{section}}%
+  \crefalias{part}{appendix}%
 }{}{}
-
 % Listings
-\makeatletter
-\cs_gset:Npn\kodname{Exempel}
+\DeclareFloatingEnvironment[fileext=lok,placement={tb},name=Exempel]{kod}
+\newsubfloat{kod}
 \crefname{kod}{exempel}{exempel}
 \Crefname{kod}{Exempel}{Exempel}
-\newcounter{kod}
-\cs_set:Npn\thekod{\arabic{kod}}
-\cs_new:Npn\fps@kod{tb}
-\cs_new:Npn\ftype@kod{3}
-\cs_new:Npn\ext@kod{lok}
-\cs_new:Npn\fnum@kod{\kodname\ \thekod}
-\NewDocumentEnvironment{kod}{o}{
-  \__skrapport_xfloat:nx{kod}
-    {\IfNoValueTF{#1}{\fps@kod}{#1}}
-  \centering
-}{
-  \end@float
-}
-\NewDocumentEnvironment{kod*}{o}{
-  \__skrapport_xfloat:nx{kod}
-    {\IfNoValueTF{#1}{tp}{#1}}
-  \centering
-}{
-  \end@float
-}
-\newsubfloat{kod}
-\makeatother
 % Displaying one line of code
 \NewDocumentCommand\kodrad{mm}{
   \hspace{1ex}
   \inputminted[firstline=#1,lastline=#1]{latex}{#2.tex}
-}
-% Front/main/backmatter
-\NewDocumentCommand\frontmatter{}{
-  \cleardoublepage
-  \pagenumbering{roman}
-}
-\NewDocumentCommand\mainmatter{}{
-  \cleardoublepage
-  \pagenumbering{arabic}
-}
-\NewDocumentCommand\backmatter{}{
-  \cleardoublepage
-}
-% Changes to titlepage environment (don't reset pagenumbering before)
-\DeclareDocumentEnvironment{titlepage}{}{
-    \cleardoublepage
-}{
-    \bool_gset_false:N\g__skrapport_copyright_unprinted_bool
-    \thispagestyle{skrapport@titlepage}
-    \cleardoublepage\setcounter{page}{1}
 }
 % File last modified
 \def\parsedate #1:2#2#3#4#5#6#7#8#9\empty{\ifx{#2}{9}19\else20\fi#3#4/#5#6/#7#8}
@@ -95,5 +35,7 @@
 	\colorbox{\minted@bgcol}{\usebox{\minted@bgbox}}
 	\par
 }
+% Fix for imakeidx
+\AtBeginDocument{\def\alsoname{se~även}}
 \makeatother
 \ExplSyntaxOff
