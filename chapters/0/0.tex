@@ -2,9 +2,7 @@
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
 \documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
 \begin{document}
-\phantomsection
-\addcontentsline{toc}{section}{\hspace{1.3em}Inledning}
-\section*{Inledning}
+\nntocsection{Inledning}
 Att publicera något, oavsett om det är långa böcker eller korta artiklar,
 är inte helt enkelt. Förr, innan det fanns en dator i varje hem och innan
 programvaror som Microsoft Word och Open\-Office blev tillgängliga för var
@@ -37,6 +35,8 @@ någon mening för \TeX{} hur den tror att du vill ha ditt dokument (utifrån
 dokumentklassen samt den kod du skriver) och låter sedan \TeX{} typsätta
 detta för att skapa ett ”tryckt” dokument.
 
+\index{kompilator}
+\index{kompilator!pdfLaTeX@\pdfLaTeX{}}
 Men \LaTeX{} är inte bara ett typsättningssystem; både språket dokumenten
 skrivs i och den kompilator som omvandlar dokumenten till \DVI-filer
 kallas \LaTeX{} (men just kompilatorn brukar benämnas \cli{latex},
@@ -55,6 +55,7 @@ enkla kommandon — sådana som gör texten kursiv eller infogar en figur
 — men att dokumentet ändå håller mycket hög standard, precis som om
 det typsatts av en riktig typsättare.
 
+\index{stavningskontroll}
 Eftersom språket man skriver dokument i uppmanar till struktur och ordning
 blir det dessutom lättare att skriva strukturerade texter. Även om saker
 som finns i en vanlig ordbehandlare (stavningskontroll, till exempel) saknas i
@@ -100,17 +101,17 @@ Introduktionen innehåller följande delar:
 	beskriver hur man på bästa sätt använder \LaTeX{} tillsammans med
 	\AmS-paketen för att typsätta det \LaTeX{} typsätter bäst, matematik,
 	och går även kort in på hur man typsätter en del fysik med paketet
-	\pack{siunitx}.
+	\pack*{siunitx}.
 	
 	\item[{\Cref{sec:4}, \hyperref[sec:4]{Grafik med \LaTeX}}]
 	beskriver hur man inkluderar grafik i \LaTeX{} med paketet
-	\pack{graphicx}, och visar några korta exempel på hur man kan rita
+	\pack*{graphicx}, och visar några korta exempel på hur man kan rita
 	direkt i \LaTeX{} med \PGFTikZ{}. Efter den här och föregående del bör
 	du kunna skriva fullständiga rapporter med \LaTeX.
 	
 	\item[{\Cref{sec:5}, \hyperref[sec:5]{Referenser med \BibTeX}}]
 	beskriver hur du använder \BibTeX{} för att hålla koll på och använda
-	referenser i \LaTeX, och beskriver även i korthet paketet \pack{chscite} som
+	referenser i \LaTeX, och beskriver även i korthet paketet \pack*{chscite} som
 	hjälper dig att typsätta referenser på det sätt Chalmers bibliotek
 	rekommenderar. Efter denna delen bör du kunna skriva långa arbeten
 	(till exempel kandidatrapporter) i \LaTeX.
@@ -134,6 +135,7 @@ studera och förstå de exempel som presenteras, och lek gärna lite själv
 om du inte riktigt förstår. Det finns inget bättre sätt att lära sig än
 att vara nyfiken!
 
+\index{installera!LaTeX@\LaTeX{}}
 \LaTeX{} finns till många plattformar, och finns installerat på Chalmers
 Linux\-da\-to\-rer. Vill du installera \LaTeX{} på din egen dator finns det
 sannolikt i din pakethanterare (om du använder Linux), alternativt i form
@@ -145,6 +147,7 @@ tyvärr inte ge fullständiga instruktioner för att installera dessa paket
 (det är inte introduktionens syfte);
 konsultera istället respektive pakets dokumentation.
 
+\index{CTAN}
 Under introduktionens gång kommer det refereras till så kallade
 \emph{paket}, som används för att utöka \LaTeX{} med intressanta (och
 ibland nödvändiga) funktioner. Dessa paket kommer oftast att beskrivas

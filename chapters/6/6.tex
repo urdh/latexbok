@@ -24,6 +24,7 @@ som finns och när man bör använda dem. Avslutningsvis ges även en lista
 \XeTeX.
 
 \subsection{Andra resurser}
+\index{resurser|(}
 Även om denna introduktion siktar på att ge dig allt du behöver för att
 lära dig \LaTeX{} är det inte säkert att den är tillräcklig. Man kan inte
 diskutera allt i en kort introduktion, och vill man lära sig mer om den
@@ -36,6 +37,7 @@ och forum som kan hjälpa dig släcka din kunskapstörst eller lösa dina
 \LaTeX-problem.
 
 \subsubsection{Böcker och artiklar}
+\index{resurser!böcker|(}
 Det finns mycket material tillgängligt när det gäller \LaTeX{}. Många
 böcker inom ämnet har publicerats av Addison-Wesley, och det finns även
 en uppsjö artiklar, böcker och guider tillgängliga på CTAN, och en journal
@@ -105,15 +107,17 @@ artiklar som kan vara av intresse för dig som precis börjat med \LaTeX.
 \end{description}
 
 Utöver dessa bör man givetvis även läsa manualerna till de paket man
-använder (dessa finns alltid på CTAN) och kanske även manualen till
-\BibTeX{} \parencite{Patashnik88a} om man behöver det.
+använder (dessa finns alltid på CTAN).
+\index{resurser!böcker|)}
 
 \subsubsection{Hjälp med specifika problem}
+\index{resurser!på internet}
 Det tar lång tid att bemästra \LaTeX{} fullt ut, och i början kommer man
 garanterat att stöta på problem. Några av dem kanske går att lösa med den
 hjälp som ges i den här introduktionen och de andra böcker och artiklar
 som presenteras, men vissa måste man fråga någon om.
 
+\index{TeX Stack Exchange@\TeX{} Stack Exchange}
 Det finns så klart en uppsjö olika maillistor, forum och sökmotorer (och
 phaddrar, för dig som går på en teknisk högskola) som kan användas för att
 lösa problem, ställa frågor och utforska \LaTeX. En mycket bra resurs är
@@ -123,9 +127,11 @@ Många stora namn i \TeX-världen dyker upp där lite då och då, och undrar
 man något om \LaTeX{} så är det ett utmärkt ställe att fråga. Använder man
 IRC kan man också med fördel besöka \verb|#latex|-kanalen på Freenode%
 \footnote{\url{irc://chat.freenode.net}}.
+\index{resurser|)}
 
 \phantomsection
 \subsection{Tips för stora projekt}
+\index{struktur!filsystems-}
 För stora \LaTeX-projekt (till exempel kandidatarbeten, examensarbeten
 och liknande) är det viktigt att kunna ha en ordentlig ordning på sitt
 dokument. Är det dessutom ett dokument många ska samarbeta med är det
@@ -165,6 +171,7 @@ läsaren, men mer information om hur man gör sådant ges av bland annat
 \textcites{Flynn06}{LaTeX3}{Robertson06}.
 
 \subsubsection{Versionshantering}
+\index{versionshantering}
 För större projekt och projekt som utförs i grupp är det mycket praktiskt
 att kunna spåra ändringar och ändra dokumentet från många olika platser
 (gärna samtidigt). Med hjälp av ett versionshanteringssystem så som 
@@ -183,6 +190,7 @@ Comic Sans är en utmärkt resurs för den som vill lära sig Mercurial och
 versionshantering.
 
 \subsubsection{Uppdelning av dokumentet}
+\index{uppdelning!av \LaTeX-kod}
 Stora projekt (med flera kapitel eller stora delar) kan med fördel delas
 upp på flera filer. Man har då en grundfil (säg, \texttt{projekt.tex}) som
 refererar till flera olika underfiler (kanske en per kapitel, lämpligen
@@ -210,6 +218,7 @@ projektet under tiden. Paketet \pack{subfiles} finns på CTAN men inte i
 Chalmers datorsystem eller i \TeX{} Live.
 
 \subsection{Rekommenderade paket}
+\index{paket!förteckning|(}
 Eftersom \TeX{} är Turingkomplett kan i princip allt göras med språket,
 även om det främst är tänkt för typsättning. Således kan det mesta i 
 typsättningsväg lösas relativt enkelt. Kan det inte det, och problemet
@@ -229,6 +238,7 @@ funktionalitet att man alltid bör använda dem. Det handlar om allt från
 tecken- och typsnittskodning till avstavning och interna länkar.
 
 \begin{description}
+	\index{avstavning}
 	\item[\pack{babel}] (ej med \XeTeX)
 	översätter interna strängar (till exempel ”Referenser” och 
 	”Sammanfattning”) till det språk som önskas och gör det möjligt för
@@ -246,11 +256,13 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	bland annat avstavning, och man bör därför istället använda 
 	\texttt{T1}. Detta diskuteras närmre på \cpageref{pack:fontenc}.
 
+	\index{typsnitt!OTF- och TTF-@{OTF- och TTF-}}
 	\item[\pack{fontspec}] (endast med \XeTeX och \hologo{LuaTeX})
 	låter användaren välja \textsc{OTF}-typsnitt helt fritt, antingen
 	från typsnitt installerade på datorn eller från \textsc{TTF}- eller
 	\textsc{OTF}-filer.
 	
+	\index{hyperlänk}
 	\item[\pack{hyperref}]
 	gör om innehållsförteckningar, referenser och URIer till riktiga
 	länkar i de fall detta stöds (det vill säga om slutformatet är \PDF).
@@ -259,6 +271,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	och Acrobat Reader).
 	Ett oumbärligt paket som alltid bör inkluderas.
 	
+	\index{teckenkodning}
 	\item[\pack{inputenx}] (ej med \XeTeX och \hologo{LuaTeX})
 	är ett paket som låter användaren berätta för \LaTeX{} vilken
 	teckenkodning indatan sparats med. De vanigaste inställningarna är
@@ -266,6 +279,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	stöds också.
 	Detta paket introducerades lite kort på \cpageref{pack:inputenx}.
 
+	\index{typsnitt!paket}
 	\item[\pack{kpfonts}]
 	inkluderar typsnittsfamiljen \emph{Kepler} som är en gratis familj
 	baserad på Adobe Palatino. Personligen tycker jag att \emph{Kepler}
@@ -273,6 +287,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	innehåller dessutom en enorm mängd typsnitt som täcker allasituationer.
 	Välj antingen detta paket \emph{eller} \pack{lmodern}, inte båda.
 	
+	\index{typsnitt!paket}
 	\item[\pack{lmodern}]
 	inkluderar typsnittet \emph{Latin Modern} för att ersätta
 	\emph{Computer Modern}, standardtypsnittet i \LaTeX. Latin Modern ser
@@ -287,6 +302,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	alternativen \texttt{l2tabu} och \texttt{orthodox}:
 	\latex|\usepackage[l2tabu,orthodox]{nag}|
 
+	\index{avstavning}
 	\item[{\pack{polyglossia}}] (endast med \XeTeX)
 	ersätter \pack{babel} för \XeTeX och har bättre stöd för \UTF.
 \end{description}
@@ -298,26 +314,32 @@ applicera diverse olika paket för att få hjälp med detta. Det gäller
 till exempel tabeller, figurtexter, SI-enheter och matematik.
 
 \begin{description}
+	\index{tabell}
 	\item[\pack{booktabs}]
 	är ett paket som gör det möjligt att skapa mycket snygga tabeller.
 	Paketet diskuteras redan på \cpageref{pack:booktabs}, och är i princip
 	ett måste om man ska inkludera tabeller i sitt \LaTeX-dokument.
 
+	\index{figur}
+	\index{tabell}
 	\item[\pack{caption}]
 	gör det möjligt att ändra stilen på figur- och tabelltexter så att de
 	syns tydligare och inte smälter in i texten.
 
+	\index{citattecken}
 	\item[\pack{csquotes}]
 	gör det lättare att typsätta citat på ett snyggt och korrekt sätt.
 	Bland annat definieras kommandot \cmd{enquote}, som kan användas
 	istället för de (inkorrekta) citattecknen \verb|``| och \verb|''|, 
 	och kommandot \cmd{blockquote} för längre block av citerad text.
 
+	\index{fotnot}
 	\item[\pack{fnpct}]
 	ser till att fotnoter nära skiljetecken typsätts på ett snyggt sätt,
 	och gör det lättare att typsätta flera fotnoter brevid varandra.
 	Introducerades kort på \cpageref{sec:2:footnote}.
 	
+	\index{SI-enhet}
 	\item[{\pack{siunitx}}]
 	gör det enklare att typsätta SI-enheter, decimaltal och vinklar på ett
 	korrekt sätt för icke engelskspråkiga rapporter. Mycket användbart
@@ -326,6 +348,7 @@ till exempel tabeller, figurtexter, SI-enheter och matematik.
 \end{description}
 
 \subsubsubsection*{Paket för matematiktypsättning}
+\index{paket!matematik}
 Som teknisk matematiker (eller fysiker) kommer stora delar av de rapporter
 man skriver oundvikligen innehålla matematik. Även om \LaTeX{} för sig
 självt är relativt bra på att typsätta matematik kan det ibland behövas
@@ -363,9 +386,10 @@ matematikpaket.
 
 	\item[\pack{skmath}]
 	definierar en del kommandon som gör det lättare att typsätta matematik
-	(till exempel \cmd{d} som presenterades på \cpageref{sec:3:integ:kod})
+	(till exempel \cmd*{d} som presenterades på \cpageref{sec:3:integ:kod})
 	och omdefinierar andra för att förbättra utseendet.
 
+	\index{teckenkodning!UTF@\UTF}
 	\item[{\pack{unicode-math}}]
 		(endast med \XeTeX och \hologo{LuaTeX})
 	kan användas för att ladda \textsc{OTF}-typsnitt för matematik och
@@ -377,6 +401,7 @@ matematikpaket.
 \end{description}
 
 \subsubsection{Paket för grafik}
+\index{paket!grafik}
 Grafik i form av figurer eller illustrationer är givetvis en viktig del
 av många rapporter, vare sig det är figurer av uppställningar, plottar
 eller flödesscheman. Det finns tre relevanta paket när det gäller grafik
@@ -384,11 +409,13 @@ i \LaTeX; ett som används för att importera grafik från externa filer och
 två som används för att rita direkt med \LaTeX-kommandon.
 
 \begin{description}
+	\index{grafik!inkludera}
 	\item[\pack{graphicx}]
 	förklaras kort i \cref{sec:4} och gör det möjligt att inkludera
 	figurer från externa filer i sitt \LaTeX-dokument. Mycket användbart
 	om man har data från till exempel MATLAB eller Mathematica.
 	
+	\index{grafik!generera}
 	\item[\pack{tikz}]
 	nämns också i \cref{sec:4} och gör det möjligt att rita
 	vektorbaserade figurer direkt i \LaTeX. Mycket användbart om man
@@ -397,6 +424,7 @@ två som används för att rita direkt med \LaTeX-kommandon.
 	endast med \pdfLaTeX{} i \PDF-läge eller moderna varianter som
 	\XeTeX.
 
+	\index{grafik!generera}
 	\item[\pack{pstricks}]
 	är en slags motsvarighet till \pack{tikz} som endast fungerar med de
 	\LaTeX-varianter som genererar \DVI- eller \textsc{PS}-filer. Inte
@@ -405,6 +433,7 @@ två som används för att rita direkt med \LaTeX-kommandon.
 \end{description}
 
 \subsubsection{Paket för bibliografier}
+\index{paket!bibliografi}
 Eftersom \pack{biblatex} (som diskuteras i~\cref{sec:5}) har bra stöd
 för många olika språk, bibliografistilar och såväl numeriska system som
 Harvard-stilen behövs det sällan extra paket. Det kan däremot vara värt
@@ -456,12 +485,14 @@ många sådana problem är vanligt förekommande finns det ofta paket som
 löser dem.
 
 \begin{description}
+	\index{förkortning}
 	\item[\pack{acro}]
 	låter dig skapa listor över förkortningar på ett enkelt sätt, men är
 	lite enklare än \pack{glossaries} som egentligen är gjort för hela
 	ordlistor. Till skillnad från \pack{glossaries} kräver \pack{acro}
 	inget externt program. Diskuteras kort på \cpageref{sec:2:acro}.
 
+	\index{korsreferens}
 	\item[\pack{cleveref}]
 	definierar kommandot \cmd{cref} (och många liknande kommandon), ett
 	alternativ till \cmd{ref} som automatiskt skriver ut vilken typ av
@@ -473,6 +504,7 @@ löser dem.
 	\env{enumerate}	så att man även kan specificera en egen etikett, återuppta
 	numreringen från förra listan, och mycket mer.
 	
+	\index{flytande objekt}
 	\item[\pack{float}]
 	definierar ett kommando \cmd{newfloat} som skapar nya sorters flytande
 	objekt (vilka diskuterats på \cpageref{sec:floats}).
@@ -484,12 +516,14 @@ löser dem.
 	anledning. Kan vara värdefullt om man vill skapa dokument för A5-%
 	eller A6-papper (eller andra ovanliga storlekar).
 
+	\index{ordlista}
 	\item[\pack{glossaries}]
 	diskuterades tidigare på \cpageref{sec:2:glossaries}, och låter
 	dig skapa ordlistor och listor över förkortningar på ett enkelt
 	och relativt automatiserat sätt. Paketet är mycket användbart i
 	tekniska dokument där en ordlista är viktig för förståelsen.
 
+	\index{register}
 	\item[\pack{imakeidx}]
 	nämndes på \cpageref{sec:2:imakeidx} och låter dig skapa sakregister
 	på ett automatiserat sätt. Paketet kan vara användbart i större
@@ -568,6 +602,7 @@ någon inlämningsuppgift.
 	\item[\pack{algorithmic}]
 	är ett paket för typsättning av algoritmer och pseudokod.
 	
+	\index{bra-ket}
 	\item[{\pack{braket}}]\label{pack:braket}
 	definierar kommandon för att handskas med braket-notationen som
 	används inom kvantfysik. Kommandot \cmd{Braket} kan således resultera
@@ -602,6 +637,7 @@ någon inlämningsuppgift.
 	med en lista över dessa. Paketet innehåller även ett kommando \cmd{missingfigure},
 	som kan användas för att markera en saknad figur.
 \end{description}
+\index{paket!förteckning|)}
 
 \subsection{Andra \TeX-baserade projekt}
 \LaTeX{} är inte det enda användbara \TeX-baserade projektet, även om det
@@ -613,6 +649,9 @@ det projekt för att utveckla \LaTeXe{} och göra vissa saker som till
 exempel utveckling av dokumentklasser mycket enklare.
 
 \subsubsection{Unicode-baserade \XeTeX}
+\index{kompilator!XeTeX@\hologo{XeTeX}}
+\index{typsnitt!OTF- och TTF-@{OTF- och TTF-}}
+\index{teckenkodning!UTF@\UTF}
 \XeTeX är, precis som \pdfLaTeX, en \TeX-kompilator. Denna kan användas
 på samma sätt som vanliga \TeX{} och \pdfLaTeX (dvs. den kan köras på i
 princip samma kod) med hjälp av dess program, \texttt{xelatex}.
@@ -648,6 +687,8 @@ klarar nämligen även gamla \pdfLaTeX-typsnitt) kan man i princip alltid
 använda \XeTeX istället för \pdfLaTeX.
 
 \subsubsection{Skripta med \hologo{LuaTeX}}
+\index{kompilator!LuaTeX@\hologo{LuaTeX}}
+\index{teckenkodning!UTF@\UTF}
 \Hologo{LuaTeX} är en kombination av programmeringsspråket Lua och
 typsättningsspråket \TeX. Introduktionen till \hologo{LuaLaTeX},
 som är \hologo{LuaTeX}s motsvarighet till vanliga \LaTeX,
@@ -674,6 +715,7 @@ skriptspråk. I likhet med \XeTeX är \hologo{LuaTeX} stabilt nog för att
 användas istället för \pdfLaTeX.
 
 \subsubsection{Ett alternativ: \hologo{ConTeXt}}
+\index{ConTeXt@\hologo{ConTeXt}}
 \Hologo{ConTeXt} är ett alternativt makropaket för \TeX{} som utvecklats
 parallellt med \LaTeX{} men med en annan inriktning. Medan \LaTeX{}
 försöker isolera användaren från typografiska beslut, vilket gör det
@@ -689,6 +731,8 @@ trots detta intresserad av \hologo{ConTeXt} bör man referera till
 \hologo{ConTeXt}-manualen \parencite{Hagen01}.
 
 \subsubsection{Framtiden: \LaTeX3}
+\index{LaTeX3@\LaTeX3}
+\index[packages]{expl3@\textsf  {expl3}}
 Den variant av \LaTeX{} som diskuterats i boken, \LaTeXe{}, härstammar
 från 1994 då den ersatte den tidigare versionen, \LaTeX~2.09. Denna
 variant uppdateras fortfarande regelbundet, men redan 1997 startade ett

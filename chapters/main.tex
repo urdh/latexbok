@@ -34,7 +34,22 @@
 	%% Table of contents
 	\frontmatter
 	\pagestyle{thefancy}
-	\tableofcontents
+	\begingroup
+		\ExplSyntaxOn
+		\cs_set_eq:NN\__old_pack\pack
+		\cs_set_eq:NN\__old_cmd\cmd
+		\cs_set_eq:NN\__old_env\env
+		\DeclareDocumentCommand\pack{som}{\textsf{#3}}
+		\DeclareDocumentCommand\cmd{som}{\texttt{\textbackslash{}#3}}
+		\DeclareDocumentCommand\env{som}{\texttt{#3}}
+		\ExplSyntaxOff
+		\tableofcontents
+		\ExplSyntaxOn
+		\cs_set_eq:NN\pack\__old_pack
+		\cs_set_eq:NN\cmd\__old_cmd
+		\cs_set_eq:NN\env\__old_env
+		\ExplSyntaxOff
+	\endgroup
 	\cleardoublepage
 	\mainmatter
 	%% INLEDNING
@@ -52,13 +67,94 @@
 	%% VIDARE LÄSNING
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
+	\cleardoublepage
 	\let\oldurl=\url
 	\paper{a4}{\renewcommand\url[1]{\mbox{\small\oldurl{#1}}}}
 	\paper{c5}{\renewcommand\url[1]{\mbox{\footnotesize\texttt{\oldurl{#1}}}}}
-	\cleardoublepage
+	\defbibheading{bibliography}[\bibname]{\nntocsection{#1}}
 	\printbibliography
 	\let\url\oldurl
+	%% INDEX
+	% korsrefererande index
+	% kapitel 0?
+	\index{mellanrum|see{tomrum}}
+	\index{pdfLaTeX@\pdfLaTeX{}|see{kompilator, \pdfLaTeX{}}}
+	\index{LuaLaTeX@\hologo{LuaTeX}|see{kompilator, \hologo{LuaTeX}}}
+	\index{XeLaTeX@\hologo{XeTeX}|see{kompilator, \hologo{XeTeX}}}
+	% kapitel 1?
+	\index{nyradstecken|see{tomrum}}
+	\index{och-tecken|see{specialtecken}}
+	\index{\&!i text|see{specialtecken}}
+	\index{\&!i tabell|see{tabell}}
+	\index{procenttecken|see{specialtecken}}
+	\index{\%!i text|see{specialtecken}}
+	\index{\%!i \LaTeX-kod|see{kommentar}}
+	\index{dollartecken|see{specialtecken}}
+	\index{\$!i text|see{specialtecken}}
+	\index{\$!matematikläge|see{matematikläge}}
+	\index{klass|see{dokumentklass}}
+	\index{pappersstorlek|see{inställningar, standardklass}}
+	\index{installera!paket|see{paket, installera}}
+	\index{kompilera!till \PDF|see{\PDF}}
+	\index{kompilera!automatiskt|see{\cli{latexmk}}}
+	% Kapitel 2
+	\index{kapitel|see{rubrik}}
+	\index{radbrytning!automatisk|see{avstavning}}
+	\index{kursiv|see{textstil}}
+	\index{fetstil|see{textstil}}
+	\index{kapitäler|see{textstil}}
+	\index{serif-typsnitt|see{typsnitt}}
+	\index{sans-serif-typsnitt|see{typsnitt}}
+	\index{referens!kors-|see{korsreferens}}
+	\index{sakregister|see{register}}
+	\index{förteckning|see{register}}
+	\index{index!register|see{register}}
+	\index{förteckning!innehålls-|see{innehållsförteckning}}
+	\index{framsida|see{titelsida}}
+	\index{mått!i LaTeX@i \LaTeX{}|see{längd}}
+	\index{flytande objekt!figur|see{figur}}
+	\index{flytande objekt!tabell|see{tabell}}
+	% Kapitel 3
+	\index{mått!i text|see{SI-enhet}}
+	\index{enhet|see{SI-enhet}}
+	\index{index!subskript|see{subskript}}
+	\index{exponent|see{superskript}}
+	\index{matematikläge!tomrum|see{tomrum}}
+	\index{matematikläge|seealso{matematik}}
+	\index{ekvation|see{matematikläge}}
+	% Kapitel 4
+	\index{figur!infoga|see{grafik}}
+	\index{pgfTikZ@\PGFTikZ|see{grafik, generera}}
+	% Kapitel 5
+	\index{referens!-lista|see{bibliografi}}
+	\index{Harvard-stil|see{bibliografistil}}
+	\index{Chicago-stil|see{bibliografistil}}
+	% Kapitel 6
+	\index{resurser!CTAN|see{CTAN}}
+	\index{resurser!TeX.SE@\TeX.SE|see{\TeX{} Stack Exchange}}
+	% Skriv förteckningar
+	\cleardoublepage
+	\indexprologue{\label{sec:idx}
+		Detta register innehåller en förteckning över olika teman, termer
+		och liknande som diskuteras i boken. Den innehåller inte en
+		förteckning över de \LaTeX-paket som diskuteras (en sådan återfinns
+		på~\cpageref{sec:idx-pkg}) eller de kommandon och miljöer som nämns
+		(en förteckning över dessa finns på~\cpageref{sec:idx-cmd}).
+	}
+	\printindex
+	\cleardoublepage
+	\indexprologue{\label{sec:idx-pkg}
+		Denna förteckning listar alla de \LaTeX-paket som nämns i boken.
+	}
+	\printindex[packages]
+	\cleardoublepage
+	\indexprologue{\label{sec:idx-cmd}
+		Denna förteckning listar alla de kommandon och mijöer som 
+		diskuteras i boken.
+	}
+	\printindex[macros]
 	%% EN ENKEL MALL
+	\cleardoublepage
 	\appendix
 	\subfile{chapters/meta/appendix.tex}
 	\backmatter

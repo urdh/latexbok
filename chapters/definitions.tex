@@ -27,8 +27,14 @@
 \NewDocumentCommand\opt{m}
 	{\texttt{\emph{#1}}}
 % LaTeX package
-\NewDocumentCommand\pack{m}
-	{\textsf{#1}}
+\NewDocumentCommand\pack{som}{
+	\textsf{#1}
+	\IfBooleanF{#1}{
+		\IfNoValueTF{#2}
+			{\index[packages]{#3@\textsf{#3}}}
+			{\index[packages]{#2@\textsf{#2}}}
+	}
+}
 % pdfLaTeX logotype
 \NewDocumentCommand\pdfLaTeX{}
 	{\hologo{pdfLaTeX}\xspace}
@@ -63,11 +69,23 @@
 \NewDocumentCommand\eng{m}
 	{(eng.~\textenglish{\emph{#1})}}
 % LaTeX command
-\NewDocumentCommand\cmd{m}
-	{\textenglish{\texttt{\textbackslash{}#1}}}
+\NewDocumentCommand\cmd{som}{
+	\textenglish{\texttt{\textbackslash{}#3}}
+	\IfBooleanF{#1}{
+		\IfNoValueTF{#2}
+			{\index[macros]{#3@\texttt{\textbackslash{}#3}}}
+			{\index[macros]{#2@\texttt{\textbackslash{}#2}}}
+	}
+}
 % LaTeX environment
-\NewDocumentCommand\env{m}
-	{\textenglish{\texttt{#1}}}
+\NewDocumentCommand\env{som}{
+	\textenglish{\texttt{#3}}
+	\IfBooleanF{#1}{
+		\IfNoValueTF{#2}
+			{\index[macros]{#3-env@\texttt{#3}~(miljö)}}
+			{\index[macros]{#2-env@\texttt{#2}~(miljö)}}
+	}
+}
 % minted style
 \usemintedstyle{solarizedlight}
 \definecolor{mintedbg}{rgb}{0.9665,0.9550,0.9175}
@@ -98,4 +116,25 @@
 \definecolor{required}{rgb}{0.384,0.576,0.000}
 \definecolor{optional}{rgb}{0.992,0.843,0.000}
 \definecolor{unavailable}{rgb}{0.863,0.196,0.184}
-\ExplSyntaxOff
+% Index
+\def\symbolsname{Symboler}
+\makeindex[title={\indexname},%
+	columns=2,options={-L swedish -C utf8},noautomatic]%,intoc
+\makeindex[name=packages,title={Förteckning~över~\LaTeX-paket},%
+	columns=2,options={-L swedish -C utf8},noautomatic]%,intoc
+\makeindex[name=macros,title={Förteckning~över~kommandon~och~miljöer},%
+	columns=2,options={-L swedish -C utf8},noautomatic]%,intoc
+\indexsetup{level=\nntocsection,noclearpage}
+% Helper macro for unnumbered sections
+\NewDocumentCommand\nntocsection{som}{
+	\phantomsection
+	\IfNoValueTF{#2}{
+		\section*{#3}
+		\addcontentsline{toc}{section}
+		{\protect\numberline{\protect\phantom{M}}#3}
+	}{
+		\section*[#2]{#3}
+		\addcontentsline{toc}{section}
+		{\protect\numberline{\protect\phantom{M}}#2}
+	}
+}
