@@ -51,6 +51,16 @@
 	för inspirerande texter på samma tema.
 }
 
-\maketitle
+% Force titleback even in onepage mode
+\makeatletter
+\paper{a4}{
+	\@twosidetrue
+	\maketitle
+	\@twosidefalse
+}
+\paper{c5}{
+	\maketitle
+}
+\makeatother
 
 \end{document}
