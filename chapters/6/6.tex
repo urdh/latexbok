@@ -1,8 +1,8 @@
 \ifdefined\latexbokFontdir\else\def\latexbokFontdir{../../fonts}\fi
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf,../../a4.tex]{subfiles}
+\documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-\section{Vidare läsning}\label{sec:6}
+\chapter{Vidare läsning}\label{sec:6}
 Den här introduktionen har förhoppningsvis gett dig en bra \LaTeX-grund
 som låter dig typsätta både rapporter och artiklar utan problem. Tyvärr
 kommer du, eftersom \LaTeX{} är ett så stort system, sannolikt att behöva
@@ -23,7 +23,7 @@ som finns och när man bör använda dem. Avslutningsvis ges även en lista
 över andra projekt som liknar \LaTeX, till exempel det tidigare nämnda
 \XeTeX.
 
-\subsection{Andra resurser}
+\section{Andra resurser}
 \index{resurser|(}
 Även om denna introduktion siktar på att ge dig allt du behöver för att
 lära dig \LaTeX{} är det inte säkert att den är tillräcklig. Man kan inte
@@ -36,7 +36,7 @@ Nedan följer därför en lista över resurser i form av böcker, journaler
 och forum som kan hjälpa dig släcka din kunskapstörst eller lösa dina
 \LaTeX-problem.
 
-\subsubsection{Böcker och artiklar}
+\subsection{Böcker och artiklar}
 \index{resurser!böcker|(}
 Det finns mycket material tillgängligt när det gäller \LaTeX{}. Många
 böcker inom ämnet har publicerats av Addison-Wesley, och det finns även
@@ -110,7 +110,7 @@ Utöver dessa bör man givetvis även läsa manualerna till de paket man
 använder (dessa finns alltid på CTAN).
 \index{resurser!böcker|)}
 
-\subsubsection{Hjälp med specifika problem}
+\subsection{Hjälp med specifika problem}
 \index{resurser!på internet}
 Det tar lång tid att bemästra \LaTeX{} fullt ut, och i början kommer man
 garanterat att stöta på problem. Några av dem kanske går att lösa med den
@@ -130,7 +130,7 @@ IRC kan man också med fördel besöka \verb|#latex|-kanalen på Freenode%
 \index{resurser|)}
 
 \phantomsection
-\subsection{Tips för stora projekt}
+\section{Tips för stora projekt}
 \index{struktur!filsystems-}
 För stora \LaTeX-projekt (till exempel kandidatarbeten, examensarbeten
 och liknande) är det viktigt att kunna ha en ordentlig ordning på sitt
@@ -170,7 +170,7 @@ egen dokumentklass, om möjligt. Att göra detta lämnas som en övning åt
 läsaren, men mer information om hur man gör sådant ges av bland annat
 \textcites{Flynn06}{LaTeX3}{Robertson06}.
 
-\subsubsection{Versionshantering}
+\subsection{Versionshantering}
 \index{versionshantering}
 För större projekt och projekt som utförs i grupp är det mycket praktiskt
 att kunna spåra ändringar och ändra dokumentet från många olika platser
@@ -189,7 +189,7 @@ område, men är man intresserad bör man läsa
 Comic Sans är en utmärkt resurs för den som vill lära sig Mercurial och
 versionshantering.
 
-\subsubsection{Uppdelning av dokumentet}
+\subsection{Uppdelning av dokumentet}
 \index{uppdelning!av \LaTeX-kod}
 Stora projekt (med flera kapitel eller stora delar) kan med fördel delas
 upp på flera filer. Man har då en grundfil (säg, \texttt{projekt.tex}) som
@@ -217,7 +217,7 @@ göra om man bara redigerar ett kapitel, och inte vill kompilera hela
 projektet under tiden. Paketet \pack{subfiles} finns på CTAN men inte i
 Chalmers datorsystem eller i \TeX{} Live.
 
-\subsection{Rekommenderade paket}
+\section{Rekommenderade paket}
 \index{paket!förteckning|(}
 Eftersom \TeX{} är Turingkomplett kan i princip allt göras med språket,
 även om det främst är tänkt för typsättning. Således kan det mesta i 
@@ -232,7 +232,7 @@ Dokumentation för alla paket finns på CTAN och kan
 eller på
 \href{http://texdoc.net}{\nolinkurl{http://texdoc.net/pkg/<paketnamn>}}.
 
-\subsubsection{Allmänt nyttiga paket}
+\subsection{Allmänt nyttiga paket}
 Dessa paket finns i princip alltid och tillhandahåller så grundläggande
 funktionalitet att man alltid bör använda dem. Det handlar om allt från
 tecken- och typsnittskodning till avstavning och interna länkar.
@@ -307,7 +307,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	ersätter \pack{babel} för \XeTeX och har bättre stöd för \UTF.
 \end{description}
 
-\subsubsection{Paket för snyggare typsättning}
+\subsection{Paket för snyggare typsättning}
 Även om \LaTeX{} är mycket bra på att typsätta så blir det ibland inte
 så snyggt som man kanske kan önska. Vid dessa tillfällen kan man
 applicera diverse olika paket för att få hjälp med detta. Det gäller
@@ -347,7 +347,7 @@ till exempel tabeller, figurtexter, SI-enheter och matematik.
 	på \cpageref{sec:3:siunitx}.
 \end{description}
 
-\subsubsubsection*{Paket för matematiktypsättning}
+\subsubsection*{Paket för matematiktypsättning}
 \index{paket!matematik}
 Som teknisk matematiker (eller fysiker) kommer stora delar av de rapporter
 man skriver oundvikligen innehålla matematik. Även om \LaTeX{} för sig
@@ -400,7 +400,7 @@ matematikpaket.
 	med ett snedstreck: \(\sfrac{2}{3}\).
 \end{description}
 
-\subsubsection{Paket för grafik}
+\subsection{Paket för grafik}
 \index{paket!grafik}
 Grafik i form av figurer eller illustrationer är givetvis en viktig del
 av många rapporter, vare sig det är figurer av uppställningar, plottar
@@ -432,7 +432,7 @@ två som används för att rita direkt med \LaTeX-kommandon.
 	\pdfLaTeX{} i \PDF-läge.
 \end{description}
 
-\subsubsection{Paket för bibliografier}
+\subsection{Paket för bibliografier}
 \index{paket!bibliografi}
 Eftersom \pack{biblatex} (som diskuteras i~\cref{sec:5}) har bra stöd
 för många olika språk, bibliografistilar och såväl numeriska system som
@@ -478,7 +478,7 @@ riktar sig till specifika områden eller publikationer på CTAN%
 	of Physics}.
 \end{description}
 
-\subsubsection{Paket som löser problem}
+\subsection{Paket som löser problem}
 Ibland vill man göra något som är väldigt svårt att göra med vanlig
 \LaTeX-kod, till exempel ändra sidstorlek eller skapa underfigurer. Då
 många sådana problem är vanligt förekommande finns det ofta paket som
@@ -569,7 +569,7 @@ löser dem.
 	att man slipper skriva \texttt{\{\}} efter kommandot.
 \end{description}
 
-\subsubsection{Paket för att ändra utseende}
+\subsection{Paket för att ändra utseende}
 Standardklasserna lämnar ofta en del att önska i termer av utseende. Vill
 man göra något åt detta kan man använda paket som utformats för att låta
 dig ändra stilen av vissa element, till exempel rubriker eller sidhuvuden%
@@ -592,7 +592,7 @@ dokumentklass som ser bättre ut istället.}.
 	innehållsförteckningen.
 \end{description}
 
-\subsubsection{Andra specialiserade paket}
+\subsection{Andra specialiserade paket}
 För en del snäva områden så som kvantfysik eller datavetenskap finns det
 specialiserade paket som löser specifika uppgifter. Dessa kan med fördel
 användas om man skriver rapporter inom området, eller rör vid ämnet i
@@ -639,7 +639,7 @@ någon inlämningsuppgift.
 \end{description}
 \index{paket!förteckning|)}
 
-\subsection{Andra \TeX-baserade projekt}
+\section{Andra \TeX-baserade projekt}
 \LaTeX{} är inte det enda användbara \TeX-baserade projektet, även om det
 är det makropaket som används mest i praktiken. Det finns alternativ
 som baseras på \LaTeX{} men löser problem (till exempel \XeTeX och
@@ -648,7 +648,7 @@ som baseras på \LaTeX{} men löser problem (till exempel \XeTeX och
 det projekt för att utveckla \LaTeXe{} och göra vissa saker som till 
 exempel utveckling av dokumentklasser mycket enklare.
 
-\subsubsection{Unicode-baserade \XeTeX}
+\subsection{Unicode-baserade \XeTeX}
 \index{kompilator!XeTeX@\hologo{XeTeX}}
 \index{typsnitt!OTF- och TTF-@{OTF- och TTF-}}
 \index{teckenkodning!UTF@\UTF}
@@ -686,7 +686,7 @@ ligger i att \pack{inputenx} och \pack{fontenc} inte bör användas (\XeTeX
 klarar nämligen även gamla \pdfLaTeX-typsnitt) kan man i princip alltid
 använda \XeTeX istället för \pdfLaTeX.
 
-\subsubsection{Skripta med \hologo{LuaTeX}}
+\subsection{Skripta med \hologo{LuaTeX}}
 \index{kompilator!LuaTeX@\hologo{LuaTeX}}
 \index{teckenkodning!UTF@\UTF}
 \Hologo{LuaTeX} är en kombination av programmeringsspråket Lua och
@@ -714,7 +714,7 @@ en del saker mycket enklare eftersom man har tillgång till ett fullgott
 skriptspråk. I likhet med \XeTeX är \hologo{LuaTeX} stabilt nog för att
 användas istället för \pdfLaTeX.
 
-\subsubsection{Ett alternativ: \hologo{ConTeXt}}
+\subsection{Ett alternativ: \hologo{ConTeXt}}
 \index{ConTeXt@\hologo{ConTeXt}}
 \Hologo{ConTeXt} är ett alternativt makropaket för \TeX{} som utvecklats
 parallellt med \LaTeX{} men med en annan inriktning. Medan \LaTeX{}
@@ -730,7 +730,7 @@ matematik, och att man därför oftast bör hålla sig till \LaTeX. Är man
 trots detta intresserad av \hologo{ConTeXt} bör man referera till
 \hologo{ConTeXt}-manualen \parencite{Hagen01}.
 
-\subsubsection{Framtiden: \LaTeX3}
+\subsection{Framtiden: \LaTeX3}
 \index{LaTeX3@\LaTeX3}
 \index[packages]{expl3@\textsf  {expl3}}
 Den variant av \LaTeX{} som diskuterats i boken, \LaTeXe{}, härstammar

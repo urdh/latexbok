@@ -1,84 +1,11 @@
 \ExplSyntaxOn
+% Twoside
+\paper{a4}{\KOMAoptions{twoside=false,open=any}}
+\paper{c5}{\KOMAoptions{twoside=true,open=right}}
 % Section numbering depth
-\setcounter{secnumdepth}{1}
+\setcounter{secnumdepth}{2}
 % Table of contents depth
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{1}
 % Table of contents bf sections
 \RenewDocumentCommand\cftsecfont{}{\bfseries}
-% Fancy page style
-\fancypagestyle{thefancy}{
-	\fancyhead{}
-	\fancyfoot{}
-	\fancyhead[LE,RO]{\thepage}
-	\cs_gset_nopar:Npn\headrulewidth{0.1pt}
-}
-\dim_set:Nn\headheight{15pt}
-% Restyle the section command
-% Note: Don't use xparse for \the#1 (protection issues)
-\renewcommand\thesection{\Roman{section}} 
-\cs_generate_variant:Nn\__skrapport_generic_section:nnnnn{nnnon}
-\cs_set:Npn\__skrapport_section_style:
-  {\normalfont\__skrapport_title_style:}
-\dim_set:Nn \c__skrapport_section_indent_dim{.25\textwidth} % magic number
-\makeatletter
-\RenewDocumentCommand\section{som}{
-  \cleardoublepage
-  \group_begin:
-    \centering
-    \fontsize{36pt}{36pt}\selectfont
-    \__skrapport_generic_section:nnnon{section}{1}{#1}{
-      \IfNoValueTF{#2}{#3}{#2}
-    }{
-      \newline\nobreak{\LARGE #3}
-    }
-  \group_end:
-  \bigskip
-  % Oops? Is this my fault or something in skrapport?
-  % What it does is to do the cleveref refstepcounter stuff again
-  % since it doesn't seem to stick. Probably cus' the definitions
-  % aren't global and I have one or more groups in here and in skrapport.
-  \cref@constructprefix{section}{\cref@result}
-  \@ifundefined{cref@section@alias}
-    {\def\@tempa{section}}{\def\@tempa{\cref@section@alias}}
-  \protected@edef\cref@currentlabel
-    {[\@tempa][\arabic{section}][\cref@result]\p@section\thesection}
-}
-\makeatother
-% Holy shit, hacking my own class
-% Undefine paragraph counters
-\makeatletter
-\cs_undefine:N\c@paragraph
-\cs_undefine:N\c@subparagraph
-\cs_undefine:N\paragraph
-\cs_undefine:N\subparagraph
-\makeatother
-% Define new subsubsubsection
-\skip_const:Nn\c__skrapport_subsubsubsection_pre_skip
-  {-2ex~plus~.5ex~minus~-.5ex}
-\skip_const:Nn\c__skrapport_subsubsubsection_post_skip
-  {.125ex~plus~.125ex}
-\dim_const:Nn \c__skrapport_subsubsubsection_indent_dim
-  {\c_zero_dim}
-\cs_set_protected:Nn\__skrapport_subsubsubsection_style:
-  {\normalfont\large\__skrapport_title_style:\itshape}
-\DeclareDocumentCommand\subsubsubsection{som}{
-  \__skrapport_generic_section:nnnnn{subsubsubsection}{3}{#1}{#2}{#3}
-}
-% Redefine TOC entries to match
-\newlistentry[subsubsection]{subsubsubsection}{toc}{3}
-\newlistentry[subsubsubsection]{paragraph}{toc}{4}
-\newlistentry[paragraph]{subparagraph}{toc}{5}
-\cftsetindents{subsubsubsection}{6.45em}{4.15em}
-\cftsetindents{paragraph}{10.6em}{5.15em}
-\cftsetindents{subparagraph}{15.75em}{6.15em}
-\cs_set:Npn\toclevel@subsubsubsection{4}
-\cs_set:Npn\toclevel@paragraph{5}
-\cs_set:Npn\toclevel@subparagraph{6}
-% Redefine the counter macros
-\cs_set_nopar:Npn\thesubsubsubsection
-  {\thesubsubsection.\arabic{subsubsubsection}}
-\cs_set_nopar:Npn\theparagraph
-  {\thesubsubsubsection.\arabic{paragraph}}
-\cs_set_nopar:Npn\thesubparagraph
-  {\theparagraph.\arabic{subparagraph}}
 \ExplSyntaxOff

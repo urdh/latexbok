@@ -3,7 +3,7 @@
 \NewDocumentCommand\paper{mm}{\IfStrEq{\papersize}{#1}{#2}{}}
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
 \PassOptionsToPackage{quiet}{fontspec}
-\documentclass[lang=sv,ptsize=10pt,font=none,nomath,titles=bf]{skrapport}
+\documentclass[fontsize=10pt]{scrbook}
 %% Packages
 \input{chapters/packages.tex}
 %% Draft fixes to minted, tikz
@@ -23,7 +23,7 @@
 %% METADATA
 \title{Att \hologo{TeX}a: en praktisk guide}
 \author{Simon Sigurdhsson}
-\regarding{Nybörjarguide i \hologo{LaTeX}, andra upplagan.}
+\subject{Nybörjarguide i \hologo{LaTeX}, andra upplagan.}
 \date{}
 
 %% Actual document
@@ -55,16 +55,21 @@
 	%% INLEDNING
 	\subfile{chapters/0/0.tex}
 	%% GRUNDLÄGGANDE BEGREPP
+	\part{Grunderna}
 	\subfile{chapters/1/1.tex}
 	%% TYPSÄTTNING MED LATEX
 	\subfile{chapters/2/2.tex}
 	%% MATEMATIK MED LATEX OCH AMS
+	\part{Matematiken}
 	\subfile{chapters/3/3.tex}
 	%% GRAFIK MED LATEX
+	\part{Figurerna}
 	\subfile{chapters/4/4.tex}
 	%% REFERENSER MED BIBTEX
+	\part{Referenserna}
 	\subfile{chapters/5/5.tex}
 	%% VIDARE LÄSNING
+	\part{Fortsättningen}
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
 	\cleardoublepage
@@ -156,6 +161,7 @@
 	%% EN ENKEL MALL
 	\cleardoublepage
 	\appendix
+	\part{Appendix}
 	\subfile{chapters/meta/appendix.tex}
 	\backmatter
 \end{document}
