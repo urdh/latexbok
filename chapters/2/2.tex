@@ -710,8 +710,11 @@ Det mest grundläggande man bör uppmärksamma i \LaTeX{}, eftersom det är en
 grop man lätt faller i, är citattecken. Man kan inte i \LaTeX{} använda
 det vanliga citattecknet (\verb|"|) för att generera ett citattecken, utan
 man måste istället använda kombinationer av \emph{backticks} (\verb|`|)
-och apostrofer (\verb|'|). \Cref{tab:citat} visar hur dessa används
-för att citera text.
+och apostrofer (\verb|'|)\footnote{Men man kan även använda paketet
+\pack{csquotes}, som gör det enkelt med nästlade citat och olika stilar i
+olika språk. Detta paket och även miljöer för lite längre citat behandlas
+närmre på \cpageref{sec:2:citat}}. \Cref{tab:citat} visar hur dessa
+används för att citera text.
 
 \begin{table}[tbp]
 	\centering 
@@ -887,9 +890,8 @@ dokumentets start):
 \end{abstract}
 \end{latexcode}
 
-\subsection{Citat}
+\subsection{Citat}\label{sec:2:citat}
 \index{citattecken}
-% FIXME: Korrekturläs och förbättra
 I \LaTeX{} används ofta \verb|``| och \verb|''| för att typsätta citattecken,
 och dessa teckenkombinationer resulterar då i det öppnande och stängande
 citattecknet så som det används i engelsk typografi. I svensk typografi
