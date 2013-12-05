@@ -2,14 +2,7 @@
 \ifdefined\latexbokFiguredir\else\def\latexbokFiguredir{../../examples}\fi
 \documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
-%% NOTE: run in nonstopmode to ignore XeTeX bug
-%% See http://tex.stackexchange.com/questions/122923/xelatex-problem-missing-chars-in-texlive-2013-textfont-xxx-is-undefined-erro
-%% Also, http://tex.stackexchange.com/questions/91592/where-to-find-official-and-extended-documentation-for-tex-latexs-commandlin
-\chardef\previousmode=\interactionmode
-\nonstopmode
-%% END NOTE
-%
-\chapter{Referenser med \pack{biblatex}}\label{sec:5}
+\chapter{Referenser med \texorpdfstring{\pack*{biblatex}}{biblatex}}\label{sec:5}
 \index{bibliografi}
 En stor fördel med \LaTeX{} är att man kan automatisera hanteringen av
 till exempel referenser. Paketet \pack{biblatex}, tillsammans med
@@ -64,29 +57,18 @@ En fullständig förteckning finns i \textcite[7\psqq]{Lehman13}.
 
 \begin{table}[p]
 	\begin{minipage}[][0.98\textheight][t]{0.98\textwidth}
-		\newlength{\oldfboxsep}\setlength{\oldfboxsep}{\fboxsep}
-		\setlength{\fboxsep}{0pt}
-		\def\r{% (fold)
-			\setlength{\fboxsep}{\oldfboxsep}%
-			\colorbox{required}{\color{required}o}%\checkmark}%
-		} % (end)
-		\def\o{% (fold)
-			\setlength{\fboxsep}{\oldfboxsep}%
-			\colorbox{optional}{\color{optional}v}%\Large$\circ$}%
-		} % (end)
-		\def\u{% (fold)
-			\setlength{\fboxsep}{\oldfboxsep}%
-			\colorbox{unavailable}{\color{unavailable}x}%$\times$}%
-		} % (end)
+		\def\r{\textcolor{black}{\textsf{+}}}
+		\def\o{\textcolor{lightgray}{\textsf{+}}}
+		\def\u{}
 		\centering
-		\caption{\setlength{\oldfboxsep}{0.5\oldfboxsep}%
+		\caption{%
 			Några av referenstyperna i \pack{biblatex} och en del av
 			deras tillhörande fält.
 			Både typnamn och fältnamn är relativt självförklarande,
 			men se \textcite[7\psqq]{Lehman13} för mer information.
-			\emph{Nyckel:} \fbox{\r} obligatoriskt,
-			\fbox{\o} valfritt och
-			\fbox{\u} otillgängligt fält.
+			\emph{Nyckel:} {\r} obligatoriskt,
+			{\o} valfritt fält.% och
+			%{\u} otillgängligt fält.
 		}
 		\label{tab:blocktyper}
 		\NewCoffin\TableCoffin
@@ -117,7 +99,7 @@ format \BibTeX{} och \pack{biblatex} använder, och dessa kan sedan
 läggas till direkt i den egna referensdatabasen.
 Detta är mycket praktiskt i större projekt så som kandidatuppsatser.
 
-\section{Stilar och inställningar i \pack{biblatex}}
+\section{Stilar och inställningar i \texorpdfstring{\pack*{biblatex}}{biblatex}}
 Nästa steg efter att ha skapat en referensdatabas är att inkludera
 paketet \pack{biblatex}. Paketet är gjort för att kunna vara relativt
 generellt, och har därför en uppsjö olika inställningar och
@@ -319,8 +301,4 @@ Trion \cmd{textcite}, \cmd{parencite} och \cmd{autocite} (och deras
 multipelvarianter) har dessutom varianter à la \cmd{Textcite}, som är
 gjorda för att användas i början på en mening eller i andra situationer
 där texten bör inledas med en versal.
-%
-%% NOTE: Reset interaction mode (see top of this file)
-\interactionmode=\previousmode
-%% END NOTE
 \end{document}
