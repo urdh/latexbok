@@ -9,8 +9,10 @@
 \RenewDocumentCommand\LaTeX{}
 	{\hologo{LaTeX}\xspace}
 % PDF format
-\NewDocumentCommand\PDF{}
-	{\textsc{PDF}\xspace}
+\NewDocumentCommand\PDF{s}{
+	\IfBooleanF{#1}{\index{PDF@\PDF*}}
+	\textsc{PDF}\xspace
+}
 % PNG format
 \NewDocumentCommand\PNG{}
 	{\textsc{PNG}\xspace}
@@ -24,8 +26,10 @@
 \NewDocumentCommand\JPEG{}
 	{\textsc{JPEG}\xspace}
 % UTF-8 standard
-\NewDocumentCommand\UTF{}
-	{\textsc{UTF-8}\xspace}
+\NewDocumentCommand\UTF{s}{
+	\IfBooleanF{#1}{\index{teckenkodning!UTF@\UTF*}}
+	\textsc{UTF-8}\xspace
+}
 % Command-line input
 \NewDocumentCommand\cli{m}
 	{\texttt{#1}}
