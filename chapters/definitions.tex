@@ -34,11 +34,11 @@
 	{\texttt{\emph{#1}}}
 % LaTeX package
 \NewDocumentCommand\pack{som}{
-	\textsf{#1}
+	\textsf{#3}
 	\IfBooleanF{#1}{
 		\IfNoValueTF{#2}
 			{\index[packages]{#3@\textsf{#3}}}
-			{\index[packages]{#2@\textsf{#2}}}
+			{\index[packages]{#2@\textsf{#3}}}
 	}
 }
 % pdfLaTeX logotype
@@ -80,7 +80,7 @@
 	\IfBooleanF{#1}{
 		\IfNoValueTF{#2}
 			{\index[macros]{#3@\texttt{\textbackslash{}#3}}}
-			{\index[macros]{#2@\texttt{\textbackslash{}#2}}}
+			{\index[macros]{#2@\texttt{\textbackslash{}#3}}}
 	}
 }
 % LaTeX environment
@@ -89,7 +89,7 @@
 	\IfBooleanF{#1}{
 		\IfNoValueTF{#2}
 			{\index[macros]{#3-env@\texttt{#3}~(miljö)}}
-			{\index[macros]{#2-env@\texttt{#2}~(miljö)}}
+			{\index[macros]{#2-env@\texttt{#3}~(miljö)}}
 	}
 }
 % minted style
