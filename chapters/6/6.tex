@@ -249,7 +249,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	korrigerar en del buggar i \LaTeXe-kärnan och gör till 
 	exempel matematikkommandon robusta. Inkludera alltid.
 	
-	\item[\pack{fontenc}] (ej med \XeTeX och \hologo{LuaTeX})
+	\item[\pack{fontenc}] (ej med \XeTeX{} och \hologo{LuaTeX})
 	låter användaren välja typsnittskodning. Från början använder \LaTeX{}
 	\texttt{OT1}, som inte innehåller icke-anglikanska tecken så som
 	\emph{å}, \emph{ä} och \emph{ö}. Detta medför problem när det gäller
@@ -257,7 +257,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	\texttt{T1}. Detta diskuteras närmre på \cpageref{pack:fontenc}.
 
 	\index{typsnitt!OTF- och TTF-@{OTF- och TTF-}}
-	\item[\pack{fontspec}] (endast med \XeTeX och \hologo{LuaTeX})
+	\item[\pack{fontspec}] (endast med \XeTeX{} och \hologo{LuaTeX})
 	låter användaren välja \textsc{OTF}-typsnitt helt fritt, antingen
 	från typsnitt installerade på datorn eller från \textsc{TTF}- eller
 	\textsc{OTF}-filer.
@@ -272,7 +272,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	Ett oumbärligt paket som alltid bör inkluderas.
 	
 	\index{teckenkodning}
-	\item[\pack{inputenx}] (ej med \XeTeX och \hologo{LuaTeX})
+	\item[\pack{inputenx}] (ej med \XeTeX{} och \hologo{LuaTeX})
 	är ett paket som låter användaren berätta för \LaTeX{} vilken
 	teckenkodning indatan sparats med. De vanigaste inställningarna är
 	\texttt{utf8} och \texttt{latin1}, men många andra teckenkodningar
@@ -304,7 +304,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 
 	\index{avstavning}
 	\item[{\pack{polyglossia}}] (endast med \XeTeX)
-	ersätter \pack{babel} för \XeTeX och har bättre stöd för \UTF.
+	ersätter \pack{babel} för \XeTeX{} och har bättre stöd för \UTF.
 \end{description}
 
 \subsection{Paket för snyggare typsättning}
@@ -391,7 +391,7 @@ matematikpaket.
 
 	\index{teckenkodning!UTF@\UTF *}
 	\item[{\pack{unicode-math}}]
-		(endast med \XeTeX och \hologo{LuaTeX})
+		(endast med \XeTeX{} och \hologo{LuaTeX})
 	kan användas för att ladda \textsc{OTF}-typsnitt för matematik och
 	gör det även möjligt att skriva matematik med Unicode-tecken.
 
@@ -623,7 +623,7 @@ någon inlämningsuppgift.
 	figurtexter och även en mycket enkel syntaxfärgning \eng{syntax
 	highlighting}. Fungerar inte om koden innehåller svenska tecken, även
 	om paketet \emph{\pack{listingsutf8}} försöker lösa detta. Använder 
-	man \XeTeX uppstår inte detta problem.
+	man \XeTeX{} uppstår inte detta problem.
 	
 	\item[{\pack{minted}}]
 	kan sägas vara en förbättring av \pack{listings} som använder Python-%
@@ -642,7 +642,7 @@ någon inlämningsuppgift.
 \section{Andra \TeX-baserade projekt}
 \LaTeX{} är inte det enda användbara \TeX-baserade projektet, även om det
 är det makropaket som används mest i praktiken. Det finns alternativ
-som baseras på \LaTeX{} men löser problem (till exempel \XeTeX och
+som baseras på \LaTeX{} men löser problem (till exempel \XeTeX{} och
 \hologo{LuaTeX}) men även alternativa makropaket som är mycket olika
 \LaTeX{} i sin struktur (till exempel \hologo{ConTeXt}). Dessutom finns
 det projekt för att utveckla \LaTeXe{} och göra vissa saker som till 
@@ -652,26 +652,26 @@ exempel utveckling av dokumentklasser mycket enklare.
 \index{kompilator!XeTeX@\hologo{XeTeX}}
 \index{typsnitt!OTF- och TTF-@{OTF- och TTF-}}
 \index{teckenkodning!UTF@\UTF *}
-\XeTeX är, precis som \pdfLaTeX, en \TeX-kompilator. Denna kan användas
-på samma sätt som vanliga \TeX{} och \pdfLaTeX (dvs. den kan köras på i
+\XeTeX{} är, precis som \pdfLaTeX, en \TeX-kompilator. Denna kan användas
+på samma sätt som vanliga \TeX{} och \pdfLaTeX{} (dvs. den kan köras på i
 princip samma kod) med hjälp av dess program, \texttt{xelatex}.
 
-Skillnaden mellan \pdfLaTeX{} och \XeTeX som gör att man kanske föredrar
-det senare är relativt stor, sett till de djupa delarna av \TeX: \XeTeX 
+Skillnaden mellan \pdfLaTeX{} och \XeTeX{} som gör att man kanske föredrar
+det senare är relativt stor, sett till de djupa delarna av \TeX: \XeTeX{} 
 förutsätter, till skillnad från \pdfLaTeX, att all indata är \UTF och kan
 därmed läsa \UTF-dokument på ett korrekt sätt. Detta innebär bland annat
-att saker som inte fungerar i \pdfLaTeX ens med \pack{inputenx}, till
+att saker som inte fungerar i \pdfLaTeX{} ens med \pack{inputenx}, till
 exempel svenska tecken i kodlistingar eller inkluderade filer, kommer att
 fungera utmärkt med \XeTeX.
 
 Dessutom kan man med hjälp av speciella kommandon välja typsnitt på ett
-mycket enklare sätt, eftersom \XeTeX stödjer \textsc{OTF}- och
+mycket enklare sätt, eftersom \XeTeX{} stödjer \textsc{OTF}- och
 \textsc{TTF}-typsnitt, och kan hitta alla typsnitt som är installerade
 på datorn, inte bara de som finns i form av \LaTeX-paket.
 
-En relativt övergripande bild av vad som är nytt i \XeTeX ges av
+En relativt övergripande bild av vad som är nytt i \XeTeX{} ges av
 \textcite{Robertson11}; för det mesta kan man förutsätta att \LaTeX-kod
-kommer att fungera precis likadant i \XeTeX med några få undantag:
+kommer att fungera precis likadant i \XeTeX{} med några få undantag:
 \begin{itemize}
 	\item Paketet \pack{polyglossia} bör användas istället för \pack{babel}
 	\item Varken \pack{inputenx} eller \pack{fontenc} bör användas
@@ -680,11 +680,11 @@ kommer att fungera precis likadant i \XeTeX med några få undantag:
 		  för matematik och för att skriva matematik med Unicode-tecken.
 \end{itemize}
 
-\XeTeX är idag så stabilt att det kan användas istället för \pdfLaTeX.
+\XeTeX{} är idag så stabilt att det kan användas istället för \pdfLaTeX.
 Den här boken är typsatt med \XeTeX, och eftersom skillnaderna främst
 ligger i att \pack{inputenx} och \pack{fontenc} inte bör användas (\XeTeX
 klarar nämligen även gamla \pdfLaTeX-typsnitt) kan man i princip alltid
-använda \XeTeX istället för \pdfLaTeX.
+använda \XeTeX{} istället för \pdfLaTeX.
 
 \subsection{Skripta med \hologo{LuaTeX}}
 \index{kompilator!LuaTeX@\hologo{LuaTeX}}
@@ -711,7 +711,7 @@ och de hanterar båda \UTF
 mycket bättre än sina företrädare. Skillnaden är att \hologo{LuaTeX}
 även gör det möjligt att bädda in Lua-kod direkt i dokumentet, vilket gör
 en del saker mycket enklare eftersom man har tillgång till ett fullgott
-skriptspråk. I likhet med \XeTeX är \hologo{LuaTeX} stabilt nog för att
+skriptspråk. I likhet med \XeTeX{} är \hologo{LuaTeX} stabilt nog för att
 användas istället för \pdfLaTeX.
 
 \subsection{Ett alternativ: \hologo{ConTeXt}}
