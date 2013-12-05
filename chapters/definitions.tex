@@ -38,7 +38,7 @@
 	\IfBooleanF{#1}{
 		\IfNoValueTF{#2}
 			{\index[packages]{#3@\textsf{#3}}}
-			{\index[packages]{#2@\textsf{#3}}}
+			{\index[packages]{#2@\textsf{#2}}}
 	}
 }
 % pdfLaTeX logotype
@@ -80,7 +80,7 @@
 	\IfBooleanF{#1}{
 		\IfNoValueTF{#2}
 			{\index[macros]{#3@\texttt{\textbackslash{}#3}}}
-			{\index[macros]{#2@\texttt{\textbackslash{}#3}}}
+			{\index[macros]{#2@\texttt{\textbackslash{}#2}}}
 	}
 }
 % LaTeX environment
@@ -89,7 +89,7 @@
 	\IfBooleanF{#1}{
 		\IfNoValueTF{#2}
 			{\index[macros]{#3-env@\texttt{#3}~(miljö)}}
-			{\index[macros]{#2-env@\texttt{#3}~(miljö)}}
+			{\index[macros]{#2-env@\texttt{#2}~(miljö)}}
 	}
 }
 % minted style
