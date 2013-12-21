@@ -1,4 +1,4 @@
-\RequirePackage[draft]{ifdraft}
+\RequirePackage[final]{ifdraft}
 \RequirePackage{xstring,xparse}
 \NewDocumentCommand\paper{mm}{\IfStrEq{\papersize}{#1}{#2}{}}
 \PassOptionsToPackage{usenames,dvipsnames}{xcolor}
@@ -136,6 +136,7 @@
 	\index{resurser!CTAN|see{CTAN}}
 	\index{resurser!TeX.SE@\TeX.SE|see{\TeX{} Stack Exchange}}
 	% Skriv förteckningar
+	\KOMAoptions{parskip=never}
 	\cleardoublepage
 	\indexprologue{\label{sec:idx}
 		Detta register innehåller en förteckning över olika teman, termer
@@ -156,6 +157,7 @@
 		diskuteras i boken.
 	}
 	\printindex[macros]
+	\KOMAoptions{parskip=half*}
 	%% EN ENKEL MALL
 	\cleardoublepage
 	\appendix
