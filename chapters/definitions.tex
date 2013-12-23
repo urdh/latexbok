@@ -96,6 +96,11 @@
 			{\index[macros]{#2-env@\texttt{#2}~(miljö)}}
 	}
 }
+% CTAN link
+\NewDocumentCommand\ctan{m}{
+	\textsc{CTAN}:~
+	\href{http://mirrors.ctan.org/#1}{#1}
+}
 % minted style
 \usemintedstyle{github}
 \definecolor{mintedbg}{rgb}{0.98,0.98,0.98}
