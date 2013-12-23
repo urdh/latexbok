@@ -30,11 +30,11 @@
 }
 \DeclareFieldFormat*{url}{
 	\newunit\mkbibacro{URL}\addcolon\addnbspace%
-		\url{#1}%
+		\mbox{\latexbokurlfont\url{#1}}%
 }
 \DeclareFieldFormat*{verba}{
 	\newunit\mkbibacro{CTAN}\addcolon\addnbspace%
-		\href{http://mirrors.ctan.org/#1}{#1}
+		\mbox{\latexbokurlfont\href{http://mirrors.ctan.org/#1}{#1}}
 }
 % "Move" them to the end of the list as well
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\space#1}

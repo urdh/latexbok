@@ -72,11 +72,9 @@
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
 	\cleardoublepage
-	\let\oldurl=\url
-	\paper{a4}{\renewcommand\url[1]{\mbox{\small\oldurl{#1}}}}
-	\paper{c5}{\renewcommand\url[1]{\mbox{\footnotesize\texttt{\oldurl{#1}}}}}
+	\paper{a4}{\newcommand\latexbokurlfont{\small}}
+	\paper{c5}{\newcommand\latexbokurlfont{\footnotesize\ttfamily}}
 	\printbibliography[heading=bibintoc]
-	\let\url\oldurl
 	%% INDEX
 	% korsrefererande index
 	% kapitel 0?
