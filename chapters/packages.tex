@@ -8,6 +8,7 @@
 %\usepackage[usenames,dvipsnames]{xcolor}
 \usepackage{graphicx}
 \usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.9}
 \usetikzlibrary{shadows}
 % page size
 \paper{a4}{%
@@ -38,6 +39,9 @@
 %\usepackage{fancyhdr}
 \usepackage{booktabs}
 \usepackage[multiple]{fnpct}
+\AtEndPreamble{% circumvents bug in fnpct v0.4a
+	\ProvideDocumentCommand\baselanguage{m}{#1}
+} 
 % references
 \usepackage{polyglossia}
 \setmainlanguage{swedish}
