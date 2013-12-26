@@ -72,11 +72,20 @@
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
 	\cleardoublepage
-	\let\oldurl=\url
-	\paper{a4}{\renewcommand\url[1]{\mbox{\small\oldurl{#1}}}}
-	\paper{c5}{\renewcommand\url[1]{\mbox{\footnotesize\texttt{\oldurl{#1}}}}}
-	\printbibliography[heading=bibintoc]
-	\let\url\oldurl
+	\paper{a4}{\newcommand\latexbokurlfont{\small}}
+	\paper{c5}{\newcommand\latexbokurlfont{\footnotesize\ttfamily}}
+	\defbibnote{ctan-info}{%
+		\protect\index{CTAN}%
+		Nedan följer en litteraturförteckning. I denna listas alla de
+		böcker, artiklar och manualer som refererats till i boken, med
+		hänvisningar till de sidor verket nämndes på. En del av de verk
+		som listas, främst olika manualer, har en CTAN-länk istället för
+		ett ISBN-nummer eller en URL. Dessa verk kan man hitta genom att
+		lägga till \url{http://mirrors.ctan.org/} innan länken, eller
+		genom att titta i sin \LaTeX-distribution (och då är det enklast
+		att använda \cli{texdoc}, som beskrivs på \cpageref{cli:texdoc}).%
+	}
+	\printbibliography[heading=bibintoc,prenote=ctan-info]
 	%% INDEX
 	% korsrefererande index
 	% kapitel 0?

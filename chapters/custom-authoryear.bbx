@@ -4,6 +4,15 @@
 % We're basing our stuff on the actual authoryear style, so include it
 \RequireBibliographyStyle{authoryear}
 
+% Declare the ctan field
+\DeclareSourcemap{
+  \maps[datatype=bibtex]{
+    \map{
+      \step[fieldsource=ctan,fieldtarget=verba]
+    }
+  }
+}
+
 % Renew the URL and ISBN fields
 \settoggle{bbx:doi}{false}
 \settoggle{bbx:isbn}{false}
@@ -21,7 +30,11 @@
 }
 \DeclareFieldFormat*{url}{
 	\newunit\mkbibacro{URL}\addcolon\addnbspace%
-		\url{#1}%
+		\mbox{\latexbokurlfont\url{#1}}%
+}
+\DeclareFieldFormat*{verba}{
+	\newunit\mkbibacro{CTAN}\addcolon\addnbspace%
+		\mbox{\latexbokurlfont\href{http://mirrors.ctan.org/#1}{#1}}
 }
 % "Move" them to the end of the list as well
 \DeclareFieldFormat{urldate}{\bibstring{urlseen}\space#1}
@@ -47,7 +60,11 @@
 	\newunit\newblock\setunit{\newunitpunct\newline}%
 	\usebibmacro{doi+isbn}%
 	\newunit\newblock\setunit{\newunitpunct\newline}%
-	\printfield{url}%
+	\iffieldundef{verba}{
+		\printfield{url}%
+	}{
+		\printfield{verba}%
+	}
 	\finentry%
 }
 
