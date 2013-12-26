@@ -37,7 +37,9 @@ artikel, och så vidare) det handlar om kan även andra fält finnas med.
 
 \begin{kod}[tbp]
 	\centering
-	\vfil\cprotect[mm]\ifdraft{\inputminted[frame=single]{latex}{\latexbokFiguredir/5/bibdata.bib}}{\inputminted[frame=single,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{\latexbokFiguredir/5/bibdata.bib}}\vfil
+	\vfil%
+	\inputlatex{\latexbokFiguredir/5/bibdata.bib}%
+	\vfil%
 	\caption{En enkel exempelreferens ur en referensdatabas.}
 	\label{ex:bibtex}
 \end{kod}

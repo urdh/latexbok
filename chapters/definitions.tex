@@ -104,6 +104,19 @@
 % minted style
 \usemintedstyle{github}
 \definecolor{mintedbg}{rgb}{0.98,0.98,0.98}
+% Appendix input macro
+\cs_set:Nn\__latexbok_input_latex:nn{
+	\inputminted[#1]{latex}{#2}
+}
+\cs_generate_variant:Nn\__latexbok_input_latex:nn{Vn}
+\DeclareDocumentCommand\inputlatex{oom}{
+	\clist_gset:Nn\l_tmpa_clist{frame=single}
+	\ifdraft{}{ \clist_gpush:Nn\l_tmpa_clist
+					{bgcolor=mintedbg,rulecolor=\color{mintedbg}} }
+	\IfNoValueF{#1}{\clist_gpush:Nn\l_tmpa_clist{firstline=#1}}
+	\IfNoValueF{#2}{\clist_gpush:Nn\l_tmpa_clist{lastline=#2}}
+	\__latexbok_input_latex:Vn\l_tmpa_clist{#3}
+}
 % Unit definitions
 \DeclareSIUnit\point{pt}
 \DeclareSIUnit\em{em}

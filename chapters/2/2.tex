@@ -445,7 +445,9 @@ Figurer är den kanske vanligaste typen av flytande objekt, och dessa
 \begin{kod}
 	\centering\hspace{0.0075\textwidth}
 	\begin{minipage}{0.75\textwidth} % kod
-			\vfil\ifdraft{\inputminted[frame=single,firstline=10,lastline=16]{latex}{\latexbokFiguredir/2/figure.tex}}{\inputminted[frame=single,firstline=10,lastline=16,bgcolor=mintedbg,rulecolor=\color{mintedbg}]{latex}{\latexbokFiguredir/2/figure.tex}}\vfil
+			\vfil%
+			\inputlatex[10][16]{\latexbokFiguredir/2/figure.tex}%
+			\vfil%
 	\end{minipage}
 	\\ \medskip
 	\begin{minipage}{0.725\textwidth} % figur
