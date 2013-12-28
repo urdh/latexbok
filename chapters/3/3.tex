@@ -66,7 +66,7 @@ begränsade av omgivande text. Integraler och summor kan göras så höga som
 det krävs, och paranteser kan växa nästan obegränsat. Det är dock viktigt
 att komma ihåg att en fristående ekvation \emph{oftast} inte ska vara ett 
 eget
-stycke. \Cref{ex:stycken} visade hur ett antal ekvationer och
+stycke. \Cref{ex:stycken} på \cpageref*{ex:stycken} visade hur ett antal ekvationer och
 mellanrumet mellan dessa och den omgivande texten varierade beroende på
 	ekvationens plats i stycket. Trots att ekvationen är ”fristående” bör
 	man alltså behandla den precis som en
@@ -236,7 +236,7 @@ utmärkta verktyget Detexify%
 kan rita sin symbol och få en lista över liknande \LaTeX-symboler och
 deras motsvarande kommandon.
 
-\begin{table}[p]
+\begin{table}[tb!]
 	\centering 
 	\caption{Diverse användbara symboler i \LaTeX.}
 	\label{tab:symbs}
@@ -258,9 +258,10 @@ deras motsvarande kommandon.
 	\end{tabular}
 \end{table}
 
-\begin{table}[p]
+\begin{table}[p!]
 	\centering 
 	\caption{Kommandon motsvarande symbolerna i grekiska alfabetet.}
+	\vbox to 0.8\textheight{\hbox to \textwidth{\centering% HACK: fit table on one page
 	\label{tab:grekiska}
 	\begin{tabular}{lclclc}
 		\toprule 
@@ -294,6 +295,7 @@ deras motsvarande kommandon.
 		\cmd{omega} & \(\omega\) & \cmd{Omega} & \(\Omega\) & & \\
 		\bottomrule 
 	\end{tabular}
+	}\hfill\vss}% HACK: fit table on one page
 \end{table}
 
 \subsubsection{Operatorer}\label{sec:3:operatorer}%
@@ -309,7 +311,9 @@ exempel
 \index{matematik!relationssymbol}
 \index{matematik!pil}
 
+\paper{c5}{\vspace*{-0.7\baselineskip}}% HACK(c5): mindre avstånd bättre sidbrytning
 \subsubsection{Hattar, prickar, primtecken och liknande}
+\paper{c5}{\vspace*{-0.3\baselineskip}}% HACK(c5): mindre avstånd bättre sidbrytning
 \index{matematik!hatt}
 \index{matematik!derivata}
 Ibland vill man även modifiera variablers betydelse, kanske för att
@@ -329,93 +333,96 @@ Min rekommendation är att använda \cmd{vec} (eftersom det i
 koden indikerar att vi pratar om en vektor), och omdefiniera den om man
 föredrar en annan notation. Man kan till exempel använda följande kommando
 för att göra så att \cmd{vec} istället visar variabeln
-fetstilt\footnote{Med paketet \pack{isomath} — som kan rekommenderas — kan koden reduceras till \cmd*{let}\cmd*{vec}\cmd*{vectorsym}}:
+fetstilt\footnote{Med paketet \pack{isomath} — som kan rekommenderas — kan koden reduceras till \cmd*{let}\cmd*{vec}\cmd*{vectorsym}}:%
+\paper{c5}{\nopagebreak}% HACK(c5): Radbryt inte här!
 \latex|\renewcommand\vec[1]{\boldmath{#1}}|
 
-\begin{table}[p]
-	\centering 
-	\caption{Hattar och dylikt med \LaTeX-kommandon.}
-	\label{tab:hattar}
-	\begin{tabular}{lcp{0.5\textwidth}}
-		\toprule 
-		Notation & & Kommentar \\
-		\midrule 
-		\cmd[hat]{hat\{a\}} & \(\hat{a}\) & Transformerade variabler \\
-		\cmd[vec]{vec\{a\}} & \(\vec{a}\) & Vektorer (alternativ notation existerar) \\
-		\cmd[dot]{dot\{a\}} & \(\dot{a}\)& Förstaderviata med avseende på tid\\
-		\cmd[ddot]{ddot\{a\}} &\(\ddot{a}\)& Andraderivata med avseende på tid\\
-		\texttt{a'} & \(a'\)& Generell förstaderivata\\
-		\texttt{a''} & \(a''\)& Generell andraderivata\\
-		\cmd[bar]{bar\{a\}} & \(\bar{a}\) & Statistiskt medelvärde \\
-		\cmd[tilde]{tilde\{a\}} & \(\tilde{a}\) & Statistisk median \\
-		\cmd[widehat]{widehat\{abc\}} & \(\widehat{abc}\) & Variant av \cmd{hat} för flera tecken \\
-		\bottomrule 
-	\end{tabular}
+\begin{table}[p!]
+	\begin{minipage}{\textwidth}
+		\centering
+		\caption{Hattar och dylikt med \LaTeX-kommandon.}
+		\label{tab:hattar}
+		\begin{tabular}{lcp{0.5\textwidth}}
+			\toprule 
+			Notation & & Kommentar \\
+			\midrule 
+			\cmd[hat]{hat\{a\}} & \(\hat{a}\) & Transformerade variabler \\
+			\cmd[vec]{vec\{a\}} & \(\vec{a}\) & Vektorer (alternativ notation existerar) \\
+			\cmd[dot]{dot\{a\}} & \(\dot{a}\)& Förstaderviata med avseende på tid\\
+			\cmd[ddot]{ddot\{a\}} &\(\ddot{a}\)& Andraderivata med avseende på tid\\
+			\texttt{a'} & \(a'\)& Generell förstaderivata\\
+			\texttt{a''} & \(a''\)& Generell andraderivata\\
+			\cmd[bar]{bar\{a\}} & \(\bar{a}\) & Statistiskt medelvärde \\
+			\cmd[tilde]{tilde\{a\}} & \(\tilde{a}\) & Statistisk median \\
+			\cmd[widehat]{widehat\{abc\}} & \(\widehat{abc}\) & Variant av \cmd{hat} för flera tecken \\
+			\bottomrule 
+		\end{tabular}
+	\end{minipage}\par\vfil
+	\begin{minipage}{\textwidth}
+		\centering 
+		\caption{Viktiga pilar i matematisk notation och deras \LaTeX-kommandon.}
+		\label{tab:pilar}
+		\begin{tabular}{lclc}
+			\toprule 
+			Kort & & Lång & \\
+			\midrule 
+			\cmd{gets} & \(\gets\) & \cmd{longleftarrow}&\(\longleftarrow\) \\
+			\cmd{to} & \(\to\) & \cmd{longrightarrow}&\(\longrightarrow\) \\ 
+			\cmd{leftrightarrow} & \(\leftrightarrow\) & \cmd{longleftrightarrow} & \(\longleftrightarrow\) \\
+			\cmd{Leftarrow} & \(\Leftarrow\) & \cmd{Longleftarrow} & \(\Longleftarrow\) \\
+			\cmd{Rightarrow} & \(\Rightarrow\) & \cmd{Longrightarrow} & \(\Longrightarrow\) \\
+			\cmd{Leftrightarrow} & \(\Leftrightarrow\) & \cmd{iff} & \(\iff\) \\
+			\cmd{mapsto} & \(\mapsto\) & \cmd{longmapsto} & \(\longmapsto\) \\
+			\bottomrule 
+		\end{tabular}
+	\end{minipage}
 \end{table}
 
-%% Pilar, operatorer och relationer (fold)
-\begin{table}[p]
-	\centering 
-	\caption{Viktiga pilar i matematisk notation och deras \LaTeX-kommandon.}
-	\label{tab:pilar}
-	\begin{tabular}{lclc}
-		\toprule 
-		Kort & & Lång & \\
-		\midrule 
-		\cmd{gets} & \(\gets\) & \cmd{longleftarrow}&\(\longleftarrow\) \\
-		\cmd{to} & \(\to\) & \cmd{longrightarrow}&\(\longrightarrow\) \\ 
-		\cmd{leftrightarrow} & \(\leftrightarrow\) & \cmd{longleftrightarrow} & \(\longleftrightarrow\) \\
-		\cmd{Leftarrow} & \(\Leftarrow\) & \cmd{Longleftarrow} & \(\Longleftarrow\) \\
-		\cmd{Rightarrow} & \(\Rightarrow\) & \cmd{Longrightarrow} & \(\Longrightarrow\) \\
-		\cmd{Leftrightarrow} & \(\Leftrightarrow\) & \cmd{iff} & \(\iff\) \\
-		\cmd{mapsto} & \(\mapsto\) & \cmd{longmapsto} & \(\longmapsto\) \\
-		\bottomrule 
-	\end{tabular}
-\end{table}
-
-\begin{table}[p]
-	\centering 
-	\caption{Viktiga relationssymboler och deras \LaTeX-kommandon.}
-	\label{tab:relationer}
-	\begin{tabular}{lclclc}
-		\toprule 
-		Mindre & & Större & & Lika & \\
-		\midrule 
-		\texttt{<} & \(<\) & \texttt{>} & \(>\) & \texttt{=} & \(=\) \\
-		\cmd{nless} & \(\nless\) & \cmd{ngtr} & \(\ngtr\) & \cmd{neq} & \(\neq\) \\
-		\cmd{leq} & \(\leq\) & \cmd{geq} & \(\geq\) & \cmd{equiv} & \(\equiv\) \\
-		\cmd{nleq} & \(\nleq\) & \cmd{ngeq} & \(\ngeq\) & & \\
-		\cmd{lesssim} & \(\lesssim\) & \cmd{gtrsim} & \(\gtrsim\) & \cmd{approx} & \(\approx\) \\
-		\cmd{ll} & \(\ll\) & \cmd{gg} & \(\gg\) & & \\
-		\cmd{subset} & \(\subset\) & \cmd{supset} & \(\supset\) & & \\
-		\cmd{subseteq} & \(\subseteq\) & \cmd{supseteq} & \(\supseteq\) & & \\
-		\bottomrule
-	\end{tabular}
-\end{table}
-
-\begin{table}[p]
-	\centering 
-	\caption{Viktiga operatorer och deras \LaTeX-kommandon.}
-	\label{tab:operatorer}
-	\begin{tabular}{llp{0.5\textwidth}}
-		\toprule 
-		Operator & & Kommentar \\ 
-		\midrule 
-		\texttt{+}, \texttt{-} & \(+\), \(-\) & \\
-		\cmd{times}, \cmd{div} & \(\times\), \(\div\) & Multiplikation kan även skrivas ut tydligt med \cmd{cdot} (\(\cdot\)); \cmd{times} och \cmd{cdot} har speciella betydelser inom linjär algebra\\
-		\cmd{pm}, \cmd{mp} & \(\pm\), \(\mp\) & \\
-		\cmd{cup}, \cmd{cap} & \(\cup\), \(\cap\) & Union/snitt i mängdlära \\
-		\cmd{lor}, \cmd{land} & \(\lor\), \(\land\) & Och/eller i Boolesk algebra \\
-		\cmd{partial} & \(\partial\) & Partiell deriveringsoperator \\
-		\cmd{nabla} & \(\nabla\) & Flerdimensionell deriveringsoperator \\
-		\cmd{Delta} & \(\Delta\) & Laplaceoperator \\
+\begin{table}[p!]
+	\begin{minipage}{\textwidth}
+		\centering 
+		\caption{Viktiga relationssymboler och deras \LaTeX-kommandon.}
+		\label{tab:relationer}
+		\begin{tabular}{lclclc}
+			\toprule 
+			Mindre & & Större & & Lika & \\
+			\midrule 
+			\texttt{<} & \(<\) & \texttt{>} & \(>\) & \texttt{=} & \(=\) \\
+			\cmd{nless} & \(\nless\) & \cmd{ngtr} & \(\ngtr\) & \cmd{neq} & \(\neq\) \\
+			\cmd{leq} & \(\leq\) & \cmd{geq} & \(\geq\) & \cmd{equiv} & \(\equiv\) \\
+			\cmd{nleq} & \(\nleq\) & \cmd{ngeq} & \(\ngeq\) & & \\
+			\cmd{lesssim} & \(\lesssim\) & \cmd{gtrsim} & \(\gtrsim\) & \cmd{approx} & \(\approx\) \\
+			\cmd{ll} & \(\ll\) & \cmd{gg} & \(\gg\) & & \\
+			\cmd{subset} & \(\subset\) & \cmd{supset} & \(\supset\) & & \\
+			\cmd{subseteq} & \(\subseteq\) & \cmd{supseteq} & \(\supseteq\) & & \\
+			\bottomrule
+		\end{tabular}
+	\end{minipage}\par\vfil
+	\begin{minipage}{\textwidth}
+		\centering 
+		\caption{Viktiga operatorer och deras \LaTeX-kommandon.}
+		\label{tab:operatorer}
+		\begin{tabular}{llp{0.5\textwidth}}
+			\toprule 
+			Operator & & Kommentar \\ 
+			\midrule 
+			\texttt{+}, \texttt{-} & \(+\), \(-\) & \\
+			\cmd{times}, \cmd{div} & \(\times\), \(\div\) & Multiplikation kan även skrivas ut tydligt med \cmd{cdot} (\(\cdot\)); \cmd{times} och \cmd{cdot} har speciella betydelser inom linjär algebra\\
+			\cmd{pm}, \cmd{mp} & \(\pm\), \(\mp\) & \\
+			\cmd{cup}, \cmd{cap} & \(\cup\), \(\cap\) & Union/snitt i mängdlära \\
+			\cmd{lor}, \cmd{land} & \(\lor\), \(\land\) & Och/eller i Boolesk algebra \\
+			\cmd{partial} & \(\partial\) & Partiell deriveringsoperator \\
+			\cmd{nabla} & \(\nabla\) & Flerdimensionell deriveringsoperator \\
+			\cmd{Delta} & \(\Delta\) & Laplaceoperator \\
 %			\cmd{mathscr\{F\}} & \(\mathscr{F}\) & Fouriertransform \\
-		\bottomrule 
-	\end{tabular}
-	% \wedge, \cup, \in, \to, \nabla
+			\bottomrule 
+		\end{tabular}
+		% \wedge, \cup, \in, \to, \nabla
+	\end{minipage}
 \end{table}
 %% (end)
 
+\paper{a4}{\clearpage}% HACK(a4): rubrik efter figurer
 \subsection{Paranteser och dylikt}
 \index{matematik!parantes|(}
 Paranteser är mycket viktiga inom matematiken för att visa olika typer av
@@ -446,11 +453,11 @@ på \cpageref{sec:3:mid} och paketet \pack{braket} som förklaras
 på \cpageref{pack:braket}):
 \latex|\left\langle\psi\right\vert|
 
-\begin{table}[t]
+\begin{table}[p]
 	\centering 
 	\caption{Fyra vanliga parantestyper i \LaTeX.}
 	\label{tab:paranteser}
-	\begin{tabular}{lcp{0.5\textwidth}}
+	\begin{tabular}{lcp{0.6\textwidth}}
 		\toprule 
 		Paranteser & & Kommentar \\
 		\midrule 
@@ -460,14 +467,13 @@ på \cpageref{pack:braket}):
 		\texttt{[ ]} & \( [\quad] \) & Används av vissa istället för 
 		\(()\), av andra för att visa insättning av en variabel\\
 		\verb|\langle| & \(\langle\quad\rangle\) &
-		\multirow{2}{0.5\textwidth}{Används för att visa skalärprodukten i
+		\multirow{2}{0.6\textwidth}{Används för att visa skalärprodukten i
 		till exempel funktionsrum}\\
 		\verb|\rangle| & & \\
 		\bottomrule 
 	\end{tabular}
 \end{table}
-
-\begin{kod}[tbp]
+\begin{kod}[p]
 	\centering 
 	\begin{minipage}{0.85\textwidth}
 		\begin{latexcode}
@@ -498,21 +504,24 @@ vill. Det
 finns dock även kommandon \cmd{lvert} och \cmd{rvert} som motsvarar dessa
 (och som beter sig något bättre typsättningsmässigt),
 samt \cmd{lVert} och \cmd{rVert} som motsvarar dubbla vertikala streck.
-Man kan således definiera absolutbelopps- och normkommandon i \LaTeX%
+Man kan således definiera både absolutbelopps- och normkommandon i \LaTeX%
 \footnote{Kommandot \cmd{DeclarePairedDelimiter} definieras av paketet
-\pack{mathtools}}:
+\pack{mathtools}}, som sedan kan användas i matematikläget:%
+\paper{a4}{\nopagebreak}% HACK(a4): ingen radbrytning här!
 \begin{latexcode}
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 \DeclarePairedDelimiter\norm{\lVert}{\rVert}
+% ...
+\( \norm{x}_1 = \sum_{i=1}^n\abs{x_i} \)
 \end{latexcode}
 \label{cmd:declarepaireddelimiter}
-Dessa kan sedan enkelt användas i matematikläge:
-\latex|\norm{x}_1 = \sum_{i=1}^n\abs{x_i}|
 
 Dessutom används det vertikala strecket ibland mitt i block (exempelvis
 vid definition av mängder, \(\varnothing = \{A \mid A \in A\}\)) och
 betecknas då \cmd{mid}. Ett exempel med tidigare nämnda bra-ket-notation
-kan se ut så här: \label{sec:3:mid}
+kan se ut så här:%
+\paper{a4}{\nopagebreak}% HACK(a4): ingen radbrytning här!
+\label{sec:3:mid}%
 \latex|\left\langle\psi\mid\Psi\right\rangle|
 
 Dessutom kan det användas som en operator,
@@ -555,7 +564,8 @@ tecknet då detta får plats, och med gränser likt vanliga upphöjningar och
 nedsänkningar annars (till exempel i ekvationer i text, där det är ont om
 plats i höjdled). Ibland gör \LaTeX dock fel. När detta händer får man
 hinta \LaTeX{} om att gränserna inte typsätts korrekt med hjälp av
-kommandot \cmd{limits}, som placeras mellan tecknet och gränserna:
+kommandot \cmd{limits}, som placeras mellan tecknet och gränserna:%
+\paper{c5}{\nopagebreak}% HACK(c5): radbryt inte här!
 \latex|\sum\limits_{x=1}^\infty \frac{1}{x^2}|
 
 Kommandot \cmd{limits} kan även användas med andra operatorer, till
@@ -574,10 +584,11 @@ lägga in ett negativt mellanrum (\cmd{"!}) mellan integraltecken och
 innehåll:
 \latex|\int_0^1\! x^2 dx|
 
+\paper{c5}{\newpage}% HACK(c5): bättre sidbrytning
 Det andra problemet kan också lösas genom att lägga till mellanrum (i
 kombination med att typsätta \(dx\) med \cmd{mathrm}), men eftersom
 det är så ofta man behöver differentieringsoperatorn är det bättre att
-definiera ett nytt kommando för detta\footnote{Tack till
+definiera ett kommando för detta\footnote{Tack till
 \textcite{Beaudrap11} för grunden till detta kommando.;%
 Detta kommando, och en del andra användbara matematik-kommandon,
 definieras även av paketet \pack{skmath} som finns tillgängligt
@@ -680,7 +691,16 @@ de båda. Notera att varje \env{multline}-omgivning endast får \emph{ett}
 ekvationsnummer; vill man ha ett per rad ska man istället använda
 \env{align}.
 
-\begin{figure}[b]
+\subsection{Relaterade ekvationer: \env{align} och \env{gather}}
+\index{matematikläge!samlade ekvationer}
+Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
+i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
+\env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
+\Cref{fig:aligngather} visar hur dessa omgivningar ser ut; den enda
+skillnaden mellan de två är att man med \env{align} kan placera ekvationer
+mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
+
+\begin{figure}[tb]
 	\centering 
 	\subfloat[Tre ekvationer typsatta med \env{align}]{\fbox{ % align
 		\label{fig:aligngather:align}
@@ -712,15 +732,7 @@ ekvationsnummer; vill man ha ett per rad ska man istället använda
 	\label{fig:aligngather}
 \end{figure}
 
-\subsection{Relaterade ekvationer: \env{align} och \env{gather}}
-\index{matematikläge!samlade ekvationer}
-Ibland kan man ha flera olika, men relaterade ekvationer man vill typsätta
-i en grupp eller på rad. Detta kan man göra med två olika omgivningar:
-\env{align} och \env{gather} (även dessa har stjärnvarianter utan nummer).
-\Cref{fig:aligngather} visar hur dessa omgivningar ser ut; den enda
-skillnaden mellan de två är att man med \env{align} kan placera ekvationer
-mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
-
+\paper{a4}{\newpage}% HACK(a4): bättre sidbrytning
 Nya rader skapas i båda omgivningarna med nyradskommandot \verb|\\|, och
 i \env{align} använder man (på liknande sätt som i \env{tabular}) ett
 et-tecken (\verb|&|) för att skapa en ”kolumn”. Koden för \cref{fig:aligngather:align} är således som följer:
@@ -741,6 +753,22 @@ kommandot \cmd{nonumber} precis innan man bryter raden. Man kan även
 sätta en etikett på en enskild rad genom att placera \cmd{label} på samma
 sätt.
 
+\paper{a4}{\newpage}% HACK(a4): bättre sidbrytning
+\subsubsection{Underekvationer}
+Förutom \env{align} och \env{gather} visar även \cref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
+omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
+och får bara innehålla en (och endast en) matematikomgivning, inget annat:
+\begin{latexcode}
+\begin{subequations}
+\begin{align}
+y_1 &= x^2 + 2x + 1 \\
+y_2 &= x^2 - 2x + 1 \\
+y_3 &= x^2 - 1
+\end{align}
+\end{subequations}
+\end{latexcode}
+
+\subsection{Matriser}
 \begin{figure}[b]
 	\centering 
 	\subfloat[\env{Vmatrix}]{
@@ -796,22 +824,6 @@ sätt.
 	\caption{Fem av de sex matristyper \AmS\LaTeX{} definierar.}
 	\label{fig:matriser}
 \end{figure}
-
-\subsubsection{Underekvationer}
-Förutom \env{align} och \env{gather} visar även \cref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
-omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
-och får bara innehålla en (och endast en) matematikomgivning, inget annat:
-\begin{latexcode}
-\begin{subequations}
-\begin{align}
-y_1 &= x^2 + 2x + 1 \\
-y_2 &= x^2 - 2x + 1 \\
-y_3 &= x^2 - 1
-\end{align}
-\end{subequations}
-\end{latexcode}
-
-\subsection{Matriser}
 \index{matematik!matris}
 Matriser byggs upp på ett sätt som liknar \env{tabular}, och definieras
 av de omgivningar som visas i \cref{fig:matriser}. Dessa måste
@@ -846,7 +858,7 @@ har endast två kolumner (som dock separeras av mer mellanrum än i andra
 omgivningar). \Cref{ex:cases} visar hur \env{cases} används för
 att definiera en styckvis funktion (i det här fallet rampfunktionen).
 
-\begin{kod}[tbp]
+\begin{kod}[b]
 	\centering 
 	\begin{minipage}[b]{0.35\textwidth} % figur
 		\begin{equation}
@@ -913,7 +925,7 @@ används i matematikläge samt några exempel och mängden mellanrum som
 tillförs. Notera dock att tecken av typ 2 (binära operatorer) görs om till
 typ 0 om de inte har någon text (en operand) till vänster.
 
-\begin{table}[tbp]
+\begin{table}[p]
 	\centering 
 	\caption{Avstånd före (\emph{pre}) och efter (\emph{post}) olika typer
 	av tecken i matematikläge.}
@@ -934,23 +946,7 @@ typ 0 om de inte har någon text (en operand) till vänster.
 		\bottomrule 
 	\end{tabular}
 \end{table}
-
-\subsection{Fantomer}
-\index{tomrum!matematikläge}
-Ibland finns det även tillfällen då man vill ha mellanrum som är
-\emph{exakt} lika stora som en viss bit typsatt text. Man använder då
-fantomer. De viktigaste fantomerna är \cmd{hphantom} (ingen höjd, bredd
-från dess innehåll) och \cmd{vphantom} (ingen bredd, höjd från dess 
-innehåll). Dessa kan vara användbara om man till exempel använder
-\env{multline} för att bryta en ekvation, samtidigt som man använder
-\cmd{left} och \cmd{right} (som inte fungerar ”runt” radbrytningar).
-
-\Cref{fig:phantom} illustrerar problemet och lösningen. Här använder
-vi \cmd{vphantom}, eftersom vi vill lägga till höjd, och vi fyller den med
-\verb|\frac{1}{2}| eftersom det är den högsta delen av gruppen vi vill
-matcha.
-
-\begin{figure}[tbp]
+\begin{figure}[p]
 	\centering
 	\begin{minipage}{\textwidth}
 		\begin{minipage}{0.4\textwidth} % ekvation
@@ -992,6 +988,21 @@ p(x) = \left(\frac{1}{2}x^3 +
 	\caption{Problem med \env{multline} och lösningen med \cmd{vphantom}.}
 	\label{fig:phantom}
 \end{figure}
+
+\subsection{Fantomer}
+\index{tomrum!matematikläge}
+Ibland finns det även tillfällen då man vill ha mellanrum som är
+\emph{exakt} lika stora som en viss bit typsatt text. Man använder då
+fantomer. De viktigaste fantomerna är \cmd{hphantom} (ingen höjd, bredd
+från dess innehåll) och \cmd{vphantom} (ingen bredd, höjd från dess 
+innehåll). Dessa kan vara användbara om man till exempel använder
+\env{multline} för att bryta en ekvation, samtidigt som man använder
+\cmd{left} och \cmd{right} (som inte fungerar ”runt” radbrytningar).
+
+\Cref{fig:phantom} illustrerar problemet och lösningen. Här använder
+vi \cmd{vphantom}, eftersom vi vill lägga till höjd, och vi fyller den med
+\verb|\frac{1}{2}| eftersom det är den högsta delen av gruppen vi vill
+matcha.
 
 \section{Punkter}
 \index{matematik!punkter}

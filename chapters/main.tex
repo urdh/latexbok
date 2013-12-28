@@ -59,6 +59,7 @@
 	%% TYPSÄTTNING MED LATEX
 	\subfile{chapters/2/2.tex}
 	%% MATEMATIK MED LATEX OCH AMS
+	\paper{a4}{\addtocontents{toc}{\newpage}}% HACK(a4): sidbryt TOC
 	\part{Matematiken}
 	\subfile{chapters/3/3.tex}
 	%% GRAFIK MED LATEX
@@ -68,6 +69,7 @@
 	\part{Referenserna}
 	\subfile{chapters/5/5.tex}
 	%% VIDARE LÄSNING
+	\paper{a4}{\addtocontents{toc}{\newpage}}% HACK(a4): sidbryt TOC
 	\part{Fortsättningen}
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
@@ -148,6 +150,7 @@
 	\KOMAoptions{parskip=never}
 	\cleardoublepage
 	\indexprologue{\label{sec:idx}
+		\noindent
 		Detta register innehåller en förteckning över olika teman, termer
 		och liknande som diskuteras i boken. Den innehåller inte en
 		förteckning över de \LaTeX-paket som diskuteras (en sådan återfinns
@@ -157,11 +160,13 @@
 	\printindex
 	\cleardoublepage
 	\indexprologue{\label{sec:idx-pkg}
+		\noindent
 		Denna förteckning listar alla de \LaTeX-paket som nämns i boken.
 	}
 	\printindex[packages]
 	\cleardoublepage
 	\indexprologue{\label{sec:idx-cmd}
+		\noindent
 		Denna förteckning listar alla de kommandon och mijöer som 
 		diskuteras i boken.
 	}

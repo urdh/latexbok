@@ -55,7 +55,11 @@ artiklar som kan vara av intresse för dig som precis börjat med \LaTeX.
 	felaktig), men det kan vara värt att skumma igenom den ändå.
 	
 	\item[\emph{The Not So Short Introduction to \LaTeXe} \parencite{Oetiker11}]
-	går även under namnet \pack{lshort} och är
+	går 
+	\paper{a4}{\\}% HACK(a4): Bättre radbrytning
+	även 
+	\paper{c5}{\\}% HACK(c5): Bättre radbrytning
+	under namnet \pack{lshort} och är
 	en kort introduktion till \LaTeX,
 	skriven på engelska. Den går \emph{lite} djupare in på vissa bitar
 	av \LaTeX{}, och fokuserar en del på den nu i princip överflödiga
@@ -84,7 +88,11 @@ artiklar som kan vara av intresse för dig som precis börjat med \LaTeX.
 	sidor.
 	
 	\item[\emph{The \LaTeX{} Companion} \parencite{Mittelbach04}]
-	beskriver alla \LaTeX-kommandon och en stor mängd paket. Om du ska
+	beskriver 
+	\paper{a4}{\\}% HACK(a4): Bättre radbrytning
+	alla 
+	\paper{c5}{\\}% HACK(c5): Bättre radbrytning
+	\LaTeX-kommandon och en stor mängd paket. Om du ska
 	skriva ett eget paket eller en egen dokumentklass, eller bara är
 	intresserad av att ”hacka” \LaTeX{} lite, så bör du absolut ta en titt
 	på den här boken. En mycket bra referens för den vane \TeX{}aren.
@@ -177,10 +185,14 @@ att kunna spåra ändringar och ändra dokumentet från många olika platser
 (gärna samtidigt). Med hjälp av ett versionshanteringssystem så som 
 Subversion\footnote{\url{http://subversion.tigris.org/}} blir detta
 enkelt. Ännu bättre blir det om man använder ett distribuerat system så
-som Mercurial\footnote{\url{http://mercurial.selenic.com/}} eller
+som Mercurial\footnote{\url{http://mercurial.selenic.com/}%
+\\% HACK(a4+c5): bättre radbrytning i fotnot
+} eller
 Git\footnote{\url{http://git-scm.com/}}, hostat helt gratis av något snällt
 företag, till exempel på Bitbucket\footnote{\url{https://bitbucket.org/}}
-(Github\footnote{\url{https://github.com/}} eller Gitorious%
+(Github\footnote{\url{https://github.com/}%
+\\% HACK(a4+c5): bättre radbrytning i fotnot
+} eller Gitorious%
 \footnote{\url{http://gitorious.org/}} om man föredrar Git framför Mercurial).
 
 Att utförligt förklara hur Mercurial fungerar är utanför den här bokens
@@ -251,7 +263,8 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	
 	\item[\pack{fontenc}] (ej med \XeTeX{} och \hologo{LuaTeX})
 	låter användaren välja typsnittskodning. Från början använder \LaTeX{}
-	\texttt{OT1}, som inte innehåller icke-anglikanska tecken så som
+	% HACK(a4): discretionary hyphen i följande rad
+	\texttt{OT1}, som inte innehåller icke-angli\-kanska tecken så som
 	\emph{å}, \emph{ä} och \emph{ö}. Detta medför problem när det gäller
 	bland annat avstavning, och man bör därför istället använda 
 	\texttt{T1}. Detta diskuteras närmre på \cpageref{pack:fontenc}.
@@ -284,7 +297,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	inkluderar typsnittsfamiljen \emph{Kepler} som är en gratis familj
 	baserad på Adobe Palatino. Personligen tycker jag att \emph{Kepler}
 	ser bättre och tydligare ut än \emph{Latin Modern}, och paketet
-	innehåller dessutom en enorm mängd typsnitt som täcker allasituationer.
+	innehåller dessutom en enorm mängd typsnitt som täcker alla situationer.
 	Välj antingen detta paket \emph{eller} \pack{lmodern}, inte båda.
 	
 	\index{typsnitt!paket}
@@ -307,6 +320,7 @@ tecken- och typsnittskodning till avstavning och interna länkar.
 	ersätter \pack{babel} för \XeTeX{} och har bättre stöd för \UTF.
 \end{description}
 
+\paper{c5}{\newpage}% HACK(c5): bätre radbrytning
 \subsection{Paket för snyggare typsättning}
 Även om \LaTeX{} är mycket bra på att typsätta så blir det ibland inte
 så snyggt som man kanske kan önska. Vid dessa tillfällen kan man
@@ -364,7 +378,7 @@ matematikpaket.
 
 	\item[\pack{amssymb}]
 	definierar en hel del matematiska symboler, till exempel 
-	\cmd{therefore} (\(\therefore\)) och \cmd{ggg} (\(\ggg\)), och 
+	\cmd{ggg} (\(\ggg\)) och \cmd{therefore} (\(\therefore\)), samt 
 	kommandot \cmd{mathbb} som ger krittavletecken (som
 	används för de grundläggande talmängderna).
 	

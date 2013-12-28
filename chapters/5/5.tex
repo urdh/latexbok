@@ -151,7 +151,7 @@ En bibliografistil laddas i \pack{biblatex} genom inställningen
 som visas i \cref{fig:bibstyle:alphabetic} på följande sätt:
 \latex|\usepackage[style=alphabetic]{biblatex}|
 
-\Cref{fig:bibstyle:1} visar som sagt de bibliografistilar som inkluderas
+\Cref{fig:bibstyle:1} på \cpageref*{fig:bibstyle:1} visar som sagt de bibliografistilar som inkluderas
 med \pack{biblatex}. Vanligt inom matematik och fysik är att man använder
 något liknande \texttt{numeric} (\cref{fig:bibstyle:numeric}), men på
 Chalmers använder man istället författare-årtal
@@ -160,28 +160,10 @@ Chalmers använder man istället författare-årtal
 paket, \pack{biblatex-chicago}, som diskuteras senare i detta kapitel).
 Många fält och publikationer har egna specifika stilar, varav de flesta
 stora publikationer har \pack{biblatex}-stilar — ett urval av sådana
-stilar visas i \Cref{fig:bibstyle:2}, men den intresserade hänvisas till
+stilar visas i \cref{fig:bibstyle:2} på \cpageref*{fig:bibstyle:2}, men den intresserade hänvisas till
 CTAN-katalogen\footnote{\url{http://www.ctan.org/tex-archive/macros/latex/contrib/biblatex-contrib}}, där fler stilar listas.
 
-\subsubsection{Chicago-stilen med \pack{biblatex-chicago}}
-Chicago-stilen \parencite{Chicago10} är väldigt omfattande (även om man
-bortser från de delar som inte relaterar till referenslistor), och av
-tekniska skäl finns den därför inte implementerad som en enkel
-\pack{biblatex}-stil. Istället implementeras stilen som ett paket,
-\pack{biblatex-chicago}, som laddar \pack{biblatex} automatiskt.
-
-Paketets manual \parencite{Fussner13} förklarar i stora drag hur det
-är tänkt att användas, men i princip gäller samma inställningar som
-för \pack{biblatex} bortsett från bibliografistilar. Istället för alla
-de stilar som finns tillgängliga för \pack{biblatex} använder sig
-\pack{biblatex-chicago} endast av två: fotnoter (\texttt{notes})
-och författare-årtal (\texttt{authordate}, den stil som rekommenderas
-av Chalmers och som syns i \cref{fig:bibstyle:chicago}).
-För att använda paketet istället för någon annan \pack{biblatex}-stil
-räcker det oftast med att istället ladda \pack{biblatex-chicago}:
-\latex|\usepackage[authordate,backend=biber]{biblatex-chicago}|
-\index{bibliografi!-stil|)}
-
+\paper{a4}{\clearpage}% HACK(a4): se kommentar nedan
 % NOTE: make sure first figure is on even page, second on odd
 \begin{figure}[p]
 	\centering
@@ -249,6 +231,26 @@ räcker det oftast med att istället ladda \pack{biblatex-chicago}:
 	\caption{Några av de bibliografistilar som definieras av olika paket och inte följer med \pack{biblatex}.}
 	\label{fig:bibstyle:2}
 \end{figure}
+\paper{a4}{\clearpage}% HACK(a4): se kommentar ovan
+
+\subsubsection{Chicago-stilen med \pack{biblatex-chicago}}
+Chicago-stilen \parencite{Chicago10} är väldigt omfattande (även om man
+bortser från de delar som inte relaterar till referenslistor), och av
+tekniska skäl finns den därför inte implementerad som en enkel
+\pack{biblatex}-stil. Istället implementeras stilen som ett paket,
+\pack{biblatex-chicago}, som laddar \pack{biblatex} automatiskt.
+
+Paketets manual \parencite{Fussner13} förklarar i stora drag hur det
+är tänkt att användas, men i princip gäller samma inställningar som
+för \pack{biblatex} bortsett från bibliografistilar. Istället för alla
+de stilar som finns tillgängliga för \pack{biblatex} använder sig
+\pack{biblatex-chicago} endast av två: fotnoter (\texttt{notes})
+och författare-årtal (\texttt{authordate}, den stil som rekommenderas
+av Chalmers och som syns i \cref{fig:bibstyle:chicago}).
+För att använda paketet istället för någon annan \pack{biblatex}-stil
+räcker det oftast med att istället ladda \pack{biblatex-chicago}:
+\latex|\usepackage[authordate,backend=biber]{biblatex-chicago}|
+\index{bibliografi!-stil|)}
 
 \section{Referenskommandon och referenslistor}
 \index{bibliografi}

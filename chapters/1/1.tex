@@ -18,7 +18,7 @@ men det rekommenderas att man använder
 en textredigerare med syntaxfärgning (då det underlättar felsökande) och
 stavningskontroll. Oftast sparar man filen med teckenkodningen \UTF{} 
 (detta gör de flesta moderna textredigerare), men det finns en risk att
-filerna sparas med teckenkodningen \textsc{iso-8559-1}\footnote{Det finns 
+filerna sparas med teckenkodningen \textsc{ISO-8859-1}\footnote{Det finns 
 även andra teckenkodningar som kan dyka upp{;} Windows-1252 är en sådan.}, 
 och då måste man ha koll på detta eftersom man måste berätta för \LaTeX{}
 hur filen ska läsas in.
@@ -59,6 +59,7 @@ dessutom lägga till måsvingar efteråt, eftersom dessa tecken normalt används
 modifiera vokaler. Tecknen måste alltså skrivas på följande sätt:
 \latex|\# \^{} \& \_ \{ \} \~{} \textbackslash \% \$|
 
+\paper{a4}{\clearpage}% HACK(a4): hindra radbrytning mellan text och lista
 \subsection{\LaTeX-kommandon}
 \index{kommando}
 För att säga åt \LaTeX{} vad som ska göras används kommandon. Dessa
@@ -67,7 +68,7 @@ kommandon följer några enkla regler:
 	\item De börjar med ett bakvänd snedstreck (\cmd*{}) och följs av sitt
 	namn, som bara får innehålla bokstäver%
 	\footnote{Det finns även ett antal kommandon som består av \cmd*{} och
-	exakt en icke-bokstav, till exempel \cmd{\&}.}.
+	exakt en icke-bokstav, till exempel \cmd{\&}.;Att namnet bara får innehålla bokstäver är något av en sanning med modifikation, eftersom man med så kallade kategorikoder \eng{catcodes} kan ändra vilka tecken \LaTeX{} tolkar som bokstäver — inom ramen för den här introduktionen kan man dock anta att endast \enquote{riktiga} bokstäver är tillåtna.}.
 	Kommandon avslutas av ett
 	mellanslag, en siffra eller annan godtycklig ”icke-bokstav”.
 	
@@ -246,9 +247,13 @@ bestämmer dig därför för att använda \pack{article}-klassen:
 \index{paket}
 \index{CTAN}
 När du skriver ett dokument kommer du troligtvis att märka att vissa saker
-är svåra eller ointuitiva (kanske rent av omöjliga\footnote{Tekniskt sett
-är de inte omöjliga, eftersom \TeX{} är Turingkomplett. Nästan alla paket
-är implementerade med \LaTeX-kod.}) att göra med grundläggande \LaTeX-kod.
+är svåra eller ointuitiva (kanske rent av omöjliga%
+\paper{c5}{%
+	\footnote{Tekniskt sett är de inte omöjliga,
+	eftersom \TeX{} är Turingkomplett. Nästan alla paket är
+	implementerade med \LaTeX-kod.}%
+}% HACK(a4): utelämna fotnot för bättre sidbrydning
+) att göra med grundläggande \LaTeX-kod.
 Lyckligvis finns det då nästan alltid ett paket på CTAN som förenklar
 det du vill göra. Installerade paket kan inkluderas med kommandot
 \cmd{usepackage}:
@@ -307,7 +312,9 @@ innehållsförteckningar med mera\footnote{Detta är en konsekvens av hur
 \TeX{} fungerar; kompilatorn läser filen bit för bit och expanderar kommandon —
 det går inte att röra sig ”bakåt” i filen, så vill man ändra på något
 man redan gått förbi måste man spara information om detta i en extern fil
-som man läser in under nästa körning.}.
+som man läser in under nästa körning.%
+\protect\paper{c5}{\hfill\\}% HACK(c5): fixar osnygg fotnotslayout
+}.
 Kompilatorn brukar varna om detta och
 be om ännu en körning. Använder man vissa externa verktyg som \BibTeX{}
 måste man även köra detta program; arbetsflödet blir då 
@@ -325,7 +332,7 @@ vissa mikrotypografiska funktioner, till exempel hängande punktuation
 Användningen är enkel; när du vill kompilera ditt dokument (vilket du som
 sagt vill göra några gånger i rad) anropar du helt enkelt programmet
 \cli{pdflatex} (testa gärna på koden i \cref{ex:initio}):
-\mint{sh}|pdflatex filnamn.tex|
+\sh|pdflatex filnamn.tex|
 
 Detta gör att \pdfLaTeX{} kompilerar ditt program och skapar ett antal
 filer, däribland \texttt{filnamn.pdf}, som är det slutgiltiga (eller, så
@@ -363,7 +370,7 @@ kolla efter ändringar i \LaTeX-filen (och andra berörda filer) och
 kompilera om hela dokumentet när dessa ändras.
 
 Att köra \cli{latexmk} är lika lätt som att köra \cli{pdflatex}:
-\mint{sh}|latexmk -pdf filnamn.tex|
+\sh|latexmk -pdf filnamn.tex|
 
 \section{Filer du kanske stöter på}
 När man arbetar med \LaTeX{} finner man ganska snabbt att det dyker upp en

@@ -3,6 +3,7 @@
 \documentclass[10pt,../../a4.tex]{subfiles}
 \begin{document}
 \chapter{Grafik med \LaTeX}\label{sec:4}
+\vspace*{-0.75\baselineskip}% HACK(a4): Minde whitespace -> bättre sidbryt
 Grafik, i form av figurer och diagram, kan vara ett mycket bra sätt
 att illustrera eller beskriva samband, algoritmer och data. Nedan följer
 ett antal olika tips, inte bara om hur man inkluderar (eller till och 
@@ -16,7 +17,9 @@ det inledande stycket (även om det är både kort och informativt) och
 gå direkt på \pack{graphicx} och \PGFTikZ\ på
 \cpageref{sec:includegraphics}.
 
+\vspace*{-0.75\baselineskip}% HACK(a4): Minde whitespace -> bättre sidbryt
 \section{Vad är bra grafik?}
+\vspace*{-0.25\baselineskip}% HACK(a4): Minde whitespace -> bättre sidbryt
 \index{figur}
 \index{grafik}
 Att skapa bra grafik, grafik som på ett effektivt och tydligt sätt
@@ -32,7 +35,8 @@ verkligen behövs, eller om en tabell presenterar datan bättre.
 	\emph{\citetitle{Tufte97}} \parencite{Tufte97} är väl värd att läsa
 	för den som är intresserad av grafik och hur man presenterar data.},
 sammanfattar bra grafik på ett mycket exakt och kortfattat sätt
-\textcite[\pno~51]{Tufte01}:
+\textcite[\pno~51]{Tufte01}:%
+\paper{a4}{\nopagebreak}% HACK(a4): sdbryt inte innan citat!
 \begin{quotation}
 	Fulländad grafik består av komplicerade idéer kommunicerade med
 	klarhet, precision och effektivitet.
@@ -126,13 +130,17 @@ installerat paketet genom att köra kommandot
 \verb|install.packages("ggplot2")|
 i \Rlogo använder man det genom att inkludera paketet och använda
 funktionen \texttt{ggplot} i kombination med någon av paketets många
-plot-funktioner. Man kan även kombinera olika grafer:
+plot-funktioner. Man kan även kombinera olika grafer:%
 \begin{rcode}
 require(ggplot2)
 # Exempeldata
 df <- data.frame(
 +   trt = factor(c(1, 1, 2, 2)),
 +   resp = c(1, 5, 3, 4), 
+\end{rcode}
+\paper{a4}{\nopagebreak\vspace{-1\baselineskip}}% HACK(c5): ...
+% avbrott i koden för att kunna sidbryta, avbrottet fuskas bort i a4
+\begin{rcode}
 +   group = factor(c(1, 2, 1, 2)),
 +   se = c(0.1, 0.3, 0.3, 0.2)
 +) 
@@ -217,7 +225,9 @@ ingen anledning att inte göra det, och i vissa fall (så som för enkla
 figurer över uppställningar eller mekaniska figurer) kan det vara 
 lättare att skriva \PGFTikZ-kod än att rita figuren i ett externt program.
 CTAN-katalogen innehåller ett stort antal tilläggspaket till \PGFTikZ%
-\footnote{\url{http://www.ctan.org/tex-archive/graphics/pgf/contrib}},
+\footnote{\url{http://www.ctan.org/tex-archive/graphics/pgf/contrib}%
+\protect\paper{c5}{\hfill\\}% HACK(c5): bättre fotnot
+},
 bland annat \pack{circuitikz} \parencite{Redaelli12} som används
 för att rita kopplingsscheman, \pack{flowchart} \parencite{Robson13}
 som gör det lättare att rita flödesscheman, \pack{pgfgantt}
@@ -229,10 +239,12 @@ material på internet\footnote{Bland annat finns galleriet
 \TeX{}ample.net\footref{fn:4:texample} som innehåller 
 många exempel på \PGFTikZ-kod, och taggen \emph{\mbox{tikz-pgf}} på
 \TeX.SE\footref{fn:4:tex-se-tikz-pgf}
-där man kan få svar på många frågor}. Ska man bara rita enkla grafer
+där man kan få svar på många frågor.}. Ska man bara rita enkla grafer
 finns dessutom det lite enklare paketet \pack{pgfplots}, som använder
 \PGFTikZ\ internt (och som diskuteras nedan).%
-\silentfootnote{\url{http://www.texample.net}\label{fn:4:texample}}%
+\silentfootnote{\url{http://www.texample.net}\label{fn:4:texample}%
+\protect\paper{c5}{\hfill\\}% HACK(c5): bättre fotnot
+}%
 \silentfootnote{\url{http://tex.stackexchange.com/questions/tagged/tikz-pgf}\label{fn:4:tex-se-tikz-pgf}}
 
 Fördelen med \PGFTikZ ligger främst i det faktum att grafiken är
@@ -287,17 +299,19 @@ att beskriva hur man enklast exporterar figurer som \PGFTikZ-kod eller
 i \PDF-format (i nödfall \PNG) från två vanliga programvaror:
 \Rlogo och \MATLAB.
 
-\section{Exportera i \texorpdfstring{\PGFTikZ}{PGF/TikZ}-format}
+\subsection{Exportera i \texorpdfstring{\PGFTikZ}{PGF/TikZ}-format}
 \PGFTikZ brukar inte vara ett format som normalt stöds av kommersiella
 (eller fria) programvaror, och därför är funktionen ofta implementerad
 som någon form av tillägg. Lyckligtvis brukar dessa vara öppna och fria
 att använda för vem som helst.
 
-\subsection{Från \texorpdfstring{\Rlogo}{R} med \texttt{tikzDevice}}
+\subsubsection{Från \texorpdfstring{\Rlogo}{R} med \texttt{tikzDevice}}
 \Rlogo-paketet \texttt{tikzDevice} \parencite{Sharpsteen12} gör det möjligt
 att i \Rlogo exportera figurer som \PGFTikZ-kod. Det kan som många andra
-\Rlogo-paket hittas på CRAN och installeras enklast genom att köra
-\Rlogo-kommandot \verb|install.packages("tikzDevice")|. Man använder
+\Rlogo-paket hittas på CRAN och installeras enklast med \Rlogo-kommandot \texttt{install}:
+\splus|install.packages("tikzDevice")|
+
+Man använder
 sedan kommandot \texttt{tikz} för att berätta för \Rlogo att grafiken
 ska skrivas som \PGFTikZ-kod, och filen som skapas kan sedan inkluderas
 i \LaTeX-dokument med kommandot \cmd{input}.
@@ -375,7 +389,7 @@ Båda dessa format är oftast rasterbaserade, men med \PDF finns i alla
 fall möjligheten (och den utnyttjas ibland) att figurerna exporteras
 som vektorgrafik.
 
-\subsection{Från \texorpdfstring{\Rlogo}{R} till \texorpdfstring{\PDF}{PDF}}
+\subsubsection{Från \texorpdfstring{\Rlogo}{R} till \texorpdfstring{\PDF}{PDF}}
 \Rlogo har ett antal inbyggda så kallade enheter \eng{device} som kan
 användas för att rita diagram, grafer och liknande, bland annat för \EPS,
 \PNG och \textsc{SVG} \parencite[\ppno~675–676]{RCoreTeam12}. Enheten vi är mest
@@ -385,7 +399,7 @@ genom att köra kommandot \texttt{pdf}, som tar samma parametrar som
 kan sedan enkelt inkluderas i ett \LaTeX-dokument med \cmd{includegraphics}.
 \Cref{ex:pdfdevice} visar hur det kan se ut.
 
-\begin{kod}[tbp]
+\begin{kod}[p]
 	\centering
 	\begin{minipage}{\textwidth}
 		\centering
@@ -424,7 +438,7 @@ besvär när man ska inkludera figuren i \LaTeX. Lyckligtvis är detta
 problemet lätt att lösa \parencite{Robertson10} och man kan till exempel
 använda funktionen \texttt{figuresize.m}\footnote{\url{https://github.com/wspr/matlabpkg/blob/master/figuresize.m}}, som är fritt tillgänglig under BSD-licensen.
 
-\begin{kod}[tbp]
+\begin{kod}[p]
 	\centering
 	\begin{minipage}{\textwidth}
 		\centering

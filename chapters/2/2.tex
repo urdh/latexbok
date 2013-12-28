@@ -108,6 +108,7 @@ struktur som delar upp innehållet, och den typografiska effekten av att
 införa en rubrik är så stark att det nästan är självklart hur man ska
 använda dessa för att strukturera sin text.
 
+\paper{c5}{\newpage}% HACK(c5): sidbryt för att undvika horunge
 Standardklasserna i \LaTeX{} har sex rubriknivåer:
 \begin{latexcode}
 \part{...}          % Ingen nivå
@@ -288,6 +289,7 @@ som beskrivs; att det sedan typsätts med sans-serif-typsnitt är inte så
 intressant just när man skriver dokumentet.
 \index{struktur!text-|)}
 
+\paper{a4}{\clearpage}% HACK(a4): bättre flöde med ny rubrik efter tabell
 \section{Figurer, tabeller, listor}
 Figurer, tabeller och listor\footnote{Men även ekvationer, programkod,
 vissa kemiska formler, citat och algoritmer, för att nämna några
@@ -485,6 +487,27 @@ flytande objekt och används precis som \texttt{figure}:
 \end{table}
 \end{latexcode}
 
+\begin{table}[tb!]
+	\centering 
+	\caption{De fyra viktigaste kolumntyperna i \texttt{tabular}.}
+	\label{tab:kolumner}
+	\begin{tabular}{l p{0.65\textwidth}}
+		\toprule 
+		Typ & Kommentar \\
+		\midrule 
+		\texttt{l} & Vänsterjusterar innehållet. Använd till text, datum
+					 och så vidare. \\
+		\texttt{c} & Centrerar innehållet. Använd inte. \\
+		\texttt{r} & Högerjusterar innehållet. Använd till tal, 
+				     mätresultat och så vidare. \\
+		\texttt{p\{...\}} & Avstavat textstycke med angiven bredd. Använd
+							när texten är så lång att tabellen bli för
+							bred för sidan, eller när du skriver långa
+							beskrivningar och/eller kommentarer. \\
+		\bottomrule 
+	\end{tabular}
+\end{table}
+
 Den andra omgivningen, \texttt{tabular}, är den som faktiskt används för
 att definiera tabellen. \LaTeX{} kan i denna omgivning hjälpa till med att
 rita linjer både kors och tvärs, och definiera kolumner på ett antal olika
@@ -495,7 +518,46 @@ bör man ta paketet \pack{booktabs} till hjälp när man skapar tabeller i
 En enkel tabell skapad med hjälp av \pack{booktabs} kan se ut som
 tabellen i \cref{ex:tabular}.
 
-\begin{kod}[tbp]
+Som vi ser tar \texttt{tabular}-omgivningen ett obligatoriskt argument,
+som beskriver de kolumner tabellen innehåller. \Cref{tab:kolumner}
+listar de vanligaste kolumntyperna och deras användningsområden.
+Kolumntyperna anges direkt efter varandra, men kan om man vill separeras
+med exempelvis mellanslag. Den speciella separatorn \texttt{|} skapar en
+vertikal linje mellan två kolumner, men detta är inte att rekommendera
+\parencite{Fear05}.
+
+Efter att omgivningen inletts med \cmd{begin} följer tabellens rader. Här
+måste varje rad markeras med explicita nyrader (\verb|\\|), och kolumnerna
+separeras med och-tecken (\verb|&|). Notera även de kommandon som skapar
+horisontella linjer; dessa är från \pack{booktabs} och används enligt
+\cref{ex:tabular}.
+
+Det är även viktigt att komma ihåg några typografiska regler när det
+gäller tabeller. Alla dessa ges av \textcite[3]{Fear05}. Fritt
+översatt:
+\begin{quotation}%
+	\noindent\vspace{-\baselineskip}%
+	\begin{enumerate}
+		\item Använd aldrig någonsin lodräta linjer.
+		\item Använd aldrig dubbla linjer.
+		\item Lägg enheter i tabellhuvudet.
+		\item Decimalkomma ska alltid föregås av en siffra; alltså \(0{\mathord,}1\) 
+		\emph{inte} bara \({\mathord,}1\).
+		\item Använd inte upprepningstecken eller liknande konventioner 
+		för att repetera föregående värde. I många fall räcker det med en 
+		tom cell. Gör det inte det, repetera värdet.
+	\end{enumerate}
+\end{quotation}
+
+Punkt ett och två är enkla att följa om man använder \pack{booktabs} som
+manualen föreskriver, och punkt tre och fem är snarare arbetsbesparande än
+ansträngande att hålla sig till. Även punkt fyra är enkel att följa. 
+Följer man
+dessa fem punkter får man snygga tabeller varje gång\footnote{Läs gärna
+igenom \textcite{Fear05} ordentligt de tre-fyra första gångerna du
+sitter med tabeller i \LaTeX, så går användandet in i ryggmärgen.}.
+
+\begin{kod}[p]
 	\centering 
 	\begin{minipage}{0.9\textwidth} % kod
 		\begin{latexcode}
@@ -539,66 +601,6 @@ egenskapen att \((e^x)' = e^x\). \\
 	\caption{En tabell skapad med hjälp av \pack{booktabs}.}
 	\label{ex:tabular}
 \end{kod}
-
-Som vi ser tar \texttt{tabular}-omgivningen ett obligatoriskt argument,
-som beskriver de kolumner tabellen innehåller. \Cref{tab:kolumner}
-listar de vanligaste kolumntyperna och deras användningsområden.
-Kolumntyperna anges direkt efter varandra, men kan om man vill separeras
-med exempelvis mellanslag. Den speciella separatorn \texttt{|} skapar en
-vertikal linje mellan två kolumner, men detta är inte att rekommendera
-\parencite{Fear05}.
-
-Efter att omgivningen inletts med \cmd{begin} följer tabellens rader. Här
-måste varje rad markeras med explicita nyrader (\verb|\\|), och kolumnerna
-separeras med och-tecken (\verb|&|). Notera även de kommandon som skapar
-horisontella linjer; dessa är från \pack{booktabs} och används enligt
-\cref{ex:tabular}.
-
-Det är även viktigt att komma ihåg några typografiska regler när det
-gäller tabeller. Alla dessa ges av \textcite[3]{Fear05}. Fritt
-översatt:
-
-\begin{quotation}
-	\begin{enumerate}
-		\item Använd aldrig någonsin lodräta linjer.
-		\item Använd aldrig dubbla linjer.
-		\item Lägg enheter i tabellhuvudet.
-		\item Decimalkomma ska alltid föregås av en siffra; alltså \(0,1\) 
-		\emph{inte} bara \(,1\).
-		\item Använd inte upprepningstecken eller liknande konventioner 
-		för att repetera föregående värde. I många fall räcker det med en 
-		tom cell. Gör det inte det, repetera värdet.
-	\end{enumerate}
-\end{quotation}
-
-Punkt ett och två är enkla att följa om man använder \pack{booktabs} som
-manualen föreskriver, och punkt tre och fem är snarare arbetsbesparande än
-ansträngande att hålla sig till. Även punkt fyra är enkel att följa. 
-Följer man
-dessa fem punkter får man snygga tabeller varje gång\footnote{Läs gärna
-igenom \textcite{Fear05} ordentligt de tre-fyra första gångerna du
-sitter med tabeller i \LaTeX, så går användandet in i ryggmärgen.}.
-
-\begin{table}[tbp]
-	\centering 
-	\caption{De fyra viktigaste kolumntyperna i \texttt{tabular}.}
-	\label{tab:kolumner}
-	\begin{tabular}{l p{0.65\textwidth}}
-		\toprule 
-		Typ & Kommentar \\
-		\midrule 
-		\texttt{l} & Vänsterjusterar innehållet. Använd till text, datum
-					 och så vidare. \\
-		\texttt{c} & Centrerar innehållet. Använd inte. \\
-		\texttt{r} & Högerjusterar innehållet. Använd till tal, 
-				     mätresultat och så vidare. \\
-		\texttt{p\{...\}} & Avstavat textstycke med angiven bredd. Använd
-							när texten är så lång att tabellen bli för
-							bred för sidan, eller när du skriver långa
-							beskrivningar och/eller kommentarer. \\
-		\bottomrule 
-	\end{tabular}
-\end{table}
 
 \subsection{Etiketter och korsreferenser}\label{sec:labels}
 \index{etikett}
@@ -648,7 +650,9 @@ man alltså lättare navigera i dokumentet. Förutom detta så lägger
 kan visa i programmet, och annan \PDF-specifik funktionalitet. Paketet
 rekommenderas starkt om du använder \pdfLaTeX.
 
+{\vspace*{-0.75\baselineskip}}% HACK(a4+c5): bättre sidbryt
 \subsection{Ordlistor}\label{sec:2:glossaries}
+{\vspace*{-0.25\baselineskip}}% HACK(a4+c5): bättre sidbryt
 \index{ordlista}
 När man skriver tekniska eller vetenskapliga texter finns det ofta
 anledning att inkludera en ordlista. Det väldigt omfattande paketet
@@ -707,7 +711,7 @@ korthet att förklaras på de närmsta sidorna, till vilka viss inspiration
 tagits från \textcite{Schultz05}.
 
 \subsection{Citattecken}
-\index{citattecken}
+\index{citattecken}\label{sec:citattecken}
 Det mest grundläggande man bör uppmärksamma i \LaTeX{}, eftersom det är en
 grop man lätt faller i, är citattecken. Man kan inte i \LaTeX{} använda
 det vanliga citattecknet (\verb|"|) för att generera ett citattecken, utan
@@ -853,7 +857,8 @@ Det kan vara trevligt att i sitt arbete ha en fin titelsida. Även denna
 kan \LaTeX{} (åtminstone standardklasserna) typsätta åt dig. Detta är
 enkelt att göra, och fungerar i princip så att man definierar sin
 metadata (titel, datum, författare) med hjälp av ett par kommandon, varpå
-man kör kommandot \cmd{maketitle} för att skriva ut en titelsida:
+man kör kommandot \cmd{maketitle} för att skriva ut en titelsida:%
+\paper{a4}{\nopagebreak}% HACK(a4): sidbryt inte innan kod
 \begin{latexcode}
 \title{En fantastisk rapport\thanks{Tack till DD-gudarna
    för visad barmhärtighet och stabila filservrar.}}
@@ -894,7 +899,7 @@ dokumentets start):
 
 \subsection{Citat}\label{sec:2:citat}
 \index{citattecken}
-I \LaTeX{} används ofta \verb|``| och \verb|''| för att typsätta citattecken,
+I \LaTeX{} används ofta \verb|``| och \verb|''| för att typsätta citattecken\footnote{Detta förklarades redan på \cpageref{sec:citattecken}.},
 och dessa teckenkombinationer resulterar då i det öppnande och stängande
 citattecknet så som det används i engelsk typografi. I svensk typografi
 används endast det senare, så skriver du på svenska ska du bara använda
@@ -937,16 +942,18 @@ varandra.
 \index{teckenkodning}
 Teckenkodning, som kort nämndes på \cpageref{sec:1:inputenx}, är
 viktigt att hålla koll på. Det finns två större teckenkodningar på Linux-%
-plattformar, \UTF{} och \textsc{iso-8859-1}, och en till på Windows-%
-system, \textsc{cp-1252}. Det är viktigt att man vet vilken teckenkodning
+plattformar, \UTF{} och \textsc{ISO-8859-1}, och en till på Windows-%
+system, \textsc{CP-1252}. Det är viktigt att man vet vilken teckenkodning
 man skriver sina dokument i, då man måste berätta detta för \LaTeX. Gör
 man inte det förutsätter \LaTeX{} att dokumentet är skrivet i
-\textsc{iso-8859-1}, och är det då inte det så kommer hemska saker hända.
+\textsc{ISO-8859-1}, och är det då inte det så kommer hemska saker hända.
 Teckenkodningen specificeras med paketet \pack{inputenx}%
 \footnote{Tidigare användes \pack{inputenc}, men det har ersatts av det
-mer uppdaterade \pack{inputenx}.}:
+mer uppdaterade \pack{inputenx}.%
+\protect\paper{a4}{\\}% HACK(a4): bättre fotnotsradbrytning
+}:
 \latex|\usepackage[<teckenkodning>]{inputenx}|
-Här refererar man till \UTF{} som \texttt{utf8}, \textsc{iso-8859-1} som
+Här refererar man till \UTF{} som \texttt{utf8}, \textsc{ISO-8859-1} som
 \texttt{latin1} och \textsc{CP-1252} som \texttt{cp1252}. Det finns även
 en del mer obskyra teckenkodningar\footnote{De som stöds av 
 \pack{inputenx} listas i paketets manual.}, men det är troligtvis de tre
