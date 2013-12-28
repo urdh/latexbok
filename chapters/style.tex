@@ -9,5 +9,9 @@
 % Table of contents bf sections
 \RenewDocumentCommand\cftsecfont{}{\bfseries}
 % Other styles
-\KOMAoptions{parskip=half*}
+\KOMAoptions{parskip=half*,captions=tableheading}
 \ExplSyntaxOff
+% No dots in captions
+\renewcommand*{\figureformat}{\figurename~\thefigure}
+\renewcommand*{\tableformat}{\tablename~\thetable}
+\newcommand*{\kodformat}{\kodname~\thekod}
