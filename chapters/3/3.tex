@@ -46,7 +46,7 @@ dollatecknen fungerar bra och det är ingen typografisk skillnad.
 Matematik som typsätts i löpande text kommer att anpassas i höjd för att
 inte störa texten omkring. Det innebär att till exempel bråk kommer att
 se tilltryckta ut. Oftast bör man dock inte använda matematik i löpande
-text vid de tillfällen då det kommer se ”fel” ut, eftersom ett block då
+text vid de tillfällen då det kommer se \enquote{fel} ut, eftersom ett block då
 är mer logiskt, textmässigt. Matematik i löpande text är istället oftast
 konstanter, enstaka värden och kanske någon olikhet.
 
@@ -68,7 +68,7 @@ att komma ihåg att en fristående ekvation \emph{oftast} inte ska vara ett
 eget
 stycke. \Cref{ex:stycken} på \cpageref*{ex:stycken} visade hur ett antal ekvationer och
 mellanrumet mellan dessa och den omgivande texten varierade beroende på
-	ekvationens plats i stycket. Trots att ekvationen är ”fristående” bör
+	ekvationens plats i stycket. Trots att ekvationen är \enquote{fristående} bör
 	man alltså behandla den precis som en
 ekvation i löpande text. Skillnaden är främst typografisk.
 
@@ -127,7 +127,7 @@ vanlig texttypsättning, som främst har att göra med mellanrum:
 	vara liberal med mellanrum i din kod, vilket ökar läsbarheten.
 	
 	\item Tomma rader tillåts inte i matematiktypsättning. Endast ett
-	”stycke” per ekvationsomgivning får förekomma.
+	\enquote{stycke} per ekvationsomgivning får förekomma.
 	
 	\index{matematik!variabel}
 	\index{matematik!icke-kursiv text}
@@ -220,7 +220,7 @@ inkluderar vi inte de pilar, operatorer, hattar och olikhetstecken som
 diskuteras senare). Några av dessa symboler listas i
 \crefrange{tab:symbs}{tab:grekiska} — notera att några av de 
 grekiska bokstäverna inte har några kommandon för versaler, eftersom dessa
-är identiska med latinska bokstäver, samt att några har ”varianter” som
+är identiska med latinska bokstäver, samt att några har \enquote{varianter} som
 ser något annorlunda ut (till exempel \cmd{varepsilon}, som är mer lik
 det lilla epsilon man brukar rita för hand än \cmd{epsilon}). Notera även att
 de inte typsätts i kursiv stil, vilket oftast är lämpligt. I så fall bör man använda
@@ -604,10 +604,10 @@ på CTAN.}:
 Med denna definition kan man mycket enklare typsätta snygga integraler med
 korrekta differentieringsoperatorer, vilket \cref{ex:integral}
 visar. Notera även att exemplet inte använder \cmd{iint} trots att det
-handlar om en dubbelintegral; detta eftersom varje ”underintegral” har
+handlar om en dubbelintegral; detta eftersom varje \enquote{underintegral} har
 egna gränser. Integraltecknet \cmd{iint} används istället med fördel när
 man ska visa integrering över exempelvis ett område \(A\), då detta bara
-är ”en” gräns:
+är \enquote{en} gräns:
 \latex|\iint_A\! f(x) \d{A}|
 
 \begin{kod}[tbp]
@@ -735,7 +735,7 @@ mer exakt; \env{gather} centrerar helt enkelt bara ekvationerna.
 \paper{a4}{\newpage}% HACK(a4): bättre sidbrytning
 Nya rader skapas i båda omgivningarna med nyradskommandot \verb|\\|, och
 i \env{align} använder man (på liknande sätt som i \env{tabular}) ett
-et-tecken (\verb|&|) för att skapa en ”kolumn”. Koden för \cref{fig:aligngather:align} är således som följer:
+et-tecken (\verb|&|) för att skapa en \enquote{kolumn}. Koden för \cref{fig:aligngather:align} är således som följer:
 \begin{latexcode}
 \begin{align}
 y_1 &= x^2 + 2x + 1 \\
@@ -756,7 +756,7 @@ sätt.
 \paper{a4}{\newpage}% HACK(a4): bättre sidbrytning
 \subsubsection{Underekvationer}
 Förutom \env{align} och \env{gather} visar även \cref{fig:aligngather:gather} hur omgivningen \env{subequations} fungerar. Denna
-omgivning gör att man kan skapa ”underekvationer” (likt underrubriker),
+omgivning gör att man kan skapa \enquote{underekvationer} (likt underrubriker),
 och får bara innehålla en (och endast en) matematikomgivning, inget annat:
 \begin{latexcode}
 \begin{subequations}
@@ -916,7 +916,7 @@ i \cref{tab:spaces}.
 \end{table}
 
 Det finns både positiva (vanliga) och negativa mellanrum. De negativa
-flyttar inte helt oväntat text ”bakåt”, och är användbara när man till
+flyttar inte helt oväntat text \enquote{bakåt}, och är användbara när man till
 exempel vill ångra de mellanrum \LaTeX{} lägger in.
 
 Vilket mellanrum \LaTeX{} lägger in beror på vilken typ tecknet är och
@@ -936,10 +936,10 @@ typ 0 om de inte har någon text (en operand) till vänster.
 		\cmidrule{4-5}
 		Typ & & Beskrivning & Pre & Post \\
 		\midrule 
-		0 & \(A 0 \Phi \infty\) & Enkla tecken (”substantiv”) & 0 & 0 \\
+		0 & \(A 0 \Phi \infty\) & Enkla tecken (\enquote{substantiv}) & 0 & 0 \\
 		1 & \(\sum \prod \int\) & Prefixoperatorer & 0 & 3 \\
 		2 & \(+ \cup \wedge\)   & Binära operatorer & 4 & 4 \\
-		3 & \(= < \subset\)     & Jämförelse (”verb”) & 5 & 5 \\
+		3 & \(= < \subset\)     & Jämförelse (\enquote{verb}) & 5 & 5 \\
 		4 & \(( [ \{ \langle\)  & Öppnande avgränsare & 0 & 0 \\
 		5 & \() ] \} \rangle\)  & Stängande avgränsare & 0 & 0 \\
 		6 & \(. , ; !\)         & Postfix, punktuation & 0 & 0 \\
@@ -997,7 +997,7 @@ fantomer. De viktigaste fantomerna är \cmd{hphantom} (ingen höjd, bredd
 från dess innehåll) och \cmd{vphantom} (ingen bredd, höjd från dess 
 innehåll). Dessa kan vara användbara om man till exempel använder
 \env{multline} för att bryta en ekvation, samtidigt som man använder
-\cmd{left} och \cmd{right} (som inte fungerar ”runt” radbrytningar).
+\cmd{left} och \cmd{right} (som inte fungerar \enquote{runt} radbrytningar).
 
 \Cref{fig:phantom} illustrerar problemet och lösningen. Här använder
 vi \cmd{vphantom}, eftersom vi vill lägga till höjd, och vi fyller den med

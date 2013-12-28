@@ -31,7 +31,7 @@ författaren, och \LaTeX{} tar rollen som typsättare.
 \subsection{Textstycket}
 \index{styckesindelning}
 Den mest grundläggande byggstenen i \LaTeX{} (och både typografi och 
-författande) är stycket. Vi kallar det ”byggsten” eftersom ett stycke är
+författande) är stycket. Vi kallar det \enquote{byggsten} eftersom ett stycke är
 en typografisk enhet som ska förmedla en tanke eller en idé. Om en ny
 tanke påbörjas ska alltså även ett nytt stycke påbörjas, och om så inte är
 fallet ska endast radbrytningar användas\footnote{Notera dock att det
@@ -158,7 +158,7 @@ listar några av de kommandon som kan användas för att åstadkomma
 sidbrytningar.
 
 Notera dock att \LaTeX{} inte lyder kommandoföljder à la
-”\cmd{newpage}\cmd{newpage}” då sidbrytningskommandon endast inforgar en
+\enquote{\cmd{newpage}\cmd{newpage}} då sidbrytningskommandon endast inforgar en
 sidbrytning \emph{om det behövs}. Vill man ha en tom sida måste man alltså
 fylla den med något (osynligt), till exempel en \cmd{mbox} innan man
 sidbryter en andra gång.
@@ -211,8 +211,8 @@ avstavas med hjälp av kommandot \cmd{hyphenate}. Kommandots argument är
 en lista av ord (separerade med mellanslag) som har bindestreck
 placerade där \LaTeX{} får bryta ordet. Sålunda kan raden
 \latex|\hyphenate{FORTRAN span-ku-le-ra}|
-användas för att berätta för \LaTeX{} att ordet ”\textsc{FORTRAN}” inte 
-får brytas, medan ordet ”spankulera” får brytas på de angivna 
+användas för att berätta för \LaTeX{} att ordet \enquote{\textsc{FORTRAN}} inte 
+får brytas, medan ordet \enquote{spankulera} får brytas på de angivna 
 positionerna.
 
 \subsection{Betoning, med mera}
@@ -235,7 +235,7 @@ dokumentklasser, i alla fall).
 för betoning ett antal andra textförändrande kommandon som kan vara bra 
 att
 känna till. Exempelvis så finns \cmd{textsc}, som typsätter texten med
-kapitäler (”små versaler”), och \cmd{textsf} som typsätter med ett
+kapitäler (\enquote{små versaler}), och \cmd{textsf} som typsätter med ett
 sans-serif-typsnitt istället för det vanliga serif-typsnittet.	
 \begin{table}[tbp]\begin{minipage}{\textwidth}
 	\centering
@@ -247,7 +247,7 @@ sans-serif-typsnitt istället för det vanliga serif-typsnittet.
 		\midrule 
 		\cmd[textnormal]{textnormal\{\ldots\}}	&
 			\textnormal{Dokumentets standardtypsnitt} &
-			{Det typsnitt som används för ”vanlig” text
+			{Det typsnitt som används för \enquote{vanlig} text
 			 i dokumentet.} \\
 		\cmd[emph]{emph\{\ldots\}}		&
 			\emph{Betonad text} &
@@ -305,7 +305,7 @@ omgivning.
 Omgivningar i \LaTeX{} definieras utifrån två kommandon; \cmd{begin} och
 \cmd{end}. De kan nästlas (på det sättet att en omgivning kan innehålla
 en annan) men kan inte överlappa — varje omgivning måste avslutas innan
-dess ”förälder” avslutas, vilket gör att de ger en tydlig trädliknande
+dess \enquote{förälder} avslutas, vilket gör att de ger en tydlig trädliknande
 struktur. En omgivning (här \texttt{verbatim}) kan alltså skrivas
 \begin{latexcode}
 \begin{verbatim}
@@ -408,7 +408,7 @@ ett effektiv sätt. De är också mycket speciella objekt rent typografiskt,
 eftersom de till skillnad från vanliga textstycken inte kan brytas över
 sidor hur som helst. För att placera figurer och tabeller på ett
 tillfredsställande sätt använder \LaTeX{} sig av så kallade \emph{floats},
-vilket innebär att objektet får ”flyta iväg” en bit ifrån det ställe där
+vilket innebär att objektet får \enquote{flyta iväg} en bit ifrån det ställe där
 det från början definieras. Detta undviker fula halvtomma sidor och andra
 obehagliga resultat.
 
@@ -773,7 +773,7 @@ intended}) angående användningen av tankstreck, se
 \textcite[\ppno~46–47]{LIU98} — observera dock att man \emph{inte} som 
 \citeauthor*{LIU98} föreslår ska använda tankstrecket i intervall eller
 punktlistor. Det \textcite{Sprakradet08} och \citeauthor*{LIU98} betecknar som
-”tankstreck” är i själva verket mycket närmre det som i \LaTeX{} anses vara ett
+\enquote{tankstreck} är i själva verket mycket närmre det som i \LaTeX{} anses vara ett
 intervallstreck, det vill säga ett lite kortare tecken. Personligen föredrar jag 
 att göra skillnad på de två, och gör man det bör intervallstrecket användas till
 intervall, och det långa tankstrecket som alternativ till kommatecknet.}.
@@ -847,7 +847,7 @@ Titelsidor bör man till exempel alltid ha, och det är även viktigt att ha
 koll på
 hur man citerar och vilken teckenkodning man använder. I vissa fall
 kan man även vilja referera till vissa längder, eller använda kommandon
-som \LaTeX{} anser vara ”ömtåliga” i situationer de inte är tänkta att
+som \LaTeX{} anser vara \enquote{ömtåliga} i situationer de inte är tänkta att
 användas. Avslutningen på detta kapitel kommer därför att gå igenom dessa
 småsaker.
 
@@ -875,8 +875,8 @@ liknande. Den typografiska effekten av \cmd{thanks} (i standardklasserna)
 Man kan dessutom infoga en sammanfattning \eng{abstract} med hjälp av
 omgivningen \texttt{abstract}. Denna omgivning inkluderas lämpligen direkt
 efter \cmd{maketitle}, och skapar automatisk ett litet textstycke med
-rubriken ”Sammanfattning” (eller, om engelska valts som språk,
-”Abstract”).
+rubriken \enquote{Sammanfattning} (eller, om engelska valts som språk,
+\foreignquote{english}{Abstract}).
 
 Vill man (säg, i ett kandidatarbete) ha både \emph{abstract} och
 sammanfattning måste man använda \pack{babel}s funktioner för att byta
@@ -978,7 +978,7 @@ En del text, så som rubriker, figurtexter med mera, kan dyka upp mer än en
 gång i ett dokument (till exempel i innehållsförteckningen). Argument till
 sådana kommandon kallas för rörliga \eng{moving arguments} och kan ställa
 till med en del problem. Det finns nämligen kommandon (\cmd{footnote},
-till exempel) som är ”ömtåliga” \eng{fragile}, och som därför inte kan
+till exempel) som är \enquote{ömtåliga} \eng{fragile}, och som därför inte kan
 användas i rörliga argument utan vidare. Vill man göra det måste man
 skydda dem, något som görs med kommandot \cmd{protect}:
 \latex|\section{En rubrik\protect\footnote{Med en fotnot.}}|

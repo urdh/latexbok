@@ -27,7 +27,7 @@ hur filen ska läsas in.
 \index{syntax!LaTeX@\hologo{(La)TeX}|(}
 \index{tomrum!i LaTeX-kod@i \LaTeX-kod}
 Tomrumstecken, det vill säga mellanslag, tabbar och liknande behandlas
-alla som ”tomrum” av \LaTeX{}. Flera sådana tecken i rad tolkas som ett
+alla som \enquote{tomrum} av \LaTeX{}. Flera sådana tecken i rad tolkas som ett
 enda tomrum, vilket gör att man kan ex. indentera textstycken i sin
 \LaTeX-fil utan att detta påverkar resultatet. Tomrum i början av en rad
 ignoreras generellt sett, och ett enkelt nyradstecken tolkas också som
@@ -70,12 +70,12 @@ kommandon följer några enkla regler:
 	\footnote{Det finns även ett antal kommandon som består av \cmd*{} och
 	exakt en icke-bokstav, till exempel \cmd{\&}.;Att namnet bara får innehålla bokstäver är något av en sanning med modifikation, eftersom man med så kallade kategorikoder \eng{catcodes} kan ändra vilka tecken \LaTeX{} tolkar som bokstäver — inom ramen för den här introduktionen kan man dock anta att endast \enquote{riktiga} bokstäver är tillåtna.}.
 	Kommandon avslutas av ett
-	mellanslag, en siffra eller annan godtycklig ”icke-bokstav”.
+	mellanslag, en siffra eller annan godtycklig \enquote{icke-bokstav}.
 	
 	\item De är skriftlägeskänsliga (\cmd*{Kommando} är inte samma sak som
 	\cmd*{kommando}).
 	
-	\item Vissa kommandon har även en ”stjärnvariant”, då en stjärna
+	\item Vissa kommandon har även en \enquote{stjärnvariant}, då en stjärna
 	(\texttt{*}) läggs till på slutet av kommandonamnet.
 \end{itemize}
 
@@ -310,7 +310,7 @@ Normalt måste man köra kompilatorn åtminstone två gånger, så att \LaTeX{}
 får en chans att förbättra och korrigera småsaker som referenser,
 innehållsförteckningar med mera\footnote{Detta är en konsekvens av hur
 \TeX{} fungerar; kompilatorn läser filen bit för bit och expanderar kommandon —
-det går inte att röra sig ”bakåt” i filen, så vill man ändra på något
+det går inte att röra sig \enquote{bakåt} i filen, så vill man ändra på något
 man redan gått förbi måste man spara information om detta i en extern fil
 som man läser in under nästa körning.%
 \protect\paper{c5}{\hfill\\}% HACK(c5): fixar osnygg fotnotslayout
