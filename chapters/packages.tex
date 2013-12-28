@@ -24,17 +24,7 @@
 \usepackage{minted}
 % improvement packages
 \usepackage{multirow}
-\usepackage[para,perpage,ragged,bottom,stable]{footmisc}
-\makeatletter
-\def\silentfootnote{%
-	\@ifnextchar[\@xfootnote{%
-		\stepcounter\@mpfn%
-		\protected@xdef\@thefnmark{\thempfn}%
-%		\@footnotemark%
-		\@footnotetext%
-	}%
-}
-\makeatother
+\usepackage[para,perpage,hang,bottom,stable]{footmisc}
 \usepackage{enumitem}
 %\usepackage{fancyhdr}
 \usepackage{booktabs}

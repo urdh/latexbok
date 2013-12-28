@@ -225,9 +225,7 @@ ingen anledning att inte göra det, och i vissa fall (så som för enkla
 figurer över uppställningar eller mekaniska figurer) kan det vara 
 lättare att skriva \PGFTikZ-kod än att rita figuren i ett externt program.
 CTAN-katalogen innehåller ett stort antal tilläggspaket till \PGFTikZ%
-\footnote{\url{http://www.ctan.org/tex-archive/graphics/pgf/contrib}%
-\protect\paper{c5}{\hfill\\}% HACK(c5): bättre fotnot
-},
+\footnote{\url{http://www.ctan.org/tex-archive/graphics/pgf/contrib}},
 bland annat \pack{circuitikz} \parencite{Redaelli12} som används
 för att rita kopplingsscheman, \pack{flowchart} \parencite{Robson13}
 som gör det lättare att rita flödesscheman, \pack{pgfgantt}
@@ -236,16 +234,13 @@ som gör det lättare att rita flödesscheman, \pack{pgfgantt}
 
 Utöver de exempel som finns i manualen går det även att hitta mycket
 material på internet\footnote{Bland annat finns galleriet
-\TeX{}ample.net\footref{fn:4:texample} som innehåller 
+\TeX{}ample.net\innernote{\url{http://www.texample.net}}%
+ som innehåller 
 många exempel på \PGFTikZ-kod, och taggen \emph{\mbox{tikz-pgf}} på
-\TeX.SE\footref{fn:4:tex-se-tikz-pgf}
+\TeX.SE\innernote{\url{http://tex.stackexchange.com/questions/tagged/tikz-pgf}}
 där man kan få svar på många frågor.}. Ska man bara rita enkla grafer
 finns dessutom det lite enklare paketet \pack{pgfplots}, som använder
 \PGFTikZ\ internt (och som diskuteras nedan).%
-\silentfootnote{\url{http://www.texample.net}\label{fn:4:texample}%
-\protect\paper{c5}{\hfill\\}% HACK(c5): bättre fotnot
-}%
-\silentfootnote{\url{http://tex.stackexchange.com/questions/tagged/tikz-pgf}\label{fn:4:tex-se-tikz-pgf}}
 
 Fördelen med \PGFTikZ ligger främst i det faktum att grafiken är
 vektorbaserad, och därför ser lika bra ut oavsett hur mycket den skalas
