@@ -14,3 +14,7 @@ Den mer tekniskt kunnige kanske även vill kompilera boken själv. För detta kr
 Boken är tillgänglig under en Creative Commons-licens ([BY-SA 4.0](http://creativecommons.org/licenses/by-sa/4.0/)), vilket innebär att du som användare får kopiera, distribuera och sända verket utan restriktioner, under förutsättning att du anger vem som är upphovsmannen och att du delar eventuella vidareutvecklingar eller liknande under samma villkor.
 
 (c) 2014 Simon Sigurdhsson.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/urdh/latexbok/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
