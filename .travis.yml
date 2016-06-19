@@ -5,7 +5,7 @@ before_install:
 
 install:
   - PATH=$HOME/texlive/bin/x86_64-linux:$PATH
-  - tlmgr update --self
+  - tlmgr update --self --all
   - sudo pip install pygments
   - sudo pip install pygments-style-solarized
 
