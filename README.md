@@ -15,6 +15,3 @@ Boken är tillgänglig under en Creative Commons-licens ([BY-SA 4.0](http://crea
 
 (c) 2014 Simon Sigurdhsson.
 
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/urdh/latexbok/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
