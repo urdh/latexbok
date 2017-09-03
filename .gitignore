@@ -38,3 +38,4 @@
 *.pyg
 *.bcf
 *.run.xml
+_minted-*/
