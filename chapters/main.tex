@@ -30,7 +30,7 @@
 \begin{document}
 	%% Title page
 	\subfile{chapters/meta/titlepage.tex}
-	\cleardoublepage 
+	\cleardoublepage
 	%% Table of contents
 	\frontmatter
 	\begingroup
@@ -59,7 +59,7 @@
 	%% TYPSÄTTNING MED LATEX
 	\subfile{chapters/2/2.tex}
 	%% MATEMATIK MED LATEX OCH AMS
-	\paper{a4}{\addtocontents{toc}{\newpage}}% HACK(a4): sidbryt TOC
+	\paper{a4}{\addtocontents{toc}{\protect\newpage}}% HACK(a4): sidbryt TOC
 	\part{Matematiken}
 	\subfile{chapters/3/3.tex}
 	%% GRAFIK MED LATEX
@@ -69,7 +69,7 @@
 	\part{Referenserna}
 	\subfile{chapters/5/5.tex}
 	%% VIDARE LÄSNING
-	\paper{a4}{\addtocontents{toc}{\newpage}}% HACK(a4): sidbryt TOC
+	\paper{a4}{\addtocontents{toc}{\protect\newpage}}% HACK(a4): sidbryt TOC
 	\part{Fortsättningen}
 	\subfile{chapters/6/6.tex}
 	%% BIBLIOGRAFI
