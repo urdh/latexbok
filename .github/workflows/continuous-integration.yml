@@ -1,0 +1,25 @@
+name: Continuous integration
+on:
+  push:
+    branches: [master]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  continuous-integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: teatimeguest/setup-texlive-action@v3
+        with:
+          version: 2017
+          packages: scheme-full
+      - run: sudo pip install pygments
+      - run: sudo pip install 'pygments-style-solarized @ git+https://github.com/shkumagai/pygments-style-solarized.git@0.2.0'
+      - run: make a4
+      - run: make c5
+      - uses: actions/upload-artifact@v4
+        with:
+          path: |
+            latexbok-a4.pdf
+            latexbok-c5.pdf
